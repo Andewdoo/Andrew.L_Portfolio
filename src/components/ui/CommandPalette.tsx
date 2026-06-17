@@ -212,9 +212,9 @@ export function CommandPalette() {
             aria-modal="true"
             aria-label="Command palette"
             className="w-full max-w-xl"
-            initial={{ opacity: 0, scale: 0.96, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: 8 }}
+            initial={{ opacity: 0, scale: 0.96, y: "0.75rem" }}
+            animate={{ opacity: 1, scale: 1, y: "0rem" }}
+            exit={{ opacity: 0, scale: 0.98, y: "0.5rem" }}
             transition={{ duration: 0.18, ease: "easeOut" }}
             onKeyDown={handleCommandKeys}
             onMouseDown={(event) => event.stopPropagation()}
@@ -225,7 +225,7 @@ export function CommandPalette() {
                   <Palette className="size-4" aria-hidden="true" />
                   Command
                 </div>
-                <kbd className="rounded border border-zinc-800 bg-black px-2 py-1 font-mono text-[11px] text-zinc-500">
+                <kbd className="rounded border border-zinc-800 bg-black px-2 py-1 font-mono text-[0.6875rem] text-zinc-500">
                   Esc
                 </kbd>
               </div>

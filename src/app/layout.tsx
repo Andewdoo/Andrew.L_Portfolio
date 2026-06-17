@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Andrew L. | AI/ML Engineering Portfolio",
-  description: "An AI/ML engineering portfolio focused on applied models, data systems, and intelligent software.",
+  title: "Andrew L. | Software Engineering Portfolio",
+  description: "A software engineering portfolio focused on full-stack development, systems thinking, and practical tooling.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

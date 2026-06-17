@@ -7,9 +7,9 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "#work", label: "Work" },
+  { href: "#projects", label: "Projects" },
   { href: "#stack", label: "Stack" },
-  { href: "#contact", label: "Contact" },
+  { href: "#education", label: "Education" },
 ];
 
 export function TopNav() {
@@ -21,6 +21,15 @@ export function TopNav() {
   }, []);
 
   const isDark = mounted ? resolvedTheme === "dark" : true;
+
+  const handleSectionClick = (href: string) => {
+    const section = document.getElementById(href.slice(1));
+
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", href);
+    }
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-900/90 bg-black/55 backdrop-blur-xl">
@@ -34,13 +43,17 @@ export function TopNav() {
 
         <div className="flex items-center gap-1">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.href}
               href={item.href}
+              onClick={(event) => {
+                event.preventDefault();
+                handleSectionClick(item.href);
+              }}
               className="hidden rounded-md px-3 py-2 text-sm text-zinc-400 hover:text-zinc-50 md:inline-flex"
             >
               {item.label}
-            </Link>
+            </a>
           ))}
 
           <button

@@ -19,17 +19,17 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "semantic-search-lab",
-    title: "Semantic Search Lab",
-    description: "A vector-search prototype for retrieving relevant knowledge from messy document collections.",
-    stack: ["Python", "Embeddings", "Vector DB", "Next.js"],
+    slug: "knowledge-search-lab",
+    title: "Knowledge Search Lab",
+    description: "A full-stack search prototype for organizing and retrieving useful information from messy document collections.",
+    stack: ["TypeScript", "Python", "Search", "Next.js"],
     url: "search.andrew.dev",
     problem:
-      "Keyword search misses meaning when documents use different language for the same idea. This project explores embeddings, chunking strategy, and ranked retrieval for more useful knowledge discovery.",
+      "Large document collections get hard to navigate when related ideas are scattered across different files, terms, and formats. This project explores organization, indexing, and ranked retrieval for more useful knowledge discovery.",
     architecture: [
-      "A preprocessing stage chunks source documents, normalizes metadata, and prepares text for embedding.",
-      "Vector similarity search retrieves candidate passages before a lightweight ranking layer orders results.",
-      "A Next.js inspection surface shows query intent, retrieved chunks, and confidence cues for debugging.",
+      "A preprocessing stage chunks source documents, normalizes metadata, and prepares searchable records.",
+      "A retrieval layer finds candidate passages before a lightweight ranking step orders results by usefulness.",
+      "A Next.js inspection surface shows query context, retrieved chunks, and debugging cues for tuning the experience.",
     ],
     links: {
       github: "https://github.com/",
@@ -42,17 +42,17 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "prediction-dashboard",
-    title: "Prediction Dashboard",
-    description: "A model monitoring workspace for tracking prediction quality, drift, and operational signals.",
-    stack: ["PyTorch", "Pandas", "Evaluation", "React"],
-    url: "models.andrew.dev",
+    slug: "operations-dashboard",
+    title: "Operations Dashboard",
+    description: "A monitoring workspace for tracking application health, data quality, and workflow signals.",
+    stack: ["React", "Pandas", "Dashboards", "APIs"],
+    url: "ops.andrew.dev",
     problem:
-      "A model is only useful if its behavior stays visible after training. This concept focuses on monitoring accuracy, drift, and failure modes once predictions become part of a workflow.",
+      "Useful software needs visibility after launch. This concept focuses on surfacing health, quality, and workflow signals so issues are easier to notice, compare, and triage.",
     architecture: [
-      "Evaluation summaries compare baseline, validation, and recent production-like batches.",
-      "Drift indicators highlight feature distribution changes before they become silent model failures.",
-      "Operational cards separate model metrics from infrastructure status so issues are easier to triage.",
+      "Summary panels compare current activity, historical baselines, and recent workflow outcomes.",
+      "Data quality indicators highlight missing, delayed, or inconsistent inputs before they become larger failures.",
+      "Operational cards separate product metrics from infrastructure status so issues are easier to triage.",
     ],
     links: {
       github: "https://github.com/",
@@ -65,17 +65,17 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "agent-workbench",
-    title: "Agent Workbench",
-    description: "An experimental workspace for testing tool-using AI agents against structured tasks.",
-    stack: ["LLMs", "Tool Use", "TypeScript", "Eval Harness"],
-    url: "agents.andrew.dev",
+    slug: "automation-workbench",
+    title: "Automation Workbench",
+    description: "An experimental workspace for testing multi-step workflows against structured tasks.",
+    stack: ["TypeScript", "Automation", "Tooling", "Eval Harness"],
+    url: "tools.andrew.dev",
     problem:
-      "AI agents can appear capable while failing quietly on multi-step tasks. This project explores how task traces, tool outputs, and repeatable evals can make behavior easier to inspect.",
+      "Automations can appear successful while failing quietly on multi-step tasks. This project explores how task traces, tool outputs, and repeatable checks can make behavior easier to inspect.",
     architecture: [
-      "A task runner records prompts, tool calls, intermediate reasoning artifacts, and final outputs.",
-      "Evaluation cases compare expected behaviors against observed traces instead of only judging final text.",
-      "A review surface helps identify brittle instructions, missing context, and recurring failure patterns.",
+      "A task runner records inputs, actions, intermediate artifacts, and final outputs.",
+      "Evaluation cases compare expected behaviors against observed traces instead of only judging the final result.",
+      "A review surface helps identify brittle steps, missing context, and recurring failure patterns.",
     ],
     links: {
       github: "https://github.com/",

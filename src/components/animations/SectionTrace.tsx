@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 type SectionTraceProps = {
   className?: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   side?: "left" | "right";
   targetRef: RefObject<HTMLElement | null>;
 };
@@ -32,21 +32,23 @@ export function SectionTrace({ className, icon, side = "left", targetRef }: Sect
         className
       )}
     >
-      <div className="absolute left-1/2 top-0 grid size-14 -translate-x-1/2 place-items-center rounded-full border border-zinc-800 bg-black text-zinc-50 shadow-2xl shadow-black/50">
-        {icon}
-      </div>
-      <div className="absolute left-1/2 top-14 bottom-0 w-10 -translate-x-1/2">
-        <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-zinc-900" />
+      {icon ? (
+        <div className="absolute left-1/2 top-0 grid size-14 -translate-x-1/2 place-items-center rounded-full border border-zinc-800 bg-black text-zinc-50 shadow-2xl shadow-black/50">
+          {icon}
+        </div>
+      ) : null}
+      <div className={cn("absolute left-1/2 bottom-0 w-10 -translate-x-1/2", icon ? "top-14" : "top-0")}>
+        <div className="trace-track absolute left-1/2 top-0 h-full w-px -translate-x-1/2" />
         <motion.div
-          className="absolute left-1/2 top-0 h-full w-px origin-top -translate-x-1/2 bg-zinc-50"
+          className="trace-line absolute left-1/2 top-0 h-full w-px origin-top -translate-x-1/2"
           style={{ scaleY: progress }}
         />
         <motion.div
-          className="absolute left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_28px_rgba(255,255,255,0.8)]"
+          className="trace-bead absolute left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full"
           style={{ top: beadTop }}
         />
         <motion.div
-          className="absolute left-1/2 size-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/35 blur-sm"
+          className="trace-glow absolute left-1/2 size-8 -translate-x-1/2 -translate-y-1/2 rounded-full blur-sm"
           style={{ top: beadTop }}
         />
       </div>

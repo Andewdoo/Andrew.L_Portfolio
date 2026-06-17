@@ -27,7 +27,7 @@
 html {
   font-size: 135%;
   scroll-behavior: smooth;
-  background: #000000;
+  background: hsl(var(--background));
   scrollbar-width: none;
 }
 
@@ -67,4 +67,131 @@ body * {
 ::selection {
   background: rgba(244, 244, 245, 0.18);
   color: #ffffff;
+}
+
+.light ::selection {
+  background: rgba(24, 24, 27, 0.14);
+  color: #000000;
+}
+
+.light .bg-black {
+  background-color: #ffffff !important;
+}
+
+.light .bg-black\/35 {
+  background-color: rgba(255, 255, 255, 0.58) !important;
+}
+
+.light .bg-black\/40 {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.light .bg-black\/45 {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.light .bg-black\/55,
+.light .bg-black\/60,
+.light .bg-black\/70 {
+  background-color: rgba(255, 255, 255, 0.86) !important;
+}
+
+.light .bg-zinc-950,
+.light .bg-zinc-950\/60,
+.light .bg-zinc-950\/70,
+.light .bg-zinc-950\/75,
+.light .bg-zinc-950\/80,
+.light .bg-zinc-950\/90 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.light .bg-zinc-900\/80 {
+  background-color: rgba(244, 244, 245, 0.94) !important;
+}
+
+.light .bg-zinc-900,
+.light .bg-zinc-800 {
+  background-color: #e4e4e7 !important;
+}
+
+.light .bg-zinc-50,
+.light .hover\:bg-white:hover {
+  background-color: #09090b !important;
+}
+
+.light .text-white,
+.light .text-zinc-50,
+.light .text-zinc-100,
+.light .text-zinc-200,
+.light .text-zinc-300,
+.light .hover\:text-white:hover,
+.light .hover\:text-zinc-50:hover {
+  color: #09090b !important;
+}
+
+.light .text-zinc-400,
+.light .text-zinc-500 {
+  color: #3f3f46 !important;
+}
+
+.light .text-black {
+  color: #ffffff !important;
+}
+
+.light .border-white\/10,
+.light .border-white\/15,
+.light .border-zinc-900,
+.light .border-zinc-900\/90,
+.light .border-zinc-800,
+.light .border-zinc-700 {
+  border-color: rgba(9, 9, 11, 0.5) !important;
+}
+
+.light .hover\:border-white\/25:hover,
+.light .hover\:border-zinc-600:hover,
+.light .hover\:border-zinc-700:hover {
+  border-color: rgba(9, 9, 11, 0.68) !important;
+}
+
+.light .shadow-black\/30,
+.light .shadow-black\/40,
+.light .shadow-black\/50,
+.light .shadow-white\/10 {
+  --tw-shadow-color: rgba(24, 24, 27, 0.2) !important;
+}
+
+.trace-track {
+  background-color: rgba(9, 9, 11, 0.18);
+}
+
+.trace-line {
+  background-color: #09090b;
+  box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.42);
+}
+
+.trace-bead {
+  background-color: #09090b;
+  box-shadow: 0 0 1.75rem rgba(0, 0, 0, 0.72);
+}
+
+.trace-glow {
+  background-color: rgba(9, 9, 11, 0.24);
+}
+
+.dark .trace-bead {
+  background-color: #ffffff;
+  box-shadow: 0 0 1.75rem rgba(255, 255, 255, 0.8);
+}
+
+.dark .trace-track {
+  background-color: #18181b;
+}
+
+.dark .trace-line {
+  background-color: #fafafa;
+  box-shadow: none;
+}
+
+.dark .trace-glow {
+  background-color: rgba(255, 255, 255, 0.35);
 }

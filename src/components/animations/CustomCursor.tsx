@@ -83,8 +83,8 @@ export function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          height: hoveringTarget ? 14 : 10,
-          width: hoveringTarget ? 14 : 10,
+          height: hoveringTarget ? "0.875rem" : "0.625rem",
+          width: hoveringTarget ? "0.875rem" : "0.625rem",
         }}
         transition={{ duration: 0.08, ease: "easeOut" }}
       />
@@ -99,9 +99,9 @@ export function CustomCursor() {
           scale: scrollScale,
         }}
         animate={{
-          height: hoveringTarget ? 46 : 28,
+          height: hoveringTarget ? "2.875rem" : "1.75rem",
           opacity: hoveringTarget ? 0.82 : 0.58,
-          width: hoveringTarget ? 46 : 28,
+          width: hoveringTarget ? "2.875rem" : "1.75rem",
         }}
         transition={{ type: "spring", stiffness: 700, damping: 42, mass: 0.2 }}
       />

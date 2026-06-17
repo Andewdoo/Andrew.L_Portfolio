@@ -12,9 +12,9 @@ export function RouteTransitionProvider({ children }: Readonly<{ children: React
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={pathname}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: "0.625rem" }}
+          animate={{ opacity: 1, y: "0rem" }}
+          exit={{ opacity: 0, y: "-0.625rem" }}
           transition={{ duration: 0.24, ease: "easeOut" }}
         >
           {children}

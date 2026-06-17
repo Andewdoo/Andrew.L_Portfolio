@@ -1,24 +1,24 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
-import { Calculator, CircuitBoard, GraduationCap, Orbit } from "lucide-react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { Code2, Cpu, GraduationCap, Network } from "lucide-react";
 import { useRef } from "react";
 
 const foundations = [
   {
-    icon: Calculator,
-    title: "Multivariable Calculus",
-    body: "Built comfort with gradients, vector spaces, optimization intuition, and relationships across many interacting variables.",
+    icon: Network,
+    title: "Data Structures & Algorithms",
+    body: "Developing intuition for computational efficiency, memory management, and structuring data to solve complex algorithmic puzzles. (COMPENG 2SI3)",
   },
   {
-    icon: CircuitBoard,
-    title: "Electrostatics",
-    body: "Developed field-based reasoning through distributions, potentials, and disciplined analytical setup for invisible systems.",
+    icon: Code2,
+    title: "Systems Programming",
+    body: "Building a strong foundation in modern programming paradigms, software lifecycles, and translating high-level logic into robust code. (COMPENG 2SH4)",
   },
   {
-    icon: Orbit,
-    title: "Mechanics",
-    body: "Practiced decomposing dynamic systems into forces, constraints, motion, and clear cause-effect relationships.",
+    icon: Cpu,
+    title: "Computer Architecture",
+    body: "Bridging the gap between hardware and software by decomposing microprocessor logic, gaining insight into how code executes at the metal level. (COMPENG 2DX3 & 2DI4)",
   },
 ];
 
@@ -32,23 +32,25 @@ export function Education() {
     stiffness: 120,
     damping: 28,
   });
+  const beadTop = useTransform(lineScale, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="education" ref={sectionRef} className="px-6 py-28">
+    <section id="education" ref={sectionRef} className="px-6 pb-28 pt-16">
       <div className="mx-auto max-w-6xl">
-        <div className="max-w-3xl">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Education</p>
-          <h2 className="mt-4 text-4xl font-semibold leading-tight text-zinc-50 md:text-6xl">
-            Engineering depth for applied machine learning.
-          </h2>
-        </div>
-
-        <div className="relative mt-16 grid gap-10 md:grid-cols-[4rem_minmax(0,1fr)]">
+        <div className="relative grid gap-10 md:grid-cols-[4rem_minmax(0,1fr)]">
           <div className="relative hidden justify-center md:flex">
-            <div className="absolute top-0 h-full w-px bg-zinc-900" />
+            <div className="trace-track absolute top-0 h-full w-px" />
             <motion.div
-              className="absolute top-0 h-full w-px origin-top bg-zinc-50"
+              className="trace-line absolute top-0 h-full w-px origin-top"
               style={{ scaleY: lineScale }}
+            />
+            <motion.div
+              className="trace-bead absolute left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{ top: beadTop }}
+            />
+            <motion.div
+              className="trace-glow absolute left-1/2 size-8 -translate-x-1/2 -translate-y-1/2 rounded-full blur-sm"
+              style={{ top: beadTop }}
             />
             <div className="relative z-10 grid size-16 place-items-center rounded-full border border-zinc-800 bg-black text-zinc-50">
               <GraduationCap className="size-7" aria-hidden="true" />
@@ -57,18 +59,16 @@ export function Education() {
 
           <div className="space-y-5">
             <motion.article
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: "1.125rem" }}
+              whileInView={{ opacity: 1, y: "0rem" }}
               viewport={{ once: true, margin: "-15%" }}
               transition={{ duration: 0.45, ease: "easeOut" }}
               className="rounded-2xl border border-zinc-900 bg-zinc-950/70 p-6"
             >
               <p className="text-sm uppercase tracking-[0.18em] text-zinc-500">McMaster University</p>
-              <h3 className="mt-3 text-3xl font-semibold text-zinc-50">Bachelor of Engineering</h3>
+              <h3 className="mt-3 text-3xl font-semibold text-zinc-50">Computer Engineering</h3>
               <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-400">
-                A rigorous STEM foundation that supports machine learning work with mathematical
-                fluency, systems-level reasoning, and disciplined problem framing before formal
-                industry experience.
+                For me, building software is about mastering the whole system. Computer Engineering bridges that gap by providing me with the foundation to connect low-level hardware-aware reasoning with the algorithms and interfaces that drive modern software.
               </p>
             </motion.article>
 
@@ -79,8 +79,8 @@ export function Education() {
                 return (
                   <motion.article
                     key={item.title}
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: "1.125rem" }}
+                    whileInView={{ opacity: 1, y: "0rem" }}
                     viewport={{ once: true, margin: "-12%" }}
                     transition={{ delay: index * 0.08, duration: 0.45, ease: "easeOut" }}
                     className="rounded-2xl border border-zinc-900 bg-black p-5"

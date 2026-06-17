@@ -2,6 +2,7 @@
 
 import { ArrowDownRight } from "lucide-react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
 import type { MouseEvent } from "react";
 
 const spring = {
@@ -15,8 +16,8 @@ export function Hero() {
   const pointerY = useMotionValue(0);
   const springX = useSpring(pointerX, spring);
   const springY = useSpring(pointerY, spring);
-  const buttonX = useTransform(springX, [-1, 1], [-10, 10]);
-  const buttonY = useTransform(springY, [-1, 1], [-8, 8]);
+  const buttonX = useTransform(springX, [-1, 1], ["-0.625rem", "0.625rem"]);
+  const buttonY = useTransform(springY, [-1, 1], ["-0.5rem", "0.5rem"]);
 
   const handlePointerMove = (event: MouseEvent<HTMLButtonElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
@@ -48,22 +49,21 @@ export function Hero() {
         className="absolute inset-x-0 top-12 -z-10 h-64 bg-[linear-gradient(110deg,transparent,rgba(63,63,70,0.38),transparent),linear-gradient(250deg,transparent,rgba(24,24,27,0.88),transparent)] opacity-80 blur-2xl"
       />
 
-      <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+      <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_23rem] lg:items-end">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: "1.5rem" }}
+          animate={{ opacity: 1, y: "0rem" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="max-w-4xl"
         >
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">
-            Andrew L. AI/ML Engineering Portfolio
+            Andrew L. Software Engineering Portfolio
           </p>
           <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-tight text-zinc-50 md:text-7xl">
-            Building intelligent systems from data to deployment.
+            Building software from idea to implementation.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-            A machine learning engineering portfolio focused on models, data pipelines, and
-            deployable AI systems that make complex predictions easier to inspect and trust.
+            I thrive on the challenge of taking an idea and building it from scratch. All experiences are chances to turn new knowledge into reality, and my motivation to something more ambitious.
           </p>
 
           <motion.button
@@ -81,14 +81,20 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          aria-hidden="true"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.15, duration: 0.7, ease: "easeOut" }}
-          className="hidden rounded-2xl border border-white/10 bg-zinc-950/60 p-4 shadow-2xl shadow-black/40 backdrop-blur lg:block"
+          className="hidden rounded-2xl border border-white/15 bg-zinc-950/60 p-1.5 shadow-2xl shadow-black/40 backdrop-blur lg:block"
         >
-          <div className="grid aspect-square place-items-center rounded-xl border border-white/10 bg-black">
-            <div className="h-32 w-32 rounded-full border border-zinc-700 bg-[radial-gradient(circle_at_35%_30%,white,rgba(244,244,245,0.18)_28%,transparent_62%)] shadow-[0_0_80px_rgba(255,255,255,0.18)]" />
+          <div className="relative aspect-square overflow-hidden rounded-[0.875rem] border border-white/10 bg-black">
+            <Image
+              src="/images/hero-photo.jpg"
+              alt="Andrew L. with family in a mountain cave"
+              fill
+              priority
+              sizes="23rem"
+              className="object-cover"
+            />
           </div>
         </motion.div>
       </div>

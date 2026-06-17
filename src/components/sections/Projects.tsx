@@ -42,7 +42,7 @@ export function SafariMockup({
         <span className="size-2.5 rounded-full bg-red-400/80" />
         <span className="size-2.5 rounded-full bg-yellow-300/80" />
         <span className="size-2.5 rounded-full bg-emerald-400/80" />
-        <div className="ml-3 flex-1 rounded-full border border-white/10 bg-black/70 px-3 py-1 text-[11px] text-zinc-500">
+        <div className="ml-3 flex-1 rounded-full border border-white/10 bg-black/70 px-3 py-1 text-[0.6875rem] text-zinc-500">
           {project.url}
         </div>
       </div>
@@ -97,23 +97,24 @@ function ProjectCard({ project, index }: Readonly<{ index: number; project: Proj
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 34, rotateX: 5 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      initial={{ opacity: 0, y: "2.125rem", rotateX: 5 }}
+      whileInView={{ opacity: 1, y: "0rem", rotateX: 0 }}
       viewport={{ once: true, margin: "-14%" }}
       transition={{ delay: index * 0.08, duration: 0.55, ease: "easeOut" }}
-      style={{ perspective: 1200 }}
+      style={{ perspective: "75rem" }}
       onMouseMove={handleMove}
       onMouseLeave={resetTilt}
+      className="h-full"
     >
-      <Link href={`/projects/${project.slug}`} className="group block outline-none">
+      <Link href={`/projects/${project.slug}`} className="group block h-full outline-none">
         <motion.div
           style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-          whileHover={{ y: -10 }}
+          whileHover={{ y: "-0.625rem" }}
           transition={{ type: "spring", stiffness: 180, damping: 20 }}
-          className="rounded-3xl border border-zinc-900 bg-zinc-950/70 p-4 shadow-2xl shadow-black/30"
+          className="flex h-full flex-col rounded-3xl border border-zinc-900 bg-zinc-950/70 p-4 shadow-2xl shadow-black/30"
         >
           <SafariMockup project={project} />
-          <div className="px-2 pb-2 pt-5">
+          <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <motion.h3
@@ -130,7 +131,7 @@ function ProjectCard({ project, index }: Readonly<{ index: number; project: Proj
                 <ArrowUpRight className="size-4" aria-hidden="true" />
               </span>
             </div>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-auto flex flex-wrap gap-2 pt-5">
               {project.stack.map((tech) => (
                 <Badge key={tech}>{tech}</Badge>
               ))}
@@ -146,24 +147,24 @@ export function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="projects" ref={sectionRef} className="relative scroll-mt-28 px-6 py-28">
+    <section id="projects" ref={sectionRef} className="relative scroll-mt-28 px-6 pb-28 pt-20 md:pt-14">
       <SectionTrace
         targetRef={sectionRef}
         icon={<GalleryVerticalEnd className="size-6" aria-hidden="true" />}
         side="left"
-        className="-left-2"
+        className="left-0 lg:left-[max(0rem,calc(50%_-_40rem))]"
       />
       <div className="relative z-10 mx-auto max-w-6xl">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:pt-[1.125rem]">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Projects</p>
+            <p className="ml-1 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Projects</p>
             <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-zinc-50 md:text-6xl">
-              Sneak peeks into model-backed systems.
+              Sneak peeks into software projects.
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-zinc-500">
-            Each card frames an applied AI/ML concept as an engineering system: data flow, inference
-            behavior, evaluation, and a clear path from prototype to usable tool.
+            Each card frames a technical idea as an engineering system: clear data flow, practical
+            constraints, readable interfaces, and a path from prototype to usable tool.
           </p>
         </div>
 
