@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-6xl flex-col justify-center px-6">
+    <section className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-7xl flex-col justify-center px-6">
       <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">404</p>
       <h1 className="mt-5 text-4xl font-semibold text-zinc-50 md:text-6xl">Page not found.</h1>
       <p className="mt-5 max-w-xl text-base leading-7 text-zinc-400">

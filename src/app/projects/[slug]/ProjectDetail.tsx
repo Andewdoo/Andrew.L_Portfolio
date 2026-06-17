@@ -18,7 +18,7 @@ function TechBadge({ children }: Readonly<{ children: string }>) {
 export function ProjectDetail({ project }: Readonly<{ project: Project }>) {
   return (
     <article className="min-h-screen bg-black px-6 pb-28 pt-6">
-      <div className="sticky top-6 z-40 mx-auto flex max-w-6xl">
+      <div className="sticky top-6 z-40 mx-auto flex max-w-7xl">
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-black/70 px-4 py-2 text-sm font-medium text-zinc-300 shadow-2xl shadow-black/30 backdrop-blur-xl transition-colors hover:border-zinc-600 hover:text-white"
@@ -28,7 +28,7 @@ export function ProjectDetail({ project }: Readonly<{ project: Project }>) {
         </Link>
       </div>
 
-      <div className="mx-auto mt-20 max-w-6xl">
+      <div className="mx-auto mt-20 max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end">
           <div>
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Case Study</p>

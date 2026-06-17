@@ -33,7 +33,7 @@ export function TopNav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-900/90 bg-black/55 backdrop-blur-xl">
-      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
+      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6">
         <Link
           href="/"
           className="font-mono text-sm font-medium uppercase tracking-[0.2em] text-zinc-100"

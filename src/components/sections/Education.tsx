@@ -36,7 +36,7 @@ export function Education() {
 
   return (
     <section id="education" ref={sectionRef} className="px-6 pb-28 pt-16">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="relative grid gap-10 md:grid-cols-[4rem_minmax(0,1fr)]">
           <div className="relative hidden justify-center md:flex">
             <div className="trace-track absolute top-0 h-full w-px" />

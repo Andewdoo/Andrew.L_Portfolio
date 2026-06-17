@@ -154,7 +154,7 @@ export function Projects() {
         side="left"
         className="left-0 lg:left-[max(0rem,calc(50%_-_40rem))]"
       />
-      <div className="relative z-10 mx-auto max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-7xl md:pl-20">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:pt-[1.125rem]">
           <div>
             <p className="ml-1 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Projects</p>

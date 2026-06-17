@@ -38,7 +38,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative isolate flex min-h-[calc(100vh-5rem)] items-center overflow-hidden px-6 py-20">
+    <section className="relative isolate flex min-h-[calc(100dvh-5rem)] items-center overflow-hidden px-6 py-20">
       <div className="absolute inset-0 -z-20 bg-black" />
       <div
         aria-hidden="true"
@@ -49,7 +49,7 @@ export function Hero() {
         className="absolute inset-x-0 top-12 -z-10 h-64 bg-[linear-gradient(110deg,transparent,rgba(63,63,70,0.38),transparent),linear-gradient(250deg,transparent,rgba(24,24,27,0.88),transparent)] opacity-80 blur-2xl"
       />
 
-      <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_23rem] lg:items-end">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-end">
         <motion.div
           initial={{ opacity: 0, y: "1.5rem" }}
           animate={{ opacity: 1, y: "0rem" }}
@@ -92,7 +92,7 @@ export function Hero() {
               alt="Andrew L. with family in a mountain cave"
               fill
               priority
-              sizes="23rem"
+              sizes="26rem"
               className="object-cover"
             />
           </div>
