@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/with-next-cache.mjs dev",
-    "build": "node scripts/with-next-cache.mjs build",
-    "start": "node scripts/with-next-cache.mjs start",
+    "build": "next build",
+    "start": "next start",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
