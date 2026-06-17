@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Briefcase,
   Check,
-  Download,
   GraduationCap,
   Moon,
   Palette,
@@ -12,7 +11,16 @@ import {
   Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { type ComponentType, type ReactNode, type SVGProps, useEffect, useMemo, useRef, useState } from "react";
+import {
+  type ComponentType,
+  type ReactNode,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type SVGProps,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -143,17 +151,6 @@ export function CommandPalette() {
         label: "Jump to Education",
         onSelect: () => jumpToSection("education"),
       },
-      {
-        icon: Download,
-        keywords: ["cv", "resume", "download"],
-        label: "Download Resume",
-        onSelect: () => {
-          const link = document.createElement("a");
-          link.href = "/resume.pdf";
-          link.download = "Andrew-L-Resume.pdf";
-          link.click();
-        },
-      },
     ],
     [mounted, resolvedTheme, setTheme]
   );
@@ -180,10 +177,12 @@ export function CommandPalette() {
     setSearch("");
   };
 
-  const handleCommandKeys = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleCommandKeys = (event: ReactKeyboardEvent<HTMLDivElement>) => {
     if (event.key === "ArrowDown") {
       event.preventDefault();
-      setActiveIndex((current) => Math.min(current + 1, filteredActions.length - 1));
+      setActiveIndex((current) =>
+        filteredActions.length === 0 ? 0 : Math.min(current + 1, filteredActions.length - 1)
+      );
     }
 
     if (event.key === "ArrowUp") {

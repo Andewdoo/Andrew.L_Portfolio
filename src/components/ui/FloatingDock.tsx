@@ -8,13 +8,14 @@ import type { ComponentType, SVGProps } from "react";
 import { cn } from "@/lib/utils";
 
 type DockLinkItem = {
+  kind: "link";
   href: string;
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   label: string;
 };
 
 type DockActionItem = {
-  action: "copyEmail";
+  kind: "email";
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   label: string;
 };
@@ -25,17 +26,19 @@ const EMAIL_ADDRESS = "ahanliu0311@gmail.com";
 
 const dockItems: DockItem[] = [
   {
+    kind: "link",
     href: "https://github.com/Andewdoo",
     icon: Github,
     label: "GitHub",
   },
   {
+    kind: "link",
     href: "https://www.linkedin.com/in/andrew-liu-13099336a",
     icon: Linkedin,
     label: "LinkedIn",
   },
   {
-    action: "copyEmail",
+    kind: "email",
     icon: Mail,
     label: "Email",
   },
@@ -59,8 +62,17 @@ export function FloatingDock() {
   }, [copiedNoticeId]);
 
   async function handleCopyEmail() {
-    await navigator.clipboard.writeText(EMAIL_ADDRESS);
-    setCopiedNoticeId((currentNoticeId) => currentNoticeId + 1);
+    if (!navigator.clipboard?.writeText) {
+      window.location.href = `mailto:${EMAIL_ADDRESS}`;
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(EMAIL_ADDRESS);
+      setCopiedNoticeId((currentNoticeId) => currentNoticeId + 1);
+    } catch {
+      window.location.href = `mailto:${EMAIL_ADDRESS}`;
+    }
   }
 
   return (
@@ -86,41 +98,41 @@ export function FloatingDock() {
               transition: { type: "spring", stiffness: 380, damping: 24 },
             } as const;
 
-            if ("href" in item) {
+            if (item.kind === "email") {
               return (
-                <motion.a
+                <motion.button
                   key={item.label}
-                  href={item.href}
-                  aria-label={item.label}
+                  type="button"
+                  aria-label="Copy email address"
                   title={item.label}
-                  target="_blank"
-                  rel="noreferrer"
                   className={dockItemClassName}
+                  onClick={handleCopyEmail}
                   {...motionProps}
                 >
                   <Icon className="size-5" aria-hidden="true" />
                   <span className="pointer-events-none absolute -top-9 rounded-md border border-white/10 bg-zinc-950 px-2 py-1 text-xs text-zinc-200 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                     {item.label}
                   </span>
-                </motion.a>
+                </motion.button>
               );
             }
 
             return (
-              <motion.button
+              <motion.a
                 key={item.label}
-                type="button"
-                aria-label="Copy email address"
+                href={item.href}
+                aria-label={item.label}
                 title={item.label}
+                target="_blank"
+                rel="noreferrer"
                 className={dockItemClassName}
-                onClick={handleCopyEmail}
                 {...motionProps}
               >
                 <Icon className="size-5" aria-hidden="true" />
                 <span className="pointer-events-none absolute -top-9 rounded-md border border-white/10 bg-zinc-950 px-2 py-1 text-xs text-zinc-200 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                   {item.label}
                 </span>
-              </motion.button>
+              </motion.a>
             );
           })}
         </div>

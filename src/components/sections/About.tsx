@@ -9,7 +9,7 @@ import { SectionTrace } from "@/components/animations/SectionTrace";
 const sentences = [
   "To me, software is the mechanic of how complex things turn into something simple that I can understand. I thrive on the challenge of breaking down problems and building solutions to them.",
   "I love to travel and the sights are only a part of it. I also love observing how all the unique cultures around the world structure their systems to solve the exact same puzzles but with their own spin.",
-  "This drives my non-linear approach to problem-solving. From my experience, the best solutions come from connecting completely unexpected dots. I treat building software as solving a puzzle with my own spin. ",
+  "This drives my non-linear approach to problem-solving. From my experience, the best solutions come from connecting unexpected dots. I treat building software as solving a puzzle with my own spin.",
 ];
 
 export function About() {
@@ -61,7 +61,7 @@ function RevealSentence({
   total: number;
 }>) {
   const baseStart = index / total;
-  const start = index === total - 1 ? Math.max(0, baseStart - 0.80) : baseStart;
+  const start = index === total - 1 ? Math.max(0, baseStart - 0.8) : baseStart;
   const end = (index + 0.78) / total;
   const opacity = useTransform(progress, [start, end], [0.18, 1]);
   const y = useTransform(progress, [start, end], ["1.125rem", "0rem"]);

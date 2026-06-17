@@ -48,9 +48,6 @@ export function SafariMockup({
       </div>
       <div className={cn("relative overflow-hidden bg-black", size === "hero" ? "aspect-[16/9]" : "aspect-[16/10]")}>
         <motion.div
-          // This animated surface stands in for a project GIF/video until real
-          // media assets are dropped in. It keeps the sneak peek alive without
-          // introducing external dependencies or broken media files.
           className={cn("absolute inset-0", project.visual.pattern)}
           animate={{ scale: [1, 1.06, 1], x: ["0%", "-2%", "0%"] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}

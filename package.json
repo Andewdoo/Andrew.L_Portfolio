@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "node scripts/with-next-cache.mjs dev",
+    "build": "node scripts/with-next-cache.mjs build",
+    "start": "node scripts/with-next-cache.mjs start",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.8",

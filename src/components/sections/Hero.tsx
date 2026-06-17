@@ -63,7 +63,7 @@ export function Hero() {
             Building software from idea to implementation.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-            I thrive on the challenge of taking an idea and building it from scratch. All experiences are chances to turn new knowledge into reality, and my motivation to something more ambitious.
+            I thrive on the challenge of taking an idea and building it from scratch. Every experience is a chance to turn new knowledge into reality and push toward something more ambitious.
           </p>
 
           <motion.button

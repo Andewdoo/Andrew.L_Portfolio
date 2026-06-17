@@ -56,7 +56,7 @@ export function ProjectDetail({ project }: Readonly<{ project: Project }>) {
         </div>
 
         <div className="mt-20 grid gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
-          <aside className="hidden lg:block">
+          <aside className="hidden lg:block" aria-label="Case study sections">
             <div className="sticky top-28 rounded-2xl border border-zinc-900 bg-zinc-950/70 p-5">
               <p className="text-sm font-medium uppercase tracking-[0.16em] text-zinc-500">Sections</p>
               <nav className="mt-5 grid gap-3 text-sm text-zinc-400">
