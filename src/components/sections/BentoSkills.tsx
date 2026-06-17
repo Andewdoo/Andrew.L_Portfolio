@@ -53,18 +53,18 @@ export function BentoSkills() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="stack" ref={sectionRef} className="relative scroll-mt-28 px-6 pb-28 pt-20 md:pt-14">
+    <section id="stack" ref={sectionRef} className="relative scroll-mt-28 px-[clamp(1rem,4vw,1.5rem)] pb-[clamp(5rem,10vw,7rem)] pt-[clamp(4rem,8vw,5rem)] md:pt-14">
       <SectionTrace
         targetRef={sectionRef}
         icon={<MousePointer2 className="size-6" aria-hidden="true" />}
         side="left"
         className="left-0 lg:left-[max(0rem,calc(50%_-_40rem))]"
       />
-      <div className="relative z-10 mx-auto max-w-7xl md:pl-20">
+      <div className="relative z-10 mx-auto max-w-7xl md:pl-[clamp(4rem,8vw,5rem)]">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:pt-[1.125rem]">
           <div>
             <p className="ml-1 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Skills</p>
-            <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-zinc-50 md:text-6xl">
+            <h2 className="mt-4 max-w-3xl text-[clamp(2.25rem,6vw,3.75rem)] font-semibold leading-tight text-zinc-50">
               A compact toolkit for software engineering.
             </h2>
           </div>
@@ -74,13 +74,13 @@ export function BentoSkills() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-4">
+        <div className="mt-14 grid grid-cols-[repeat(auto-fit,minmax(min(100%,16rem),1fr))] gap-5">
           <motion.article
             initial={{ opacity: 0, y: "1.5rem" }}
             whileInView={{ opacity: 1, y: "0rem" }}
             viewport={{ once: true, margin: "-12%" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative min-h-[34rem] overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950/80 p-6 lg:col-span-4"
+            className="relative min-h-[clamp(30rem,62vw,34rem)] overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950/80 p-[clamp(1.25rem,4vw,1.5rem)] lg:col-span-full"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(244,244,245,0.16),transparent_36%),radial-gradient(circle_at_78%_72%,rgba(113,113,122,0.16),transparent_34%)]" />
             <div className="relative flex h-full flex-col justify-between">
@@ -88,7 +88,7 @@ export function BentoSkills() {
                 <div className="grid size-12 place-items-center rounded-xl border border-zinc-800 bg-black text-zinc-100">
                   <Layers3 className="size-6" aria-hidden="true" />
                 </div>
-                <h3 className="mt-6 text-5xl font-semibold leading-tight text-zinc-50 md:text-6xl">Tech Stack</h3>
+                <h3 className="mt-6 text-[clamp(2.75rem,7vw,3.75rem)] font-semibold leading-tight text-zinc-50">Tech Stack</h3>
                 <p className="mt-4 max-w-xl text-base leading-7 text-zinc-400">
                   A focused stack for turning ideas into dependable applications, with enough
                   systems depth to keep the details understandable and maintainable.

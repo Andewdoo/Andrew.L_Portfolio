@@ -79,12 +79,12 @@ export function FloatingDock() {
     <>
       <motion.nav
         aria-label="Social links"
-        className="fixed inset-x-0 bottom-5 z-50 flex justify-center px-6"
+        className="fixed inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-50 flex justify-center px-[clamp(1rem,4vw,1.5rem)]"
         initial={{ opacity: 0, y: "1.125rem" }}
         animate={{ opacity: 1, y: "0rem" }}
         transition={{ duration: 0.35, ease: "easeOut" }}
       >
-        <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-black/55 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
+        <div className="flex max-w-full items-end gap-2 overflow-x-auto rounded-2xl border border-white/10 bg-black/55 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {dockItems.map((item) => {
             const Icon = item.icon;
             const dockItemClassName = cn(

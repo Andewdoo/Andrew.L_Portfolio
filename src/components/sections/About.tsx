@@ -20,17 +20,17 @@ export function About() {
   });
 
   return (
-    <section id="about" ref={sectionRef} className="relative px-6 pb-12 pt-16">
+    <section id="about" ref={sectionRef} className="relative px-[clamp(1rem,4vw,1.5rem)] pb-12 pt-[clamp(4rem,8vw,5rem)]">
       <SectionTrace
         targetRef={sectionRef}
         icon={<PenLine className="size-6" aria-hidden="true" />}
         side="right"
         className="right-0 lg:right-[max(0rem,calc(50%_-_40rem))]"
       />
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-12 md:pr-20 md:grid-cols-[16rem_minmax(0,1fr)]">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-[clamp(2rem,5vw,3rem)] md:grid-cols-[minmax(12rem,16rem)_minmax(0,1fr)] md:pr-[clamp(4rem,8vw,5rem)]">
         <div>
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">About</p>
-          <h2 className="mt-4 text-3xl font-semibold text-zinc-50 md:text-4xl">A practical engineering lens.</h2>
+          <h2 className="mt-4 text-[clamp(1.875rem,4vw,2.25rem)] font-semibold text-zinc-50">A practical engineering lens.</h2>
         </div>
 
         <div className="space-y-8 md:space-y-10">
@@ -67,7 +67,7 @@ function RevealSentence({
   const y = useTransform(progress, [start, end], ["1.125rem", "0rem"]);
 
   return (
-    <motion.p style={{ opacity, y }} className="max-w-4xl text-2xl leading-snug text-zinc-200 md:text-4xl">
+    <motion.p style={{ opacity, y }} className="max-w-4xl text-[clamp(1.5rem,4.5vw,2.25rem)] leading-snug text-zinc-200">
       {sentence}
     </motion.p>
   );

@@ -200,7 +200,7 @@ export function CommandPalette() {
     <AnimatePresence>
       {open ? (
         <motion.div
-          className="fixed inset-0 z-[70] flex items-start justify-center bg-black/60 px-4 pt-[18vh] backdrop-blur-sm"
+          className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto bg-black/60 px-[clamp(1rem,4vw,1.5rem)] py-[clamp(3rem,18vh,8rem)] backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

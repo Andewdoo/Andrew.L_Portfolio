@@ -35,7 +35,7 @@ export function Education() {
   const beadTop = useTransform(lineScale, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="education" ref={sectionRef} className="px-6 pb-28 pt-16">
+    <section id="education" ref={sectionRef} className="px-[clamp(1rem,4vw,1.5rem)] pb-[clamp(5rem,10vw,7rem)] pt-[clamp(4rem,8vw,5rem)]">
       <div className="mx-auto max-w-7xl">
         <div className="relative grid gap-10 md:grid-cols-[4rem_minmax(0,1fr)]">
           <div className="relative hidden justify-center md:flex">
@@ -66,13 +66,13 @@ export function Education() {
               className="rounded-2xl border border-zinc-900 bg-zinc-950/70 p-6"
             >
               <p className="text-sm uppercase tracking-[0.18em] text-zinc-500">McMaster University</p>
-              <h3 className="mt-3 text-3xl font-semibold text-zinc-50">Computer Engineering</h3>
+              <h3 className="mt-3 text-[clamp(1.875rem,4vw,2.25rem)] font-semibold text-zinc-50">Computer Engineering</h3>
               <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-400">
                 For me, building software is about mastering the whole system. Computer Engineering bridges that gap by providing me with the foundation to connect low-level hardware-aware reasoning with the algorithms and interfaces that drive modern software.
               </p>
             </motion.article>
 
-            <div className="grid gap-5 lg:grid-cols-3">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,16rem),1fr))] gap-5">
               {foundations.map((item, index) => {
                 const Icon = item.icon;
 
