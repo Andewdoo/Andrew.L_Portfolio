@@ -29,7 +29,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body className={`${geistSans.variable} ${geistMono.variable} bg-black antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <TopNav />
-          <main className="min-h-screen bg-black pt-[4.5rem]">{children}</main>
+          <main className="relative isolate min-h-screen overflow-hidden bg-black pt-[4.5rem]">
+            <div className="site-afterglow" aria-hidden="true" />
+            <div className="relative z-10">{children}</div>
+          </main>
           <FloatingDock />
           <CommandPalette />
           <CustomCursor />

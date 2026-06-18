@@ -38,15 +38,22 @@ export function Hero() {
   };
 
   return (
-    <section className="relative isolate flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden py-[clamp(3.5rem,7vw,6rem)]">
-      <div className="absolute inset-0 -z-20 bg-black" />
+    <section className="relative isolate flex min-h-[calc(100svh-4.5rem)] items-center py-[clamp(3.5rem,7vw,6rem)]">
       <div
         aria-hidden="true"
-        className="absolute left-1/2 top-0 -z-10 size-[min(86vw,42rem)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,244,245,0.22),rgba(39,39,42,0.08)_44%,transparent_68%)] blur-3xl"
+        className="absolute inset-x-0 top-0 bottom-[-30rem] -z-20 bg-[linear-gradient(180deg,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.85)_62%,rgba(0,0,0,0)_100%)]"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-12 -z-10 h-[clamp(12rem,24vw,21rem)] bg-[linear-gradient(110deg,transparent,rgba(63,63,70,0.38),transparent),linear-gradient(250deg,transparent,rgba(24,24,27,0.88),transparent)] opacity-80 blur-2xl"
+        className="absolute left-1/2 top-0 -z-10 size-[min(92vw,50rem)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,244,245,0.22),rgba(39,39,42,0.09)_46%,transparent_70%)] blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-10 -z-10 h-[clamp(20rem,48vw,42rem)] bg-[radial-gradient(ellipse_at_74%_38%,rgba(244,244,245,0.16),transparent_38%),radial-gradient(ellipse_at_36%_54%,rgba(113,113,122,0.22),transparent_42%),linear-gradient(110deg,transparent,rgba(63,63,70,0.32),transparent),linear-gradient(250deg,transparent,rgba(24,24,27,0.82),transparent)] opacity-90 blur-2xl"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-[-22rem] -z-10 h-[clamp(20rem,42vw,38rem)] bg-[radial-gradient(ellipse_at_center,rgba(244,244,245,0.1),rgba(39,39,42,0.055)_45%,transparent_72%)]"
       />
 
       <div className="site-shell grid w-full gap-[clamp(2.5rem,5vw,6rem)] lg:grid-cols-[minmax(0,1fr)_minmax(28rem,38vw)] lg:items-center">

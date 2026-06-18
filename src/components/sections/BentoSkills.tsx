@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Bot, BrainCircuit, Cpu, Database, Layers3, MousePointer2 } from "lucide-react";
 import { useRef } from "react";
 
 import { SectionTrace } from "@/components/animations/SectionTrace";
+import { ScrollFocusCard } from "@/components/animations/ScrollFocusCard";
 import { ScrollableTechCards } from "@/components/ui/ScrollableTechCards";
 
 const techGroups = [
@@ -65,16 +65,11 @@ export function BentoSkills() {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:pt-[1.125rem]">
             <div>
               <p className="ml-1 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Skills</p>
-
             </div>
           </div>
 
-          <div className="mt-[clamp(2.5rem,6vw,4rem)] grid grid-cols-1 gap-[clamp(1.25rem,2vw,2rem)] md:grid-cols-2 xl:grid-cols-4">
-            <motion.article
-              initial={{ opacity: 0, y: "1.5rem" }}
-              whileInView={{ opacity: 1, y: "0rem" }}
-              viewport={{ once: true, margin: "-12%" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+          <div className="focus-card-cluster mt-[clamp(2.5rem,6vw,4rem)] grid grid-cols-1 gap-[clamp(1.25rem,2vw,2rem)] md:grid-cols-2 xl:grid-cols-4">
+            <article
               className="relative min-h-[clamp(34rem,54vw,46rem)] overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950/80 p-[clamp(1.75rem,4vw,2.5rem)] md:col-span-2 xl:col-span-4"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(244,244,245,0.16),transparent_36%),radial-gradient(circle_at_78%_72%,rgba(113,113,122,0.16),transparent_34%)]" />
@@ -92,18 +87,14 @@ export function BentoSkills() {
 
                 <ScrollableTechCards groups={techGroups} />
               </div>
-            </motion.article>
+            </article>
 
-            {skillCards.map((card, index) => {
+            {skillCards.map((card) => {
               const Icon = card.icon;
 
               return (
-                <motion.article
+                <ScrollFocusCard
                   key={card.title}
-                  initial={{ opacity: 0, y: "1.5rem" }}
-                  whileInView={{ opacity: 1, y: "0rem" }}
-                  viewport={{ once: true, margin: "-12%" }}
-                  transition={{ delay: index * 0.06, duration: 0.45, ease: "easeOut" }}
                   className="min-h-[clamp(20rem,25vw,23rem)] rounded-2xl border border-zinc-900 bg-black p-[clamp(1.75rem,2.5vw,2.5rem)]"
                 >
                   <div className="grid size-14 place-items-center rounded-xl border border-zinc-800 bg-zinc-950 text-zinc-200">
@@ -111,7 +102,7 @@ export function BentoSkills() {
                   </div>
                   <h3 className="mt-8 text-[clamp(1.5rem,2vw,1.85rem)] font-semibold text-zinc-50">{card.title}</h3>
                   <p className="mt-5 text-[clamp(1.05rem,1.35vw,1.2rem)] leading-8 text-zinc-500">{card.body}</p>
-                </motion.article>
+                </ScrollFocusCard>
               );
             })}
 

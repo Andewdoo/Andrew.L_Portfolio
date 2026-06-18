@@ -80,12 +80,12 @@ export function About() {
             </motion.p>
           </div>
 
-          <div className="max-w-[86rem] translate-x-[clamp(1.25rem,5vw,4rem)] md:translate-x-[clamp(11rem,16vw,20rem)]">
+          <div className="max-w-[90rem] translate-x-[clamp(1.25rem,5vw,4rem)] md:translate-x-[clamp(8rem,12vw,15rem)]">
             <motion.h2
               variants={blurContainer}
               initial="hidden"
               animate="visible"
-              className="max-w-[10ch] text-[clamp(2.75rem,9.5vw,7.75rem)] font-semibold leading-[0.98] text-zinc-50 md:max-w-[12ch] md:text-[clamp(3.75rem,6.6vw,7.75rem)]"
+              className="max-w-[11.5ch] text-[clamp(2.75rem,9.5vw,7.75rem)] font-semibold leading-[0.98] text-zinc-50 md:max-w-[14ch] md:text-[clamp(3.75rem,6.6vw,7.75rem)]"
             >
               {headline.split(" ").map((word) => (
                 <motion.span key={word} variants={blurItem} className="mr-[0.18em] inline-block">

@@ -6,7 +6,9 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type { MouseEvent, ReactNode } from "react";
 
+import { MaskedSectionHeading } from "@/components/animations/MaskedSectionHeading";
 import { SectionTrace } from "@/components/animations/SectionTrace";
+import { ScrollFocusCard } from "@/components/animations/ScrollFocusCard";
 import { projects, type Project } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 
@@ -73,7 +75,8 @@ export function SafariMockup({
   );
 }
 
-function ProjectCard({ project, index }: Readonly<{ index: number; project: Project }>) {
+function ProjectCard({ project }: Readonly<{ project: Project }>) {
+  const isPlaceholder = project.status === "placeholder";
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const smoothX = useSpring(pointerX, { stiffness: 180, damping: 22 });
@@ -92,23 +95,22 @@ function ProjectCard({ project, index }: Readonly<{ index: number; project: Proj
     pointerY.set(0);
   };
 
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: "2.125rem", rotateX: 5 }}
-      whileInView={{ opacity: 1, y: "0rem", rotateX: 0 }}
-      viewport={{ once: true, margin: "-14%" }}
-      transition={{ delay: index * 0.08, duration: 0.55, ease: "easeOut" }}
+  const card = (
+    <ScrollFocusCard
       style={{ perspective: "75rem" }}
       onMouseMove={handleMove}
       onMouseLeave={resetTilt}
       className="h-full"
     >
-      <Link href={`/projects/${project.slug}`} className="group block h-full outline-none">
+      <div className={cn("group block h-full outline-none", isPlaceholder && "cursor-default")}>
         <motion.div
           style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-          whileHover={{ y: "-0.625rem" }}
+          whileHover={isPlaceholder ? undefined : { y: "-0.625rem" }}
           transition={{ type: "spring", stiffness: 180, damping: 20 }}
-          className="flex h-full flex-col rounded-3xl border border-zinc-900 bg-zinc-950/70 p-[clamp(1.25rem,1.6vw,1.75rem)] shadow-2xl shadow-black/30"
+          className={cn(
+            "flex h-full flex-col rounded-3xl border border-zinc-900 bg-zinc-950/70 p-[clamp(1.25rem,1.6vw,1.75rem)] shadow-2xl shadow-black/30",
+            isPlaceholder && "opacity-65"
+          )}
         >
           <SafariMockup project={project} />
           <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
@@ -124,9 +126,11 @@ function ProjectCard({ project, index }: Readonly<{ index: number; project: Proj
                 </motion.h3>
                 <p className="mt-3 text-[clamp(1rem,1.4vw,1.12rem)] leading-7 text-zinc-500">{project.description}</p>
               </div>
-              <span className="mt-1 rounded-full border border-zinc-800 p-2.5 text-zinc-400 transition-colors group-hover:border-zinc-600 group-hover:text-white">
-                <ArrowUpRight className="size-5" aria-hidden="true" />
-              </span>
+              {!isPlaceholder ? (
+                <span className="mt-1 rounded-full border border-zinc-800 p-2.5 text-zinc-400 transition-colors group-hover:border-zinc-600 group-hover:text-white">
+                  <ArrowUpRight className="size-5" aria-hidden="true" />
+                </span>
+              ) : null}
             </div>
             <div className="mt-auto flex flex-wrap gap-2 pt-6">
               {project.stack.map((tech) => (
@@ -135,8 +139,18 @@ function ProjectCard({ project, index }: Readonly<{ index: number; project: Proj
             </div>
           </div>
         </motion.div>
-      </Link>
-    </motion.article>
+      </div>
+    </ScrollFocusCard>
+  );
+
+  if (isPlaceholder) {
+    return card;
+  }
+
+  return (
+    <Link href={`/projects/${project.slug}`} className="block h-full outline-none">
+      {card}
+    </Link>
   );
 }
 
@@ -159,9 +173,9 @@ export function Projects() {
             </div>
           </div>
 
-          <div className="mt-[clamp(2.5rem,6vw,4rem)] grid grid-cols-1 gap-[clamp(1.25rem,2vw,2.25rem)] md:grid-cols-2 xl:grid-cols-3">
-            {projects.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} />
+          <div className="focus-card-cluster mt-[clamp(2.5rem,6vw,4rem)] grid grid-cols-1 gap-[clamp(1.25rem,2vw,2.25rem)] md:grid-cols-2 xl:grid-cols-3">
+            {projects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </div>

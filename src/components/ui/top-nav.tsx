@@ -35,7 +35,7 @@ export function TopNav() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-900/90 bg-black/55 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 bg-black/45 backdrop-blur-xl">
       <nav className="site-shell flex h-18 w-full items-center justify-between">
         <Link
           href="/"
