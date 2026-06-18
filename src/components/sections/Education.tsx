@@ -40,14 +40,8 @@ export function Education() {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:pt-[1.125rem]">
             <div>
               <p className="ml-1 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Education</p>
-              <h2 className="mt-4 max-w-4xl text-[clamp(2.25rem,6vw,5.25rem)] font-semibold leading-tight text-zinc-50">
-                Engineering foundations for useful software.
-              </h2>
+
             </div>
-            <p className="max-w-lg text-[clamp(1rem,1.5vw,1.15rem)] leading-8 text-zinc-500">
-              Coursework and systems practice that connect hardware-aware reasoning, algorithms,
-              data structures, and implementation details.
-            </p>
           </div>
 
           <div className="mt-[clamp(2.5rem,6vw,4rem)] space-y-5">
@@ -61,7 +55,7 @@ export function Education() {
               <p className="text-sm uppercase tracking-[0.18em] text-zinc-500">McMaster University</p>
               <h3 className="mt-3 text-[clamp(2rem,4vw,2.75rem)] font-semibold text-zinc-50">Computer Engineering</h3>
               <p className="mt-4 max-w-4xl text-[clamp(1rem,1.5vw,1.15rem)] leading-8 text-zinc-400">
-                For me, building software is about mastering the whole system. Computer Engineering bridges that gap by providing me with the foundation to connect low-level hardware-aware reasoning with the algorithms and interfaces that drive modern software.
+                To me, building software is about mastering the whole system. Computer Engineering bridges that gap by providing me with the foundation to connect low-level hardware-aware reasoning with the algorithms and interfaces that drive modern software.
               </p>
             </motion.article>
 

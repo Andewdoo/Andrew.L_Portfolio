@@ -65,14 +65,8 @@ export function BentoSkills() {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:pt-[1.125rem]">
             <div>
               <p className="ml-1 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Skills</p>
-              <h2 className="mt-4 max-w-4xl text-[clamp(2.25rem,6vw,5.25rem)] font-semibold leading-tight text-zinc-50">
-                A compact toolkit for software engineering.
-              </h2>
+
             </div>
-            <p className="max-w-lg text-[clamp(1rem,1.5vw,1.15rem)] leading-8 text-zinc-500">
-              Selected skills framed around building useful software: clear interfaces, dependable
-              logic, thoughtful data flow, and systems-aware implementation.
-            </p>
           </div>
 
           <div className="mt-[clamp(2.5rem,6vw,4rem)] grid grid-cols-1 gap-[clamp(1.25rem,2vw,2rem)] md:grid-cols-2 xl:grid-cols-4">
