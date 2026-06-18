@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 function Badge({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <span className="rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1 text-xs font-medium text-zinc-300">
+    <span className="rounded-full border border-zinc-800 bg-zinc-950 px-3.5 py-1.5 text-xs font-medium text-zinc-300">
       {children}
     </span>
   );
@@ -108,27 +108,27 @@ function ProjectCard({ project, index }: Readonly<{ index: number; project: Proj
           style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
           whileHover={{ y: "-0.625rem" }}
           transition={{ type: "spring", stiffness: 180, damping: 20 }}
-          className="flex h-full flex-col rounded-3xl border border-zinc-900 bg-zinc-950/70 p-4 shadow-2xl shadow-black/30"
+          className="flex h-full flex-col rounded-3xl border border-zinc-900 bg-zinc-950/70 p-[clamp(1.25rem,1.6vw,1.75rem)] shadow-2xl shadow-black/30"
         >
           <SafariMockup project={project} />
           <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
-            <div className="flex items-start justify-between gap-4">
+            <div className="flex items-start justify-between gap-5">
               <div>
                 <motion.h3
                   // The title has its own layoutId so the text can subtly settle
                   // into the detail page heading alongside the browser mockup.
                   layoutId={`project-title-${project.slug}`}
-                  className="text-[clamp(1.25rem,3vw,1.5rem)] font-semibold text-zinc-50"
+                  className="text-[clamp(1.45rem,2.5vw,2rem)] font-semibold text-zinc-50"
                 >
                   {project.title}
                 </motion.h3>
-                <p className="mt-3 text-sm leading-6 text-zinc-500">{project.description}</p>
+                <p className="mt-3 text-[clamp(1rem,1.4vw,1.12rem)] leading-7 text-zinc-500">{project.description}</p>
               </div>
-              <span className="mt-1 rounded-full border border-zinc-800 p-2 text-zinc-400 transition-colors group-hover:border-zinc-600 group-hover:text-white">
-                <ArrowUpRight className="size-4" aria-hidden="true" />
+              <span className="mt-1 rounded-full border border-zinc-800 p-2.5 text-zinc-400 transition-colors group-hover:border-zinc-600 group-hover:text-white">
+                <ArrowUpRight className="size-5" aria-hidden="true" />
               </span>
             </div>
-            <div className="mt-auto flex flex-wrap gap-2 pt-5">
+            <div className="mt-auto flex flex-wrap gap-2 pt-6">
               {project.stack.map((tech) => (
                 <Badge key={tech}>{tech}</Badge>
               ))}
@@ -144,31 +144,33 @@ export function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="projects" ref={sectionRef} className="relative scroll-mt-28 px-[clamp(1rem,4vw,1.5rem)] pb-[clamp(5rem,10vw,7rem)] pt-[clamp(4rem,8vw,5rem)] md:pt-14">
+    <section id="projects" ref={sectionRef} className="relative scroll-mt-28 pb-[clamp(5rem,10vw,7.5rem)] pt-[clamp(4rem,8vw,5.5rem)] md:pt-16">
       <SectionTrace
         targetRef={sectionRef}
         icon={<GalleryVerticalEnd className="size-6" aria-hidden="true" />}
         side="left"
-        className="left-0 lg:left-[max(0rem,calc(50%_-_40rem))]"
+        className="site-trace-left"
       />
-      <div className="relative z-10 mx-auto max-w-7xl md:pl-[clamp(4rem,8vw,5rem)]">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:pt-[1.125rem]">
-          <div>
-            <p className="ml-1 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Projects</p>
-            <h2 className="mt-4 max-w-3xl text-[clamp(2.25rem,6vw,3.75rem)] font-semibold leading-tight text-zinc-50">
-              Sneak peeks into software projects.
-            </h2>
+      <div className="site-shell">
+        <div className="relative z-10 w-full md:pl-[clamp(4rem,5vw,5rem)]">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:pt-[1.125rem]">
+            <div>
+              <p className="ml-1 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Projects</p>
+              <h2 className="mt-4 max-w-4xl text-[clamp(2.25rem,6vw,5.25rem)] font-semibold leading-tight text-zinc-50">
+                Sneak peeks into software projects.
+              </h2>
+            </div>
+            <p className="max-w-lg text-[clamp(1rem,1.5vw,1.15rem)] leading-8 text-zinc-500">
+              Each card frames a technical idea as an engineering system: clear data flow, practical
+              constraints, readable interfaces, and a path from prototype to usable tool.
+            </p>
           </div>
-          <p className="max-w-sm text-sm leading-6 text-zinc-500">
-            Each card frames a technical idea as an engineering system: clear data flow, practical
-            constraints, readable interfaces, and a path from prototype to usable tool.
-          </p>
-        </div>
 
-        <div className="mt-14 grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] gap-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} index={index} />
-          ))}
+          <div className="mt-[clamp(2.5rem,6vw,4rem)] grid grid-cols-1 gap-[clamp(1.25rem,2vw,2.25rem)] md:grid-cols-2 xl:grid-cols-3">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

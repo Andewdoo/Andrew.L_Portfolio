@@ -9,7 +9,7 @@ import type { Project } from "@/lib/projects";
 
 function TechBadge({ children }: Readonly<{ children: string }>) {
   return (
-    <span className="rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1 text-xs font-medium text-zinc-300">
+    <span className="rounded-full border border-zinc-800 bg-zinc-950 px-3.5 py-1.5 text-xs font-medium text-zinc-300">
       {children}
     </span>
   );
@@ -17,8 +17,8 @@ function TechBadge({ children }: Readonly<{ children: string }>) {
 
 export function ProjectDetail({ project }: Readonly<{ project: Project }>) {
   return (
-    <article className="min-h-screen bg-black px-[clamp(1rem,4vw,1.5rem)] pb-[clamp(5rem,10vw,7rem)] pt-6">
-      <div className="sticky top-6 z-40 mx-auto flex max-w-7xl">
+    <article className="min-h-screen bg-black px-[clamp(1rem,3.8vw,5rem)] pb-[clamp(5rem,10vw,7.5rem)] pt-6">
+      <div className="sticky top-6 z-40 flex w-full">
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-black/70 px-4 py-2 text-sm font-medium text-zinc-300 shadow-2xl shadow-black/30 backdrop-blur-xl transition-colors hover:border-zinc-600 hover:text-white"
@@ -28,8 +28,8 @@ export function ProjectDetail({ project }: Readonly<{ project: Project }>) {
         </Link>
       </div>
 
-      <div className="mx-auto mt-[clamp(4rem,10vw,5rem)] max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end">
+      <div className="mt-[clamp(4rem,10vw,5rem)] w-full">
+        <div className="grid gap-[clamp(2.5rem,5vw,5.5rem)] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-end">
           <div>
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">Case Study</p>
             <motion.h1
@@ -40,11 +40,11 @@ export function ProjectDetail({ project }: Readonly<{ project: Project }>) {
               // adopts a native Next ViewTransition component, this is the exact
               // handoff point to replace with the framework-native transition name.
               layoutId={`project-title-${project.slug}`}
-              className="mt-5 text-[clamp(2.65rem,8vw,4.5rem)] font-semibold leading-tight text-zinc-50"
+              className="mt-5 text-[clamp(3rem,7vw,6.4rem)] font-semibold leading-[1.05] text-zinc-50"
             >
               {project.title}
             </motion.h1>
-            <p className="mt-6 max-w-2xl text-[clamp(1rem,2vw,1.125rem)] leading-8 text-zinc-400">{project.description}</p>
+            <p className="mt-7 max-w-3xl text-[clamp(1.05rem,1.8vw,1.35rem)] leading-9 text-zinc-400">{project.description}</p>
             <div className="mt-7 flex flex-wrap gap-2">
               {project.stack.map((tech) => (
                 <TechBadge key={tech}>{tech}</TechBadge>
@@ -76,7 +76,7 @@ export function ProjectDetail({ project }: Readonly<{ project: Project }>) {
           <div className="space-y-12 text-zinc-300">
             <section id="problem" className="scroll-mt-28">
               <h2 className="text-[clamp(1.875rem,4vw,2.25rem)] font-semibold text-zinc-50">The Problem</h2>
-              <p className="mt-5 max-w-3xl text-[clamp(1rem,2vw,1.125rem)] leading-8 text-zinc-400">{project.problem}</p>
+              <p className="mt-5 max-w-4xl text-[clamp(1rem,2vw,1.2rem)] leading-8 text-zinc-400">{project.problem}</p>
             </section>
 
             <section id="architecture" className="scroll-mt-28">

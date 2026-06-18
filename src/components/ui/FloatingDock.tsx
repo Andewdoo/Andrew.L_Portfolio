@@ -79,7 +79,7 @@ export function FloatingDock() {
     <>
       <motion.nav
         aria-label="Social links"
-        className="fixed inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-50 flex justify-center px-[clamp(1rem,4vw,1.5rem)]"
+        className="fixed inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-50 flex justify-center px-[clamp(1rem,3.8vw,5rem)]"
         initial={{ opacity: 0, y: "1.125rem" }}
         animate={{ opacity: 1, y: "0rem" }}
         transition={{ duration: 0.35, ease: "easeOut" }}
@@ -88,7 +88,7 @@ export function FloatingDock() {
           {dockItems.map((item) => {
             const Icon = item.icon;
             const dockItemClassName = cn(
-              "group relative flex size-11 items-center justify-center rounded-xl",
+              "group relative flex size-12 items-center justify-center rounded-xl",
               "border border-white/10 bg-zinc-950/90 text-zinc-300",
               "transition-colors hover:border-white/25 hover:text-white"
             );
@@ -109,7 +109,7 @@ export function FloatingDock() {
                   onClick={handleCopyEmail}
                   {...motionProps}
                 >
-                  <Icon className="size-5" aria-hidden="true" />
+                  <Icon className="size-5.5" aria-hidden="true" />
                   <span className="pointer-events-none absolute -top-9 rounded-md border border-white/10 bg-zinc-950 px-2 py-1 text-xs text-zinc-200 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                     {item.label}
                   </span>
@@ -128,7 +128,7 @@ export function FloatingDock() {
                 className={dockItemClassName}
                 {...motionProps}
               >
-                <Icon className="size-5" aria-hidden="true" />
+                <Icon className="size-5.5" aria-hidden="true" />
                 <span className="pointer-events-none absolute -top-9 rounded-md border border-white/10 bg-zinc-950 px-2 py-1 text-xs text-zinc-200 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                   {item.label}
                 </span>

@@ -29,7 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body className={`${geistSans.variable} ${geistMono.variable} bg-black antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <TopNav />
-          <main className="min-h-screen bg-black pt-20">{children}</main>
+          <main className="min-h-screen bg-black pt-[4.5rem]">{children}</main>
           <FloatingDock />
           <CommandPalette />
           <CustomCursor />

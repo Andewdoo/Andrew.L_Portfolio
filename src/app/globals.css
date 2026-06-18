@@ -8,6 +8,7 @@
   --border: 240 5.9% 90%;
   --muted: 240 4.8% 95.9%;
   --muted-foreground: 240 3.8% 46.1%;
+  --site-gutter: clamp(1rem, 3.8vw, 5rem);
   color-scheme: light;
 }
 
@@ -25,10 +26,22 @@
 }
 
 html {
-  font-size: 100%;
+  font-size: 90%;
   scroll-behavior: smooth;
   background: hsl(var(--background));
   scrollbar-width: none;
+}
+
+@media (min-width: 40rem) and (max-width: 47.999rem) and (min-height: 32rem) {
+  html {
+    font-size: 101.25%;
+  }
+}
+
+@media (min-width: 48rem) and (min-height: 32rem) {
+  html {
+    font-size: 112.5%;
+  }
 }
 
 @media (pointer: fine) and (hover: hover) {
@@ -63,6 +76,19 @@ body * {
     color 240ms ease,
     fill 240ms ease,
     stroke 240ms ease;
+}
+
+.site-shell {
+  width: 100%;
+  padding-inline: var(--site-gutter);
+}
+
+.site-trace-left {
+  left: var(--site-gutter);
+}
+
+.site-trace-right {
+  right: var(--site-gutter);
 }
 
 ::selection {
@@ -177,6 +203,54 @@ body * {
 
 .trace-glow {
   background-color: rgba(9, 9, 11, 0.24);
+}
+
+.trace-progress-rail {
+  height: 100%;
+}
+
+.about-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@supports (animation-timeline: view()) {
+  .trace-progress-rail {
+    animation: trace-rail-grow linear both;
+    animation-range: entry 16% exit 72%;
+    animation-timeline: view(block);
+    height: 0%;
+  }
+
+  .about-reveal {
+    animation: about-reveal linear both;
+    animation-range: entry 58% cover 38%;
+    animation-timeline: view(block);
+    opacity: 0.18;
+    transform: translateY(1.125rem);
+  }
+}
+
+@keyframes trace-rail-grow {
+  from {
+    height: 0%;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes about-reveal {
+  from {
+    opacity: 0.18;
+    transform: translateY(1.125rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dark .trace-bead {

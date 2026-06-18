@@ -38,31 +38,31 @@ export function Hero() {
   };
 
   return (
-    <section className="relative isolate flex min-h-[calc(100dvh-5rem)] items-center overflow-hidden px-[clamp(1rem,4vw,1.5rem)] py-[clamp(4rem,10vw,7rem)]">
+    <section className="relative isolate flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden py-[clamp(3.5rem,7vw,6rem)]">
       <div className="absolute inset-0 -z-20 bg-black" />
       <div
         aria-hidden="true"
-        className="absolute left-1/2 top-0 -z-10 size-[min(82vw,34rem)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,244,245,0.22),rgba(39,39,42,0.08)_44%,transparent_68%)] blur-3xl"
+        className="absolute left-1/2 top-0 -z-10 size-[min(86vw,42rem)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,244,245,0.22),rgba(39,39,42,0.08)_44%,transparent_68%)] blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-12 -z-10 h-[clamp(12rem,24vw,16rem)] bg-[linear-gradient(110deg,transparent,rgba(63,63,70,0.38),transparent),linear-gradient(250deg,transparent,rgba(24,24,27,0.88),transparent)] opacity-80 blur-2xl"
+        className="absolute inset-x-0 top-12 -z-10 h-[clamp(12rem,24vw,21rem)] bg-[linear-gradient(110deg,transparent,rgba(63,63,70,0.38),transparent),linear-gradient(250deg,transparent,rgba(24,24,27,0.88),transparent)] opacity-80 blur-2xl"
       />
 
-      <div className="mx-auto grid w-full max-w-7xl gap-[clamp(2rem,6vw,4rem)] lg:grid-cols-[minmax(0,1fr)_minmax(18rem,32%)] lg:items-end">
+      <div className="site-shell grid w-full gap-[clamp(2.5rem,5vw,6rem)] lg:grid-cols-[minmax(0,1fr)_minmax(28rem,38vw)] lg:items-center">
         <motion.div
           initial={{ opacity: 0, y: "1.5rem" }}
           animate={{ opacity: 1, y: "0rem" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-4xl"
+          className="max-w-none"
         >
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500">
             Andrew L. Software Engineering Portfolio
           </p>
-          <h1 className="mt-5 max-w-4xl text-[clamp(2.65rem,8vw,4.5rem)] font-semibold leading-tight text-zinc-50">
-            Building software from idea to implementation.
+          <h1 className="mt-5 max-w-[12ch] text-[clamp(2.75rem,12vw,8.75rem)] font-semibold leading-[1.03] text-zinc-50 md:text-[clamp(3rem,6.9vw,8.75rem)]">
+            Building software from ideas.
           </h1>
-          <p className="mt-6 max-w-2xl text-[clamp(1rem,2vw,1.125rem)] leading-8 text-zinc-400">
+          <p className="mt-7 max-w-4xl text-[clamp(1.05rem,1.55vw,1.6rem)] leading-[1.55] text-zinc-400">
             I thrive on the challenge of taking an idea and building it from scratch. Every experience is a chance to turn new knowledge into reality and push toward something more ambitious.
           </p>
 
@@ -73,7 +73,7 @@ export function Hero() {
             onMouseLeave={handlePointerLeave}
             style={{ x: buttonX, y: buttonY }}
             whileTap={{ scale: 0.98 }}
-            className="mt-9 inline-flex items-center gap-3 rounded-full border border-zinc-700 bg-zinc-50 px-5 py-3 text-sm font-semibold text-black shadow-2xl shadow-white/10 transition-colors hover:bg-white"
+            className="mt-10 inline-flex items-center gap-3 rounded-full border border-zinc-700 bg-zinc-50 px-7 py-4 text-[clamp(0.9rem,1vw,1.05rem)] font-semibold text-black shadow-2xl shadow-white/10 transition-colors hover:bg-white"
           >
             View My Work
             <ArrowDownRight className="size-4" aria-hidden="true" />
@@ -84,7 +84,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.15, duration: 0.7, ease: "easeOut" }}
-          className="hidden rounded-2xl border border-white/15 bg-zinc-950/60 p-1.5 shadow-2xl shadow-black/40 backdrop-blur lg:block"
+          className="hidden w-full rounded-2xl border border-white/15 bg-zinc-950/60 p-1.5 shadow-2xl shadow-black/40 backdrop-blur lg:block"
         >
           <div className="relative aspect-square overflow-hidden rounded-[0.875rem] border border-white/10 bg-black">
             <Image
@@ -92,7 +92,7 @@ export function Hero() {
               alt="Andrew L. with family in a mountain cave"
               fill
               priority
-              sizes="(min-width: 1024px) 32vw, 100vw"
+              sizes="(min-width: 1024px) 38vw, 100vw"
               className="object-cover"
             />
           </div>
