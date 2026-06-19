@@ -298,29 +298,12 @@ body * {
     animation-timeline: view(block);
   }
 
-  .trace-progress-rail {
-    animation: trace-rail-grow linear both;
-    animation-range: entry 16% exit 72%;
-    animation-timeline: view(block);
-    height: 0%;
-  }
-
   .about-reveal {
     animation: about-reveal linear both;
     animation-range: entry 58% cover 38%;
     animation-timeline: view(block);
     opacity: 0.18;
     transform: translateY(1.125rem);
-  }
-}
-
-@keyframes trace-rail-grow {
-  from {
-    height: 0%;
-  }
-
-  to {
-    height: 100%;
   }
 }
 
