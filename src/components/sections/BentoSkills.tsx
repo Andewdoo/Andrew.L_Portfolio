@@ -53,7 +53,7 @@ export function BentoSkills() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="stack" ref={sectionRef} className="relative scroll-mt-28 pb-[clamp(5rem,10vw,7.5rem)] pt-[clamp(4rem,8vw,5.5rem)] md:pt-16">
+    <section id="stack" ref={sectionRef} className="ambient-section relative scroll-mt-28 pb-[clamp(5rem,10vw,7.5rem)] pt-[clamp(4rem,8vw,5.5rem)] md:pt-16">
       <SectionTrace
         targetRef={sectionRef}
         icon={<MousePointer2 className="size-6" aria-hidden="true" />}

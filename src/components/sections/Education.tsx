@@ -28,7 +28,7 @@ export function Education() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="education" ref={sectionRef} className="relative pb-[clamp(5rem,10vw,7.5rem)] pt-[clamp(4rem,8vw,5.5rem)]">
+    <section id="education" ref={sectionRef} className="ambient-section relative pb-[clamp(5rem,10vw,7.5rem)] pt-[clamp(4rem,8vw,5.5rem)]">
       <SectionTrace
         targetRef={sectionRef}
         icon={<GraduationCap className="size-6" aria-hidden="true" />}

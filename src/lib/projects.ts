@@ -1,14 +1,26 @@
 export type Project = {
   architecture: string[];
+  caseStudySections?: {
+    eyebrow: string;
+    title: string;
+    items: string[];
+  }[];
   category: string;
   challengeHighlights: string[];
   demoNotes: string[];
   description: string;
+  gallery?: {
+    alt: string;
+    caption: string;
+    src: string;
+    title: string;
+  }[];
   hook: string;
   links: {
     github: string;
     live: string;
   };
+  embedUrl?: string;
   metric: {
     label: string;
     value: string;
@@ -30,36 +42,95 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "knowledge-search-lab",
-    title: "Knowledge Search Lab",
+    slug: "devlify",
+    title: "Devlify",
     status: "featured",
-    category: "Full-Stack Search System / Next.js + Python",
-    description: "A full-stack search prototype for organizing and retrieving useful information from messy document collections.",
-    hook: "A retrieval-first workspace that turns scattered files into ranked, inspectable answers with a calm developer-facing interface.",
-    stack: ["TypeScript", "Python", "Search", "Next.js"],
-    url: "search.andrew.dev",
+    category: "AI Learning Chatbot Platform",
+    description: "An AI learning workspace for subject-specific tutoring, file-aware analysis, persistent chat history, and current-information retrieval.",
+    hook: "A full-stack tutoring platform that helps students ask questions, analyze files, keep chat context, and get clearer guidance across core subjects.",
+    stack: ["React", "Next.js", "FastAPI", "TypeScript", "Python", "PostgreSQL", "CSS", "Vercel"],
+    url: "devlify-eight.vercel.app",
+    embedUrl: "https://devlify-eight.vercel.app/portfolio/general-workspace",
     problem:
-      "Large document collections get hard to navigate when related ideas are scattered across different files, terms, and formats. This project explores organization, indexing, and ranked retrieval for more useful knowledge discovery.",
-    challengeHighlights: ["messy document collections", "ranked retrieval", "debuggable query context"],
+      "Students often jump between separate tools for tutoring, file review, current facts, and saved study history. Devlify brings those workflows into one workspace with subject-specific chat modes, reusable commands, and persistent per-user context.",
+    challengeHighlights: ["subject-specific tutoring, file-aware analysis, and saved chat history", "typed command workflows and workspace-aware chat state", "reasoning-mode routing and quick-action controls"],
     architecture: [
-      "A preprocessing stage chunks source documents, normalizes metadata, and prepares searchable records.",
-      "A retrieval layer finds candidate passages before a lightweight ranking step orders results by usefulness.",
-      "A Next.js inspection surface shows query context, retrieved chunks, and debugging cues for tuning the experience.",
+      "React and Next.js power the learning workspace, subject navigation, browser file previews, CSS styling, and Vercel deployment.",
+      "FastAPI routes, Python services, asyncpg, and PostgreSQL persist user chat state with per-user isolation across retained conversations.",
+      "AI API routes verify Firebase JWTs, enforce per-IP rate limits and body-size caps, protect shared backend secrets, and render sanitized Markdown.",
+    ],
+    caseStudySections: [
+      {
+        eyebrow: "Command Workflows",
+        title: "Reusable tutor actions for each subject.",
+        items: [
+          "Implemented typed prompt contracts for subject-specific commands so each tutor mode can route requests consistently.",
+          "Added quick-action controls for analysis, alternate methods, cheat sheets, and deeper reasoning without forcing users to rewrite prompts.",
+          "Managed workspace-aware chat state so the active subject, reasoning mode, and conversation context stay aligned.",
+        ],
+      },
+      {
+        eyebrow: "Persistent Backend",
+        title: "Chat history that survives the session.",
+        items: [
+          "Designed a FastAPI backend with asyncpg and PostgreSQL for storing per-user conversations.",
+          "Retained 10 chats and 20 messages per chat to keep the workspace useful without letting history grow unbounded.",
+          "Kept chat records isolated by user so saved study context stays scoped to the authenticated account.",
+        ],
+      },
+      {
+        eyebrow: "File Analysis",
+        title: "Multi-modal input for real student work.",
+        items: [
+          "Supported PDFs, DOCX files, spreadsheets, text documents, and images through browser previews and upload handling.",
+          "Serialized files with base64 payloads, extracted content server-side, and passed structured context into AI requests.",
+          "Used OpenAI Vision fallback for image-heavy or visually dependent material.",
+        ],
+      },
+      {
+        eyebrow: "Current Context",
+        title: "Recent facts and finance prompts get sourced context.",
+        items: [
+          "Resolved finance symbols and recent-fact requests before model calls when current context was needed.",
+          "Queried Yahoo Finance and search providers, then injected sourced context into the prompt.",
+          "Separated current-information retrieval from ordinary tutoring prompts so simple questions stay fast.",
+        ],
+      },
     ],
     demoNotes: [
-      "Query panel placeholder for natural-language search, filters, and result inspection.",
-      "Result stream placeholder for retrieved chunks, confidence indicators, and metadata.",
-      "Trace panel placeholder for ranking decisions, timing, and debugging output.",
+      "General workspace preview for asking questions, pasting work, or attaching a file.",
+      "Subject navigation for switching between general, programming, math, science, business, and finance help.",
+      "Reasoning controls and quick actions for deeper analysis, alternate solution methods, and concise study aids.",
+    ],
+    gallery: [
+      {
+        alt: "Devlify Math Tutor answering an integration question in dark mode",
+        caption: "Deep Reasoning mode breaks a math prompt into fastest, standard, and intuitive solution paths while preserving the active chat context.",
+        src: "/images/devlify-math-integrals.png",
+        title: "Math Tutor Deep Reasoning",
+      },
+      {
+        alt: "Devlify Finance Tutor showing a current Meta stock answer with chart and analysis",
+        caption: "Finance prompts use current-context retrieval to inject sourced market data, charts, and recent-fact analysis into the response.",
+        src: "/images/devlify-finance-meta.png",
+        title: "Finance Tutor Retrieval",
+      },
+      {
+        alt: "Devlify Math Tutor explaining a basis in linear algebra in dark mode",
+        caption: "Subject-specific tutoring keeps long-form explanations readable with structured sections, math notation, and quick follow-up actions.",
+        src: "/images/devlify-linear-algebra.png",
+        title: "Linear Algebra Tutor",
+      },
     ],
     metric: {
-      label: "Retrieval Latency",
-      value: "Sub-50ms",
-      detail: "Target response window for cached local result ranking.",
+      label: "Retained History",
+      value: "10 x 20",
+      detail: "10 chats and 20 messages per chat retained per isolated user workspace.",
     },
-    takeaway: "Designed as an explainable search surface where the ranking behavior can be inspected, tuned, and trusted.",
+    takeaway: "Devlify shows a complete AI learning platform: a polished chat workspace, full-stack persistence, multi-modal file handling, hardened API routes, and retrieval-aware tutoring for current-context questions.",
     links: {
       github: "https://github.com/",
-      live: "https://example.com/",
+      live: "https://devlify-eight.vercel.app/",
     },
     visual: {
       accent: "from-zinc-50/90",

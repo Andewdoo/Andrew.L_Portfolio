@@ -158,7 +158,7 @@ export function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="projects" ref={sectionRef} className="relative scroll-mt-28 pb-[clamp(5rem,10vw,7.5rem)] pt-[clamp(4rem,8vw,5.5rem)] md:pt-16">
+    <section id="projects" ref={sectionRef} className="ambient-section relative scroll-mt-28 pb-[clamp(5rem,10vw,7.5rem)] pt-[clamp(4rem,8vw,5.5rem)] md:pt-16">
       <SectionTrace
         targetRef={sectionRef}
         icon={<GalleryVerticalEnd className="size-6" aria-hidden="true" />}

@@ -59,7 +59,7 @@ export function About() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
-    <section id="about" ref={sectionRef} className="relative pb-12 pt-[clamp(4rem,8vw,5.5rem)]">
+    <section id="about" ref={sectionRef} className="ambient-section relative pb-12 pt-[clamp(4rem,8vw,5.5rem)]">
       <SectionTrace
         targetRef={sectionRef}
         icon={<PenLine className="size-6" aria-hidden="true" />}

@@ -54,7 +54,10 @@ html {
 body {
   min-height: 100vh;
   width: 100%;
-  background: hsl(var(--background));
+  background:
+    radial-gradient(ellipse at 14% 28rem, rgba(24, 24, 27, 0.12), transparent 30rem),
+    radial-gradient(ellipse at 86% 58rem, rgba(63, 63, 70, 0.1), transparent 34rem),
+    linear-gradient(180deg, hsl(var(--background)) 0%, #f7f7f8 42%, hsl(var(--background)) 100%);
   color: hsl(var(--foreground));
   overflow-x: hidden;
   font-feature-settings:
@@ -102,6 +105,38 @@ body * {
     radial-gradient(ellipse at 22% 48%, rgba(244, 244, 245, 0.075), transparent 32rem),
     radial-gradient(ellipse at 58% 74%, rgba(244, 244, 245, 0.085), transparent 34rem),
     linear-gradient(180deg, rgba(244, 244, 245, 0.035), transparent 16rem, rgba(244, 244, 245, 0.026) 56rem, transparent);
+}
+
+.ambient-section {
+  isolation: isolate;
+}
+
+.ambient-section::before,
+.ambient-section::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+.ambient-section::before {
+  inset: -8rem 0 auto;
+  height: clamp(18rem, 34vw, 34rem);
+  background:
+    radial-gradient(ellipse at 50% 12%, rgba(24, 24, 27, 0.18), rgba(63, 63, 70, 0.075) 36%, transparent 72%),
+    linear-gradient(180deg, rgba(24, 24, 27, 0.1), transparent 78%);
+  filter: blur(2.25rem);
+  opacity: 0.78;
+}
+
+.ambient-section::after {
+  inset: auto 6vw -7rem;
+  height: clamp(14rem, 26vw, 28rem);
+  background:
+    radial-gradient(ellipse at 24% 42%, rgba(9, 9, 11, 0.08), transparent 54%),
+    radial-gradient(ellipse at 76% 58%, rgba(113, 113, 122, 0.08), transparent 56%);
+  filter: blur(2.5rem);
+  opacity: 0.7;
 }
 
 .focus-card-cluster .focus-card-item {
@@ -331,4 +366,13 @@ body * {
 
 .dark .trace-glow {
   background-color: rgba(255, 255, 255, 0.35);
+}
+
+.dark body {
+  background: hsl(var(--background));
+}
+
+.dark .ambient-section::before,
+.dark .ambient-section::after {
+  display: none;
 }
