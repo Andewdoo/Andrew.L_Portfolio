@@ -4,21 +4,13 @@ import Link from "next/link";
 import { ArrowUpRight, GalleryVerticalEnd } from "lucide-react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
-import type { MouseEvent, ReactNode } from "react";
+import type { MouseEvent } from "react";
 
 import { MaskedSectionHeading } from "@/components/animations/MaskedSectionHeading";
 import { SectionTrace } from "@/components/animations/SectionTrace";
 import { ScrollFocusCard } from "@/components/animations/ScrollFocusCard";
 import { projects, type Project } from "@/lib/projects";
 import { cn } from "@/lib/utils";
-
-function Badge({ children }: Readonly<{ children: ReactNode }>) {
-  return (
-    <span className="rounded-full border border-zinc-800 bg-zinc-950 px-3.5 py-1.5 text-xs font-medium text-zinc-300">
-      {children}
-    </span>
-  );
-}
 
 export function SafariMockup({
   className,
@@ -131,11 +123,6 @@ function ProjectCard({ project }: Readonly<{ project: Project }>) {
                   <ArrowUpRight className="size-5" aria-hidden="true" />
                 </span>
               ) : null}
-            </div>
-            <div className="mt-auto flex flex-wrap gap-2 pt-6">
-              {project.stack.map((tech) => (
-                <Badge key={tech}>{tech}</Badge>
-              ))}
             </div>
           </div>
         </motion.div>

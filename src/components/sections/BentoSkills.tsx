@@ -10,19 +10,27 @@ import { ScrollableTechCards } from "@/components/ui/ScrollableTechCards";
 const techGroups = [
   {
     title: "Languages",
-    items: ["TypeScript", "JavaScript", "Python", "C++", "Tailwind CSS", "HTML", "MATLAB"],
+    items: ["TypeScript", "JavaScript", "Python", "SQL", "C/C++", "HTML5/CSS", "MATLAB"],
   },
   {
-    title: "Frameworks",
-    items: ["React", "Next.js", "Node.js", "FastAPI"],
+    title: "Frontend",
+    items: ["React", "Next.js", "Tailwind CSS", "React Hook Form", "Zod", "TanStack Query", "Zustand", "Recharts", "XYFlow"],
   },
   {
-    title: "Developer Tools",
-    items: ["Git", "GitHub", "PyCharm", "VS Code"],
+    title: "Backend",
+    items: ["Node.js", "FastAPI", "SQLAlchemy", "Alembic", "Celery", "LangChain", "LangGraph"],
   },
   {
-    title: "Databases",
-    items: ["MongoDB", "PostgreSQL", "Google Firebase"],
+    title: "AI Tools",
+    items: ["DeepSeek", "Codex", "Claude", "Gemini", "ChatGPT", "GitHub Copilot", "Cursor", "Brave Search"],
+  },
+  {
+    title: "Data & Infrastructure",
+    items: ["PostgreSQL", "Supabase", "pgvector", "Redis", "Firebase Auth", "AWS EC2 & S3", "Vercel", "Docker"],
+  },
+  {
+    title: "Quality & Tooling",
+    items: ["Git", "GitHub", "Sentry", "Pytest", "Ruff", "MyPy", "PyCharm", "VS Code"],
   },
 ];
 
@@ -80,8 +88,8 @@ export function BentoSkills() {
                   </div>
                   <h3 className="mt-7 text-[clamp(3rem,7vw,5.25rem)] font-semibold leading-tight text-zinc-50">Tech Stack</h3>
                   <p className="mt-5 max-w-3xl text-[clamp(1.05rem,1.5vw,1.25rem)] leading-8 text-zinc-400">
-                    A focused stack for turning ideas into dependable applications, with enough
-                    systems depth to keep the details understandable and maintainable.
+                    A full-stack toolkit for building dependable applications—from polished React
+                    interfaces and AI workflows to verification pipelines, databases, and cloud deployment.
                   </p>
                 </div>
 
