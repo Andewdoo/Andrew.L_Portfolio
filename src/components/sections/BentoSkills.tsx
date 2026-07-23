@@ -14,7 +14,7 @@ const techGroups = [
   },
   {
     title: "Frontend",
-    items: ["React", "Next.js", "Tailwind CSS", "React Hook Form", "Zod", "TanStack Query", "Zustand", "Recharts", "XYFlow"],
+    items: ["React", "Next.js", "React Hook Form", "Zod", "TanStack Query", "Zustand", "Recharts", "XYFlow"],
   },
   {
     title: "Backend",
@@ -22,11 +22,11 @@ const techGroups = [
   },
   {
     title: "AI Tools",
-    items: ["DeepSeek", "Codex", "Claude", "Gemini", "ChatGPT", "GitHub Copilot", "Cursor", "Brave Search"],
+    items: ["DeepSeek", "Codex", "Claude", "Gemini", "GitHub Copilot", "Cursor"],
   },
   {
     title: "Data & Infrastructure",
-    items: ["PostgreSQL", "Supabase", "pgvector", "Redis", "Firebase Auth", "AWS EC2 & S3", "Vercel", "Docker"],
+    items: ["PostgreSQL", "MongoDB", "Docker", "pgvector", "Redis", "AWS", "Supabase", "Firebase", "Vercel"],
   },
   {
     title: "Quality & Tooling",

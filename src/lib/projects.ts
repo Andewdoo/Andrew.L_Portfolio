@@ -165,7 +165,7 @@ export const projects: Project[] = [
     description: "An evidence-management platform that evaluates claims against timestamped sources and produces citation-audited reports with reproducible provenance.",
     hook: "An agentic RAG pipeline that evaluates a specific claim against timestamped evidence, then produces a transparent, citation-backed assessment.",
     intro: [
-      "I built Elara because misinformation spreads quickly while careful verification takes time, context, and care. I wanted a portfolio project that tackled a problem I genuinely care about—not a copied or easy build.",
+      "I built Elara because misinformation spreads quickly while careful verification takes time, context, and care. I wanted a portfolio project that tackled a problem I genuinely care about, not a copied or easy build.",
       "Elara is not a lie detector. A user submits a claim, and the system researches it, preserves the relevant evidence, and makes the result reviewable instead of merely sounding confident.",
     ],
     stack: ["Next.js", "FastAPI", "PostgreSQL", "pgvector", "Redis", "Celery", "Python", "DeepSeek"],
