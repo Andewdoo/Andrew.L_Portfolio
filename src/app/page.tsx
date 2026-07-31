@@ -1,17 +1,5 @@
-import { About } from "@/components/sections/About";
-import { BentoSkills } from "@/components/sections/BentoSkills";
-import { Education } from "@/components/sections/Education";
-import { Hero } from "@/components/sections/Hero";
-import { Projects } from "@/components/sections/Projects";
+import { EditorialPortfolio } from "@/components/portfolio/EditorialPortfolio";
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
-      <About />
-      <Education />
-      <Projects />
-      <BentoSkills />
-    </>
-  );
+  return <EditorialPortfolio />;
 }
