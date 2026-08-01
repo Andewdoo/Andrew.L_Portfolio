@@ -19,7 +19,7 @@ const capabilities = [
 
 const coordinates = Array.from({ length: 14 }, (_, index) => String(index + 1).padStart(2, "0"));
 
-const stack = ["Next.js", "TypeScript", "Python", "FastAPI", "PostgreSQL"];
+const lifePattern = ["Notice", "Question", "Try", "Adjust", "Repeat"];
 
 const educationFoundations = [
   {
@@ -28,11 +28,11 @@ const educationFoundations = [
   },
   {
     description: "Modern paradigms, lifecycles, and robust code.",
-    title: "SYSTEMS PROGRAMMING",
+    title: "LOGIC DESIGN & COMPUTER ARCHITECTURE",
   },
   {
     description: "How software executes at the metal level.",
-    title: "COMPUTER ARCHITECTURE",
+    title: "MICROPROCESSORS & EMBEDDED SYSTEMS",
   },
 ];
 
@@ -97,34 +97,20 @@ const offlineInterests = [
   },
 ];
 
-const markhamTime = new Intl.DateTimeFormat("en-CA", {
+const utcTime = new Intl.DateTimeFormat("en-CA", {
   hour: "2-digit",
   hour12: false,
   minute: "2-digit",
   second: "2-digit",
-  timeZone: "America/Toronto",
-});
-
-const markhamOffset = new Intl.DateTimeFormat("en-US", {
-  timeZone: "America/Toronto",
-  timeZoneName: "longOffset",
+  timeZone: "UTC",
 });
 
 function LiveClock() {
-  const [clock, setClock] = useState({ offset: "UTC--:--", time: "--:--:--" });
+  const [time, setTime] = useState("--:--:--");
 
   useEffect(() => {
     const updateClock = () => {
-      const now = new Date();
-      const offset = markhamOffset
-        .formatToParts(now)
-        .find((part) => part.type === "timeZoneName")
-        ?.value.replace("GMT", "UTC");
-
-      setClock({
-        offset: offset ?? "UTC-04:00",
-        time: markhamTime.format(now),
-      });
+      setTime(utcTime.format(new Date()));
     };
 
     updateClock();
@@ -134,9 +120,9 @@ function LiveClock() {
   }, []);
 
   return (
-    <div className={`${styles.desktopMeta} ${styles.liveClock}`} aria-label={`Markham time ${clock.time}, ${clock.offset}`}>
-      <span>TIME: {clock.time}</span>
-      <span>{clock.offset}</span>
+    <div className={`${styles.desktopMeta} ${styles.liveClock}`} aria-label={`Current UTC time ${time}`}>
+      <span>TIME: {time}</span>
+      <span>UTC+00:00</span>
     </div>
   );
 }
@@ -188,20 +174,17 @@ function EducationSkillsSequence() {
           <div className={styles.sectionLabelRow}>
             <p className={styles.desktopSectionLabel}>/ EDUCATION <b>&gt;_</b></p>
             <p className={styles.mobileSectionLabel}><b>&gt;_</b> 01 / EDUCATION</p>
-            <a className={styles.sectionArrow} href="#skills" aria-label="Jump to skills">
-              <Arrow />
-            </a>
           </div>
 
           <div className={styles.educationIntro}>
             <h2>THEORY MEETS<br />THE MACHINE.</h2>
             <div className={styles.degreeBlock}>
               <div>
-                <h3>McMASTER UNIVERSITY</h3>
+                <h3>MCMASTER UNIVERSITY</h3>
                 <p>COMPUTER ENGINEERING</p>
                 <mark aria-hidden="true" />
               </div>
-              <p>Learning the whole system — from silicon to software.</p>
+              <p>Learning the whole system.</p>
             </div>
           </div>
 
@@ -405,10 +388,12 @@ export function EditorialPortfolio() {
             <p className={styles.role}>SOFTWARE ENGINEER <b>/</b> MARKHAM</p>
             <span className={styles.prompt}>&gt;_</span>
             <h1>
-              <span className={styles.headlineLine}>I BUILD SYSTEMS</span>
-              <span className={styles.headlineLine}>THAT THINK <mark>CLEARLY.</mark></span>
+              <span className={styles.headlineLine}>I MAKE THINGS THAT</span>
+              <span className={styles.headlineLine}>I’D ACTUALLY <mark>USE</mark></span>
             </h1>
-            <p className={styles.heroDescription}>Turning hard problems into direct, useful software.</p>
+            <p className={styles.heroDescription}>
+              <strong>Usually starting with curiosity and far too many tabs.</strong>
+            </p>
             <a className={styles.workButton} href="#projects">
               <span className={styles.desktopCta}>VIEW SELECTED WORK</span>
               <span className={styles.mobileCta}>VIEW WORK</span>
@@ -435,6 +420,31 @@ export function EditorialPortfolio() {
           ))}
         </div>
 
+        <section className={styles.aboutStack}>
+          <div className={styles.aboutTitle}>
+            <p>&gt; ABOUT <b>/</b></p>
+            <h2>I LIKE LEARNING HOW THINGS WORK BY DOING.</h2>
+          </div>
+          <div className={styles.aboutCopy}>
+            <p className={styles.aboutCopyLabel}>&gt; BUILD.NOTES</p>
+            <p>
+              Each idea evolves as I work, and that
+              makes the final result more interesting. <mark />
+            </p>
+          </div>
+          <div className={styles.lifePattern}>
+            <p>&gt; LIFE.PATTERN</p>
+            <div>
+              {lifePattern.map((item, index) => (
+                <span key={item}>
+                  <small>{String(index + 1).padStart(2, "0")}</small>
+                  <b>{item}</b>
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="projects" className={styles.projects} aria-label="Selected work">
           <ProjectRow
             index="01"
@@ -452,28 +462,6 @@ export function EditorialPortfolio() {
             stackLine="NEXT.JS / FASTAPI / PGVECTOR / CELERY"
             slug="elara-ai"
           />
-        </section>
-
-        <section className={styles.aboutStack}>
-          <div className={styles.aboutTitle}>
-            <p>&gt; ABOUT <b>/</b></p>
-            <h2>PRACTICAL ENGINEERING, NON-LINEAR THINKING.</h2>
-          </div>
-          <p className={styles.aboutCopy}>
-            I design and build software that solves real problems with clarity and leverage. Systems that are maintainable,
-            observable, and ready for what&apos;s next. <mark />
-          </p>
-          <div className={styles.stackIndex}>
-            <p>&gt; STACK.INDEX</p>
-            <div>
-              {stack.map((item, index) => (
-                <span key={item}>
-                  <b>{item}</b>
-                  <small>{String(index + 1).padStart(2, "0")}</small>
-                </span>
-              ))}
-            </div>
-          </div>
         </section>
 
         <EducationSkillsSequence />
@@ -500,7 +488,7 @@ export function EditorialPortfolio() {
             <span>RESUME</span>
           </a>
         </nav>
-        <span className={styles.footerResponse}>RESPONSE: 24–48H</span>
+        <span className={styles.footerResponse}>RESPONSE: 0–24H</span>
       </footer>
     </div>
   );
