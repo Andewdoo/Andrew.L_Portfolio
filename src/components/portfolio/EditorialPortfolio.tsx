@@ -11,7 +11,7 @@ const capabilities = [
   "Full-Stack",
   "Automation",
   "System Design",
-  "Backend Engineering",
+  "Embedded Systems",
   "Cloud & DevOps",
   "Data Engineering",
   "Security",
@@ -27,57 +27,53 @@ const educationFoundations = [
     title: "DATA STRUCTURES & ALGORITHMS",
   },
   {
-    description: "Modern paradigms, lifecycles, and robust code.",
+    description: "Digital logic, processor design, and the architecture behind modern computers.",
     title: "LOGIC DESIGN & COMPUTER ARCHITECTURE",
   },
   {
-    description: "How software executes at the metal level.",
+    description: "Low-level programming, hardware control, and real-time embedded systems.",
     title: "MICROPROCESSORS & EMBEDDED SYSTEMS",
   },
 ];
 
 const coreCapabilities = [
   {
-    description: "Readable components. Clean interfaces.",
-    title: "SOFTWARE DESIGN",
+    description: "I use the best tools available to work faster, explore more options, and stay focused on the decisions that matter.",
+    title: "AI AS A COLLABORATOR",
   },
   {
-    description: "AI used fluently to accelerate research, building, and verification.",
-    title: "AI-AUGMENTED WORK",
+    description: "I keep repetition out of the way by automating scripts, shortcuts, templates, and reusable components.",
+    title: "AUTOMATE THE REPEATABLE",
   },
   {
-    description: "Performance, memory, and architecture.",
-    title: "SYSTEMS THINKING",
+    description: "I learn fastest by poking at something, seeing what breaks, and making the next version better.",
+    title: "BUILD TO LEARN",
   },
   {
-    description: "Automation that stays inspectable.",
-    title: "DEVELOPER TOOLING",
+    description: "I build, test, inspect, and refine continuously.",
+    title: "FEEDBACK LOOPS",
   },
 ];
 
 const technologyTaxonomy = [
   {
-    technologies: "TypeScript / JavaScript / Python / SQL / C++ / MATLAB",
+    technologies: "TypeScript / JavaScript / Python / C++ / SQL / HTML5 / Tailwind CSS / MATLAB",
     title: "LANGUAGES",
   },
   {
-    technologies: "React / Next.js / Zustand / TanStack Query",
-    title: "FRONTEND",
+    technologies: "React / Next.js / TanStack Query / Node.js / FastAPI / SQLAlchemy / Celery / Alembic",
+    title: "FRONTEND & BACKEND",
   },
   {
-    technologies: "Node.js / FastAPI / SQLAlchemy / Celery",
-    title: "BACKEND",
-  },
-  {
-    technologies: "LangGraph / DeepSeek / Codex / Claude",
+    technologies: " LangGraph / Langchain / DeepSeek / Codex / Claude Code",
     title: "AI WORKFLOWS",
   },
   {
-    technologies: "PostgreSQL / pgvector / Redis / Docker / AWS",
+    technologies: "PostgreSQL / MongoDB / pgvector / Redis / Docker / AWS",
     title: "DATA & INFRA",
   },
   {
-    technologies: "Git / Sentry / Pytest / Ruff / MyPy",
+    technologies: "Git / Github / Sentry / Pytest / Ruff",
     title: "QUALITY",
   },
 ];
@@ -205,14 +201,15 @@ function EducationSkillsSequence() {
         <SectionNumber value="02" />
         <div className={styles.skillsContent}>
           <div className={styles.sectionLabelRow}>
-            <p className={styles.desktopSectionLabel}>/ SKILLS <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 02 / SKILLS</p>
+            <p className={styles.desktopSectionLabel}>/ WORKFLOW <b>&gt;_</b></p>
+            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 02 / WORKFLOW</p>
             <a className={styles.sectionArrow} href="#tech-stack" aria-label="Jump to tech stack">
               <Arrow />
             </a>
           </div>
 
           <h2>HOW I WORK.</h2>
+          <p className={styles.workflowStatement}>I don&apos;t just write code. I build better ways to write it.</p>
 
           <div className={styles.capabilityGrid}>
             {coreCapabilities.map((capability) => (
@@ -224,16 +221,16 @@ function EducationSkillsSequence() {
             ))}
           </div>
 
-          <div className={styles.technologyRows}>
+          <div className={styles.workflowRows}>
             <div>
               <span>01</span>
-              <h3>LANGUAGES</h3>
-              <p><b>&gt;_</b> TypeScript / Python / SQL / C++</p>
+              <h3>EXPLORE</h3>
+              <p><b>&gt;_</b> FRAME THE PROBLEM / GATHER CONTEXT / COMPARE APPROACHES</p>
             </div>
             <div>
               <span>02</span>
-              <h3>BUILD</h3>
-              <p><b>&gt;_</b> Next.js / FastAPI / PostgreSQL / Docker</p>
+              <h3>EXECUTE</h3>
+              <p><b>&gt;_</b> PROTOTYPE / TEST / AUTOMATE / DOCUMENT / REFINE</p>
             </div>
           </div>
         </div>
@@ -254,7 +251,7 @@ function TechHobbiesSequence() {
             <p className={styles.mobileSectionLabel}><b>&gt;_</b> 03 / TECH STACK</p>
           </div>
 
-          <h2>TOOLS CHANGE. THE STANDARD DOESN&apos;T.<mark aria-hidden="true" /></h2>
+          <h2>TOOLS CHANGE. STANDARD DOESN&apos;T.<mark aria-hidden="true" /></h2>
 
           <div className={styles.taxonomyRows}>
             {technologyTaxonomy.map((category, index) => (
@@ -389,7 +386,7 @@ export function EditorialPortfolio() {
             <span className={styles.prompt}>&gt;_</span>
             <h1>
               <span className={styles.headlineLine}>I MAKE THINGS THAT</span>
-              <span className={styles.headlineLine}>I’D ACTUALLY <mark>USE</mark></span>
+              <span className={styles.headlineLine}>I WOULD ACTUALLY <mark>USE</mark></span>
             </h1>
             <p className={styles.heroDescription}>
               <strong>Usually starting with curiosity and far too many tabs.</strong>
@@ -424,6 +421,7 @@ export function EditorialPortfolio() {
           <div className={styles.aboutTitle}>
             <p>&gt; ABOUT <b>/</b></p>
             <h2>I LIKE LEARNING HOW THINGS WORK BY DOING.</h2>
+            <span className={styles.aboutSubtitle}>Visual &amp; hands-on learner.</span>
           </div>
           <div className={styles.aboutCopy}>
             <p className={styles.aboutCopyLabel}>&gt; BUILD.NOTES</p>
