@@ -7,9 +7,10 @@ const command = process.argv[2] ?? "dev";
 const args = process.argv.slice(3);
 const projectRoot = process.cwd();
 const projectNodeModules = path.join(projectRoot, "node_modules");
+const isDevelopment = command === "dev";
+const distDirName = isDevelopment ? ".next" : ".next-production";
 const nextLinkPath = path.join(projectRoot, ".next");
-const cacheRoot = path.join(os.tmpdir(), "andrew-portfolio-next-cache");
-const cacheNodeModules = path.join(cacheRoot, "node_modules");
+const cacheRoot = path.join(os.tmpdir(), "andrew-portfolio-next-development");
 const nextBin = path.join(projectNodeModules, "next", "dist", "bin", "next");
 
 function removePath(targetPath) {
@@ -19,9 +20,9 @@ function removePath(targetPath) {
 function ensureJunction(linkPath, targetPath) {
   if (fs.existsSync(linkPath)) {
     const stat = fs.lstatSync(linkPath);
-    const currentTarget = stat.isSymbolicLink() ? fs.readlinkSync(linkPath) : null;
+    const currentTarget = stat.isSymbolicLink() ? fs.realpathSync.native(linkPath) : null;
 
-    if (stat.isSymbolicLink() && path.resolve(path.dirname(linkPath), currentTarget) === targetPath) {
+    if (currentTarget && path.resolve(currentTarget).toLowerCase() === path.resolve(targetPath).toLowerCase()) {
       return;
     }
 
@@ -35,24 +36,24 @@ function ensureJunction(linkPath, targetPath) {
 function prepareCache() {
   fs.mkdirSync(cacheRoot, { recursive: true });
   ensureJunction(nextLinkPath, cacheRoot);
-
-  if (fs.existsSync(projectNodeModules)) {
-    ensureJunction(cacheNodeModules, projectNodeModules);
-  }
 }
 
-prepareCache();
+if (isDevelopment) {
+  prepareCache();
+}
 
-const keepCacheLinked = setInterval(prepareCache, 500);
 const next = spawn(process.execPath, [nextBin, command, ...args], {
   cwd: projectRoot,
+  env: {
+    ...process.env,
+    NEXT_DIST_DIR: distDirName,
+    NODE_PATH: [projectNodeModules, process.env.NODE_PATH].filter(Boolean).join(path.delimiter),
+  },
   shell: false,
   stdio: "inherit",
 });
 
 next.on("exit", (code, signal) => {
-  clearInterval(keepCacheLinked);
-
   if (signal) {
     process.kill(process.pid, signal);
     return;

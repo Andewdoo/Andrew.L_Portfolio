@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#0a0a0a" stroke-opacity=".12"/></pattern></defs>
+  <rect width="800" height="600" fill="#f1ebdd"/><rect width="800" height="600" fill="url(#g)"/>
+  <path d="M75 145h150l55 72h130l55-92h250M115 455h135l55-88h168l64 72h155" fill="none" stroke="#0a0a0a" stroke-width="9"/>
+  <g fill="#c7ff2f" stroke="#0a0a0a" stroke-width="9"><circle cx="75" cy="145" r="21"/><circle cx="410" cy="217" r="21"/><circle cx="692" cy="439" r="21"/><rect x="294" y="270" width="220" height="130"/></g>
+  <path d="M330 315h148M330 352h94" stroke="#0a0a0a" stroke-width="12"/>
+  <text x="64" y="83" font-family="monospace" font-size="30" font-weight="700" fill="#0a0a0a">LOGIC STUDY / PLACEHOLDER</text>
+  <text x="606" y="552" font-family="monospace" font-size="24" font-weight="700" fill="#0a0a0a">01&gt;_</text>
+</svg>

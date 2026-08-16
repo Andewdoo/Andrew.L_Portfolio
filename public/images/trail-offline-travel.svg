@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#161616"/>
+  <circle cx="614" cy="146" r="75" fill="#ff5c35"/>
+  <path d="m0 470 160-210 120 115 125-190 250 285z" fill="#f1ebdd"/><path d="m0 510 210-170 145 98 170-142 275 214v90H0z" fill="#c7ff2f"/>
+  <path d="M73 530c119-85 249-75 337-14s195 41 312-58" fill="none" stroke="#0a0a0a" stroke-width="10" stroke-dasharray="7 18"/>
+  <text x="48" y="65" font-family="monospace" font-size="28" font-weight="700" fill="#f1ebdd">OPEN ROAD / PLACEHOLDER</text><text x="634" y="555" font-family="monospace" font-size="24" font-weight="700">01&gt;_</text>
+</svg>

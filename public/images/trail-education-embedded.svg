@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#c7ff2f"/>
+  <g fill="none" stroke="#0a0a0a" stroke-width="8"><path d="M0 120h150v95h120M800 480H650v-92H530M80 600V430h190M720 0v165H530M0 330h120v-52h150M800 280H680v48H530"/><rect x="270" y="165" width="260" height="270" rx="10"/></g>
+  <g fill="#0a0a0a"><circle cx="150" cy="120" r="17"/><circle cx="650" cy="480" r="17"/><circle cx="80" cy="430" r="17"/><circle cx="720" cy="165" r="17"/><rect x="330" y="225" width="140" height="150"/></g>
+  <g stroke="#0a0a0a" stroke-width="8"><path d="M304 205h-44M304 255h-44M304 305h-44M304 355h-44M496 205h44M496 255h44M496 305h44M496 355h44"/></g>
+  <text x="52" y="70" font-family="monospace" font-size="28" font-weight="700">EMBEDDED LAB / PLACEHOLDER</text><text x="628" y="555" font-family="monospace" font-size="24" font-weight="700">03&gt;_</text>
+</svg>

@@ -93,6 +93,60 @@ const offlineInterests = [
   },
 ];
 
+const educationTrail = [
+  {
+    alt: "Abstract logic-gate blueprint placeholder",
+    caption: "Logic becomes structure.",
+    label: "LOGIC / 01",
+    src: "/images/trail-education-logic.svg",
+  },
+  {
+    alt: "Abstract computer architecture blueprint placeholder",
+    caption: "Structure becomes a system.",
+    label: "ARCH / 02",
+    src: "/images/trail-education-architecture.svg",
+  },
+  {
+    alt: "Abstract embedded circuit-board placeholder",
+    caption: "Systems meet the physical world.",
+    label: "EMBED / 03",
+    src: "/images/trail-education-embedded.svg",
+  },
+  {
+    alt: "Abstract prototyping workbench placeholder",
+    caption: "Theory survives contact with the bench.",
+    label: "BUILD / 04",
+    src: "/images/trail-education-prototype.svg",
+  },
+];
+
+const offlineTrail = [
+  {
+    alt: "Stylized mountain travel postcard placeholder",
+    caption: "Take the unfamiliar road.",
+    label: "ROAM / 01",
+    src: "/images/trail-offline-travel.svg",
+  },
+  {
+    alt: "Stylized streets and culture postcard placeholder",
+    caption: "Notice how other places work.",
+    label: "NOTICE / 02",
+    src: "/images/trail-offline-culture.svg",
+  },
+  {
+    alt: "Stylized maze and puzzle postcard placeholder",
+    caption: "Follow the pattern through the noise.",
+    label: "SOLVE / 03",
+    src: "/images/trail-offline-puzzles.svg",
+  },
+  {
+    alt: "Stylized compass and topographic map placeholder",
+    caption: "Bring a wider view home.",
+    label: "RETURN / 04",
+    src: "/images/trail-offline-wander.svg",
+  },
+];
+
 const utcTime = new Intl.DateTimeFormat("en-CA", {
   hour: "2-digit",
   hour12: false,
@@ -154,8 +208,66 @@ function SectionCoordinates() {
 function SectionNumber({ value }: Readonly<{ value: string }>) {
   return (
     <div className={styles.sectionNumber} aria-hidden="true">
-      <strong>{value}</strong>
-      <span>–</span>
+      <div className={styles.sectionNumberInner}>
+        <span className={styles.sectionNumberLabel}>SECTION</span>
+        <strong>{value}</strong>
+        <span className={styles.sectionNumberRule} />
+      </div>
+    </div>
+  );
+}
+
+function TrailGallery({
+  items,
+  title,
+  tone,
+}: Readonly<{
+  items: typeof educationTrail;
+  title: string;
+  tone: "dark" | "light";
+}>) {
+  return (
+    <div className={`${styles.trailGallery} ${tone === "dark" ? styles.trailDark : styles.trailLight}`}>
+      <div className={styles.trailHeading}>
+        <span aria-hidden="true">X</span>
+        <p>{title}</p>
+        <small>4 STOPS / FOLLOW THE DOTS</small>
+      </div>
+
+      <div className={styles.trailTrack}>
+        <svg className={styles.trailPathDesktop} viewBox="0 0 1200 360" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M36 112 C145 42 235 64 312 145 S495 262 603 144 S786 25 882 135 S1036 260 1162 164" />
+          <circle cx="36" cy="112" r="8" />
+          <circle cx="312" cy="145" r="8" />
+          <circle cx="603" cy="144" r="8" />
+          <circle cx="882" cy="135" r="8" />
+        </svg>
+        <svg className={styles.trailPathMobile} viewBox="0 0 400 960" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M72 34 C330 92 344 207 205 265 S45 370 194 454 S360 580 205 650 S42 785 320 916" />
+          <circle cx="72" cy="34" r="7" />
+          <circle cx="205" cy="265" r="7" />
+          <circle cx="194" cy="454" r="7" />
+          <circle cx="205" cy="650" r="7" />
+        </svg>
+
+        {items.map((item, index) => (
+          <figure className={styles.trailCard} key={item.src}>
+            <div className={styles.trailImageFrame}>
+              <span className={styles.trailTape} aria-hidden="true" />
+              <img src={item.src} alt={item.alt} loading="lazy" width="800" height="600" />
+              <b aria-hidden="true">{String(index + 1).padStart(2, "0")}</b>
+              {index === items.length - 1 && (
+                <span className={styles.trailFinish} aria-hidden="true">X</span>
+              )}
+            </div>
+            <figcaption>
+              <span>{item.label}</span>
+              <p>{item.caption}</p>
+            </figcaption>
+          </figure>
+        ))}
+
+      </div>
     </div>
   );
 }
@@ -193,6 +305,8 @@ function EducationSkillsSequence() {
               </div>
             ))}
           </div>
+
+          <TrailGallery items={educationTrail} title="FIELD NOTES / THE LEARNING TRAIL" tone="light" />
         </div>
       </section>
 
@@ -285,6 +399,8 @@ function TechHobbiesSequence() {
               </article>
             ))}
           </div>
+
+          <TrailGallery items={offlineTrail} title="FIELD NOTES / OFF THE CLOCK" tone="dark" />
         </div>
       </section>
     </>
