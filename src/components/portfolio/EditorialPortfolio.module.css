@@ -41,8 +41,9 @@
 .systemStatus {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  text-align: left !important;
+  text-align: center !important;
 }
 
 .statusDot {
@@ -702,6 +703,205 @@
 .hobbiesSection {
   display: grid;
   grid-template-columns: 54px clamp(142px, 13vw, 184px) minmax(0, 1fr);
+}
+
+.sectionTransition {
+  --from-bg: var(--paper);
+  --from-fg: var(--ink);
+  --to-bg: var(--ink);
+  --to-fg: var(--paper);
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(
+    168deg,
+    var(--from-bg) 0%,
+    var(--from-bg) 48.2%,
+    var(--signal) 48.35%,
+    var(--signal) 49.35%,
+    var(--to-bg) 49.5%,
+    var(--to-bg) 100%
+  );
+}
+
+.transitionToLight {
+  --from-bg: var(--ink);
+  --from-fg: var(--paper);
+  --to-bg: var(--paper);
+  --to-fg: var(--ink);
+}
+
+.transitionGrid {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(255, 92, 53, 0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 92, 53, 0.13) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.transitionRoute {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+}
+
+.transitionReverse .transitionRoute {
+  transform: scaleY(-1);
+}
+
+.transitionRouteShadow {
+  stroke: var(--ink);
+  stroke-width: 9;
+  opacity: 0.52;
+}
+
+.transitionRouteLine {
+  stroke: var(--acid);
+  stroke-dasharray: 9 12;
+  stroke-linecap: square;
+  stroke-width: 3;
+  animation: transitionRouteFlow 1.5s linear infinite;
+}
+
+.transitionNode {
+  fill: var(--signal);
+  stroke: var(--ink);
+  stroke-width: 3;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: transitionNodePulse 1.8s ease-in-out infinite;
+}
+
+.transitionNode:nth-of-type(2) {
+  animation-delay: 220ms;
+}
+
+.transitionNode:nth-of-type(3) {
+  animation-delay: 440ms;
+}
+
+.transitionNode:nth-of-type(4) {
+  animation-delay: 660ms;
+}
+
+@keyframes transitionRouteFlow {
+  to {
+    stroke-dashoffset: -42;
+  }
+}
+
+@keyframes transitionNodePulse {
+  0%,
+  100% {
+    transform: scale(0.82);
+  }
+
+  50% {
+    transform: scale(1.32);
+  }
+}
+
+.transitionDeparture,
+.transitionArrival {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.transitionDeparture {
+  top: 13px;
+  left: clamp(22px, 4vw, 64px);
+  color: var(--from-fg);
+}
+
+.transitionArrival {
+  right: clamp(22px, 4vw, 64px);
+  bottom: 11px;
+  color: var(--to-fg);
+  text-align: right;
+}
+
+.transitionDeparture span,
+.transitionArrival span {
+  font-size: 8px;
+}
+
+.transitionDeparture strong,
+.transitionArrival strong {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: 37px;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+}
+
+.transitionDeparture strong {
+  color: var(--signal);
+}
+
+.transitionArrival strong {
+  order: -1;
+  color: var(--acid);
+}
+
+.transitionGate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 68px;
+  padding: 5px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border: 1px solid var(--ink);
+  background: var(--acid);
+  box-shadow: 10px 10px 0 rgba(255, 92, 53, 0.88);
+}
+
+.transitionGate > div {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  transform: rotate(-45deg);
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+
+.transitionGate small {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.transitionGate b {
+  margin-top: -2px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.transitionStatus {
+  position: absolute;
+  right: 50%;
+  bottom: 7px;
+  margin: 0 53px 0 0;
+  color: var(--to-fg);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  opacity: 0.66;
 }
 
 .educationSection,
@@ -1850,6 +2050,60 @@
     display: block;
   }
 
+  .sectionTransition {
+    height: 112px;
+    background: linear-gradient(
+      160deg,
+      var(--from-bg) 0%,
+      var(--from-bg) 47.8%,
+      var(--signal) 48%,
+      var(--signal) 49.4%,
+      var(--to-bg) 49.6%,
+      var(--to-bg) 100%
+    );
+  }
+
+  .transitionGrid {
+    background-size: 22px 22px;
+  }
+
+  .transitionDeparture {
+    top: 10px;
+    left: 15px;
+  }
+
+  .transitionArrival {
+    right: 15px;
+    bottom: 8px;
+  }
+
+  .transitionDeparture span,
+  .transitionArrival span {
+    max-width: 88px;
+    font-size: 7px;
+    line-height: 1.35;
+  }
+
+  .transitionDeparture strong,
+  .transitionArrival strong {
+    font-size: 30px;
+  }
+
+  .transitionGate {
+    width: 54px;
+    height: 54px;
+    padding: 4px;
+    box-shadow: 7px 7px 0 rgba(255, 92, 53, 0.88);
+  }
+
+  .transitionGate b {
+    font-size: 22px;
+  }
+
+  .transitionStatus {
+    display: none;
+  }
+
   .sectionCoordinates,
   .sectionNumber,
   .desktopSectionLabel,
@@ -2184,6 +2438,11 @@
 
   .portraitImage {
     transition: none;
+  }
+
+  .transitionRouteLine,
+  .transitionNode {
+    animation: none;
   }
 }
 

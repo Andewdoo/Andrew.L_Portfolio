@@ -81,16 +81,16 @@ const technologyTaxonomy = [
 
 const offlineInterests = [
   {
-    description: "New places. Different systems. Wider perspective.",
-    title: "TRAVEL",
+    description: "BADMINTON, VOLLEYBALL, SNOWBOARDING, BENCH PRs, AND THE OCCASIONAL MARATHON.",
+    title: "SPORTS & FITNESS",
   },
   {
-    description: "How people solve familiar problems their own way.",
-    title: "CULTURE",
+    description: "LOCAL SPECIALTY FOODS, DISTINCTIVE ARCHITECTURE, DIFFERENT LANDSCAPES, AND THE LIFESTYLES THAT MAKE EACH PLACE UNIQUE.",
+    title: "TRAVEL & CULTURE",
   },
   {
-    description: "Finding structure inside complexity.",
-    title: "PUZZLES",
+    description: "CHRISTIANITY, THE BIBLE, FAMILY DINNER, FAMILY VACATIONS, AND MOST IMPORTANTLY, HOME-LIFE",
+    title: "FAMILY & RELIGION",
   },
 ];
 
@@ -148,20 +148,24 @@ const offlineTrail = [
   },
 ];
 
-const utcTime = new Intl.DateTimeFormat("en-CA", {
+const easternTimeFormatter = new Intl.DateTimeFormat("en-CA", {
   hour: "2-digit",
-  hour12: false,
+  hourCycle: "h23",
   minute: "2-digit",
   second: "2-digit",
-  timeZone: "UTC",
+  timeZone: "America/Toronto",
 });
 
 function LiveClock() {
-  const [time, setTime] = useState("--:--:--");
+  const [times, setTimes] = useState({ eastern: "--:--:--", utc: "--:--:--" });
 
   useEffect(() => {
     const updateClock = () => {
-      setTime(utcTime.format(new Date()));
+      const now = new Date();
+      setTimes({
+        eastern: easternTimeFormatter.format(now),
+        utc: now.toISOString().slice(11, 19),
+      });
     };
 
     updateClock();
@@ -171,9 +175,12 @@ function LiveClock() {
   }, []);
 
   return (
-    <div className={`${styles.desktopMeta} ${styles.liveClock}`} aria-label={`Current UTC time ${time}`}>
-      <span>TIME: {time}</span>
-      <span>UTC+00:00</span>
+    <div
+      className={`${styles.desktopMeta} ${styles.liveClock}`}
+      aria-label={`Current UTC time ${times.utc}; Eastern time ${times.eastern}`}
+    >
+      <span>UTC: {times.utc}</span>
+      <span>ET: {times.eastern}</span>
     </div>
   );
 }
@@ -214,6 +221,67 @@ function SectionNumber({ value }: Readonly<{ value: string }>) {
         <strong>{value}</strong>
         <span className={styles.sectionNumberRule} />
       </div>
+    </div>
+  );
+}
+
+function SectionTransition({
+  from,
+  fromLabel,
+  reverse = false,
+  to,
+  toLabel,
+  tone,
+}: Readonly<{
+  from: string;
+  fromLabel: string;
+  reverse?: boolean;
+  to: string;
+  toLabel: string;
+  tone: "dark-to-light" | "light-to-dark";
+}>) {
+  return (
+    <div
+      className={`${styles.sectionTransition} ${
+        tone === "light-to-dark" ? styles.transitionToDark : styles.transitionToLight
+      } ${reverse ? styles.transitionReverse : ""}`}
+      aria-hidden="true"
+    >
+      <div className={styles.transitionGrid} />
+
+      <svg className={styles.transitionRoute} viewBox="0 0 1200 140" preserveAspectRatio="none">
+        <path
+          className={styles.transitionRouteShadow}
+          d="M-24 36 C138 13 204 104 370 88 S610 20 774 65 S1006 126 1224 66"
+        />
+        <path
+          className={styles.transitionRouteLine}
+          d="M-24 36 C138 13 204 104 370 88 S610 20 774 65 S1006 126 1224 66"
+        />
+        <circle className={styles.transitionNode} cx="142" cy="34" r="6" />
+        <circle className={styles.transitionNode} cx="370" cy="88" r="6" />
+        <circle className={styles.transitionNode} cx="774" cy="65" r="6" />
+        <circle className={styles.transitionNode} cx="1070" cy="87" r="6" />
+      </svg>
+
+      <div className={styles.transitionDeparture}>
+        <span>EXIT / {fromLabel}</span>
+        <strong>{from}</strong>
+      </div>
+
+      <div className={styles.transitionGate}>
+        <div>
+          <small>ROUTE</small>
+          <b>↘</b>
+        </div>
+      </div>
+
+      <div className={styles.transitionArrival}>
+        <span>NEXT / {toLabel}</span>
+        <strong>{to}</strong>
+      </div>
+
+      <p className={styles.transitionStatus}>SIGNAL HANDOFF · {from}—{to} · PATH LOCKED</p>
     </div>
   );
 }
@@ -311,6 +379,14 @@ function EducationSkillsSequence() {
         </div>
       </section>
 
+      <SectionTransition
+        from="01"
+        fromLabel="EDUCATION"
+        to="02"
+        toLabel="WORKFLOW"
+        tone="light-to-dark"
+      />
+
       <section id="skills" className={styles.skillsSection}>
         <SectionCoordinates />
         <SectionNumber value="02" />
@@ -357,6 +433,15 @@ function EducationSkillsSequence() {
 function TechHobbiesSequence() {
   return (
     <>
+      <SectionTransition
+        from="02"
+        fromLabel="WORKFLOW"
+        reverse
+        to="03"
+        toLabel="TECH STACK"
+        tone="dark-to-light"
+      />
+
       <section id="tech-stack" className={styles.techStackSection}>
         <SectionCoordinates />
         <SectionNumber value="03" />
@@ -379,6 +464,14 @@ function TechHobbiesSequence() {
           </div>
         </div>
       </section>
+
+      <SectionTransition
+        from="03"
+        fromLabel="TECH STACK"
+        to="04"
+        toLabel="OFFLINE"
+        tone="light-to-dark"
+      />
 
       <section id="hobbies" className={styles.hobbiesSection} aria-label="Hobbies and interests">
         <SectionCoordinates />
@@ -517,7 +610,7 @@ export function EditorialPortfolio() {
 
           <div className={styles.asciiPanel}>
             <Image
-              src="/images/hero-portrait-editorial-long-neck.png"
+              src="/images/hero-portrait-orange-green.png"
               alt="Centered grain-textured editorial screen-print portrait of Andrew L."
               fill
               priority
@@ -577,19 +670,19 @@ export function EditorialPortfolio() {
         <section id="projects" className={styles.projects} aria-label="Selected work">
           <ProjectRow
             index="01"
-            title="DEVLIFY"
-            category="AI LEARNING WORKSPACE"
-            description="Multi-modal tutoring, persistent chat history, and retrieval-aware answers in one focused workspace."
-            stackLine="NEXT.JS / FASTAPI / POSTGRESQL"
-            slug="devlify"
-          />
-          <ProjectRow
-            index="02"
             title="ELARA.AI"
             category="EVIDENCE VERIFICATION"
             description="Evidence-first verification with timestamped sources, visible uncertainty, and citation-audited reports."
             stackLine="NEXT.JS / FASTAPI / PGVECTOR / CELERY"
             slug="elara-ai"
+          />
+          <ProjectRow
+            index="02"
+            title="DEVLIFY"
+            category="AI LEARNING WORKSPACE"
+            description="Multi-modal tutoring, persistent chat history, and retrieval-aware answers in one focused workspace."
+            stackLine="NEXT.JS / FASTAPI / POSTGRESQL"
+            slug="devlify"
           />
         </section>
 
