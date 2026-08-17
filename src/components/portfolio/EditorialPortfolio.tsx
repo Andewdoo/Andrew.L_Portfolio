@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { FileText, Github, Linkedin, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -514,13 +515,27 @@ export function EditorialPortfolio() {
             </a>
           </div>
 
-          <div className={styles.asciiPanel} aria-label="Reserved space for a future ASCII portrait">
+          <div className={styles.asciiPanel}>
+            <Image
+              src="/images/hero-portrait-editorial-long-neck.png"
+              alt="Centered grain-textured editorial screen-print portrait of Andrew L."
+              fill
+              priority
+              sizes="(max-width: 980px) 100vw, 50vw"
+              className={styles.portraitImage}
+            />
+            <div className={styles.portraitWash} aria-hidden="true" />
+            <div className={styles.portraitScan} aria-hidden="true" />
+            <span className={styles.portraitStatus} aria-hidden="true">
+              <i /> IDENTITY:LOCKED
+            </span>
+            <span className={styles.portraitIndex} aria-hidden="true">SUBJECT / A.L-01</span>
             <div className={styles.asciiScale} aria-hidden="true">
               {Array.from({ length: 25 }, (_, index) => (
                 <span key={index}>{String(index + 1).padStart(2, "0")}</span>
               ))}
             </div>
-            <span className={styles.asciiLabel}>[ PORTRAIT.ASCII ]</span>
+            <span className={styles.asciiLabel}>[ PORTRAIT.EDITION ]</span>
           </div>
         </section>
 
@@ -536,7 +551,7 @@ export function EditorialPortfolio() {
         <section className={styles.aboutStack}>
           <div className={styles.aboutTitle}>
             <p>&gt; ABOUT <b>/</b></p>
-            <h2>I LIKE LEARNING HOW THINGS WORK BY DOING.</h2>
+            <h2>I LIKE LEARNING HOW THINGS WORK BY DOING</h2>
             <span className={styles.aboutSubtitle}>Visual &amp; hands-on learner.</span>
           </div>
           <div className={styles.aboutCopy}>
