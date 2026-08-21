@@ -92,32 +92,36 @@ const offlineInterests = [
     description: "CHRISTIANITY, THE BIBLE, FAMILY DINNER, FAMILY VACATIONS, AND MOST IMPORTANTLY, HOME-LIFE",
     title: "FAMILY & RELIGION",
   },
+  {
+    description: "PLAYLISTS, FILMS, GAMES, PODCASTS, AND THE STORIES THAT KEEP CURIOSITY MOVING.",
+    title: "MUSIC & MEDIA",
+  },
 ];
 
 const educationTrail = [
   {
-    alt: "Abstract logic-gate blueprint placeholder",
-    caption: "Logic becomes structure.",
-    label: "LOGIC / 01",
-    src: "/images/trail-education-logic.svg",
+    alt: "Snowy autumn walkway through McMaster University campus",
+    caption: "Seasons change, campus remains the same.",
+    label: "CAMPUS / 01",
+    src: "/images/education-campus-winter.webp",
   },
   {
-    alt: "Abstract computer architecture blueprint placeholder",
-    caption: "Structure becomes a system.",
-    label: "ARCH / 02",
-    src: "/images/trail-education-architecture.svg",
+    alt: "Students writing during a crowded university classroom activity",
+    caption: "Test-takers and note-takers.",
+    label: "CLASS / 02",
+    src: "/images/education-classroom.webp",
   },
   {
-    alt: "Abstract embedded circuit-board placeholder",
-    caption: "Systems meet the physical world.",
-    label: "EMBED / 03",
-    src: "/images/trail-education-embedded.svg",
+    alt: "Multi-screen desktop workstation with a laptop and tablet",
+    caption: "Where all my work gets done.",
+    label: "BUILD / 03",
+    src: "/images/education-workstation.webp",
   },
   {
-    alt: "Abstract prototyping workbench placeholder",
-    caption: "Theory survives contact with the bench.",
-    label: "BUILD / 04",
-    src: "/images/trail-education-prototype.svg",
+    alt: "McMaster stadium lit through fog on a winter night",
+    caption: "Campus after hours.",
+    label: "AFTER / 04",
+    src: "/images/education-stadium-night.webp",
   },
 ];
 
@@ -258,10 +262,10 @@ function SectionTransition({
           className={styles.transitionRouteLine}
           d="M-24 36 C138 13 204 104 370 88 S610 20 774 65 S1006 126 1224 66"
         />
-        <circle className={styles.transitionNode} cx="142" cy="34" r="6" />
+        <circle className={styles.transitionNode} cx="142" cy="50.442" r="6" />
         <circle className={styles.transitionNode} cx="370" cy="88" r="6" />
         <circle className={styles.transitionNode} cx="774" cy="65" r="6" />
-        <circle className={styles.transitionNode} cx="1070" cy="87" r="6" />
+        <circle className={styles.transitionNode} cx="1070" cy="99.661" r="6" />
       </svg>
 
       <div className={styles.transitionDeparture}>
@@ -451,7 +455,7 @@ function TechHobbiesSequence() {
             <p className={styles.mobileSectionLabel}><b>&gt;_</b> 03 / TECH STACK</p>
           </div>
 
-          <h2>TOOLS CHANGE. STANDARD DOESN&apos;T.<mark aria-hidden="true" /></h2>
+          <h2>TOOLS CHANGE. STANDARD DOESN&apos;T.</h2>
 
           <div className={styles.taxonomyRows}>
             {technologyTaxonomy.map((category, index) => (
@@ -482,7 +486,7 @@ function TechHobbiesSequence() {
             <p className={styles.mobileSectionLabel}><b>&gt;_</b> 04 / OFFLINE</p>
           </div>
 
-          <h2>CURIOSITY DOESN&apos;T CLOCK OUT.<mark aria-hidden="true" /></h2>
+          <h2>CURIOSITY DOESN&apos;T CLOCK OUT.</h2>
 
           <div className={styles.interestRows}>
             {offlineInterests.map((interest, index) => (
@@ -651,7 +655,7 @@ export function EditorialPortfolio() {
             <p className={styles.aboutCopyLabel}>&gt; BUILD.NOTES</p>
             <p>
               Each idea evolves as I work, and that
-              makes the final result more interesting. <mark />
+              makes the final result more interesting.
             </p>
           </div>
           <div className={styles.lifePattern}>

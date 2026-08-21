@@ -633,14 +633,6 @@
   line-height: 1.7;
 }
 
-.aboutCopy > p:last-child mark {
-  display: inline-block;
-  width: 12px;
-  height: 7px;
-  margin-left: 7px;
-  background: var(--acid);
-}
-
 .lifePattern {
   border-right: 0 !important;
 }
@@ -1428,15 +1420,6 @@
   font-weight: 700;
   letter-spacing: 0.015em;
   line-height: 0.98;
-}
-
-.techStackContent > h2 mark,
-.hobbiesContent > h2 mark {
-  display: inline-block;
-  width: 0.24em;
-  height: 0.24em;
-  margin-left: 0.18em;
-  background: var(--acid);
 }
 
 .taxonomyRows {
@@ -2326,12 +2309,6 @@
     font-size: clamp(3.35rem, 14vw, 7rem);
     letter-spacing: 0.018em;
     line-height: 1.02;
-  }
-
-  .techStackContent > h2 mark,
-  .hobbiesContent > h2 mark {
-    width: 0.22em;
-    height: 0.22em;
   }
 
   .taxonomyRows,
