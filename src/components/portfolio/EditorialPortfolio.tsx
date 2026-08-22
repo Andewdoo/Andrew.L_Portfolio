@@ -126,11 +126,30 @@ const offlineMomentsGallery: readonly TrailMedia[] = [
     caption: "Freezing my face off.",
     src: "/images/offline-01-03.webp",
   },
+  {
+    alt: "Andrew as a child holding a swimming medal and a yellow balloon",
+    caption: "My first swim medal.",
+    src: "/images/offline-01-04.webp",
+  },
+  {
+    alt: "Badminton medalists at a Badminton Ontario event",
+    caption: "Badminton Ontario podium.",
+    src: "/images/offline-01-05.webp",
+  },
+  {
+    alt: "Badminton match in progress inside a school gym",
+    caption: "Match day.",
+    src: "/images/offline-01-06.webp",
+  },
 ];
 
 const offlineTravelGallery: readonly TrailMedia[] = [
   { alt: "Jet ski cutting across turquoise water in Mexico", caption: "Caption placeholder", group: "Mexico", src: "/images/offline-02-19.webp" },
   { alt: "Coastal golf course overlooking the sea in Mexico", caption: "Caption placeholder", group: "Mexico", src: "/images/offline-02-17.webp" },
+  { alt: "Pastel clouds over the ocean at sunset in Mexico", caption: "Mexico", group: "Mexico", src: "/images/offline-02-26.webp" },
+  { alt: "White sand beach with a striped lighthouse in Mexico", caption: "Mexico", group: "Mexico", src: "/images/offline-02-27.webp" },
+  { alt: "Turquoise sea and a pier along the Mexican coastline", caption: "Mexico", group: "Mexico", src: "/images/offline-02-28.webp" },
+  { alt: "Night clouds and distant shoreline lights over the sea in Mexico", caption: "Mexico", group: "Mexico", src: "/images/offline-02-29.webp" },
   { alt: "Panda display photographed during a trip to China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-01.webp" },
   { alt: "Classroom chalkboard in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-02.webp" },
   { alt: "Bright pedestrian street in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-07.webp" },
@@ -147,10 +166,31 @@ const offlineTravelGallery: readonly TrailMedia[] = [
   { alt: "Rocky sea arch on the Portuguese coast", caption: "Portugal", group: "Portugal", src: "/images/offline-02-23.webp" },
   { alt: "Cobblestone street lined with historic buildings in Portugal", caption: "Portugal", group: "Portugal", src: "/images/offline-02-24.webp" },
   { alt: "Ocean view with a sailboat from the Portuguese coast", caption: "Portugal", group: "Portugal", src: "/images/offline-02-25.webp" },
+  { alt: "Rocky Mountain ridge above a forested road in Alberta", caption: "Alberta", group: "Alberta", src: "/images/offline-02-30.webp" },
+  { alt: "Family photo at a glacier lake in Alberta", caption: "Alberta", group: "Alberta", src: "/images/offline-02-31.webp" },
+  { alt: "Highway through the Rocky Mountains under a blue sky in Alberta", caption: "Alberta", group: "Alberta", src: "/images/offline-02-32.webp" },
+  { alt: "Family photo outside a mountain resort in Alberta", caption: "Alberta", group: "Alberta", src: "/images/offline-02-33.webp" },
   { alt: "Toronto skyline viewed across the water with geese in the foreground", caption: "Caption placeholder", group: "Toronto", src: "/images/offline-02-15.webp" },
   { alt: "Seafood spread on a dining table", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-04.webp" },
   { alt: "Candied fruit skewers", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-08.webp" },
   { alt: "Suitcase packed with snacks", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-16.webp" },
+  { alt: "Crispy whole fish served upright in sweet sauce", caption: "Food", group: "Food", src: "/images/offline-02-34.webp" },
+  { alt: "Chinese family-style dinner spread with shared dishes", caption: "Food", group: "Food", src: "/images/offline-02-35.webp" },
+];
+
+const offlineFamilyGallery: readonly TrailMedia[] = [
+  { alt: "Cristo Rei monument rising against a blue sky in Portugal", caption: "Cristo Rei, Portugal.", group: "Faith", src: "/images/offline-03-03.webp" },
+  { alt: "Five friends posing together at a farewell celebration", caption: "Friends at a farewell celebration.", group: "Friends", src: "/images/offline-03-04.webp" },
+  { alt: "Andrew and a companion posing by the Shanghai skyline at night", caption: "Shanghai waterfront, together.", group: "Family", src: "/images/offline-03-05.webp" },
+  { alt: "Family taking a mirror photo on a sculptural staircase", caption: "A family stop between adventures.", group: "Family", src: "/images/offline-03-06.webp" },
+  { alt: "Four friends posing by the Shanghai skyline at night", caption: "A night out on the Bund.", group: "Friends", src: "/images/offline-03-07.webp" },
+  { alt: "Family portrait by the Shanghai skyline at night", caption: "Family portrait on the Bund.", group: "Family", src: "/images/offline-03-08.webp" },
+  { alt: "Family taking a selfie together on a sunny tropical trip", caption: "Family trip in the sunshine.", group: "Family", src: "/images/offline-03-09.webp" },
+  { alt: "Printed childhood photo of a parent and two children beside a snowman", caption: "A childhood winter memory.", group: "Family", src: "/images/offline-03-10.webp" },
+  { alt: "Andrew and his father standing beside a fast-flowing mountain river", caption: "By the river in Alberta.", group: "Family", src: "/images/offline-03-11.webp" },
+  { alt: "Andrew and a parent overlooking Lisbon and the Tagus River", caption: "Overlooking Lisbon and the Tagus.", group: "Family", src: "/images/offline-03-12.webp" },
+  { alt: "Family wearing matching bright green shirts during a summer trip", caption: "Matching shirts, family trip.", group: "Family", src: "/images/offline-03-13.webp" },
+  { alt: "Family gathered around a table at a beach restaurant", caption: "Together by the beach.", group: "Family", src: "/images/offline-03-14.webp" },
 ];
 
 const educationTrail: readonly TrailItem[] = [
@@ -192,10 +232,9 @@ const offlineTrail: readonly TrailItem[] = [
     label: "02:",
   },
   {
-    alt: "Stylized maze and puzzle postcard placeholder",
-    caption: "Follow the pattern through the noise.",
+    ...offlineFamilyGallery[0],
+    gallery: offlineFamilyGallery,
     label: "03:",
-    src: "/images/trail-offline-puzzles.svg",
   },
   {
     alt: "Stylized compass and topographic map placeholder",
@@ -831,7 +870,11 @@ export function EditorialPortfolio() {
             <Github aria-hidden="true" />
             <span>GITHUB</span>
           </a>
-          <a href="mailto:ahanliu0311@gmail.com">
+          <a
+            href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ahanliu0311%40gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
             <Mail aria-hidden="true" />
             <span>EMAIL</span>
           </a>
