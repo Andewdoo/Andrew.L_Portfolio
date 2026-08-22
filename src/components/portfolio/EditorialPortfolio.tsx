@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FileText, Github, Linkedin, Mail } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import styles from "./EditorialPortfolio.module.css";
@@ -98,16 +98,71 @@ const offlineInterests = [
   },
 ];
 
-const educationTrail = [
+type TrailMedia = {
+  alt: string;
+  caption: string;
+  group?: string;
+  src: string;
+};
+
+type TrailItem = TrailMedia & {
+  gallery?: readonly TrailMedia[];
+  label: string;
+};
+
+const offlineMomentsGallery: readonly TrailMedia[] = [
+  {
+    alt: "Toronto skyline viewed from a canoe on the water",
+    caption: "Toronto from a canoe",
+    src: "/images/offline-toronto-canoe.webp",
+  },
+  {
+    alt: "Skiers and snowboarders on a snowy slope at sunset",
+    caption: "Scenic sunset on the slopes.",
+    src: "/images/offline-01-02.webp",
+  },
+  {
+    alt: "Andrew wearing a ski helmet and goggles during a night ski",
+    caption: "Freezing my face off.",
+    src: "/images/offline-01-03.webp",
+  },
+];
+
+const offlineTravelGallery: readonly TrailMedia[] = [
+  { alt: "Jet ski cutting across turquoise water in Mexico", caption: "Caption placeholder", group: "Mexico", src: "/images/offline-02-19.webp" },
+  { alt: "Coastal golf course overlooking the sea in Mexico", caption: "Caption placeholder", group: "Mexico", src: "/images/offline-02-17.webp" },
+  { alt: "Panda display photographed during a trip to China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-01.webp" },
+  { alt: "Classroom chalkboard in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-02.webp" },
+  { alt: "Bright pedestrian street in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-07.webp" },
+  { alt: "Andrew overlooking a forested canyon in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-10.webp" },
+  { alt: "Hillside neighborhood surrounded by trees in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-11.webp" },
+  { alt: "Mirror selfie inside a dramatic bookstore in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-12.webp" },
+  { alt: "Chongqing skyline glowing at night", caption: "Caption placeholder", group: "China", src: "/images/offline-02-13.webp" },
+  { alt: "Mountain river landscape in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-14.webp" },
+  { alt: "Narrow historic street in Portugal", caption: "Caption placeholder", group: "Portugal", src: "/images/offline-02-03.webp" },
+  { alt: "Coastal cliffs in Portugal", caption: "Caption placeholder", group: "Portugal", src: "/images/offline-02-05.webp" },
+  { alt: "Rocky hilltop panorama in Portugal", caption: "Caption placeholder", group: "Portugal", src: "/images/offline-02-06.webp" },
+  { alt: "Andrew standing beside the ocean in Portugal", caption: "Caption placeholder", group: "Portugal", src: "/images/offline-02-09.webp" },
+  { alt: "Stone castle overlooking a green hillside in Portugal", caption: "Portugal", group: "Portugal", src: "/images/offline-02-22.webp" },
+  { alt: "Rocky sea arch on the Portuguese coast", caption: "Portugal", group: "Portugal", src: "/images/offline-02-23.webp" },
+  { alt: "Cobblestone street lined with historic buildings in Portugal", caption: "Portugal", group: "Portugal", src: "/images/offline-02-24.webp" },
+  { alt: "Ocean view with a sailboat from the Portuguese coast", caption: "Portugal", group: "Portugal", src: "/images/offline-02-25.webp" },
+  { alt: "Toronto skyline viewed across the water with geese in the foreground", caption: "Caption placeholder", group: "Toronto", src: "/images/offline-02-15.webp" },
+  { alt: "Seafood spread on a dining table", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-04.webp" },
+  { alt: "Candied fruit skewers", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-08.webp" },
+  { alt: "Suitcase packed with snacks", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-16.webp" },
+];
+
+const educationTrail: readonly TrailItem[] = [
   {
     alt: "Snowy autumn walkway through McMaster University campus",
-    caption: "Seasons change, campus remains the same.",
+    caption: "Autumn on campus.",
     label: "CAMPUS / 01",
     src: "/images/education-campus-winter.webp",
   },
   {
-    alt: "Students writing during a crowded university classroom activity",
-    caption: "Test-takers and note-takers.",
+    alt: "Andrew studying at a dining table in high school with his cat beside him",
+    caption: "its a family effort.",
     label: "CLASS / 02",
     src: "/images/education-classroom.webp",
   },
@@ -125,29 +180,27 @@ const educationTrail = [
   },
 ];
 
-const offlineTrail = [
+const offlineTrail: readonly TrailItem[] = [
   {
-    alt: "Stylized mountain travel postcard placeholder",
-    caption: "Take the unfamiliar road.",
-    label: "ROAM / 01",
-    src: "/images/trail-offline-travel.svg",
+    ...offlineMomentsGallery[0],
+    gallery: offlineMomentsGallery,
+    label: "01:",
   },
   {
-    alt: "Stylized streets and culture postcard placeholder",
-    caption: "Notice how other places work.",
-    label: "NOTICE / 02",
-    src: "/images/trail-offline-culture.svg",
+    ...offlineTravelGallery[0],
+    gallery: offlineTravelGallery,
+    label: "02:",
   },
   {
     alt: "Stylized maze and puzzle postcard placeholder",
     caption: "Follow the pattern through the noise.",
-    label: "SOLVE / 03",
+    label: "03:",
     src: "/images/trail-offline-puzzles.svg",
   },
   {
     alt: "Stylized compass and topographic map placeholder",
     caption: "Bring a wider view home.",
-    label: "RETURN / 04",
+    label: "04:",
     src: "/images/trail-offline-wander.svg",
   },
 ];
@@ -295,7 +348,7 @@ function TrailGallery({
   title,
   tone,
 }: Readonly<{
-  items: typeof educationTrail;
+  items: readonly TrailItem[];
   title: string;
   tone: "dark" | "light";
 }>) {
@@ -324,24 +377,97 @@ function TrailGallery({
         </svg>
 
         {items.map((item, index) => (
-          <figure className={styles.trailCard} key={item.src}>
-            <div className={styles.trailImageFrame}>
-              <span className={styles.trailTape} aria-hidden="true" />
-              <img src={item.src} alt={item.alt} loading="lazy" width="800" height="600" />
-              <b aria-hidden="true">{String(index + 1).padStart(2, "0")}</b>
-              {index === items.length - 1 && (
-                <span className={styles.trailFinish} aria-hidden="true">X</span>
-              )}
-            </div>
-            <figcaption>
-              <span>{item.label}</span>
-              <p>{item.caption}</p>
-            </figcaption>
-          </figure>
+          <TrailCard
+            index={index}
+            item={item}
+            key={item.src}
+            tone={tone}
+            total={items.length}
+          />
         ))}
 
       </div>
     </div>
+  );
+}
+
+function TrailCard({
+  index,
+  item,
+  tone,
+  total,
+}: Readonly<{
+  index: number;
+  item: TrailItem;
+  tone: "dark" | "light";
+  total: number;
+}>) {
+  const gallery = item.gallery ?? [item];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeMedia = gallery[activeIndex] ?? gallery[0];
+  const hasGallery = gallery.length > 1;
+  const slotNumber = String(index + 1).padStart(2, "0");
+
+  const showPrevious = () => {
+    setActiveIndex((current) => (current - 1 + gallery.length) % gallery.length);
+  };
+
+  const showNext = () => {
+    setActiveIndex((current) => (current + 1) % gallery.length);
+  };
+
+  return (
+    <figure className={styles.trailCard}>
+      <div className={styles.trailImageFrame}>
+        <span className={styles.trailTape} aria-hidden="true" />
+        <img
+          alt={activeMedia.alt}
+          className={hasGallery ? styles.trailCarouselImage : undefined}
+          decoding="async"
+          height="600"
+          key={activeMedia.src}
+          loading="lazy"
+          src={activeMedia.src}
+          width="800"
+        />
+        <b aria-hidden="true">{slotNumber}</b>
+        {index === total - 1 && (
+          <span className={styles.trailFinish} aria-hidden="true">X</span>
+        )}
+      </div>
+      <figcaption>
+        <div className={tone === "dark" ? styles.trailCaptionInline : undefined}>
+          <span>{item.label}</span>
+          <p>{activeMedia.caption}</p>
+        </div>
+        {hasGallery && (
+          <div className={styles.trailCarouselControls}>
+            <button
+              aria-label={`Previous photo in slot ${slotNumber}`}
+              onClick={showPrevious}
+              type="button"
+            >
+              <ChevronLeft aria-hidden="true" size={17} strokeWidth={2.5} />
+            </button>
+            <span aria-live="polite" className={styles.trailCarouselMeta}>
+              {activeMedia.group && (
+                <span className={styles.trailCarouselGroup}>{activeMedia.group}</span>
+              )}
+              <span className={styles.trailCarouselStatus}>
+                {String(activeIndex + 1).padStart(2, "0")} / {String(gallery.length).padStart(2, "0")}
+              </span>
+            </span>
+            <button
+              aria-label={`Next photo in slot ${slotNumber}`}
+              onClick={showNext}
+              type="button"
+            >
+              <ChevronRight aria-hidden="true" size={17} strokeWidth={2.5} />
+            </button>
+          </div>
+        )}
+      </figcaption>
+    </figure>
   );
 }
 
@@ -455,7 +581,7 @@ function TechHobbiesSequence() {
             <p className={styles.mobileSectionLabel}><b>&gt;_</b> 03 / TECH STACK</p>
           </div>
 
-          <h2>TOOLS CHANGE. STANDARD DOESN&apos;T.</h2>
+          <h2>MY TOOLBOX.</h2>
 
           <div className={styles.taxonomyRows}>
             {technologyTaxonomy.map((category, index) => (
@@ -486,7 +612,7 @@ function TechHobbiesSequence() {
             <p className={styles.mobileSectionLabel}><b>&gt;_</b> 04 / OFFLINE</p>
           </div>
 
-          <h2>CURIOSITY DOESN&apos;T CLOCK OUT.</h2>
+          <h2>BEHIND THE SCENES.</h2>
 
           <div className={styles.interestRows}>
             {offlineInterests.map((interest, index) => (

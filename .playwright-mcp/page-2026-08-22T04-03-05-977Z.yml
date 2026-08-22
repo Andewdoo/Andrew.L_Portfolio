@@ -1,0 +1,324 @@
+- generic [ref=f3e3]:
+  - banner [ref=f3e4]:
+    - generic [ref=f3e5]: SYS:ONLINE ANDREW.L®
+    - link "Jump to selected work" [ref=f3e6] [cursor=pointer]:
+      - /url: "#projects"
+      - generic [ref=f3e7]: ">_"
+      - generic [ref=f3e8]: 01 / 08
+  - main [ref=f3e10]:
+    - generic [ref=f3e11]:
+      - generic [ref=f3e12]:
+        - paragraph [ref=f3e13]: "> SOFTWARE ENGINEER / MARKHAM"
+        - heading "I MAKE THINGS THAT I WOULD ACTUALLY USE" [level=1] [ref=f3e14]:
+          - generic [ref=f3e15]: I MAKE THINGS THAT
+          - generic [ref=f3e16]:
+            - text: I WOULD ACTUALLY
+            - mark [ref=f3e17]: USE
+        - paragraph [ref=f3e18]:
+          - strong [ref=f3e19]: Usually starting with curiosity and far too many tabs.
+        - link "VIEW WORK" [ref=f3e20] [cursor=pointer]:
+          - /url: "#projects"
+      - generic [ref=f3e24]:
+        - img "Centered grain-textured editorial screen-print portrait of Andrew L." [ref=f3e25]
+        - generic [ref=f3e26]: IDENTITY:LOCKED
+        - generic [ref=f3e28]: SUBJECT / A.L-01
+        - generic [ref=f3e29]:
+          - generic [ref=f3e30]: "01"
+          - generic [ref=f3e31]: "02"
+          - generic [ref=f3e32]: "03"
+          - generic [ref=f3e33]: "04"
+          - generic [ref=f3e34]: "05"
+          - generic [ref=f3e35]: "06"
+          - generic [ref=f3e36]: "07"
+          - generic [ref=f3e37]: "08"
+          - generic [ref=f3e38]: "09"
+          - generic [ref=f3e39]: "10"
+          - generic [ref=f3e40]: "11"
+          - generic [ref=f3e41]: "12"
+          - generic [ref=f3e42]: "13"
+          - generic [ref=f3e43]: "14"
+          - generic [ref=f3e44]: "15"
+          - generic [ref=f3e45]: "16"
+          - generic [ref=f3e46]: "17"
+          - generic [ref=f3e47]: "18"
+          - generic [ref=f3e48]: "19"
+          - generic [ref=f3e49]: "20"
+          - generic [ref=f3e50]: "21"
+          - generic [ref=f3e51]: "22"
+          - generic [ref=f3e52]: "23"
+          - generic [ref=f3e53]: "24"
+          - generic [ref=f3e54]: "25"
+        - generic [ref=f3e55]: "[ PORTRAIT.EDITION ]"
+    - generic "Capabilities" [ref=f3e56]: "> CAPABILITIES 43.8561° N, 79.3370° W"
+    - generic [ref=f3e57]:
+      - generic [ref=f3e58]:
+        - paragraph [ref=f3e59]: "> ABOUT /"
+        - heading "I LIKE LEARNING HOW THINGS WORK BY DOING" [level=2] [ref=f3e60]
+        - generic [ref=f3e61]: Visual & hands-on learner.
+      - generic [ref=f3e62]:
+        - paragraph [ref=f3e63]: "> BUILD.NOTES"
+        - paragraph [ref=f3e64]: Each idea evolves as I work, and that makes the final result more interesting.
+      - generic [ref=f3e65]:
+        - paragraph [ref=f3e66]: "> LIFE.PATTERN"
+        - generic [ref=f3e67]:
+          - generic [ref=f3e68]:
+            - generic [ref=f3e69]: "01"
+            - generic [ref=f3e70]: Notice
+          - generic [ref=f3e71]:
+            - generic [ref=f3e72]: "02"
+            - generic [ref=f3e73]: Question
+          - generic [ref=f3e74]:
+            - generic [ref=f3e75]: "03"
+            - generic [ref=f3e76]: Try
+          - generic [ref=f3e77]:
+            - generic [ref=f3e78]: "04"
+            - generic [ref=f3e79]: Adjust
+          - generic [ref=f3e80]:
+            - generic [ref=f3e81]: "05"
+            - generic [ref=f3e82]: Repeat
+    - region "Selected work" [ref=f3e83]:
+      - article [ref=f3e84]:
+        - link "Open ELARA.AI case study" [ref=f3e85] [cursor=pointer]:
+          - /url: /projects/elara-ai
+          - generic [ref=f3e86]:
+            - generic [ref=f3e87]: "01"
+            - generic [ref=f3e89]:
+              - heading "ELARA.AI" [level=2] [ref=f3e90]
+              - paragraph [ref=f3e91]: EVIDENCE VERIFICATION
+          - generic [ref=f3e95]:
+            - generic [ref=f3e96]:
+              - text: // SYSTEM
+              - paragraph [ref=f3e97]: Evidence-first verification with timestamped sources, visible uncertainty, and citation-audited reports.
+            - generic [ref=f3e98]:
+              - text: // STACK
+              - paragraph [ref=f3e99]: NEXT.JS / FASTAPI / PGVECTOR / CELERY
+      - article [ref=f3e100]:
+        - link "Open DEVLIFY case study" [ref=f3e101] [cursor=pointer]:
+          - /url: /projects/devlify
+          - generic [ref=f3e102]:
+            - generic [ref=f3e103]: "02"
+            - generic [ref=f3e105]:
+              - heading "DEVLIFY" [level=2] [ref=f3e106]
+              - paragraph [ref=f3e107]: AI LEARNING WORKSPACE
+          - generic [ref=f3e111]:
+            - generic [ref=f3e112]:
+              - text: // SYSTEM
+              - paragraph [ref=f3e113]: Multi-modal tutoring, persistent chat history, and retrieval-aware answers in one focused workspace.
+            - generic [ref=f3e114]:
+              - text: // STACK
+              - paragraph [ref=f3e115]: NEXT.JS / FASTAPI / POSTGRESQL
+    - generic [ref=f3e117]:
+      - paragraph [ref=f3e119]: ">_ 01 / EDUCATION"
+      - generic [ref=f3e120]:
+        - heading "THEORY MEETS THE MACHINE." [level=2] [ref=f3e121]: THEORY MEETSTHE MACHINE.
+        - generic [ref=f3e122]:
+          - generic [ref=f3e123]:
+            - heading "MCMASTER UNIVERSITY" [level=3] [ref=f3e124]
+            - paragraph [ref=f3e125]: COMPUTER ENGINEERING
+            - mark [ref=f3e126]
+          - paragraph [ref=f3e127]: Learning the whole system.
+      - generic [ref=f3e128]:
+        - generic [ref=f3e129]:
+          - generic [ref=f3e130]: "01"
+          - heading "DATA STRUCTURES & ALGORITHMS" [level=3] [ref=f3e131]
+        - generic [ref=f3e132]:
+          - generic [ref=f3e133]: "02"
+          - heading "LOGIC DESIGN & COMPUTER ARCHITECTURE" [level=3] [ref=f3e134]
+        - generic [ref=f3e135]:
+          - generic [ref=f3e136]: "03"
+          - heading "MICROPROCESSORS & EMBEDDED SYSTEMS" [level=3] [ref=f3e137]
+      - generic [ref=f3e138]:
+        - generic [ref=f3e139]:
+          - generic [ref=f3e140]: X
+          - paragraph [ref=f3e141]: FIELD NOTES / THE LEARNING TRAIL
+        - generic [ref=f3e142]:
+          - figure "CAMPUS / 01 Autumn on campus." [ref=f3e149]:
+            - generic [ref=f3e150]:
+              - img "Snowy autumn walkway through McMaster University campus" [ref=f3e152]
+              - generic [ref=f3e153]: "01"
+            - generic [ref=f3e155]:
+              - generic [ref=f3e156]: CAMPUS / 01
+              - paragraph [ref=f3e157]: Autumn on campus.
+          - figure "CLASS / 02 its a family effort." [ref=f3e158]:
+            - generic [ref=f3e159]:
+              - img "Andrew studying at a dining table in high school with his cat beside him" [ref=f3e161]
+              - generic [ref=f3e162]: "02"
+            - generic [ref=f3e164]:
+              - generic [ref=f3e165]: CLASS / 02
+              - paragraph [ref=f3e166]: its a family effort.
+          - figure "BUILD / 03 Where all my work gets done." [ref=f3e167]:
+            - generic [ref=f3e168]:
+              - img "Multi-screen desktop workstation with a laptop and tablet" [ref=f3e170]
+              - generic [ref=f3e171]: "03"
+            - generic [ref=f3e173]:
+              - generic [ref=f3e174]: BUILD / 03
+              - paragraph [ref=f3e175]: Where all my work gets done.
+          - figure "AFTER / 04 Campus after hours." [ref=f3e176]:
+            - generic [ref=f3e177]:
+              - img "McMaster stadium lit through fog on a winter night" [ref=f3e179]
+              - generic [ref=f3e180]: "04"
+              - generic [ref=f3e181]: X
+            - generic [ref=f3e183]:
+              - generic [ref=f3e184]: AFTER / 04
+              - paragraph [ref=f3e185]: Campus after hours.
+    - generic [ref=f3e186]:
+      - generic [ref=f3e195]:
+        - generic [ref=f3e196]: EXIT / EDUCATION
+        - strong [ref=f3e197]: "01"
+      - generic [ref=f3e199]:
+        - generic [ref=f3e200]: ROUTE
+        - generic [ref=f3e201]: ↘
+      - generic [ref=f3e202]:
+        - generic [ref=f3e203]: NEXT / WORKFLOW
+        - strong [ref=f3e204]: "02"
+    - generic [ref=f3e206]:
+      - paragraph [ref=f3e208]: ">_ 02 / WORKFLOW"
+      - heading "HOW I WORK." [level=2] [ref=f3e209]
+      - paragraph [ref=f3e210]: I don't just write code. I build better ways to write it.
+      - generic [ref=f3e211]:
+        - article [ref=f3e212]:
+          - heading "AI AS A COLLABORATOR" [level=3] [ref=f3e213]
+          - generic [ref=f3e214]: ">_"
+          - paragraph [ref=f3e215]: I use the best tools available to work faster, explore more options, and stay focused on the decisions that matter.
+        - article [ref=f3e216]:
+          - heading "AUTOMATE THE REPEATABLE" [level=3] [ref=f3e217]
+          - generic [ref=f3e218]: ">_"
+          - paragraph [ref=f3e219]: I keep repetition out of the way by automating scripts, shortcuts, templates, and reusable components.
+        - article [ref=f3e220]:
+          - heading "BUILD TO LEARN" [level=3] [ref=f3e221]
+          - generic [ref=f3e222]: ">_"
+          - paragraph [ref=f3e223]: I learn fastest by poking at something, seeing what breaks, and making the next version better.
+        - article [ref=f3e224]:
+          - heading "FEEDBACK LOOPS" [level=3] [ref=f3e225]
+          - generic [ref=f3e226]: ">_"
+          - paragraph [ref=f3e227]: I build, test, inspect, and refine continuously.
+      - generic [ref=f3e228]:
+        - generic [ref=f3e229]:
+          - generic [ref=f3e230]: "01"
+          - heading "EXPLORE" [level=3] [ref=f3e231]
+          - paragraph [ref=f3e232]: ">_ FRAME THE PROBLEM / GATHER CONTEXT / COMPARE APPROACHES"
+        - generic [ref=f3e233]:
+          - generic [ref=f3e234]: "02"
+          - heading "EXECUTE" [level=3] [ref=f3e235]
+          - paragraph [ref=f3e236]: ">_ PROTOTYPE / TEST / AUTOMATE / DOCUMENT / REFINE"
+    - generic [ref=f3e237]:
+      - generic [ref=f3e246]:
+        - generic [ref=f3e247]: EXIT / WORKFLOW
+        - strong [ref=f3e248]: "02"
+      - generic [ref=f3e250]:
+        - generic [ref=f3e251]: ROUTE
+        - generic [ref=f3e252]: ↘
+      - generic [ref=f3e253]:
+        - generic [ref=f3e254]: NEXT / TECH STACK
+        - strong [ref=f3e255]: "03"
+    - generic [ref=f3e257]:
+      - paragraph [ref=f3e259]: ">_ 03 / TECH STACK"
+      - heading "TOOLS CHANGE. STANDARD DOESN'T." [level=2] [ref=f3e260]
+      - generic [ref=f3e261]:
+        - generic [ref=f3e262]:
+          - generic [ref=f3e263]: "01"
+          - heading "LANGUAGES" [level=3] [ref=f3e264]
+          - paragraph [ref=f3e265]: TypeScript / JavaScript / Python / C++ / SQL / HTML5 / Tailwind CSS / MATLAB
+        - generic [ref=f3e266]:
+          - generic [ref=f3e267]: "02"
+          - heading "FRONTEND & BACKEND" [level=3] [ref=f3e268]
+          - paragraph [ref=f3e269]: React / Next.js / TanStack Query / Node.js / FastAPI / SQLAlchemy / Celery / Alembic
+        - generic [ref=f3e270]:
+          - generic [ref=f3e271]: "03"
+          - heading "AI WORKFLOWS" [level=3] [ref=f3e272]
+          - paragraph [ref=f3e273]: LangGraph / Langchain / DeepSeek / Codex / Claude Code
+        - generic [ref=f3e274]:
+          - generic [ref=f3e275]: "04"
+          - heading "DATA & INFRA" [level=3] [ref=f3e276]
+          - paragraph [ref=f3e277]: PostgreSQL / MongoDB / pgvector / Redis / Docker / AWS
+        - generic [ref=f3e278]:
+          - generic [ref=f3e279]: "05"
+          - heading "QUALITY" [level=3] [ref=f3e280]
+          - paragraph [ref=f3e281]: Git / Github / Sentry / Pytest / Ruff
+    - generic [ref=f3e282]:
+      - generic [ref=f3e291]:
+        - generic [ref=f3e292]: EXIT / TECH STACK
+        - strong [ref=f3e293]: "03"
+      - generic [ref=f3e295]:
+        - generic [ref=f3e296]: ROUTE
+        - generic [ref=f3e297]: ↘
+      - generic [ref=f3e298]:
+        - generic [ref=f3e299]: NEXT / OFFLINE
+        - strong [ref=f3e300]: "04"
+    - region "Hobbies and interests" [ref=f3e301]:
+      - generic [ref=f3e302]:
+        - paragraph [ref=f3e304]: ">_ 04 / OFFLINE"
+        - heading "BEHIND THE SCENES." [level=2] [ref=f3e305]
+        - generic [ref=f3e306]:
+          - article [ref=f3e307]:
+            - generic [ref=f3e308]: "01"
+            - heading "SPORTS & FITNESS" [level=3] [ref=f3e309]
+            - paragraph [ref=f3e310]: BADMINTON, VOLLEYBALL, SNOWBOARDING, BENCH PRs, AND THE OCCASIONAL MARATHON.
+          - article [ref=f3e311]:
+            - generic [ref=f3e312]: "02"
+            - heading "TRAVEL & CULTURE" [level=3] [ref=f3e313]
+            - paragraph [ref=f3e314]: LOCAL SPECIALTY FOODS, DISTINCTIVE ARCHITECTURE, DIFFERENT LANDSCAPES, AND THE LIFESTYLES THAT MAKE EACH PLACE UNIQUE.
+          - article [ref=f3e315]:
+            - generic [ref=f3e316]: "03"
+            - heading "FAMILY & RELIGION" [level=3] [ref=f3e317]
+            - paragraph [ref=f3e318]: CHRISTIANITY, THE BIBLE, FAMILY DINNER, FAMILY VACATIONS, AND MOST IMPORTANTLY, HOME-LIFE
+          - article [ref=f3e319]:
+            - generic [ref=f3e320]: "04"
+            - heading "MUSIC & MEDIA" [level=3] [ref=f3e321]
+            - paragraph [ref=f3e322]: PLAYLISTS, FILMS, GAMES, PODCASTS, AND THE STORIES THAT KEEP CURIOSITY MOVING.
+        - generic [ref=f3e323]:
+          - generic [ref=f3e324]:
+            - generic [ref=f3e325]: X
+            - paragraph [ref=f3e326]: FIELD NOTES / OFF THE CLOCK
+          - generic [ref=f3e327]:
+            - 'figure "01: Toronto from a canoe Previous photo in slot 01 01 / 03 Next photo in slot 01" [ref=f3e334]':
+              - generic [ref=f3e335]:
+                - img "Toronto skyline viewed from a canoe on the water" [ref=f3e337]
+                - generic [ref=f3e338]: "01"
+              - generic [ref=f3e339]:
+                - generic [ref=f3e340]:
+                  - generic [ref=f3e341]: "01:"
+                  - paragraph [ref=f3e342]: Toronto from a canoe
+                - generic [ref=f3e343]:
+                  - button "Previous photo in slot 01" [ref=f3e344] [cursor=pointer]
+                  - generic [ref=f3e347]: 01 / 03
+                  - button "Next photo in slot 01" [ref=f3e348] [cursor=pointer]
+            - 'figure "02: Caption placeholder Previous photo in slot 02 01 / 18 Next photo in slot 02" [ref=f3e351]':
+              - generic [ref=f3e352]:
+                - img "Travel photo 01" [ref=f3e354]
+                - generic [ref=f3e355]: "02"
+              - generic [ref=f3e356]:
+                - generic [ref=f3e357]:
+                  - generic [ref=f3e358]: "02:"
+                  - paragraph [ref=f3e359]: Caption placeholder
+                - generic [ref=f3e360]:
+                  - button "Previous photo in slot 02" [ref=f3e361] [cursor=pointer]
+                  - generic [ref=f3e364]: 01 / 18
+                  - button "Next photo in slot 02" [ref=f3e365] [cursor=pointer]
+            - 'figure "03: Follow the pattern through the noise." [ref=f3e368]':
+              - generic [ref=f3e369]:
+                - img "Stylized maze and puzzle postcard placeholder" [ref=f3e371]
+                - generic [ref=f3e372]: "03"
+              - generic [ref=f3e374]:
+                - generic [ref=f3e375]: "03:"
+                - paragraph [ref=f3e376]: Follow the pattern through the noise.
+            - 'figure "04: Bring a wider view home." [ref=f3e377]':
+              - generic [ref=f3e378]:
+                - img "Stylized compass and topographic map placeholder" [ref=f3e380]
+                - generic [ref=f3e381]: "04"
+                - generic [ref=f3e382]: X
+              - generic [ref=f3e384]:
+                - generic [ref=f3e385]: "04:"
+                - paragraph [ref=f3e386]: Bring a wider view home.
+  - contentinfo [ref=f3e387]:
+    - strong [ref=f3e388]: "> LET'S TALK"
+    - navigation "Contact links" [ref=f3e389]:
+      - link "LINKEDIN" [ref=f3e390] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/andrew-liu-13099336a
+      - link "GITHUB" [ref=f3e396] [cursor=pointer]:
+        - /url: https://github.com/Andewdoo
+      - link "EMAIL" [ref=f3e401] [cursor=pointer]:
+        - /url: mailto:ahanliu0311@gmail.com
+      - link "RESUME" [ref=f3e406] [cursor=pointer]:
+        - /url: /Andrew-Liu-Resume.pdf
+    - generic [ref=f3e411]: "RESPONSE: 0–24H"
