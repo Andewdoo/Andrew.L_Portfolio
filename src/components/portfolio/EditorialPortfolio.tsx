@@ -8,15 +8,12 @@ import { useEffect, useState } from "react";
 import styles from "./EditorialPortfolio.module.css";
 
 const capabilities = [
-  "AI / ML",
-  "Full-Stack",
-  "Automation",
-  "System Design",
-  "Embedded Systems",
+  "AI/ML",
+  "Full Stack",
   "Cloud & DevOps",
-  "Data Engineering",
-  "Security",
 ];
+
+const capabilityLoop = Array.from({ length: 3 }, () => capabilities).flat();
 
 const coordinates = Array.from({ length: 14 }, (_, index) => String(index + 1).padStart(2, "0"));
 
@@ -144,53 +141,63 @@ const offlineMomentsGallery: readonly TrailMedia[] = [
 ];
 
 const offlineTravelGallery: readonly TrailMedia[] = [
-  { alt: "Jet ski cutting across turquoise water in Mexico", caption: "Caption placeholder", group: "Mexico", src: "/images/offline-02-19.webp" },
-  { alt: "Coastal golf course overlooking the sea in Mexico", caption: "Caption placeholder", group: "Mexico", src: "/images/offline-02-17.webp" },
-  { alt: "Pastel clouds over the ocean at sunset in Mexico", caption: "Mexico", group: "Mexico", src: "/images/offline-02-26.webp" },
-  { alt: "White sand beach with a striped lighthouse in Mexico", caption: "Mexico", group: "Mexico", src: "/images/offline-02-27.webp" },
-  { alt: "Turquoise sea and a pier along the Mexican coastline", caption: "Mexico", group: "Mexico", src: "/images/offline-02-28.webp" },
-  { alt: "Night clouds and distant shoreline lights over the sea in Mexico", caption: "Mexico", group: "Mexico", src: "/images/offline-02-29.webp" },
-  { alt: "Panda display photographed during a trip to China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-01.webp" },
-  { alt: "Classroom chalkboard in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-02.webp" },
-  { alt: "Bright pedestrian street in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-07.webp" },
-  { alt: "Andrew overlooking a forested canyon in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-10.webp" },
-  { alt: "Hillside neighborhood surrounded by trees in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-11.webp" },
-  { alt: "Mirror selfie inside a dramatic bookstore in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-12.webp" },
-  { alt: "Chongqing skyline glowing at night", caption: "Caption placeholder", group: "China", src: "/images/offline-02-13.webp" },
-  { alt: "Mountain river landscape in China", caption: "Caption placeholder", group: "China", src: "/images/offline-02-14.webp" },
-  { alt: "Narrow historic street in Portugal", caption: "Caption placeholder", group: "Portugal", src: "/images/offline-02-03.webp" },
-  { alt: "Coastal cliffs in Portugal", caption: "Caption placeholder", group: "Portugal", src: "/images/offline-02-05.webp" },
-  { alt: "Rocky hilltop panorama in Portugal", caption: "Caption placeholder", group: "Portugal", src: "/images/offline-02-06.webp" },
-  { alt: "Andrew standing beside the ocean in Portugal", caption: "Caption placeholder", group: "Portugal", src: "/images/offline-02-09.webp" },
-  { alt: "Stone castle overlooking a green hillside in Portugal", caption: "Portugal", group: "Portugal", src: "/images/offline-02-22.webp" },
-  { alt: "Rocky sea arch on the Portuguese coast", caption: "Portugal", group: "Portugal", src: "/images/offline-02-23.webp" },
-  { alt: "Cobblestone street lined with historic buildings in Portugal", caption: "Portugal", group: "Portugal", src: "/images/offline-02-24.webp" },
-  { alt: "Ocean view with a sailboat from the Portuguese coast", caption: "Portugal", group: "Portugal", src: "/images/offline-02-25.webp" },
-  { alt: "Rocky Mountain ridge above a forested road in Alberta", caption: "Alberta", group: "Alberta", src: "/images/offline-02-30.webp" },
-  { alt: "Family photo at a glacier lake in Alberta", caption: "Alberta", group: "Alberta", src: "/images/offline-02-31.webp" },
-  { alt: "Highway through the Rocky Mountains under a blue sky in Alberta", caption: "Alberta", group: "Alberta", src: "/images/offline-02-32.webp" },
-  { alt: "Family photo outside a mountain resort in Alberta", caption: "Alberta", group: "Alberta", src: "/images/offline-02-33.webp" },
-  { alt: "Toronto skyline viewed across the water with geese in the foreground", caption: "Caption placeholder", group: "Toronto", src: "/images/offline-02-15.webp" },
-  { alt: "Seafood spread on a dining table", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-04.webp" },
-  { alt: "Candied fruit skewers", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-08.webp" },
-  { alt: "Suitcase packed with snacks", caption: "Caption placeholder", group: "Food", src: "/images/offline-02-16.webp" },
-  { alt: "Crispy whole fish served upright in sweet sauce", caption: "Food", group: "Food", src: "/images/offline-02-34.webp" },
-  { alt: "Chinese family-style dinner spread with shared dishes", caption: "Food", group: "Food", src: "/images/offline-02-35.webp" },
+  { alt: "Jet ski cutting across turquoise water in Mexico", caption: "Jetskiing in Cancun, Mexico.", group: "Mexico", src: "/images/offline-02-19.webp" },
+  { alt: "Coastal golf course overlooking the sea in Mexico", caption: "Resort in Cancun,Mexico.", group: "Mexico", src: "/images/offline-02-17.webp" },
+  { alt: "Pastel clouds over the ocean at sunset in Mexico", caption: "4 clouds that resemble my family.", group: "Carribean Cruise", src: "/images/offline-02-26.webp" },
+  { alt: "White sand beach with a striped lighthouse in Mexico", caption: "White sand beach in the Bahamas.", group: "Carribean Cruise", src: "/images/offline-02-27.webp" },
+  { alt: "Turquoise sea and a pier along the Mexican coastline", caption: "Turqoise Mexican coastline.", group: "Carribean Cruise", src: "/images/offline-02-28.webp" },
+  { alt: "Night clouds and distant shoreline lights over the sea in Mexico", caption: "Thunderstorm over the horizon.", group: "Carribean Cruise", src: "/images/offline-02-29.webp" },
+  { alt: "Panda display photographed during a trip to China", caption: "Chengdu Panda Base.", group: "China", src: "/images/offline-02-01.webp" },
+  { alt: "Cute sign in Chongqing, China encouraging children to study hard", caption: '"Children need to study hard!" - Cute sign in Chongqing, China', group: "China", src: "/images/offline-02-02.webp" },
+  { alt: "Bright pedestrian street in China", caption: "Shanghai pedestrian street at night.", group: "China", src: "/images/offline-02-07.webp" },
+  { alt: "Andrew overlooking a forested canyon in China", caption: "3 Gorges, Wulong Karst National Park.", group: "China", src: "/images/offline-02-10.webp" },
+  { alt: "Hillside neighborhood surrounded by trees in China", caption: "Popular hangout spot in Chongqing, China.", group: "China", src: "/images/offline-02-11.webp" },
+  { alt: "Mirror selfie inside a dramatic bookstore in China", caption: "Cool lego set in a cool bookstore.", group: "China", src: "/images/offline-02-12.webp" },
+  { alt: "Chongqing skyline glowing at night", caption: "View of the cyberpunk city(Chongqing) at night.", group: "China", src: "/images/offline-02-13.webp" },
+  { alt: "Mountain river landscape in China", caption: "The river the allowed Chengdu, China to prosper.", group: "China", src: "/images/offline-02-14.webp" },
+  { alt: "Narrow historic street in Portugal", caption: "Narrow alley in Lisbon, Portugal.", group: "Portugal", src: "/images/offline-02-03.webp" },
+  { alt: "Coastal cliffs in Portugal", caption: "Coastal cliffs in Portugal.", group: "Portugal", src: "/images/offline-02-05.webp" },
+  { alt: "Rocky hilltop panorama in Portugal", caption: "Overlooking the Portuguese landscape.", group: "Portugal", src: "/images/offline-02-06.webp" },
+  { alt: "Andrew standing beside the ocean in Portugal", caption: "Standing by the ocean.", group: "Portugal", src: "/images/offline-02-09.webp" },
+  { alt: "Stone castle overlooking a green hillside in Portugal", caption: "Castle on the hill.", group: "Portugal", src: "/images/offline-02-22.webp" },
+  { alt: "Rocky sea arch on the Portuguese coast", caption: "Devil's hole.", group: "Portugal", src: "/images/offline-02-23.webp" },
+  { alt: "Cobblestone street lined with historic buildings in Portugal", caption: "Beautiful double alley in Lisbon, Portugal.", group: "Portugal", src: "/images/offline-02-24.webp" },
+  { alt: "Ocean view with a sailboat from the Portuguese coast", caption: "Sangria by the ocean.", group: "Portugal", src: "/images/offline-02-25.webp" },
+  { alt: "Rocky Mountain ridge above a forested road in Alberta", caption: "National park in Banff, Alberta.", group: "Alberta", src: "/images/offline-02-30.webp" },
+  { alt: "Family photo at a glacier lake in Alberta", caption: "Photo with my dad!", group: "Alberta", src: "/images/offline-02-31.webp" },
+  { alt: "Highway through the Rocky Mountains under a blue sky in Alberta", caption: "Driving through the Rockies.", group: "Alberta", src: "/images/offline-02-32.webp" },
+  { alt: "Family photo outside a mountain resort in Alberta", caption: "Quick snack time.", group: "Alberta", src: "/images/offline-02-33.webp" },
+  { alt: "Toronto skyline viewed across the water with geese in the foreground", caption: "Can't have Toronto without the geese.", group: "Toronto", src: "/images/offline-02-15.webp" },
+  { alt: "Seafood spread on a dining table", caption: "All you can eat in Lisbon, Portugal.", group: "Food", src: "/images/offline-02-04.webp" },
+  { alt: "Candied fruit skewers", caption: "Tang-Hulu, traditional Chinese candy snack.", group: "Food", src: "/images/offline-02-08.webp" },
+  { alt: "Suitcase packed with snacks", caption: "Can't go home empty handed!", group: "Food", src: "/images/offline-02-16.webp" },
+  { alt: "Crispy whole fish served upright in sweet sauce", caption: "Popular dish in many Chinese Provinces.", group: "Food", src: "/images/offline-02-34.webp" },
+  { alt: "Chinese family-style dinner spread with shared dishes", caption: "A traditional Chinese family dinner.", group: "Food", src: "/images/offline-02-35.webp" },
 ];
 
 const offlineFamilyGallery: readonly TrailMedia[] = [
   { alt: "Cristo Rei monument rising against a blue sky in Portugal", caption: "Cristo Rei, Portugal.", group: "Faith", src: "/images/offline-03-03.webp" },
-  { alt: "Five friends posing together at a farewell celebration", caption: "Friends at a farewell celebration.", group: "Friends", src: "/images/offline-03-04.webp" },
-  { alt: "Andrew and a companion posing by the Shanghai skyline at night", caption: "Shanghai waterfront, together.", group: "Family", src: "/images/offline-03-05.webp" },
-  { alt: "Family taking a mirror photo on a sculptural staircase", caption: "A family stop between adventures.", group: "Family", src: "/images/offline-03-06.webp" },
+  { alt: "Five friends posing together at a farewell celebration", caption: "Just got baptised!", group: "FAITH", src: "/images/offline-03-04.webp" },
+  { alt: "Andrew and a companion posing by the Shanghai skyline at night", caption: "Sis and I on the Bund.", group: "Family", src: "/images/offline-03-05.webp" },
+  { alt: "Family taking a mirror photo on a sculptural staircase", caption: "No.3 Warehouse Restaurant.", group: "Family", src: "/images/offline-03-06.webp" },
   { alt: "Four friends posing by the Shanghai skyline at night", caption: "A night out on the Bund.", group: "Friends", src: "/images/offline-03-07.webp" },
   { alt: "Family portrait by the Shanghai skyline at night", caption: "Family portrait on the Bund.", group: "Family", src: "/images/offline-03-08.webp" },
-  { alt: "Family taking a selfie together on a sunny tropical trip", caption: "Family trip in the sunshine.", group: "Family", src: "/images/offline-03-09.webp" },
+  { alt: "Family taking a selfie together on a sunny tropical trip", caption: "Family picture in Cancun, Mexico.", group: "Family", src: "/images/offline-03-09.webp" },
   { alt: "Printed childhood photo of a parent and two children beside a snowman", caption: "A childhood winter memory.", group: "Family", src: "/images/offline-03-10.webp" },
-  { alt: "Andrew and his father standing beside a fast-flowing mountain river", caption: "By the river in Alberta.", group: "Family", src: "/images/offline-03-11.webp" },
-  { alt: "Andrew and a parent overlooking Lisbon and the Tagus River", caption: "Overlooking Lisbon and the Tagus.", group: "Family", src: "/images/offline-03-12.webp" },
-  { alt: "Family wearing matching bright green shirts during a summer trip", caption: "Matching shirts, family trip.", group: "Family", src: "/images/offline-03-13.webp" },
+  { alt: "Andrew and his father standing beside a fast-flowing mountain river", caption: "By the river in Banff, Alberta.", group: "Family", src: "/images/offline-03-11.webp" },
+  { alt: "Andrew and a parent overlooking Lisbon and the Tagus River", caption: "Posing with my mom overlooking the Tagus River.", group: "Family", src: "/images/offline-03-12.webp" },
+  { alt: "Family wearing matching bright green shirts during a summer trip", caption: "Matching shirts!", group: "Family", src: "/images/offline-03-13.webp" },
   { alt: "Family gathered around a table at a beach restaurant", caption: "Together by the beach.", group: "Family", src: "/images/offline-03-14.webp" },
+];
+
+const offlineMediaGallery: readonly TrailMedia[] = [
+  { alt: "Harvey Specter and Mike Ross from the television series Suits against the New York skyline", caption: "Suits", group: "Sitcom", src: "/images/offline-04-01.webp" },
+  { alt: "The six main cast members of Friends gathered together at Central Perk", caption: "Friends", group: "Sitcom", src: "/images/offline-04-02.webp" },
+  { alt: "Ichigo Kurosaki in the official Bleach Thousand-Year Blood War key art", caption: "Bleach", group: "Anime", src: "/images/offline-04-03.webp" },
+  { alt: "Frieren, Fern, and Stark in a flower-filled landscape from Frieren Beyond Journey's End", caption: "Frieren: Beyond Journey's End", group: "Anime", src: "/images/offline-04-04.webp" },
+  { alt: "NF confronting his shattered reflection in the 2025 FEAR music video", caption: "NF — FEAR", group: "Music", src: "/images/offline-04-05.webp" },
+  { alt: "Coldplay band members posing together beneath a blue sky and rainbow light flare", caption: "Coldplay", group: "Music", src: "/images/offline-04-06.webp" },
+  { alt: "Black-and-white studio portrait of music artist Dominic Fike", caption: "Dominic Fike", group: "Music", src: "/images/offline-04-07.webp" },
 ];
 
 const educationTrail: readonly TrailItem[] = [
@@ -237,10 +244,9 @@ const offlineTrail: readonly TrailItem[] = [
     label: "03:",
   },
   {
-    alt: "Stylized compass and topographic map placeholder",
-    caption: "Bring a wider view home.",
+    ...offlineMediaGallery[0],
+    gallery: offlineMediaGallery,
     label: "04:",
-    src: "/images/trail-offline-wander.svg",
   },
 ];
 
@@ -523,7 +529,7 @@ function EducationSkillsSequence() {
           </div>
 
           <div className={styles.educationIntro}>
-            <h2>THEORY MEETS<br />THE MACHINE.</h2>
+            <h2>I LEARN, I APPLY.</h2>
             <div className={styles.degreeBlock}>
               <div>
                 <h3>MCMASTER UNIVERSITY</h3>
@@ -801,13 +807,19 @@ export function EditorialPortfolio() {
           </div>
         </section>
 
-        <div className={styles.capabilities} aria-label="Capabilities">
-          {capabilities.map((capability) => (
-            <span key={capability}>
-              <b>+</b>
-              {capability}
-            </span>
-          ))}
+        <div className={styles.capabilities} aria-label="Capabilities: AI/ML, Full Stack, and Cloud & DevOps">
+          <div className={styles.capabilitiesTrack} aria-hidden="true">
+            {[0, 1].map((copy) => (
+              <div className={styles.capabilitiesSet} key={copy}>
+                {capabilityLoop.map((capability, index) => (
+                  <span key={`${copy}-${index}-${capability}`}>
+                    <b>+</b>
+                    {capability}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
 
         <section className={styles.aboutStack}>

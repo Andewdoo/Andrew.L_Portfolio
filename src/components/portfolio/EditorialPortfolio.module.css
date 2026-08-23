@@ -351,14 +351,10 @@
 }
 
 .capabilities {
-  display: flex;
+  position: relative;
   min-height: 40px;
-  align-items: center;
-  justify-content: space-around;
-  gap: 18px;
   overflow: hidden;
   border-bottom: 1px solid var(--ink);
-  padding-inline: 22px;
   background: var(--acid);
   color: var(--ink);
   white-space: nowrap;
@@ -367,10 +363,44 @@
   text-transform: uppercase;
 }
 
+.capabilitiesTrack {
+  display: flex;
+  width: max-content;
+  min-height: 40px;
+  animation: capabilitiesRevolve 22s linear infinite;
+  transform: translate3d(-50%, 0, 0);
+  will-change: transform;
+}
+
+.capabilitiesSet {
+  display: flex;
+  flex: none;
+  align-items: center;
+}
+
 .capabilities span {
   display: flex;
+  min-width: clamp(170px, 16vw, 300px);
   align-items: center;
-  gap: 18px;
+  justify-content: center;
+  gap: 12px;
+  padding-inline: 18px;
+}
+
+@keyframes capabilitiesRevolve {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (pointer: fine) and (hover: hover) {
+  .capabilities:hover .capabilitiesTrack {
+    animation-play-state: paused;
+  }
 }
 
 .projectCard {
@@ -1928,22 +1958,10 @@
 
   .capabilities {
     min-height: 44px;
-    justify-content: space-between;
-    padding-inline: 22px;
   }
 
-  .capabilities span {
-    display: none;
-  }
-
-  .capabilities::before {
-    content: "> CAPABILITIES";
-    font-size: 11px;
-  }
-
-  .capabilities::after {
-    content: "43.8561° N, 79.3370° W";
-    font-size: 10px;
+  .capabilitiesTrack {
+    min-height: 44px;
   }
 
   .projectRow {
@@ -2488,6 +2506,12 @@
   .transitionRouteLine,
   .transitionNode {
     animation: none;
+  }
+
+  .capabilitiesTrack {
+    animation: none;
+    transform: none;
+    will-change: auto;
   }
 }
 
