@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#f1ebdd"/>
-  <path d="M0 430 800 230v370H0z" fill="#ff5c35"/>
-  <g fill="none" stroke="#0a0a0a" stroke-width="9"><rect x="112" y="120" width="220" height="285" transform="rotate(-6 222 262)"/><rect x="455" y="92" width="230" height="294" transform="rotate(5 570 239)"/><path d="m155 295 50-52 43 40 49-90M490 265h40l22-66 40 132 28-66h40"/></g>
-  <g fill="#c7ff2f" stroke="#0a0a0a" stroke-width="8"><circle cx="185" cy="180" r="27"/><rect x="500" y="135" width="126" height="46"/></g>
-  <g fill="#0a0a0a" font-family="monospace" font-weight="700"><text x="54" y="65" font-size="28">BENCH TEST / PLACEHOLDER</text><text x="591" y="550" font-size="24">04&gt;_</text></g>
-</svg>

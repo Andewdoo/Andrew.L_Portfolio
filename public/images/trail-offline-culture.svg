@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#f1ebdd"/>
-  <g stroke="#0a0a0a" stroke-width="9"><path d="M80 520V170h230v350M310 520V110h220v410M530 520V215h190v305" fill="#ff5c35"/><path d="M80 235h230M310 180h220M530 285h190" fill="none"/></g>
-  <g fill="#c7ff2f" stroke="#0a0a0a" stroke-width="7"><rect x="126" y="280" width="72" height="95"/><rect x="385" y="226" width="70" height="72"/><circle cx="626" cy="364" r="42"/></g>
-  <path d="M90 126h130l-22-38M310 72h138l-19-35M536 168h119l-25-39" fill="none" stroke="#0a0a0a" stroke-width="7"/>
-  <g fill="#0a0a0a" font-family="monospace" font-weight="700"><text x="48" y="65" font-size="28">STREET NOTES / PLACEHOLDER</text><text x="630" y="566" font-size="24">02&gt;_</text></g>
-</svg>

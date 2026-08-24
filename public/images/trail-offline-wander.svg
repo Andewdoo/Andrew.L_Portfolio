@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#0a0a0a"/>
-  <g fill="none" stroke="#f1ebdd" stroke-width="6" opacity=".75"><path d="M-30 180C160 40 250 245 390 135s261-70 430 45M-50 260C130 125 260 330 410 215s252-59 430 32M-50 355C130 230 260 420 420 315s270-45 420 30M-30 445C140 340 260 515 440 415s270-30 390 40"/></g>
-  <circle cx="400" cy="300" r="145" fill="#f1ebdd" stroke="#c7ff2f" stroke-width="14"/><circle cx="400" cy="300" r="92" fill="none" stroke="#0a0a0a" stroke-width="5"/>
-  <path d="m400 178 46 126-46 118-46-118z" fill="#ff5c35" stroke="#0a0a0a" stroke-width="8"/><circle cx="400" cy="300" r="18" fill="#c7ff2f" stroke="#0a0a0a" stroke-width="7"/>
-  <g fill="#f1ebdd" font-family="monospace" font-weight="700"><text x="48" y="65" font-size="28">WIDER VIEW / PLACEHOLDER</text><text x="632" y="555" font-size="24">04&gt;_</text></g>
-</svg>

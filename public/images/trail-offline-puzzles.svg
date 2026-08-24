@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#c7ff2f"/>
-  <path d="M80 110h640v400H80zM150 110v110h110v-55h120v120h-70v90H185v70h145v65M720 210H585v90H470v-80h-90M720 405H590v105M470 300v135h120" fill="none" stroke="#0a0a0a" stroke-width="22" stroke-linejoin="round"/>
-  <circle cx="126" cy="165" r="24" fill="#ff5c35" stroke="#0a0a0a" stroke-width="8"/><path d="m646 438 40 40m0-40-40 40" stroke="#ff5c35" stroke-width="15"/>
-  <text x="46" y="62" font-family="monospace" font-size="28" font-weight="700">FIND THE PATTERN / PLACEHOLDER</text><text x="629" y="563" font-family="monospace" font-size="24" font-weight="700">03&gt;_</text>
-</svg>
