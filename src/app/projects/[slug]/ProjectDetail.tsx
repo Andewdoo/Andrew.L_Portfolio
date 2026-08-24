@@ -3,10 +3,15 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+import { ElaraCaseStudy } from "@/components/sections/ElaraCaseStudy";
 import { ProjectSummary } from "@/components/sections/ProjectSummary";
 import type { Project } from "@/lib/projects";
 
 export function ProjectDetail({ project }: Readonly<{ project: Project }>) {
+  if (project.slug === "elara-ai") {
+    return <ElaraCaseStudy project={project} />;
+  }
+
   return (
     <article className="min-h-screen bg-black px-[clamp(1rem,3.8vw,5rem)] pb-[clamp(5rem,10vw,7.5rem)] pt-6">
       <div className="sticky top-6 z-40 flex w-full">

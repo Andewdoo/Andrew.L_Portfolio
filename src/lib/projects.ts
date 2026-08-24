@@ -199,7 +199,7 @@ export const projects: Project[] = [
         items: ["Sentry", "Pytest", "Ruff", "MyPy", "Git", "GitHub"],
       },
     ],
-    url: "elara.ai",
+    url: "elara-ai-web.vercel.app",
     problem:
       "Claims, quotations, and source documents are difficult to evaluate when supporting evidence is scattered, time-sensitive, and hard to trace. Elara brings evidence retrieval, analysis, and source provenance into a single auditable workflow.",
     challengeHighlights: ["retrieved evidence and timestamped source provenance", "asynchronous verification stages and durable report state", "citation checks that expose insufficient evidence instead of overstating certainty"],
@@ -295,9 +295,9 @@ export const projects: Project[] = [
     takeaway: "Elara.ai demonstrates how to turn a multi-stage AI workflow into a transparent product: evidence stays traceable, uncertainty is visible, and every report is designed to be reviewed rather than merely trusted.",
     links: {
       github: "https://github.com/Andewdoo/Elara.ai",
-      live: "https://github.com/Andewdoo/Elara.ai",
+      live: "https://elara-ai-web.vercel.app/",
     },
-    linkLabel: "Source code",
+    linkLabel: "Live demo",
     visual: {
       accent: "from-sky-200/80",
       secondary: "to-indigo-500/30",
