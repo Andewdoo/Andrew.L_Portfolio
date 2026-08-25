@@ -162,7 +162,7 @@ export const projects: Project[] = [
     title: "Elara.ai",
     status: "featured",
     category: "AI Evidence Verification Platform",
-    description: "An evidence-management platform that evaluates claims against timestamped sources and produces citation-audited reports with reproducible provenance.",
+    description: "An evidence-management platform that evaluates claims against available web  sources and produces citation-audited reports with reproducible provenance.",
     hook: "An agentic RAG pipeline that evaluates a specific claim against timestamped evidence, then produces a transparent, citation-backed assessment.",
     intro: [
       "I built Elara because misinformation spreads quickly while careful verification takes time, context, and care. I wanted a portfolio project that tackled a problem I genuinely care about, not a copied or easy build.",

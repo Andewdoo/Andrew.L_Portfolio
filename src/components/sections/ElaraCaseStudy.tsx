@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -101,6 +102,51 @@ const limitations = [
   "The owner-controlled demo uses one EC2 host with manual recovery, not high availability or enterprise on-call.",
 ];
 
+const deepSeekControls = [
+  "Process two batches concurrently to reduce overall latency.",
+  "Limit each batch to two schema attempts and discard partial stage results if any required batch fails.",
+  "Handle truncated DeepSeek responses with one bounded retry and a larger token allowance.",
+];
+
+const engineeringFixes = [
+  {
+    title: "Transport tests failed too early",
+    problem: "Redis, Celery, and S3 security tests stopped at release-revision validation.",
+    fix: "Built a valid production baseline, then varied only the transport under test.",
+    proof: "Intended validators reached; release revision remains independently covered.",
+  },
+  {
+    title: "Migrations depended on CWD",
+    problem: "The schema gate could not find migrations when launched from the repository root.",
+    fix: "Resolved Alembic paths from apps/api/alembic.ini instead of process CWD.",
+    proof: "Single-head and upgrade checks pass from root and API contexts.",
+  },
+  {
+    title: "Legal hold returned the wrong error",
+    problem: "A held report failed as storage unavailable instead of an explicit conflict.",
+    fix: "Normalized UTC-aware times and moved the hold check before mutation or cleanup.",
+    proof: "Active hold returns 409; records and export objects remain untouched.",
+  },
+  {
+    title: "Legacy visibility looked permissive",
+    problem: "A stale test treated visibility=public as cross-user authorization.",
+    fix: "Kept access owner- or recipient-specific with scope, expiry, and revocation checks.",
+    proof: "Unshared, expired, revoked, or wrong-scope access returns non-disclosing 404.",
+  },
+  {
+    title: "Local storage assumptions leaked",
+    problem: "MinIO defaults did not match private AWS S3 endpoint and addressing behavior.",
+    fix: "Separated endpoint, TLS, internal discovery, and path-style configuration.",
+    proof: "Regional AWS S3 uses secure transport with forced path style disabled.",
+  },
+  {
+    title: "Retryable fetch escaped retry policy",
+    problem: "A source timeout crossed the generic worker boundary and stopped the run.",
+    fix: "Mapped retryable FetchError values to the typed fetch-failure boundary.",
+    proof: "Focused retrieval and task regression suite passed: 37 tests.",
+  },
+];
+
 type ProjectImageProps = {
   alt: string;
   caption: string;
@@ -129,7 +175,7 @@ function ProjectImage({ alt, caption, className, priority, src }: Readonly<Proje
   );
 }
 
-function SectionHeading({ eyebrow, title, copy }: Readonly<{ eyebrow: string; title: string; copy?: string }>) {
+function SectionHeading({ eyebrow, title, copy }: Readonly<{ eyebrow: string; title: ReactNode; copy?: string }>) {
   return (
     <header className={styles.sectionHeading}>
       <p className={styles.eyebrow}>{eyebrow}</p>
@@ -176,7 +222,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
                 Agentic hybrid RAG
               </p>
               <h1 id="elara-title">Elara.ai</h1>
-              <p className={styles.heroStatement}>Evidence should survive the answer.</p>
+              <p className={styles.heroStatement}>Where every claim has a receipt.</p>
               <p className={styles.heroDescription}>{project.description}</p>
               <div className={styles.heroActions}>
                 <a className={styles.primaryButton} href={project.links.live} target="_blank" rel="noreferrer">
@@ -233,16 +279,17 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={styles.manifesto} id="problem">
           <div className={styles.manifestoLead}>
             <p className={styles.darkEyebrow}>01 / Product boundary</p>
-            <h2>Fluency is not evidence.</h2>
+            <h2>Check the facts, not just the phrasing</h2>
             <p>
-              A polished answer can conceal weak, missing, circular, or context-free evidence. Elara evaluates one submitted item against evidence available at a recorded time—and preserves the path from conclusion back to exact passage.
+              A polished answer can conceal weak, missing, circular, or context-free evidence. Elara evaluates a submitted claim against evidence available at a specific point in time, then preserves the path from its conclusion back to the exact supporting passages.
+
             </p>
           </div>
 
           <div className={styles.boundaryGrid}>
             <div>
               <span>Not a lie detector</span>
-              <p>It evaluates a bounded claim or document, not a person’s permanent honesty.</p>
+              <p>It evaluates a bounded claim or document, not an author's honesty.</p>
             </div>
             <div>
               <span>No credibility score</span>
@@ -258,7 +305,13 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={styles.lightSection} id="workflow">
           <SectionHeading
             eyebrow="02 / Controlled workflow"
-            title="Language understanding. Deterministic authority."
+            title={
+              <>
+                AI interprets the evidence.
+                <br />
+                Rules decide what gets reported.
+              </>
+            }
             copy="The model helps interpret evidence; durable artifacts, typed state, exact coverage, reproducible arithmetic, and citation audit decide what can be published."
           />
 
@@ -278,7 +331,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           <ProjectImage
             src="/images/elara/elara-architecture.webp"
             alt="Elara system architecture showing the browser, FastAPI boundary, verification worker, external inputs, and durable data plane"
-            caption="System design — FastAPI is privileged, PostgreSQL is durable truth, Redis is transient, and the browser only presents the final result."
+            caption="System design: FastAPI is privileged, PostgreSQL is durable truth, Redis is transient, and the browser only presents the final result."
           />
         </section>
 
@@ -292,7 +345,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           <ProjectImage
             src="/images/elara/elara-walkthrough.webp"
             alt="A representative transit claim moving through decomposition, retrieval, comparison, calculation, and citation audit beside the Elara report UI"
-            caption="Representative walkthrough — privacy-safe product data traces one claim from decomposition to a citation-audited report."
+            caption="Representative walkthrough: privacy-safe product data traces one claim from decomposition to a citation-audited report."
             className={styles.wideImage}
           />
 
@@ -305,7 +358,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
             <ProjectImage
               src="/images/elara/elara-scoring.webp"
               alt="Elara deterministic scoring view showing supporting weight 66, contradicting weight 34, and a supported-with-limitations label"
-              caption="A worked score outside the model — dependency multipliers discount repeated reporting before evidence contributes."
+              caption="A worked score outside the model: dependency multipliers discount repeated reporting before evidence contributes."
             />
           </div>
         </section>
@@ -314,8 +367,82 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           <SectionHeading
             eyebrow="04 / Engineering outcomes"
             title="Measured boundaries, honest claims."
-            copy="Instrumentation exposed where time and failure really lived. Model-backed classification and citation auditing dominated latency; deterministic scoring took 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run."
+            copy="Instrumentation exposed where time and failure really lived. Model-backed classification and citation auditing dominated latency; while deterministic scoring only took 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run."
           />
+
+          <div className={styles.outcomeStory}>
+            <div className={styles.latencyPanel}>
+              <header>
+                <h3>DeepSeek latency, before and after</h3>
+                <p>The fixed path keeps the same measured work visible while making the result easier to compare.</p>
+              </header>
+
+              <div className={styles.latencyRows}>
+                <article className={styles.latencyRow}>
+                  <div className={styles.latencyLabel}>
+                    <h4>Model-backed evidence classification</h4>
+                    <p>Evidence judgment stage</p>
+                  </div>
+                  <div className={styles.metricState}>
+                    <span>Previous Standard run</span>
+                    <strong>218.9 s</strong>
+                  </div>
+                  <ArrowUpRight className={styles.latencyArrow} aria-hidden="true" />
+                  <div className={`${styles.metricState} ${styles.metricAfter}`}>
+                    <span>After fix</span>
+                    <strong>46.3 s</strong>
+                  </div>
+                </article>
+
+                <article className={styles.latencyRow}>
+                  <div className={styles.latencyLabel}>
+                    <h4>Citation audit</h4>
+                    <p>Sentence-to-passage coverage stage</p>
+                  </div>
+                  <div className={styles.metricState}>
+                    <span>Previous Standard run</span>
+                    <strong>193.1 s</strong>
+                  </div>
+                  <ArrowUpRight className={styles.latencyArrow} aria-hidden="true" />
+                  <div className={`${styles.metricState} ${styles.metricAfter}`}>
+                    <span>After fix</span>
+                    <strong>32.8 s</strong>
+                  </div>
+                </article>
+              </div>
+
+              <p className={styles.deterministicBaseline}>
+                Deterministic baseline: scoring <strong>0.09 s</strong> / numerical audit <strong>0.06 s</strong>
+              </p>
+            </div>
+
+            <div className={styles.deepSeekMethod}>
+              <header>
+                <h3>Smaller requests, bounded recovery.</h3>
+                <p>Split huge DeepSeek requests into small batches.</p>
+              </header>
+
+              <dl className={styles.judgmentLimits}>
+                <div>
+                  <dt>Evidence classification</dt>
+                  <dd>One claim-passage judgment per request.</dd>
+                </div>
+                <div>
+                  <dt>Citation audit</dt>
+                  <dd>Two sentence-passage judgments per request.</dd>
+                </div>
+              </dl>
+
+              <ol className={styles.controlList}>
+                {deepSeekControls.map((control) => (
+                  <li key={control}>
+                    <span aria-hidden="true" />
+                    <p>{control}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
 
           <div className={styles.outcomeHighlights}>
             <article>
@@ -335,7 +462,36 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
             </article>
           </div>
 
-          <div className={styles.imageGrid}>
+          <section className={styles.fixesSection} aria-labelledby="engineering-fixes-title">
+            <header className={styles.fixesHeading}>
+              <h3 id="engineering-fixes-title">Six fixes that strengthened the release path.</h3>
+              <p>Each change is tied to the failure it corrected and the proof that now guards the boundary.</p>
+            </header>
+
+            <div className={styles.fixesLedger}>
+              {engineeringFixes.map((item) => (
+                <article className={styles.engineeringFix} key={item.title}>
+                  <h4>{item.title}</h4>
+                  <dl>
+                    <div>
+                      <dt>Problem</dt>
+                      <dd>{item.problem}</dd>
+                    </div>
+                    <div>
+                      <dt>Fix</dt>
+                      <dd>{item.fix}</dd>
+                    </div>
+                    <div>
+                      <dt>Proof</dt>
+                      <dd>{item.proof}</dd>
+                    </div>
+                  </dl>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <div className={`${styles.imageGrid} ${styles.outcomeImageGrid}`}>
             <ProjectImage
               src="/images/elara/elara-outcomes.webp"
               alt="Elara engineering outcomes with measured model and citation latency, a typed-output failure, and reduced search targets"
