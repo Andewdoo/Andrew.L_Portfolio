@@ -351,7 +351,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={`${styles.gallerySection} ${styles.evidenceSection}`} id="evidence">
           <SectionHeading
             eyebrow="03 / Evidence in the interface"
-            title="Every conclusion keeps its receipts."
+            title="Easy Interface."
             copy="The UI is designed for inspection: atomic claims, supporting and contradicting evidence, exact passages, retrieval timestamps, calculations, and snapshots remain connected."
           />
 
@@ -379,7 +379,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={styles.outcomesSection} id="outcomes">
           <SectionHeading
             eyebrow="04 / Engineering outcomes"
-            title="Measured boundaries, honest claims."
+            title="The Results."
             copy="Instrumentation exposed where time and failure really lived. Model-backed classification and citation auditing dominated latency; while deterministic scoring only took 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run."
           />
 
@@ -468,11 +468,6 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
               <strong>HTTP 200 ≠ success</strong>
               <p>A response can arrive successfully and still fail the typed output contract required for durable completion.</p>
             </article>
-            <article>
-              <span>Validation surface</span>
-              <strong>462 tests</strong>
-              <p>120 API, 238 worker, 97 web, 6 evaluation, and one full-stack acceptance flow.</p>
-            </article>
           </div>
 
           <section className={styles.fixesSection} aria-labelledby="engineering-fixes-title">
@@ -536,34 +531,32 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
             eyebrow="05 / Security + integrity"
             title={
               <>
-                Trust boundaries are
-                <br />
-                product features.
+                Boundaries protect.
               </>
             }
             copy="Evidence retrieval is an adversarial surface. Elara keeps untrusted content outside control logic and makes durable, authorized state the basis of every completed report."
           />
 
-          <div className={styles.securityGrid}>
+          <ol className={styles.securityLedger} aria-label="Security and integrity boundaries">
             {trustBoundaries.map(({ icon: Icon, title, copy }, index) => (
-              <article key={title}>
-                <div>
-                  <Icon aria-hidden="true" />
+              <li key={title}>
+                <div className={styles.securityMarker}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
+                  <Icon aria-hidden="true" />
                 </div>
                 <h3>{title}</h3>
                 <p>{copy}</p>
-              </article>
+              </li>
             ))}
-          </div>
+          </ol>
         </section>
 
         <section className={styles.buildSection} id="build">
           <div className={styles.buildIntro}>
             <p className={styles.eyebrow}>06 / Built end to end</p>
-            <h2>One contributor. The whole path.</h2>
+            <h2>The Stack.</h2>
             <p>
-              I owned product strategy, UX, the design system, application architecture, evidence workflow, retrieval security, tests, deployment, and documentation from first boundary to hosted demonstration.
+              This is the full-stack implementation of the Elara platform, covering all aspects from product strategy, UX, the design system, application architecture, evidence workflow, retrieval security, tests, deployment, and documentation from first boundary to hosted demonstration.
             </p>
           </div>
 
@@ -581,7 +574,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={styles.limitationsSection} id="scope">
           <div>
             <p className={styles.darkEyebrow}>07 / Scope + tradeoffs</p>
-            <h2>Feature-complete does not mean finished forever.</h2>
+            <h2>Completion.</h2>
             <p>
               The hosted experience is owner-validated for a low-traffic personal demo. Its limitations remain visible because clear boundaries are part of trustworthy engineering.
             </p>
@@ -599,7 +592,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={styles.finalCta}>
           <div>
             <p className={styles.darkEyebrow}>Evidence first, by design</p>
-            <h2>See the citation-audited archive.</h2>
+            <h2>See the archive.</h2>
             <p>
               The read-only demo presents 12 completed full-version reports and a working verifier interface without accepting new public requests.
             </p>
