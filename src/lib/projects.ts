@@ -179,12 +179,12 @@ export const projects: Project[] = [
         items: ["React", "Next.js", "Tailwind CSS", "React Hook Form", "Zod", "TanStack Query", "Zustand", "Recharts", "XYFlow"],
       },
       {
-        title: "AI & Verification",
-        items: ["DeepSeek", "Brave Search", "LangGraph", "Deterministic Citation Checks"],
-      },
-      {
         title: "Backend Services",
         items: ["Node.js", "FastAPI", "Celery", "SQLAlchemy", "Alembic", "Firebase Authentication"],
+      },
+      {
+        title: "AI & Verification",
+        items: ["DeepSeek", "Brave Search", "LangGraph", "Deterministic Citation Checks"],
       },
       {
         title: "Data Layer",
@@ -192,7 +192,7 @@ export const projects: Project[] = [
       },
       {
         title: "Cloud & Storage",
-        items: ["Vercel", "AWS EC2", "S3-Compatible Object Storage", "Docker"],
+        items: ["Vercel", "AWS EC2", "AWS S3", "Docker"],
       },
       {
         title: "Quality & Observability",

@@ -445,6 +445,7 @@
 }
 
 .boundaryGrid {
+  align-self: center;
   border-top: 1px solid color-mix(in srgb, var(--elara-paper-bright) 36%, transparent);
 }
 
@@ -508,6 +509,46 @@
   color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
   font-size: clamp(1rem, 1.4vw, 1.16rem);
   line-height: 1.75;
+}
+
+.workflowSection .sectionHeading {
+  max-width: none;
+}
+
+.workflowSection .sectionHeading h2,
+.workflowSection .sectionIntro {
+  grid-column: 1 / -1;
+}
+
+.workflowSection .sectionHeading h2 {
+  display: grid;
+  gap: 0.18em;
+  margin-top: 1rem;
+}
+
+.workflowHeadingLine {
+  display: block;
+}
+
+.workflowSection .sectionIntro {
+  max-width: 70rem;
+}
+
+.evidenceSection .sectionHeading {
+  max-width: none;
+}
+
+.evidenceSection .sectionHeading h2,
+.evidenceSection .sectionIntro {
+  grid-column: 1 / -1;
+}
+
+.evidenceSection .sectionHeading h2 {
+  margin-top: 1rem;
+}
+
+.evidenceSection .sectionIntro {
+  max-width: 70rem;
 }
 
 .workflowList {
@@ -603,13 +644,26 @@
 .outcomeStory,
 .outcomeHighlights,
 .fixesSection,
-.outcomeImageGrid {
-  width: min(100%, 88rem);
-  margin-inline: auto;
+.outcomeDataGrid {
+  width: 100%;
+  margin-inline: 0;
 }
 
 .outcomesSection .sectionHeading {
-  max-width: 88rem;
+  max-width: none;
+}
+
+.outcomesSection .sectionHeading h2,
+.outcomesSection .sectionIntro {
+  grid-column: 1 / -1;
+}
+
+.outcomesSection .sectionHeading h2 {
+  margin-top: 1rem;
+}
+
+.outcomesSection .sectionIntro {
+  max-width: 70rem;
 }
 
 .outcomeStory {
@@ -930,9 +984,99 @@
   line-height: 1.65;
 }
 
-.outcomeImageGrid {
-  grid-template-columns: minmax(0, 1.22fr) minmax(20rem, 0.78fr);
-  align-items: start;
+.outcomeDataGrid {
+  display: grid;
+  overflow-x: auto;
+  grid-template-columns: repeat(8, minmax(8.5rem, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: 1rem;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline proximity;
+  scrollbar-color: var(--elara-teal) color-mix(in srgb, var(--elara-ink) 10%, transparent);
+  scrollbar-width: thin;
+}
+
+.callReductionCard,
+.testCountCard {
+  display: grid;
+  min-width: 0;
+  min-height: 15rem;
+  border: 1px solid var(--elara-border);
+  border-radius: 1rem;
+  background: var(--elara-paper-bright);
+  padding: clamp(1rem, 1.25vw, 1.35rem);
+  box-shadow: 0.35rem 0.5rem 1rem color-mix(in srgb, var(--elara-ink) 8%, transparent);
+  scroll-snap-align: start;
+}
+
+.callReductionCard {
+  background: var(--elara-mint);
+}
+
+.callReductionCard.featuredReduction {
+  background: color-mix(in srgb, var(--elara-yellow) 32%, var(--elara-paper-bright));
+}
+
+.callReductionCard h3 {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reductionMeasure {
+  display: flex;
+  gap: clamp(0.2rem, 0.5vw, 0.45rem);
+  align-items: baseline;
+  margin: 2.25rem 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.6rem, 2vw, 2.35rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.reductionPercent {
+  margin: 1.5rem 0 0;
+  color: var(--elara-teal);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.reductionScope {
+  align-self: end;
+  margin: 1.5rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 62%, transparent);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.testCountCard {
+  align-content: center;
+}
+
+.testCountCard strong {
+  color: var(--elara-teal);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.25rem, 3.5vw, 3.6rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.testCountCard .highlightedTestCount {
+  color: var(--elara-yellow);
+}
+
+.testCountCard span {
+  margin-top: 0.65rem;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.74rem;
+  line-height: 1.4;
 }
 
 .securitySection {
@@ -948,7 +1092,21 @@
   color: var(--elara-yellow);
 }
 
+.securitySection .sectionHeading {
+  max-width: none;
+}
+
+.securitySection .sectionHeading h2,
 .securitySection .sectionIntro {
+  grid-column: 1 / -1;
+}
+
+.securitySection .sectionHeading h2 {
+  margin-top: 1rem;
+}
+
+.securitySection .sectionIntro {
+  max-width: 70rem;
   color: color-mix(in srgb, var(--elara-paper-bright) 70%, transparent);
 }
 
@@ -1195,8 +1353,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .outcomeStory,
-  .outcomeImageGrid {
+  .outcomeStory {
     grid-template-columns: 1fr;
   }
 
@@ -1419,6 +1576,7 @@
     grid-template-columns: 1fr;
     gap: 0.35rem;
   }
+
 
   .metricAfter {
     margin-top: 0.15rem;

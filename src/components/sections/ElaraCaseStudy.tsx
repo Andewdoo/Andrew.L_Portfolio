@@ -147,6 +147,20 @@ const engineeringFixes = [
   },
 ];
 
+const defaultCallReductions = [
+  { mode: "Quick", before: "24", after: "8", reduction: "66.7% lower" },
+  { mode: "Standard", before: "60", after: "18", reduction: "70% lower" },
+  { mode: "Deep", before: "120", after: "36", reduction: "70% lower" },
+];
+
+const testCounts = [
+  { value: "120", label: "API tests" },
+  { value: "238", label: "worker tests" },
+  { value: "97", label: "web tests" },
+  { value: "6", label: "evaluation tests", highlighted: true },
+  { value: "1", label: "full-stack acceptance" },
+];
+
 type ProjectImageProps = {
   alt: string;
   caption: string;
@@ -279,9 +293,9 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={styles.manifesto} id="problem">
           <div className={styles.manifestoLead}>
             <p className={styles.darkEyebrow}>01 / Product boundary</p>
-            <h2>Check the facts, not just the phrasing</h2>
+            <h2>Purpose: </h2>
             <p>
-              A polished answer can conceal weak, missing, circular, or context-free evidence. Elara evaluates a submitted claim against evidence available at a specific point in time, then preserves the path from its conclusion back to the exact supporting passages.
+              Elara was made to combat an internet overwhelmed by contradictions, misinformation, and confusion. Give it a claim and Elara will gathers evidence, weighs what supports or challenges it, and preserves the sources and reasoning, saving you the research hassle. At its core, Elara helps you cut through the noise and make important judgments based on current evidence instead of reputation or popularity. It isn’t a lie detector or a judge of credibility but a way to give you a transparent, defensible view of what the evidence supports right now.
 
             </p>
           </div>
@@ -302,17 +316,16 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           </div>
         </section>
 
-        <section className={styles.lightSection} id="workflow">
+        <section className={`${styles.lightSection} ${styles.workflowSection}`} id="workflow">
           <SectionHeading
-            eyebrow="02 / Controlled workflow"
+            eyebrow="02 / Workflow"
             title={
               <>
-                AI interprets the evidence.
-                <br />
-                Rules decide what gets reported.
+                <span className={styles.workflowHeadingLine}>1. AI interprets the evidence.</span>
+                <span className={styles.workflowHeadingLine}>2. Rules decide what gets reported.</span>
               </>
             }
-            copy="The model helps interpret evidence; durable artifacts, typed state, exact coverage, reproducible arithmetic, and citation audit decide what can be published."
+            copy="The model helps interpret evidence, durable artifacts, typed state, and exact coverage while citation audit rules decides what can be published."
           />
 
           <ol className={styles.workflowList}>
@@ -335,7 +348,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           />
         </section>
 
-        <section className={styles.gallerySection} id="evidence">
+        <section className={`${styles.gallerySection} ${styles.evidenceSection}`} id="evidence">
           <SectionHeading
             eyebrow="03 / Evidence in the interface"
             title="Every conclusion keeps its receipts."
@@ -491,24 +504,43 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
             </div>
           </section>
 
-          <div className={`${styles.imageGrid} ${styles.outcomeImageGrid}`}>
-            <ProjectImage
-              src="/images/elara/elara-outcomes.webp"
-              alt="Elara engineering outcomes with measured model and citation latency, a typed-output failure, and reduced search targets"
-              caption="One measured Standard run and the optimization decisions it informed."
-            />
-            <ProjectImage
-              src="/images/elara/elara-validation.webp"
-              alt="Elara validation summary with API, worker, web, evaluation, and full-stack acceptance test counts"
-              caption="Repository gates and owner validation make the demo credible without pretending it is an independent benchmark."
-            />
+          <div className={styles.outcomeDataGrid} aria-label="Default search-call reductions and test totals">
+            {defaultCallReductions.map((item) => (
+              <article
+                aria-label={`${item.mode} default search-call reduction`}
+                className={`${styles.callReductionCard} ${item.mode === "Standard" ? styles.featuredReduction : ""}`}
+                key={item.mode}
+              >
+                <h3>{item.mode}</h3>
+                <p className={styles.reductionMeasure}>
+                  <span>{item.before}</span>
+                  <span aria-hidden="true">→</span>
+                  <span>{item.after}</span>
+                </p>
+                <p className={styles.reductionPercent}>{item.reduction}</p>
+                <p className={styles.reductionScope}>Maximum → first-phase target</p>
+              </article>
+            ))}
+
+            {testCounts.map((item) => (
+              <article aria-label={`${item.label}: ${item.value}`} className={styles.testCountCard} key={item.label}>
+                <strong className={item.highlighted ? styles.highlightedTestCount : undefined}>{item.value}</strong>
+                <span>{item.label}</span>
+              </article>
+            ))}
           </div>
         </section>
 
         <section className={styles.securitySection} id="security">
           <SectionHeading
             eyebrow="05 / Security + integrity"
-            title="Trust boundaries are product features."
+            title={
+              <>
+                Trust boundaries are
+                <br />
+                product features.
+              </>
+            }
             copy="Evidence retrieval is an adversarial surface. Elara keeps untrusted content outside control logic and makes durable, authorized state the basis of every completed report."
           />
 
