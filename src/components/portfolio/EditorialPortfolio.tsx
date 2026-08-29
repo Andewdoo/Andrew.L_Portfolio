@@ -774,7 +774,7 @@ export function EditorialPortfolio() {
               <span className={styles.headlineLine}>I WOULD ACTUALLY <mark>USE</mark></span>
             </h1>
             <p className={styles.heroDescription}>
-              <strong>Usually starting with curiosity and far too many tabs.</strong>
+              <strong>Starting with curiosity and far too many tabs.</strong>
             </p>
             <a className={styles.workButton} href="#projects">
               <span className={styles.desktopCta}>VIEW SELECTED WORK</span>

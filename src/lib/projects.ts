@@ -184,7 +184,7 @@ export const projects: Project[] = [
       },
       {
         title: "AI & Verification",
-        items: ["DeepSeek", "Brave Search", "LangGraph", "Deterministic Citation Checks"],
+        items: ["DeepSeek", "Brave Search", "LangGraph"],
       },
       {
         title: "Data Layer",

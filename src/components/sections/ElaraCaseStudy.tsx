@@ -79,7 +79,7 @@ const trustBoundaries = [
   },
   {
     icon: Database,
-    title: "Durable truth",
+    title: "Authoritiative State",
     copy: "PostgreSQL remains authoritative when Redis queues, locks, caches, or progress streams expire.",
   },
   {
@@ -98,14 +98,14 @@ const limitations = [
   "No independent accuracy benchmark is claimed while human-reviewed annotations and thresholds remain pending.",
   "Paywalls, robots restrictions, deleted pages, inaccessible PDFs, and unsupported formats can limit coverage.",
   "Provider latency and availability vary; the personal demo carries no latency or uptime service-level objective.",
-  "Assessments are time-bounded and may change when sources, corrections, or evidence change.",
+  "Assessments duration may change when sources, corrections, or evidence change.",
   "The owner-controlled demo uses one EC2 host with manual recovery, not high availability or enterprise on-call.",
 ];
 
 const deepSeekControls = [
   "Process two batches concurrently to reduce overall latency.",
   "Limit each batch to two schema attempts and discard partial stage results if any required batch fails.",
-  "Handle truncated DeepSeek responses with one bounded retry and a larger token allowance.",
+  "Handle truncated DeepSeek responses with one retry and a larger token allowance.",
 ];
 
 const engineeringFixes = [
@@ -303,7 +303,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           <div className={styles.boundaryGrid}>
             <div>
               <span>Not a lie detector</span>
-              <p>It evaluates a bounded claim or document, not an author's honesty.</p>
+              <p>It evaluates a claim or document, not an author's honesty.</p>
             </div>
             <div>
               <span>No credibility score</span>
@@ -325,7 +325,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
                 <span className={styles.workflowHeadingLine}>2. Rules decide what gets reported.</span>
               </>
             }
-            copy="The model helps interpret evidence, durable artifacts, typed state, and exact coverage while citation audit rules decides what can be published."
+            copy="The model helps interpret evidence, artifacts, typed state, and exact coverage while citation audit rules decides what can be published."
           />
 
           <ol className={styles.workflowList}>
@@ -344,7 +344,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           <ProjectImage
             src="/images/elara/elara-architecture.webp"
             alt="Elara system architecture showing the browser, FastAPI boundary, verification worker, external inputs, and durable data plane"
-            caption="System design: FastAPI is privileged, PostgreSQL is durable truth, Redis is transient, and the browser only presents the final result."
+            caption="System design: FastAPI is privileged, PostgreSQL is authoritative state, Redis is transient, and the browser only presents the final result."
           />
         </section>
 
@@ -380,7 +380,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           <SectionHeading
             eyebrow="04 / Engineering outcomes"
             title="The Results."
-            copy="Instrumentation exposed where time and failure really lived. Model-backed classification and citation auditing dominated latency; while deterministic scoring only took 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run."
+            copy="Instrumentation exposed where time and failure really lived. Model-backed classification and citation auditing dominated latency; while scoring only took 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run."
           />
 
           <div className={styles.outcomeStory}>
@@ -431,7 +431,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
 
             <div className={styles.deepSeekMethod}>
               <header>
-                <h3>Smaller requests, bounded recovery.</h3>
+                <h3>Smaller requests.</h3>
                 <p>Split huge DeepSeek requests into small batches.</p>
               </header>
 
@@ -466,7 +466,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
             <article>
               <span>Failure learned</span>
               <strong>HTTP 200 ≠ success</strong>
-              <p>A response can arrive successfully and still fail the typed output contract required for durable completion.</p>
+              <p>A response can arrive successfully and still fail the typed output contract required for completion.</p>
             </article>
           </div>
 
@@ -531,10 +531,10 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
             eyebrow="05 / Security + integrity"
             title={
               <>
-                Boundaries protect.
+                Boundaries.
               </>
             }
-            copy="Evidence retrieval is an adversarial surface. Elara keeps untrusted content outside control logic and makes durable, authorized state the basis of every completed report."
+            copy="Evidence retrieval is an adversarial surface. Elara keeps untrusted content outside control logic and states the basis of every completed report."
           />
 
           <ol className={styles.securityLedger} aria-label="Security and integrity boundaries">
@@ -576,7 +576,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
             <p className={styles.darkEyebrow}>07 / Scope + tradeoffs</p>
             <h2>Completion.</h2>
             <p>
-              The hosted experience is owner-validated for a low-traffic personal demo. Its limitations remain visible because clear boundaries are part of trustworthy engineering.
+              The hosted experience is owner-validated for a low-traffic personal demo.
             </p>
           </div>
           <ul>
@@ -591,7 +591,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
 
         <section className={styles.finalCta}>
           <div>
-            <p className={styles.darkEyebrow}>Evidence first, by design</p>
+            <p className={styles.darkEyebrow}>Evidence first by design</p>
             <h2>See the archive.</h2>
             <p>
               The read-only demo presents 12 completed full-version reports and a working verifier interface without accepting new public requests.

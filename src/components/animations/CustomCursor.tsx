@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const springConfig = {
@@ -10,6 +11,8 @@ const springConfig = {
 };
 
 export function CustomCursor() {
+  const pathname = usePathname();
+  const useNativeCursor = pathname === "/projects/devlify";
   const [enabled, setEnabled] = useState(false);
   const [hoveringTarget, setHoveringTarget] = useState(false);
   const mouseX = useMotionValue(-100);
@@ -24,8 +27,9 @@ export function CustomCursor() {
     const finePointerQuery = window.matchMedia("(pointer: fine) and (hover: hover)");
 
     const syncPointerMode = () => {
-      setEnabled(finePointerQuery.matches);
-      document.documentElement.classList.toggle("has-custom-cursor", finePointerQuery.matches);
+      const shouldEnable = finePointerQuery.matches && !useNativeCursor;
+      setEnabled(shouldEnable);
+      document.documentElement.classList.toggle("has-custom-cursor", shouldEnable);
     };
 
     syncPointerMode();
@@ -35,7 +39,7 @@ export function CustomCursor() {
       finePointerQuery.removeEventListener("change", syncPointerMode);
       document.documentElement.classList.remove("has-custom-cursor");
     };
-  }, []);
+  }, [useNativeCursor]);
 
   useEffect(() => {
     if (!enabled) {
