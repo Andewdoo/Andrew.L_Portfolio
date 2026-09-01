@@ -8,6 +8,7 @@ import {
   Code2,
   FlaskConical,
   Globe2,
+  Github,
   ShieldCheck,
 } from "lucide-react";
 
@@ -33,7 +34,7 @@ const productProblems = [
   },
   {
     title: "Depth is unclear",
-    copy: "A quick hint and a careful derivation are different jobs, but most chat interfaces expose one send action.",
+    copy: "A quick hint and a careful derivation are different jobs, but most chat interfaces only have 1 action.",
   },
   {
     title: "Answers drift",
@@ -166,9 +167,11 @@ export function DevlifyCaseStudy({ project }: Readonly<{ project: Project }>) {
       <nav className={styles.topBar} aria-label="Project navigation">
         <Link href="/#projects" className={styles.backLink}>
           <ArrowLeft aria-hidden="true" />
-          <span>Portfolio</span>
+          Back to portfolio
         </Link>
-        <p>Devlify case study</p>
+        <p>
+          Andrew L. <span>/ Devlify</span>
+        </p>
         <a className={styles.topCta} href={project.links.live} target="_blank" rel="noreferrer">
           Live product
           <ArrowUpRight aria-hidden="true" />
@@ -186,7 +189,10 @@ export function DevlifyCaseStudy({ project }: Readonly<{ project: Project }>) {
                 Explore Devlify
                 <ArrowUpRight aria-hidden="true" />
               </a>
-              <p>Product design and full-stack development, 2026</p>
+              <a className={styles.secondaryButton} href={project.links.github} target="_blank" rel="noreferrer">
+                <Github aria-hidden="true" />
+                View source
+              </a>
             </div>
           </div>
 
@@ -277,7 +283,7 @@ export function DevlifyCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={styles.contextSection} aria-labelledby="context-title">
           <header className={styles.sectionHeading}>
             <h2 id="context-title">The Pipeline.</h2>
-            <p>One bounded pipeline turns files and pasted work into structured, subject-aware responses.</p>
+            <p>One pipeline turns files and pasted work into structured, subject-aware responses.</p>
           </header>
 
           <ol className={styles.contextPipeline}>
@@ -293,9 +299,6 @@ export function DevlifyCaseStudy({ project }: Readonly<{ project: Project }>) {
         <section className={styles.systemSection} aria-labelledby="system-title">
           <div className={styles.systemIntro}>
             <h2 id="system-title">The Stack.</h2>
-            <p>
-              Devlify spans the language, interface, backend, AI, retrieval, data, and delivery layers behind one subject-aware learning workspace.
-            </p>
           </div>
 
           <div className={styles.systemBody}>

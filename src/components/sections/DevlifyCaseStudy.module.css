@@ -86,9 +86,14 @@
   letter-spacing: 0.04em;
 }
 
+.topBar > p span {
+  color: var(--devlify-accent);
+}
+
 .backLink,
 .topCta,
 .primaryButton,
+.secondaryButton,
 .finalSection > a {
   display: inline-flex;
   min-height: 2.75rem;
@@ -121,6 +126,7 @@
 .backLink svg,
 .topCta svg,
 .primaryButton svg,
+.secondaryButton svg,
 .finalSection > a svg {
   width: 1rem;
   height: 1rem;
@@ -180,16 +186,10 @@
 
 .heroActions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem 1.25rem;
   margin-top: 2rem;
-}
-
-.heroActions > p {
-  max-width: 18rem;
-  color: var(--devlify-muted);
-  font-size: 0.76rem;
-  line-height: 1.5;
 }
 
 .primaryButton {
@@ -199,6 +199,16 @@
   background: var(--devlify-accent);
   color: var(--devlify-surface);
   box-shadow: 0 14px 34px rgba(25, 25, 23, 0.16);
+  white-space: nowrap;
+}
+
+.secondaryButton {
+  flex: 0 0 auto;
+  min-height: 3.1rem;
+  padding: 0.9rem 1.15rem;
+  border: 1px solid var(--devlify-ink);
+  background: transparent;
+  color: var(--devlify-ink);
   white-space: nowrap;
 }
 
@@ -661,6 +671,7 @@
 
   .topCta:hover,
   .primaryButton:hover,
+  .secondaryButton:hover,
   .finalSection > a:hover {
     transform: translateY(-2px);
   }
@@ -668,11 +679,17 @@
   .topCta:hover {
     background: var(--devlify-accent);
   }
+
+  .secondaryButton:hover {
+    background: var(--devlify-ink);
+    color: var(--devlify-surface);
+  }
 }
 
 .backLink:active,
 .topCta:active,
 .primaryButton:active,
+.secondaryButton:active,
 .finalSection > a:active {
   transform: scale(0.97);
 }
@@ -808,7 +825,8 @@
     flex-direction: column;
   }
 
-  .primaryButton {
+  .primaryButton,
+  .secondaryButton {
     width: 100%;
   }
 
@@ -894,6 +912,7 @@
   .backLink,
   .topCta,
   .primaryButton,
+  .secondaryButton,
   .finalSection > a {
     transition-duration: 0.01ms;
   }

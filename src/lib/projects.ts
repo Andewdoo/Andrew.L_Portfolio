@@ -148,7 +148,7 @@ export const projects: Project[] = [
     },
     takeaway: "Devlify shows a complete AI learning platform: a polished chat workspace, full-stack persistence, multi-modal file handling, hardened API routes, and retrieval-aware tutoring for current-context questions.",
     links: {
-      github: "https://github.com/",
+      github: "https://github.com/Andewdoo/Devlify",
       live: "https://devlify-eight.vercel.app/",
     },
     visual: {
