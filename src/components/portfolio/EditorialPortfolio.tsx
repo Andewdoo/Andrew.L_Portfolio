@@ -195,36 +195,9 @@ const offlineMediaGallery: readonly TrailMedia[] = [
   { alt: "The six main cast members of Friends gathered together at Central Perk", caption: "Friends", group: "Sitcom", src: "/images/offline-04-02.webp" },
   { alt: "Ichigo Kurosaki in the official Bleach Thousand-Year Blood War key art", caption: "Bleach", group: "Anime", src: "/images/offline-04-03.webp" },
   { alt: "Frieren, Fern, and Stark in a flower-filled landscape from Frieren Beyond Journey's End", caption: "Frieren: Beyond Journey's End", group: "Anime", src: "/images/offline-04-04.webp" },
-  { alt: "NF confronting his shattered reflection in the 2025 FEAR music video", caption: "NF — FEAR", group: "Music", src: "/images/offline-04-05.webp" },
+  { alt: "NF confronting his shattered reflection in the 2025 FEAR music video", caption: "NF - FEAR", group: "Music", src: "/images/offline-04-05.webp" },
   { alt: "Coldplay band members posing together beneath a blue sky and rainbow light flare", caption: "Coldplay", group: "Music", src: "/images/offline-04-06.webp" },
   { alt: "Black-and-white studio portrait of music artist Dominic Fike", caption: "Dominic Fike", group: "Music", src: "/images/offline-04-07.webp" },
-];
-
-const educationTrail: readonly TrailItem[] = [
-  {
-    alt: "Snowy autumn walkway through McMaster University campus",
-    caption: "Autumn on campus.",
-    label: "CAMPUS / 01",
-    src: "/images/education-campus-winter.webp",
-  },
-  {
-    alt: "Andrew studying at a dining table in high school with his cat beside him",
-    caption: "its a family effort.",
-    label: "CLASS / 02",
-    src: "/images/education-classroom.webp",
-  },
-  {
-    alt: "Multi-screen desktop workstation with a laptop and tablet",
-    caption: "Where all my work gets done.",
-    label: "BUILD / 03",
-    src: "/images/education-workstation.webp",
-  },
-  {
-    alt: "McMaster stadium lit through fog on a winter night",
-    caption: "Campus after hours.",
-    label: "AFTER / 04",
-    src: "/images/education-stadium-night.webp",
-  },
 ];
 
 const offlineTrail: readonly TrailItem[] = [
@@ -383,7 +356,7 @@ function SectionTransition({
         <strong>{to}</strong>
       </div>
 
-      <p className={styles.transitionStatus}>SIGNAL HANDOFF · {from}—{to} · PATH LOCKED</p>
+      <p className={styles.transitionStatus}>SIGNAL HANDOFF · {from}-{to} · PATH LOCKED</p>
     </div>
   );
 }
@@ -524,12 +497,12 @@ function EducationSkillsSequence() {
         <SectionNumber value="01" />
         <div className={styles.educationContent}>
           <div className={styles.sectionLabelRow}>
-            <p className={styles.desktopSectionLabel}>/ EDUCATION <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 01 / EDUCATION</p>
+            <p className={styles.desktopSectionLabel}>/ EDUCATION + WORKFLOW <b>&gt;_</b></p>
+            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 01 / EDUCATION + WORKFLOW</p>
           </div>
 
           <div className={styles.educationIntro}>
-            <h2>I LEARN, I APPLY.</h2>
+            <h2>LEARNING</h2>
             <div className={styles.degreeBlock}>
               <div>
                 <h3>MCMASTER UNIVERSITY</h3>
@@ -550,53 +523,30 @@ function EducationSkillsSequence() {
             ))}
           </div>
 
-          <TrailGallery items={educationTrail} title="FIELD NOTES / THE LEARNING TRAIL" tone="light" />
-        </div>
-      </section>
+          <div id="skills" className={styles.educationWorkflow}>
+            <p className={styles.workflowStatement}>I don&apos;t just write code. I build better ways to write it.</p>
 
-      <SectionTransition
-        from="01"
-        fromLabel="EDUCATION"
-        to="02"
-        toLabel="WORKFLOW"
-        tone="light-to-dark"
-      />
-
-      <section id="skills" className={styles.skillsSection}>
-        <SectionCoordinates />
-        <SectionNumber value="02" />
-        <div className={styles.skillsContent}>
-          <div className={styles.sectionLabelRow}>
-            <p className={styles.desktopSectionLabel}>/ WORKFLOW <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 02 / WORKFLOW</p>
-            <a className={styles.sectionArrow} href="#tech-stack" aria-label="Jump to tech stack">
-              <Arrow />
-            </a>
-          </div>
-
-          <h2>HOW I WORK.</h2>
-          <p className={styles.workflowStatement}>I don&apos;t just write code. I build better ways to write it.</p>
-
-          <div className={styles.capabilityGrid}>
-            {coreCapabilities.map((capability) => (
-              <article key={capability.title}>
-                <h3>{capability.title}</h3>
-                <b aria-hidden="true">&gt;_</b>
-                <p>{capability.description}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className={styles.workflowRows}>
-            <div>
-              <span>01</span>
-              <h3>EXPLORE</h3>
-              <p><b>&gt;_</b> FRAME THE PROBLEM / GATHER CONTEXT / COMPARE APPROACHES</p>
+            <div className={styles.capabilityGrid}>
+              {coreCapabilities.map((capability) => (
+                <article key={capability.title}>
+                  <h3>{capability.title}</h3>
+                  <b aria-hidden="true">&gt;_</b>
+                  <p>{capability.description}</p>
+                </article>
+              ))}
             </div>
-            <div>
-              <span>02</span>
-              <h3>EXECUTE</h3>
-              <p><b>&gt;_</b> PROTOTYPE / TEST / AUTOMATE / DOCUMENT / REFINE</p>
+
+            <div className={styles.workflowRows}>
+              <div>
+                <span>01</span>
+                <h3>EXPLORE</h3>
+                <p><b>&gt;_</b> FRAME THE PROBLEM / GATHER CONTEXT / COMPARE APPROACHES</p>
+              </div>
+              <div>
+                <span>02</span>
+                <h3>EXECUTE</h3>
+                <p><b>&gt;_</b> PROTOTYPE / TEST / AUTOMATE / DOCUMENT / REFINE</p>
+              </div>
             </div>
           </div>
         </div>
@@ -609,21 +559,20 @@ function TechHobbiesSequence() {
   return (
     <>
       <SectionTransition
-        from="02"
-        fromLabel="WORKFLOW"
-        reverse
-        to="03"
+        from="01"
+        fromLabel="EDUCATION + WORKFLOW"
+        to="02"
         toLabel="TECH STACK"
-        tone="dark-to-light"
+        tone="light-to-dark"
       />
 
       <section id="tech-stack" className={styles.techStackSection}>
         <SectionCoordinates />
-        <SectionNumber value="03" />
+        <SectionNumber value="02" />
         <div className={styles.techStackContent}>
           <div className={styles.sectionLabelRow}>
             <p className={styles.desktopSectionLabel}>/ TECH STACK <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 03 / TECH STACK</p>
+            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 02 / TECH STACK</p>
           </div>
 
           <h2>MY TOOLBOX.</h2>
@@ -641,20 +590,20 @@ function TechHobbiesSequence() {
       </section>
 
       <SectionTransition
-        from="03"
+        from="02"
         fromLabel="TECH STACK"
-        to="04"
+        to="03"
         toLabel="OFFLINE"
-        tone="light-to-dark"
+        tone="dark-to-light"
       />
 
       <section id="hobbies" className={styles.hobbiesSection} aria-label="Hobbies and interests">
         <SectionCoordinates />
-        <SectionNumber value="04" />
+        <SectionNumber value="03" />
         <div className={styles.hobbiesContent}>
           <div className={styles.sectionLabelRow}>
             <p className={styles.desktopSectionLabel}>/ OFFLINE <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 04 / OFFLINE</p>
+            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 03 / OFFLINE</p>
           </div>
 
           <h2>BEHIND THE SCENES.</h2>
@@ -669,7 +618,7 @@ function TechHobbiesSequence() {
             ))}
           </div>
 
-          <TrailGallery items={offlineTrail} title="FIELD NOTES / OFF THE CLOCK" tone="dark" />
+          <TrailGallery items={offlineTrail} title="FIELD NOTES / OFF THE CLOCK" tone="light" />
         </div>
       </section>
     </>
@@ -770,8 +719,8 @@ export function EditorialPortfolio() {
             <p className={styles.role}>SOFTWARE ENGINEER <b>/</b> MARKHAM</p>
             <span className={styles.prompt}>&gt;_</span>
             <h1>
-              <span className={styles.headlineLine}>I MAKE THINGS THAT</span>
-              <span className={styles.headlineLine}>I WOULD ACTUALLY <mark>USE</mark></span>
+              <span className={styles.headlineLine}>MAKING THINGS THAT</span>
+              <span className={styles.headlineLine}>I WOULD <mark>USE</mark></span>
             </h1>
             <p className={styles.heroDescription}>
               <strong>Starting with curiosity and far too many tabs.</strong>
@@ -895,7 +844,7 @@ export function EditorialPortfolio() {
             <span>RESUME</span>
           </a>
         </nav>
-        <span className={styles.footerResponse}>RESPONSE: 0–24H</span>
+        <span className={styles.footerResponse}>RESPONSE: 0-24H</span>
       </footer>
     </div>
   );

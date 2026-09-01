@@ -443,7 +443,7 @@
 }
 
 .projectNumber::after {
-  content: "—";
+  content: "-";
   position: absolute;
   margin-top: 45px;
   color: var(--signal);
@@ -927,13 +927,13 @@
 }
 
 .educationSection,
-.techStackSection {
+.hobbiesSection {
   background: var(--paper);
   color: var(--ink);
 }
 
 .skillsSection,
-.hobbiesSection {
+.techStackSection {
   background: var(--ink);
   color: var(--paper);
 }
@@ -1130,6 +1130,24 @@
 .foundationRow p {
   margin: 0;
   font-size: 10px;
+}
+
+.educationWorkflow {
+  margin: 34px 0 42px;
+}
+
+.educationWorkflow .workflowStatement {
+  color: #557616;
+}
+
+.educationWorkflow .capabilityGrid,
+.educationWorkflow .workflowRows > div {
+  border-color: var(--ink);
+}
+
+.educationWorkflow .capabilityGrid article + article,
+.educationWorkflow .workflowRows h3 {
+  border-color: var(--ink);
 }
 
 .trailGallery {
@@ -1521,7 +1539,7 @@
 }
 
 .taxonomyRows {
-  border-top: 1px solid var(--ink);
+  border-top: 1px solid currentColor;
 }
 
 .taxonomyRow {
@@ -1529,7 +1547,7 @@
   grid-template-columns: 72px minmax(230px, 0.8fr) minmax(0, 1.35fr);
   min-height: 46px;
   align-items: center;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid currentColor;
 }
 
 .taxonomyRow > span,
@@ -1563,7 +1581,7 @@
 
 .interestRows {
   margin-top: 18px;
-  border-top: 1px solid var(--paper);
+  border-top: 1px solid currentColor;
 }
 
 .interestRow {
@@ -1571,7 +1589,7 @@
   grid-template-columns: 72px minmax(230px, 0.8fr) minmax(0, 1.35fr);
   min-height: 72px;
   align-items: center;
-  border-bottom: 1px solid var(--paper);
+  border-bottom: 1px solid currentColor;
 }
 
 .footer {
