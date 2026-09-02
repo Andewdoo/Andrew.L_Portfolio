@@ -575,6 +575,46 @@
   transition: opacity 180ms ease, transform 260ms ease;
 }
 
+.projectPreview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  height: clamp(220px, 26vw, 400px);
+  background: var(--ink);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 180ms ease, transform 260ms ease;
+}
+
+.projectPreviewSplit {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.projectPreviewPane {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.projectPreviewSplit .projectPreviewPane + .projectPreviewPane {
+  border-left: 1px solid var(--paper);
+}
+
+.projectPreviewImage {
+  object-fit: contain;
+}
+
+.projectPreviewSplit .projectPreviewImage {
+  object-fit: cover;
+}
+
+.projectPreviewImageCode {
+  object-position: left center;
+}
+
+.projectPreviewImageReport {
+  object-position: center top;
+}
+
 .projectDetailsContent > div + div {
   border-left: 1px solid var(--ink);
   padding-left: 28px;
@@ -599,7 +639,9 @@
 }
 
 .projectCard:hover .projectDetailsContent,
-.projectCard:focus-within .projectDetailsContent {
+.projectCard:focus-within .projectDetailsContent,
+.projectCard:hover .projectPreview,
+.projectCard:focus-within .projectPreview {
   opacity: 1;
   transform: translateY(0);
 }

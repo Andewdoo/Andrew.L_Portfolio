@@ -629,16 +629,24 @@ function ProjectRow({
   category,
   description,
   index,
+  previewImages,
   slug,
   stackLine,
   title,
+  year,
 }: Readonly<{
   category: string;
   description: string;
   index: string;
+  previewImages?: readonly {
+    alt: string;
+    crop?: "code" | "report";
+    src: string;
+  }[];
   slug: string;
   stackLine: string;
   title: string;
+  year: string;
 }>) {
   return (
     <article className={styles.projectCard}>
@@ -652,27 +660,47 @@ function ProjectRow({
               <p>{category}</p>
             </div>
           </div>
-          <div className={styles.projectIndex}>[ {index} ]</div>
+          <div className={styles.projectIndex}>[ {year} ]</div>
           <span className={styles.squareButton} aria-hidden="true">
             <Arrow />
           </span>
         </div>
         <div className={styles.projectDetails}>
           <div className={styles.projectDetailsInner}>
-            <div className={styles.projectDetailsContent}>
-              <div>
-                <span>// SYSTEM</span>
-                <p>{description}</p>
+            {previewImages?.length ? (
+              <div className={`${styles.projectPreview}${previewImages.length > 1 ? ` ${styles.projectPreviewSplit}` : ""}`}>
+                {previewImages.map((image) => (
+                  <div className={styles.projectPreviewPane} key={image.src}>
+                    <Image
+                      alt={image.alt}
+                      className={[
+                        styles.projectPreviewImage,
+                        image.crop === "code" ? styles.projectPreviewImageCode : "",
+                        image.crop === "report" ? styles.projectPreviewImageReport : "",
+                      ].filter(Boolean).join(" ")}
+                      fill
+                      sizes={previewImages.length > 1 ? "50vw" : "100vw"}
+                      src={image.src}
+                    />
+                  </div>
+                ))}
               </div>
-              <div>
-                <span>// STACK</span>
-                <p>{stackLine}</p>
+            ) : (
+              <div className={styles.projectDetailsContent}>
+                <div>
+                  <span>// SYSTEM</span>
+                  <p>{description}</p>
+                </div>
+                <div>
+                  <span>// STACK</span>
+                  <p>{stackLine}</p>
+                </div>
+                <div className={styles.detailStatus}>
+                  <span>// STATUS</span>
+                  <p>CASE STUDY / OPEN ↗</p>
+                </div>
               </div>
-              <div className={styles.detailStatus}>
-                <span>// STATUS</span>
-                <p>CASE STUDY / OPEN ↗</p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </Link>
@@ -803,16 +831,41 @@ export function EditorialPortfolio() {
             title="ELARA.AI"
             category="EVIDENCE VERIFICATION"
             description="Evidence-first verification with timestamped sources, visible uncertainty, and citation-audited reports."
+            previewImages={[
+              {
+                alt: "Elara.ai decomposition normalization code open in Visual Studio Code",
+                crop: "code",
+                src: "/images/elara-code-preview.png",
+              },
+              {
+                alt: "Elara.ai citation-audited report overview",
+                crop: "report",
+                src: "/images/elara-report-ui-cropped.png",
+              },
+            ]}
             stackLine="NEXT.JS / FASTAPI / PGVECTOR / CELERY"
             slug="elara-ai"
+            year="2026"
           />
           <ProjectRow
             index="02"
             title="DEVLIFY"
             category="AI LEARNING WORKSPACE"
             description="Multi-modal tutoring, persistent chat history, and retrieval-aware answers in one focused workspace."
+            previewImages={[
+              {
+                alt: "Devlify math workshop code open in Visual Studio Code",
+                crop: "code",
+                src: "/images/devlify-code-preview.png",
+              },
+              {
+                alt: "Devlify general workspace welcoming Andrew with an empty chat composer",
+                src: "/images/devlify-workspace-preview.png",
+              },
+            ]}
             stackLine="NEXT.JS / FASTAPI / POSTGRESQL"
             slug="devlify"
+            year="2026"
           />
         </section>
 
