@@ -22,35 +22,18 @@ const workflow = [
   { index: "05", title: "Audit", copy: "Require typed output and complete citation coverage before a report can be published." },
 ];
 
-const architectureNodes = [
-  {
-    title: "Browser experience",
-    items: ["Next.js App Router", "React + TypeScript", "Firebase Web Auth", "TanStack Query", "React Flow + Recharts"],
-    note: "No privileged credentials",
-    connection: "HTTPS",
-  },
-  {
-    title: "FastAPI boundary",
-    items: ["Firebase Admin verification", "Authorization + validation", "Durable run creation", "Celery enqueueing", "Server-Sent Events", "Versioned report APIs"],
-    connection: "Queue",
-  },
-  {
-    title: "Verification worker",
-    items: ["Celery + LangGraph", "Typed Pydantic state", "Secure retrieval", "Evidence classification", "Deterministic scoring", "Numerical + citation audits"],
-    connection: "Server only",
-  },
-  {
-    title: "External inputs",
-    items: ["DeepSeek", "Brave Search", "Public web pages", "PDF documents"],
-    note: "Untrusted evidence",
-  },
+const architectureDecisions = [
+  ["Controlled execution", "Five reader-facing workflow steps expand into 13 persisted stages, from intake and decomposition through retrieval, scoring, synthesis, and citation audit."],
+  ["Model assistance", "DeepSeek helps plan queries, interpret passages, classify evidence, and draft grounded synthesis; it does not decide final arithmetic or report eligibility."],
+  ["Deterministic authority", "Python owns canonicalization, deduplication, decimal calculations, thresholds, dependency multipliers, final-label gates, and citation presence."],
+  ["Durable provenance", "PostgreSQL preserves runs, sources, passages, evidence, calculations, citations, and versions. Redis and SSE carry transient work and progress."],
 ];
 
-const architectureDecisions = [
-  ["FastAPI is privileged", "Auth, authorization, durable run creation, exports, and SSE."],
-  ["PostgreSQL is truth", "Runs, passages, evidence, calculations, reports, and citations persist durably."],
-  ["Redis is transient", "Queues, locks, rate limits, caches, and progress streams can expire."],
-  ["The browser presents", "Final scores and report eligibility are never recomputed client-side."],
+const scoringStages = [
+  ["01 / Weigh each item", "Evidence quality combines relevance, directness, authority transparency, temporal fit, and extraction certainty. Dependency multipliers reduce repeated or derivative reporting."],
+  ["02 / Balance the evidence", "Supporting weight P and contradicting weight N use the same weighting rules. Evidence support is calculated as 100 × P / (P + N)."],
+  ["03 / Add confidence", "Coverage, quality, independence, consistency, and primary-source access contribute to confidence, while missing context and unresolved ambiguity remain visible as guardrails."],
+  ["04 / Audit the report", "Every factual sentence must resolve to an allowed stored passage. If citation coverage or a completion gate fails, the report cannot complete."],
 ];
 
 const walkthroughSteps = [
@@ -143,33 +126,21 @@ function SectionHeading({ eyebrow, title, copy }: Readonly<{ eyebrow: string; ti
 function SystemArchitecture() {
   return (
     <section className={styles.architecture} aria-labelledby="architecture-title">
-      <div className={styles.architectureHeading}><h3 id="architecture-title">Elara.ai system architecture</h3><p>A controlled path from user submission to durable, citation-audited report.</p></div>
-          <div className={styles.architectureLayout}>
-        <div>
-          <div className={styles.architectureFlow}>
-            {architectureNodes.map((node) => (
-              <article key={node.title}>
-                <h4>{node.title}</h4>
-                <ul>{node.items.map((item) => <li key={item}>{item}</li>)}</ul>
-                {node.note ? <p>{node.note}</p> : null}
-                {node.connection ? <span>{node.connection}</span> : null}
-              </article>
-            ))}
-          </div>
-          <div className={styles.dataPlane}>
-            <h4>Durable and transient data plane</h4>
-            <p>PostgreSQL + pgvector: authoritative runs, claims, queries, snapshots, passages, evidence, calculations, citations, reports, and versions.</p>
-            <p>Redis: transient queues, locks, caches, rate limits, and progress streams.</p>
-            <p>Private S3: uploads, immutable evidence artifacts, permitted snapshots, and exports.</p>
-          </div>
-          <p className={styles.publicationRule}>Publication rule: no report reaches COMPLETED until durable citation audit and typed completion gates succeed.</p>
+      <div className={styles.architectureHeading}><h3 id="architecture-title">The 13-stage verification agent cycle</h3><p>The five workflow steps above expand into a controlled execution path that separates model-assisted interpretation from deterministic decisions and durable system state.</p></div>
+      <figure className={styles.diagramFigure}>
+        <div className={`${styles.diagramScroll} ${styles.architectureDiagramScroll}`} role="region" aria-label="Scrollable Elara architecture diagram" tabIndex={0}>
+          <Image src="/images/elara/architecture-cycle.png" alt="Architecture diagram of Elara's 13-stage verification cycle from authenticated intake through research, deterministic scoring, citation audit, persistence, and report delivery" width={1536} height={1024} sizes="(max-width: 820px) 64rem, (max-width: 1536px) 92vw, 1536px" className={styles.diagramImage} />
         </div>
-        <aside className={styles.designDecisions}>
-          <h4>Design decisions</h4>
-          {architectureDecisions.map(([title, copy]) => <div key={title}><h5>{title}</h5><p>{copy}</p></div>)}
-        </aside>
+        <figcaption>The cycle moves clockwise from authenticated intake to source discovery, secure retrieval, evidence evaluation, deterministic scoring, synthesis, and citation audit. A report completes only after the durable audit gates pass. <a href="/images/elara/architecture-cycle.png" target="_blank" rel="noreferrer">Open the full-size architecture diagram<ExternalLink aria-hidden="true" /></a></figcaption>
+      </figure>
+      <div className={styles.diagramSummary} aria-label="Architecture explanation">
+        {architectureDecisions.map(([title, copy]) => (
+          <article key={title}>
+            <h4>{title}</h4>
+            <p>{copy}</p>
+          </article>
+        ))}
       </div>
-      <p className={styles.architectureCaption}>System design: FastAPI is privileged, PostgreSQL is authoritative state, Redis is transient, and the browser only presents the final result.</p>
     </section>
   );
 }
@@ -201,8 +172,8 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
               </div>
             </header>
             <div className={styles.heroVisual}>
-              <ElaraScreenshot src="/images/elara/ui/walkthrough@2x.webp" alt="Elara report workspace showing a transit claim supported with limitations and a citation-audited report overview" label="Report overview" priority />
-              <p className={styles.auditStatus}><span>Citation audit</span><strong>Passed</strong></p>
+              <ElaraScreenshot className={styles.heroVerificationFigure} src="/images/elara/ui/new-verification.png" alt="Elara new verification form with Quick, Standard, and Deep research-depth options and an empty claim field" label="New verification" priority />
+              <p className={styles.auditStatus}><span>Research depth</span><strong>Quick · Standard · Deep</strong></p>
             </div>
           </div>
           <dl className={styles.proofStrip} aria-label="Project proof points">
@@ -233,32 +204,39 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           <SectionHeading eyebrow="03 / Evidence in the interface" title="Easy Interface." copy="The UI is designed for inspection: atomic claims, supporting and contradicting evidence, exact passages, retrieval timestamps, calculations, and snapshots remain connected." />
           <div className={styles.walkthroughLayout}>
             <div className={styles.walkthroughCopy}>
-              <p className={styles.walkthroughLabel}>Privacy-safe representative data</p>
+              <p className={styles.walkthroughLabel}>Example from a Historical Test Run</p>
               <h3>A proposed transit budget increases funding, adds frequent weekend rail service, and relies primarily on sales-tax revenue.</h3>
               <ol>{walkthroughSteps.map(([index, title, copy]) => <li key={index}><span>{index}</span><div><strong>{title}</strong><p>{copy}</p></div></li>)}</ol>
             </div>
-            <ElaraScreenshot src="/images/elara/ui/walkthrough@2x.webp" alt="A representative transit claim in the Elara report interface" label="Citation-audited report" caption="Representative walkthrough: privacy-safe product data traces one claim from decomposition to a citation-audited report." />
+            <ElaraScreenshot src="/images/elara/ui/walkthrough@2x.webp" alt="A historical Elara test run evaluating a transit budget and weekend rail service claim" label="Citation-audited report" caption="Historical test run: one completed assessment traced from decomposition to a citation-audited report." />
           </div>
 
           <div className={styles.evidenceGallery}>
             <ElaraScreenshot src="/images/elara/ui/evidence-compare@2x.webp" alt="Elara evidence views showing supporting and contradicting passages" label="Supporting and contradicting evidence" caption="Support and contradiction stay visible together, and every factual report sentence resolves to an exact stored passage." />
-            <ElaraScreenshot src="/images/elara/ui/evidence-report@2x.webp" alt="Elara report view resolving factual findings to stored evidence" label="Report sentence to exact passage" caption="Verdict, claim, calculation, evidence item, exact passage, and snapshot remain connected." />
+            <ElaraScreenshot src="/images/elara/ui/scoring@2x.webp" alt="Elara score summary showing score breakdown, evidence balance, confidence components, and research coverage charts" label="Score breakdown" caption="Server calculation records keep the score breakdown, evidence balance, confidence components, and research coverage inspectable." />
           </div>
           <ol className={styles.auditTrail} aria-label="Evidence audit trail">{auditTrail.map((item) => <li key={item}>{item}</li>)}</ol>
 
-          <div className={styles.scoringLayout}>
-            <div className={styles.scoringCopy}>
-              <p>Representative funding claim</p>
-              <h3>A worked score, outside the model</h3>
-              <dl><div><dt>Supporting weight P</dt><dd>66</dd></div><div><dt>Contradicting weight N</dt><dd>34</dd></div></dl>
-              <p className={styles.formula}>evidence support = 100 x P / (P + N)</p>
-              <div className={styles.scoreResult}><strong>66%</strong><span>direction of accepted evidence</span></div>
-              <p className={styles.finalLabel}>Final label: <strong>Supported with limitations</strong></p>
-              <p>The pending approval record and context gates remain visible. A numeric direction never erases a material limitation.</p>
+          <section className={styles.scoringSection} aria-labelledby="scoring-title">
+            <header className={styles.scoringHeading}>
+              <h3 id="scoring-title">From evidence to an auditable assessment</h3>
+              <p>Language models classify meaning, but transparent Python formulas calculate the score. Quality-adjusted evidence is balanced, confidence and guardrails preserve uncertainty, and citation coverage determines whether the report can complete.</p>
+            </header>
+            <figure className={styles.diagramFigure}>
+              <div className={`${styles.diagramScroll} ${styles.scoringDiagramScroll}`} role="region" aria-label="Scrollable deterministic scoring diagram" tabIndex={0}>
+                <Image src="/images/elara/deterministic-scoring.png" alt="Deterministic scoring diagram showing evidence quality weighting, support and contradiction balance, confidence guardrails, citation audit, and a worked 66 percent result" width={3200} height={1800} sizes="(max-width: 820px) 64rem, (max-width: 1600px) 92vw, 1600px" className={styles.diagramImage} />
+              </div>
+              <figcaption>In the historical test run, supporting weight P = 66 and contradicting weight N = 34 produced 66% evidence support. The label remained “Supported with limitations” because final approval was still pending at the evidence cutoff. <a href="/images/elara/deterministic-scoring.png" target="_blank" rel="noreferrer">Open the full-size scoring diagram<ExternalLink aria-hidden="true" /></a></figcaption>
+            </figure>
+            <div className={styles.diagramSummary} aria-label="Scoring explanation">
+              {scoringStages.map(([title, copy]) => (
+                <article key={title}>
+                  <h4>{title}</h4>
+                  <p>{copy}</p>
+                </article>
+              ))}
             </div>
-            <ElaraScreenshot src="/images/elara/ui/scoring@2x.webp" alt="Elara deterministic scoring view showing supporting weight 66, contradicting weight 34, and a supported-with-limitations label" label="Server calculation records" caption="A worked score outside the model: dependency multipliers discount repeated reporting before evidence contributes." />
-          </div>
-          <p className={styles.dependencyNote}>Dependency multipliers discount repeated reporting before evidence contributes to P or N.</p>
+          </section>
         </section>
 
         <section className={styles.outcomesSection} id="outcomes">

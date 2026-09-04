@@ -160,8 +160,7 @@
 .kicker,
 .sectionLabel,
 .darkLabel,
-.walkthroughLabel,
-.scoringCopy > p:first-child {
+.walkthroughLabel {
   color: var(--elara-teal);
   font-size: 0.6875rem;
   font-weight: 900;
@@ -262,6 +261,10 @@
   aspect-ratio: 1265 / 712;
   border: 1px solid var(--elara-line);
   background: #f8f5eb;
+}
+
+.heroVerificationFigure .screenViewport {
+  aspect-ratio: 2559 / 1231;
 }
 
 .screenshotImage {
@@ -438,7 +441,6 @@
 .workflowList h3,
 .architecture h3,
 .walkthroughCopy h3,
-.scoringCopy h3,
 .latencyPanel h3,
 .deepSeekMethod h3,
 .fixesHeading h3,
@@ -474,132 +476,84 @@
   color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
 }
 
-.architectureLayout {
-  display: grid;
-  grid-template-columns: minmax(0, 3.2fr) minmax(16rem, 0.8fr);
-  gap: clamp(3rem, 5vw, 5rem);
-  margin-top: 3rem;
+.diagramFigure {
+  margin: clamp(2.5rem, 5vw, 4.5rem) 0 0;
 }
 
-.architectureFlow {
+.diagramScroll {
+  overflow-x: auto;
+  border: 1px solid var(--elara-line);
+  background: var(--elara-paper-bright);
+  overscroll-behavior-inline: contain;
+  scrollbar-color: var(--elara-teal) transparent;
+  scrollbar-width: thin;
+}
+
+.diagramScroll:focus-visible {
+  outline: 3px solid var(--elara-yellow);
+  outline-offset: 4px;
+}
+
+.diagramImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.diagramFigure figcaption {
+  display: flex;
+  max-width: 92ch;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.diagramFigure figcaption a {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--elara-teal);
+  font-weight: 800;
+  text-underline-offset: 0.2em;
+}
+
+.diagramFigure figcaption svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.diagramSummary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: clamp(2rem, 4vw, 3rem);
   border-top: 1px solid var(--elara-line);
   border-bottom: 1px solid var(--elara-line);
 }
 
-.architectureFlow article {
-  position: relative;
-  min-height: 16rem;
-  padding: 1.35rem 1.25rem;
+.diagramSummary article {
+  padding: 1.4rem clamp(1rem, 1.8vw, 1.6rem) 1.6rem;
 }
 
-.architectureFlow article + article {
+.diagramSummary article + article {
   border-left: 1px solid var(--elara-line);
 }
 
-.architectureFlow article:not(:last-child)::after {
-  position: absolute;
-  top: 50%;
-  right: -0.65rem;
-  z-index: 1;
-  background: var(--elara-paper-bright);
-  padding: 0 0.25rem;
-  color: var(--elara-yellow);
-  content: "→";
-  font-size: 1rem;
-}
-
-.architectureFlow h4,
-.dataPlane h4,
-.designDecisions h4,
-.designDecisions h5 {
+.diagramSummary h4 {
   margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
 }
 
-.architectureFlow h4,
-.dataPlane h4 {
-  font-size: 0.92rem;
-}
-
-.architectureFlow ul {
-  margin: 0.85rem 0 0;
-  padding: 0;
-  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
-  font-size: 0.76rem;
-  line-height: 1.55;
-  list-style: none;
-}
-
-.architectureFlow article > p,
-.architectureFlow article > span {
-  display: block;
-  margin: 1rem 0 0;
-  color: var(--elara-teal);
-  font-size: 0.61rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.architectureFlow article > span {
-  color: color-mix(in srgb, var(--elara-ink) 58%, transparent);
-}
-
-.dataPlane {
-  margin-top: 2.5rem;
-  border-top: 1px solid var(--elara-teal);
-  border-bottom: 1px solid var(--elara-line);
-  padding: 1.4rem 0;
-}
-
-.dataPlane p {
-  margin: 0.7rem 0 0;
+.diagramSummary p {
+  margin: 0.65rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
   font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-.publicationRule {
-  margin: 1.5rem 0 0;
-  color: var(--elara-teal);
-  font-size: 0.78rem;
-  font-weight: 800;
-  line-height: 1.5;
-}
-
-.designDecisions {
-  border-left: 1px solid var(--elara-line);
-  padding-left: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.designDecisions > h4 {
-  color: var(--elara-teal);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.designDecisions > div {
-  margin-top: 1.8rem;
-}
-
-.designDecisions h5 {
-  font-size: 0.96rem;
-}
-
-.designDecisions p {
-  margin: 0.5rem 0 0;
-  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
-.architectureCaption {
-  max-width: 78ch;
-  margin: 2rem 0 0;
-  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
-  font-size: 0.76rem;
   line-height: 1.55;
 }
 
@@ -610,8 +564,7 @@
   background: var(--elara-paper);
 }
 
-.walkthroughLayout,
-.scoringLayout {
+.walkthroughLayout {
   display: grid;
   grid-template-columns: minmax(20rem, 0.72fr) minmax(32rem, 1.28fr);
   gap: clamp(2.5rem, 5vw, 5rem);
@@ -621,13 +574,11 @@
   border-top: 1px solid var(--elara-line);
 }
 
-.walkthroughLabel,
-.scoringCopy > p:first-child {
+.walkthroughLabel {
   margin: 0;
 }
 
-.walkthroughCopy h3,
-.scoringCopy h3 {
+.walkthroughCopy h3 {
   margin-top: 1.15rem;
   font-size: clamp(1.7rem, 2.7vw, 2.75rem);
   line-height: 1.08;
@@ -691,78 +642,29 @@
   border-left: 1px solid var(--elara-line);
 }
 
-.scoringCopy dl {
-  margin: 2rem 0 0;
-  border-top: 1px solid var(--elara-line);
+.scoringSection {
+  margin-top: clamp(5rem, 9vw, 9rem);
+  border-top: 3px solid var(--elara-forest);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
 }
 
-.scoringCopy dl > div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  border-bottom: 1px solid var(--elara-line);
-  padding: 0.95rem 0;
+.scoringHeading {
+  max-width: 76ch;
 }
 
-.scoringCopy dt {
-  font-weight: 700;
-}
-
-.scoringCopy dd {
+.scoringHeading h3 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.7rem;
-  font-weight: 700;
+  font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+  letter-spacing: -0.035em;
+  line-height: 0.98;
 }
 
-.formula {
-  margin: 1.5rem 0 0;
-  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
-  font-size: 0.82rem;
-}
-
-.scoreResult {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  margin-top: 1.6rem;
-}
-
-.scoreResult strong {
-  color: var(--elara-yellow);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(4.2rem, 7vw, 7rem);
-  line-height: 0.85;
-}
-
-.scoreResult span {
-  max-width: 12rem;
-  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
-  font-size: 0.75rem;
-}
-
-.finalLabel {
-  margin: 2rem 0 0;
-  font-size: 0.9rem;
-}
-
-.finalLabel + p {
-  margin: 0.7rem 0 0;
-  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
-  font-size: 0.84rem;
-  line-height: 1.55;
-}
-
-.dependencyNote {
-  margin: 2rem 0 0;
-  border-top: 1px solid var(--elara-teal);
-  border-bottom: 1px solid var(--elara-teal);
-  padding: 1rem;
-  color: var(--elara-teal);
-  font-size: 0.82rem;
-  font-weight: 700;
-  text-align: center;
+.scoringHeading p {
+  margin: 1.25rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.65;
 }
 
 .outcomeStory {
@@ -1245,8 +1147,7 @@
 
 @media (max-width: 1120px) {
   .heroGrid,
-  .walkthroughLayout,
-  .scoringLayout {
+  .walkthroughLayout {
     grid-template-columns: 1fr;
   }
 
@@ -1268,23 +1169,6 @@
 
   .workflowList li:nth-child(n + 3) {
     border-top: 1px solid var(--elara-line);
-  }
-
-  .architectureLayout {
-    grid-template-columns: 1fr;
-  }
-
-  .designDecisions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 2rem;
-    border-top: 1px solid var(--elara-line);
-    border-left: 0;
-    padding: 2rem 0 0;
-  }
-
-  .designDecisions > h4 {
-    grid-column: 1 / -1;
   }
 
   .outcomeStory,
@@ -1322,15 +1206,30 @@
     max-width: 40rem;
   }
 
-  .architectureFlow {
+  .architectureDiagramScroll .diagramImage,
+  .scoringDiagramScroll .diagramImage {
+    width: 64rem;
+    max-width: none;
+  }
+
+  .diagramFigure figcaption {
+    display: block;
+  }
+
+  .diagramFigure figcaption a {
+    width: fit-content;
+    margin-top: 0.65rem;
+  }
+
+  .diagramSummary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .architectureFlow article:nth-child(odd) {
+  .diagramSummary article:nth-child(odd) {
     border-left: 0;
   }
 
-  .architectureFlow article:nth-child(n + 3) {
+  .diagramSummary article:nth-child(n + 3) {
     border-top: 1px solid var(--elara-line);
   }
 
@@ -1438,8 +1337,6 @@
 
   .proofStrip,
   .workflowList,
-  .architectureFlow,
-  .designDecisions,
   .reductionGroup,
   .testGroup {
     grid-template-columns: 1fr;
@@ -1452,8 +1349,6 @@
   .proofStrip > div + div,
   .workflowList li,
   .workflowList li + li,
-  .architectureFlow article,
-  .architectureFlow article + article,
   .reductionGroup article + article,
   .testGroup article + article,
   .testGroup article:nth-child(odd) {
@@ -1462,7 +1357,6 @@
 
   .proofStrip > div + div,
   .workflowList li + li,
-  .architectureFlow article + article,
   .reductionGroup article + article,
   .testGroup article + article {
     border-top: 1px solid var(--elara-line);
@@ -1476,8 +1370,17 @@
     margin-bottom: 2rem;
   }
 
-  .architectureFlow article::after {
-    display: none;
+  .diagramSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .diagramSummary article + article,
+  .diagramSummary article:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .diagramSummary article + article {
+    border-top: 1px solid var(--elara-line);
   }
 
   .latencyRow {
