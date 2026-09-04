@@ -1,37 +1,44 @@
 .page {
   --elara-ink: #102923;
-  --elara-forest: #0b2822;
-  --elara-paper: #f4f1e8;
-  --elara-paper-bright: #fbfaf5;
-  --elara-mint: #dceee7;
-  --elara-teal: #236963;
-  --elara-yellow: #e3c500;
+  --elara-forest: #14362e;
+  --elara-paper: #f2f0e7;
+  --elara-paper-bright: #fbfaf4;
+  --elara-mint: #dce9e3;
+  --elara-teal: #28695d;
+  --elara-yellow: #d2c300;
   --elara-coral: #9f452f;
-  --elara-border: #c9cec6;
-  min-height: 100vh;
+  --elara-line: color-mix(in srgb, var(--elara-ink) 22%, transparent);
+  min-height: 100dvh;
   overflow: clip;
   background: var(--elara-paper);
   color: var(--elara-ink);
-  font-family: Arial, Helvetica, sans-serif;
+  color-scheme: light;
+  font-family: "Segoe UI Variable", "Segoe UI", Helvetica, sans-serif;
 }
 
 .page a:focus-visible {
-  outline-color: var(--elara-teal);
+  outline: 3px solid var(--elara-yellow);
+  outline-offset: 4px;
+}
+
+.page ::selection {
+  background: var(--elara-yellow);
+  color: var(--elara-ink);
 }
 
 .skipLink {
   position: fixed;
   top: 0.75rem;
   left: 1rem;
-  z-index: 100;
+  z-index: 60;
   translate: 0 -180%;
+  border: 1px solid var(--elara-ink);
   border-radius: 999px;
   background: var(--elara-paper-bright);
   padding: 0.75rem 1rem;
-  color: var(--elara-ink);
   font-size: 0.8125rem;
   font-weight: 700;
-  transition: translate 180ms ease;
+  transition: translate 180ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .skipLink:focus {
@@ -46,10 +53,10 @@
   min-height: 4.25rem;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  border-bottom: 1px solid color-mix(in srgb, var(--elara-ink) 18%, transparent);
-  background: color-mix(in srgb, var(--elara-paper) 91%, transparent);
+  border-bottom: 1px solid var(--elara-line);
+  background: color-mix(in srgb, var(--elara-paper) 94%, transparent);
   padding: 0.625rem clamp(1rem, 4vw, 4.5rem);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
 }
 
 .topBar > p {
@@ -64,149 +71,136 @@
 }
 
 .backLink,
-.topCta {
+.topCta,
+.primaryButton,
+.secondaryButton,
+.finalActions a {
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
-  gap: 0.6rem;
-  border-radius: 999px;
+  justify-content: center;
+  gap: 0.55rem;
   text-decoration: none;
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .backLink {
   width: fit-content;
-  padding-right: 1rem;
-}
-
-.backLink:hover {
-  color: var(--elara-teal);
-}
-
-.backLink svg,
-.topCta svg {
-  width: 1rem;
-  height: 1rem;
-  stroke-width: 1.8;
 }
 
 .topCta {
   justify-self: end;
   border: 1px solid var(--elara-forest);
+  border-radius: 999px;
   background: var(--elara-forest);
   padding: 0.75rem 1.15rem;
   color: var(--elara-paper-bright);
 }
 
-.topCta:hover {
-  background: var(--elara-teal);
-  border-color: var(--elara-teal);
+.backLink svg,
+.topCta svg,
+.primaryButton svg,
+.secondaryButton svg,
+.finalActions svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.8;
 }
 
 .hero,
-.lightSection,
-.gallerySection,
+.workflowSection,
+.evidenceSection,
 .outcomesSection,
 .securitySection,
 .buildSection,
 .limitationsSection,
 .finalCta,
 .manifesto {
-  padding: clamp(4rem, 8vw, 8.5rem) clamp(1.1rem, 5vw, 5.5rem);
+  padding: clamp(4rem, 8vw, 8rem) clamp(1.1rem, 5vw, 5.5rem);
 }
 
 .hero {
-  position: relative;
-  padding-top: clamp(2.75rem, 5vw, 5rem);
-  background:
-    radial-gradient(circle at 91% 14%, rgba(45, 127, 122, 0.13), transparent 28%),
-    linear-gradient(90deg, transparent 49.9%, rgba(16, 41, 35, 0.08) 50%, transparent 50.1%),
-    var(--elara-paper);
+  padding-top: clamp(2.5rem, 5vw, 5rem);
+  background: var(--elara-paper);
 }
 
 .heroMeta {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--elara-border);
-  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
+  border-bottom: 1px solid var(--elara-line);
+  padding-bottom: 1rem;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
   font-size: 0.6875rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.heroMeta p {
+.heroMeta p,
+.sectionLabel,
+.darkLabel,
+.kicker {
   margin: 0;
 }
 
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(31rem, 1.14fr);
+  min-height: min(46rem, calc(100dvh - 7rem));
+  grid-template-columns: minmax(19rem, 0.72fr) minmax(34rem, 1.28fr);
   gap: clamp(3rem, 6vw, 7rem);
   align-items: center;
-  min-height: min(48rem, calc(100svh - 8rem));
-  padding: clamp(3.5rem, 8vw, 7.5rem) 0 clamp(3.5rem, 6vw, 6rem);
-}
-
-.heroCopy {
-  animation: elara-rise 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  padding: clamp(3rem, 7vw, 6.5rem) 0 clamp(3rem, 6vw, 5.5rem);
 }
 
 .kicker,
-.eyebrow,
-.darkEyebrow {
-  margin: 0;
+.sectionLabel,
+.darkLabel,
+.walkthroughLabel,
+.scoringCopy > p:first-child {
+  color: var(--elara-teal);
   font-size: 0.6875rem;
   font-weight: 900;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.kicker {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  color: var(--elara-teal);
-}
-
-.kicker svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  color: var(--elara-yellow);
-  stroke-width: 1.7;
+.heroCopy h1,
+.sectionHeading h2,
+.manifesto h2,
+.buildIntro h2,
+.limitationsSection h2,
+.finalCta h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.04em;
 }
 
 .heroCopy h1 {
   margin: 1rem 0 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(4.8rem, 10.5vw, 10.5rem);
-  font-weight: 700;
-  letter-spacing: -0.065em;
-  line-height: 0.82;
+  font-size: clamp(4.5rem, 9vw, 9rem);
+  line-height: 0.86;
 }
 
 .heroStatement {
   max-width: 17ch;
-  margin: 2.5rem 0 0;
+  margin: 2.2rem 0 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.85rem, 3.1vw, 3.5rem);
+  font-size: clamp(1.8rem, 3vw, 3.1rem);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.02;
 }
 
 .heroDescription {
-  max-width: 41rem;
-  margin: 1.5rem 0 0;
+  max-width: 42rem;
+  margin: 1.4rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 72%, transparent);
   font-size: clamp(1rem, 1.35vw, 1.15rem);
-  line-height: 1.75;
+  line-height: 1.7;
 }
 
 .heroActions,
@@ -220,20 +214,9 @@
 .primaryButton,
 .secondaryButton,
 .finalActions a {
-  display: inline-flex;
-  min-height: 3.2rem;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
   border: 1px solid var(--elara-forest);
-  border-radius: 0.35rem;
-  padding: 0.85rem 1.2rem;
-  text-decoration: none;
-  font-size: 0.75rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: background-color 200ms ease, color 200ms ease, translate 200ms ease;
+  border-radius: 999px;
+  padding: 0.82rem 1.15rem;
 }
 
 .primaryButton {
@@ -245,1144 +228,1079 @@
   background: transparent;
 }
 
-.primaryButton:hover,
-.secondaryButton:hover,
-.finalActions a:hover {
-  translate: 0 -2px;
-}
-
-.primaryButton:hover {
-  background: var(--elara-teal);
-}
-
-.secondaryButton:hover {
-  background: var(--elara-forest);
-  color: var(--elara-paper-bright);
-}
-
-.primaryButton svg,
-.secondaryButton svg,
-.finalActions svg {
-  width: 1rem;
-  height: 1rem;
-}
-
 .heroVisual {
-  position: relative;
   min-width: 0;
-  overflow: visible;
-  border: 1px solid color-mix(in srgb, var(--elara-forest) 26%, transparent);
-  border-radius: 1.2rem;
-  background: var(--elara-paper-bright);
-  box-shadow: 1.1rem 1.1rem 0 color-mix(in srgb, var(--elara-forest) 10%, transparent);
-  animation: elara-rise 750ms 100ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.browserBar {
-  display: flex;
-  min-height: 2.85rem;
-  align-items: center;
-  gap: 0.45rem;
-  border-bottom: 1px solid var(--elara-border);
-  padding: 0.65rem 0.9rem;
-}
-
-.browserBar > span {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--elara-coral);
-}
-
-.browserBar > span:nth-child(2) {
-  background: var(--elara-yellow);
-}
-
-.browserBar > span:nth-child(3) {
-  background: var(--elara-teal);
-}
-
-.browserBar p {
+.screenshotFigure {
   min-width: 0;
-  margin: 0 0 0 0.55rem;
-  overflow: hidden;
-  color: color-mix(in srgb, var(--elara-ink) 58%, transparent);
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  margin: 0;
 }
 
-.heroImage {
-  position: relative;
-  aspect-ratio: 1.49 / 1;
-  overflow: hidden;
-  border-radius: 0 0 1.15rem 1.15rem;
-}
-
-.coverImage {
-  object-fit: cover;
-}
-
-.auditBadge {
-  position: absolute;
-  right: -1rem;
-  bottom: -1.75rem;
+.screenHeader {
   display: flex;
+  min-height: 2.65rem;
   align-items: center;
-  gap: 0.75rem;
-  border: 1px solid var(--elara-forest);
-  border-radius: 0.5rem;
-  background: var(--elara-forest);
-  padding: 0.75rem 1rem;
-  color: var(--elara-paper-bright);
-  box-shadow: 0.5rem 0.5rem 0 var(--elara-yellow);
-}
-
-.auditBadge svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--elara-yellow);
-}
-
-.auditBadge span {
-  display: grid;
-  gap: 0.1rem;
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.11em;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--elara-line);
+  border-bottom: 0;
+  padding: 0.7rem 0.9rem;
+  color: color-mix(in srgb, var(--elara-ink) 64%, transparent);
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.auditBadge strong {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.95rem;
-  letter-spacing: 0;
-  text-transform: none;
+.screenHeader span:first-child {
+  color: var(--elara-teal);
+}
+
+.screenViewport {
+  position: relative;
+  aspect-ratio: 1265 / 712;
+  border: 1px solid var(--elara-line);
+  background: #f8f5eb;
+}
+
+.screenshotImage {
+  object-fit: cover;
+}
+
+.screenshotFigure figcaption {
+  max-width: 78ch;
+  margin-top: 0.8rem;
+  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.auditStatus {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin: 0;
+  border-bottom: 1px solid var(--elara-line);
+  padding: 0.75rem 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auditStatus strong {
+  color: var(--elara-teal);
 }
 
 .proofStrip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--elara-ink);
-  border-bottom: 1px solid var(--elara-ink);
+  margin: 0;
+  border-top: 1px solid var(--elara-line);
+  border-bottom: 1px solid var(--elara-line);
 }
 
 .proofStrip > div {
   display: flex;
-  min-width: 0;
-  align-items: center;
+  min-height: 7.5rem;
+  flex-direction: column-reverse;
+  justify-content: space-between;
   gap: 1rem;
-  padding: 1.25rem clamp(0.75rem, 2vw, 1.5rem);
+  padding: 1.25rem clamp(1rem, 2vw, 1.75rem);
 }
 
 .proofStrip > div + div {
-  border-left: 1px solid var(--elara-ink);
+  border-left: 1px solid var(--elara-line);
 }
 
-.proofStrip svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  flex: 0 0 auto;
-  color: var(--elara-teal);
-  stroke-width: 1.6;
-}
-
-.proofStrip p {
-  display: grid;
-  margin: 0;
-}
-
-.proofStrip strong {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.65rem, 2.7vw, 2.6rem);
-  line-height: 1;
-}
-
-.proofStrip span {
-  margin-top: 0.3rem;
-  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+.proofStrip dt {
+  color: color-mix(in srgb, var(--elara-ink) 65%, transparent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.35;
   text-transform: uppercase;
+}
+
+.proofStrip dd {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
 }
 
 .manifesto {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr);
-  gap: clamp(3rem, 8vw, 9rem);
-  background:
-    radial-gradient(circle at 84% 8%, rgba(45, 127, 122, 0.42), transparent 26%),
-    var(--elara-forest);
-  color: var(--elara-paper-bright);
+  grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.55fr);
+  gap: clamp(4rem, 8vw, 9rem);
+  background: var(--elara-mint);
 }
 
-.darkEyebrow {
-  color: var(--elara-yellow);
+.darkLabel {
+  color: var(--elara-teal);
 }
 
-.manifestoLead h2,
-.sectionHeading h2,
+.manifesto h2,
 .buildIntro h2,
 .limitationsSection h2,
 .finalCta h2 {
   margin: 1rem 0 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.8rem, 6vw, 6.5rem);
-  font-weight: 700;
-  letter-spacing: -0.045em;
-  line-height: 0.98;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.95;
 }
 
 .manifestoLead > p:last-child {
-  max-width: 46rem;
-  margin: 2rem 0 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 72%, transparent);
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  line-height: 1.8;
-}
-
-.boundaryGrid {
-  align-self: center;
-  border-top: 1px solid color-mix(in srgb, var(--elara-paper-bright) 36%, transparent);
-}
-
-.boundaryGrid > div {
-  display: grid;
-  grid-template-columns: minmax(8.5rem, 0.45fr) minmax(0, 1fr);
-  gap: 1.5rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--elara-paper-bright) 20%, transparent);
-  padding: 1.5rem 0;
-}
-
-.boundaryGrid span {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-}
-
-.boundaryGrid p {
-  margin: 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 68%, transparent);
-  font-size: 0.86rem;
+  max-width: 64ch;
+  margin: 2.25rem 0 0;
+  font-size: clamp(1.15rem, 1.65vw, 1.45rem);
   line-height: 1.65;
 }
 
-.lightSection,
+.boundaryGrid {
+  align-self: end;
+}
+
+.boundaryGrid > div {
+  border-top: 1px solid var(--elara-line);
+  padding: 1.25rem 0;
+}
+
+.boundaryGrid > div:last-child {
+  border-bottom: 1px solid var(--elara-line);
+}
+
+.boundaryGrid span {
+  font-weight: 800;
+}
+
+.boundaryGrid p {
+  margin: 0.45rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
+  line-height: 1.55;
+}
+
+.workflowSection,
 .outcomesSection,
 .buildSection {
-  background: var(--elara-paper);
-}
-
-.outcomesSection {
-  scroll-margin-top: 5rem;
-}
-
-.gallerySection {
-  background: #e7eee9;
+  background: var(--elara-paper-bright);
 }
 
 .sectionHeading {
-  display: grid;
-  max-width: 76rem;
-  grid-template-columns: minmax(0, 0.34fr) minmax(0, 1fr);
-  column-gap: clamp(2rem, 6vw, 7rem);
-}
-
-.sectionHeading .eyebrow {
-  padding-top: 0.65rem;
-  color: var(--elara-teal);
+  max-width: 68rem;
 }
 
 .sectionHeading h2 {
-  grid-column: 2;
-  margin-top: 0;
-  font-size: clamp(2.75rem, 5.3vw, 5.7rem);
-}
-
-.sectionIntro {
-  grid-column: 2;
-  max-width: 54rem;
-  margin: 1.5rem 0 0;
-  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
-  font-size: clamp(1rem, 1.4vw, 1.16rem);
-  line-height: 1.75;
-}
-
-.workflowSection .sectionHeading {
-  max-width: none;
-}
-
-.workflowSection .sectionHeading h2,
-.workflowSection .sectionIntro {
-  grid-column: 1 / -1;
-}
-
-.workflowSection .sectionHeading h2 {
-  display: grid;
-  gap: 0.18em;
-  margin-top: 1rem;
+  margin: 1rem 0 0;
+  font-size: clamp(3.2rem, 7vw, 7rem);
+  line-height: 0.92;
 }
 
 .workflowHeadingLine {
   display: block;
 }
 
-.workflowSection .sectionIntro {
-  max-width: 70rem;
-}
-
-.evidenceSection .sectionHeading {
-  max-width: none;
-}
-
-.evidenceSection .sectionHeading h2,
-.evidenceSection .sectionIntro {
-  grid-column: 1 / -1;
-}
-
-.evidenceSection .sectionHeading h2 {
-  margin-top: 1rem;
-}
-
-.evidenceSection .sectionIntro {
-  max-width: 70rem;
+.sectionIntro {
+  max-width: 70ch;
+  margin: 1.75rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  line-height: 1.65;
 }
 
 .workflowList {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin: clamp(3rem, 6vw, 5.5rem) 0 0;
+  margin: clamp(3.5rem, 6vw, 6rem) 0 0;
   padding: 0;
-  border-top: 1px solid var(--elara-ink);
-  border-bottom: 1px solid var(--elara-ink);
+  border-top: 1px solid var(--elara-line);
+  border-bottom: 1px solid var(--elara-line);
   list-style: none;
 }
 
 .workflowList li {
-  position: relative;
-  display: flex;
   min-height: 17rem;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1.25rem;
+  padding: 1.4rem clamp(1rem, 1.6vw, 1.5rem) 1.75rem;
 }
 
 .workflowList li + li {
-  border-left: 1px solid var(--elara-ink);
+  border-left: 1px solid var(--elara-line);
 }
 
 .workflowList li > p {
-  margin: 0;
-  color: var(--elara-teal);
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 0.75rem;
+  margin: 0 0 4rem;
+  color: var(--elara-yellow);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
   font-weight: 700;
+}
+
+.workflowList h3,
+.architecture h3,
+.walkthroughCopy h3,
+.scoringCopy h3,
+.latencyPanel h3,
+.deepSeekMethod h3,
+.fixesHeading h3,
+.securityLedger h3,
+.technologyGrid h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.025em;
 }
 
 .workflowList h3 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.3rem, 2vw, 1.85rem);
+  font-size: 1.45rem;
 }
 
-.workflowList div p {
-  margin: 0.85rem 0 0;
+.workflowList li div p {
+  margin: 0.7rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
-  font-size: 0.82rem;
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
-.workflowList svg {
-  width: 1.1rem;
-  height: 1.1rem;
-  color: var(--elara-yellow);
+.architecture {
+  margin-top: clamp(5rem, 9vw, 9rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  border-top: 3px solid var(--elara-forest);
 }
 
-.projectImage {
-  margin: clamp(3rem, 6vw, 5.5rem) 0 0;
+.architectureHeading h3 {
+  font-size: clamp(2rem, 4vw, 3.8rem);
 }
 
-.projectImageCanvas {
+.architectureHeading p {
+  margin: 0.65rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
+}
+
+.architectureLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 3.2fr) minmax(16rem, 0.8fr);
+  gap: clamp(3rem, 5vw, 5rem);
+  margin-top: 3rem;
+}
+
+.architectureFlow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--elara-line);
+  border-bottom: 1px solid var(--elara-line);
+}
+
+.architectureFlow article {
   position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--elara-ink) 20%, transparent);
-  border-radius: 1.15rem;
+  min-height: 16rem;
+  padding: 1.35rem 1.25rem;
+}
+
+.architectureFlow article + article {
+  border-left: 1px solid var(--elara-line);
+}
+
+.architectureFlow article:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -0.65rem;
+  z-index: 1;
   background: var(--elara-paper-bright);
-  box-shadow: 0.65rem 0.65rem 0 color-mix(in srgb, var(--elara-ink) 8%, transparent);
+  padding: 0 0.25rem;
+  color: var(--elara-yellow);
+  content: "→";
+  font-size: 1rem;
 }
 
-.containImage {
-  object-fit: contain;
+.architectureFlow h4,
+.dataPlane h4,
+.designDecisions h4,
+.designDecisions h5 {
+  margin: 0;
 }
 
-.projectImage figcaption {
-  margin-top: 1rem;
-  color: color-mix(in srgb, var(--elara-ink) 64%, transparent);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  line-height: 1.6;
+.architectureFlow h4,
+.dataPlane h4 {
+  font-size: 0.92rem;
+}
+
+.architectureFlow ul {
+  margin: 0.85rem 0 0;
+  padding: 0;
+  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
+  font-size: 0.76rem;
+  line-height: 1.55;
+  list-style: none;
+}
+
+.architectureFlow article > p,
+.architectureFlow article > span {
+  display: block;
+  margin: 1rem 0 0;
+  color: var(--elara-teal);
+  font-size: 0.61rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.imageGrid {
+.architectureFlow article > span {
+  color: color-mix(in srgb, var(--elara-ink) 58%, transparent);
+}
+
+.dataPlane {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--elara-teal);
+  border-bottom: 1px solid var(--elara-line);
+  padding: 1.4rem 0;
+}
+
+.dataPlane p {
+  margin: 0.7rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.publicationRule {
+  margin: 1.5rem 0 0;
+  color: var(--elara-teal);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.designDecisions {
+  border-left: 1px solid var(--elara-line);
+  padding-left: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.designDecisions > h4 {
+  color: var(--elara-teal);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.designDecisions > div {
+  margin-top: 1.8rem;
+}
+
+.designDecisions h5 {
+  font-size: 0.96rem;
+}
+
+.designDecisions p {
+  margin: 0.5rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.architectureCaption {
+  max-width: 78ch;
+  margin: 2rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.evidenceSection,
+.securitySection,
+.limitationsSection,
+.finalCta {
+  background: var(--elara-paper);
+}
+
+.walkthroughLayout,
+.scoringLayout {
+  display: grid;
+  grid-template-columns: minmax(20rem, 0.72fr) minmax(32rem, 1.28fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: start;
+  margin-top: clamp(3.5rem, 7vw, 7rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--elara-line);
+}
+
+.walkthroughLabel,
+.scoringCopy > p:first-child {
+  margin: 0;
+}
+
+.walkthroughCopy h3,
+.scoringCopy h3 {
+  margin-top: 1.15rem;
+  font-size: clamp(1.7rem, 2.7vw, 2.75rem);
+  line-height: 1.08;
+}
+
+.walkthroughCopy ol {
+  margin: 2rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--elara-line);
+  list-style: none;
+}
+
+.walkthroughCopy li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--elara-line);
+  padding: 0.9rem 0;
+}
+
+.walkthroughCopy li > span {
+  color: var(--elara-teal);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+}
+
+.walkthroughCopy li p {
+  margin: 0.2rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.evidenceGallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.5rem, 3vw, 3rem);
+  margin-top: clamp(5rem, 9vw, 9rem);
 }
 
-.imageGrid .projectImage {
-  margin-top: clamp(2rem, 4vw, 3.5rem);
+.auditTrail {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 2.5rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--elara-line);
+  border-bottom: 1px solid var(--elara-line);
+  list-style: none;
 }
 
-.outcomesSection .sectionHeading,
-.outcomeStory,
-.outcomeHighlights,
-.fixesSection,
-.outcomeDataGrid {
-  width: 100%;
-  margin-inline: 0;
+.auditTrail li {
+  position: relative;
+  padding: 1.15rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-.outcomesSection .sectionHeading {
-  max-width: none;
+.auditTrail li + li {
+  border-left: 1px solid var(--elara-line);
 }
 
-.outcomesSection .sectionHeading h2,
-.outcomesSection .sectionIntro {
-  grid-column: 1 / -1;
+.scoringCopy dl {
+  margin: 2rem 0 0;
+  border-top: 1px solid var(--elara-line);
 }
 
-.outcomesSection .sectionHeading h2 {
-  margin-top: 1rem;
+.scoringCopy dl > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--elara-line);
+  padding: 0.95rem 0;
 }
 
-.outcomesSection .sectionIntro {
-  max-width: 70rem;
+.scoringCopy dt {
+  font-weight: 700;
+}
+
+.scoringCopy dd {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.formula {
+  margin: 1.5rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.82rem;
+}
+
+.scoreResult {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+
+.scoreResult strong {
+  color: var(--elara-yellow);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(4.2rem, 7vw, 7rem);
+  line-height: 0.85;
+}
+
+.scoreResult span {
+  max-width: 12rem;
+  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
+  font-size: 0.75rem;
+}
+
+.finalLabel {
+  margin: 2rem 0 0;
+  font-size: 0.9rem;
+}
+
+.finalLabel + p {
+  margin: 0.7rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.dependencyNote {
+  margin: 2rem 0 0;
+  border-top: 1px solid var(--elara-teal);
+  border-bottom: 1px solid var(--elara-teal);
+  padding: 1rem;
+  color: var(--elara-teal);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .outcomeStory {
   display: grid;
-  overflow: hidden;
-  grid-template-columns: minmax(0, 1.08fr) minmax(24rem, 0.92fr);
-  margin-top: clamp(3rem, 6vw, 5.5rem);
-  border-radius: 1rem;
-  background: var(--elara-forest);
-  color: var(--elara-paper-bright);
-}
-
-.latencyPanel,
-.deepSeekMethod {
-  min-width: 0;
-  padding: clamp(1.5rem, 3.5vw, 3.25rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+  gap: clamp(3rem, 6vw, 6rem);
+  margin-top: clamp(3.5rem, 7vw, 7rem);
+  border-top: 3px solid var(--elara-forest);
+  padding-top: 2rem;
 }
 
 .deepSeekMethod {
-  border-left: 1px solid color-mix(in srgb, var(--elara-paper-bright) 24%, transparent);
-  background: color-mix(in srgb, var(--elara-teal) 24%, var(--elara-forest));
+  border-left: 1px solid var(--elara-line);
+  padding-left: clamp(1.5rem, 3vw, 3rem);
 }
 
-.latencyPanel header h3,
-.deepSeekMethod header h3,
+.latencyPanel h3,
+.deepSeekMethod h3,
 .fixesHeading h3 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 3.2vw, 3.35rem);
-  letter-spacing: -0.035em;
-  line-height: 1.02;
+  font-size: clamp(1.8rem, 3vw, 3rem);
 }
 
-.latencyPanel header p,
-.deepSeekMethod header p,
-.fixesHeading p {
-  max-width: 62ch;
-  margin: 1rem 0 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 72%, transparent);
-  font-size: 0.92rem;
-  line-height: 1.7;
+.latencyPanel header > p,
+.deepSeekMethod header > p,
+.fixesHeading > p {
+  max-width: 60ch;
+  margin: 0.7rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
+  line-height: 1.55;
 }
 
 .latencyRows {
-  margin-top: 2.25rem;
-  border-top: 1px solid color-mix(in srgb, var(--elara-paper-bright) 24%, transparent);
+  margin-top: 2rem;
 }
 
 .latencyRow {
   display: grid;
-  grid-template-columns: minmax(13rem, 1fr) minmax(7rem, auto) 1.5rem minmax(7rem, auto);
-  gap: 1rem;
+  grid-template-columns: minmax(13rem, 1.4fr) minmax(8rem, 0.75fr) auto minmax(8rem, 0.75fr);
+  gap: 1.25rem;
   align-items: center;
-  border-bottom: 1px solid color-mix(in srgb, var(--elara-paper-bright) 18%, transparent);
-  padding: 1.25rem 0;
+  border-top: 1px solid var(--elara-line);
+  padding: 1.35rem 0;
+}
+
+.latencyRow:last-child {
+  border-bottom: 1px solid var(--elara-line);
 }
 
 .latencyLabel h4 {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
-  line-height: 1.2;
+  font-size: 0.95rem;
 }
 
 .latencyLabel p {
-  margin: 0.45rem 0 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 56%, transparent);
-  font-size: 0.72rem;
-  line-height: 1.5;
-}
-
-.metricState {
-  display: grid;
-  gap: 0.35rem;
+  margin: 0.35rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 62%, transparent);
+  font-size: 0.76rem;
 }
 
 .metricState span {
-  color: color-mix(in srgb, var(--elara-paper-bright) 58%, transparent);
-  font-size: 0.58rem;
+  display: block;
+  color: color-mix(in srgb, var(--elara-ink) 58%, transparent);
+  font-size: 0.62rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  line-height: 1.3;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
 .metricState strong {
+  display: block;
+  margin-top: 0.35rem;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.75rem, 2.7vw, 2.65rem);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  font-size: 1.8rem;
 }
 
-.metricAfter {
-  border-radius: 0.7rem;
-  background: var(--elara-yellow);
-  padding: 0.85rem 1rem;
-  color: var(--elara-forest);
-}
-
-.metricAfter span {
-  color: color-mix(in srgb, var(--elara-forest) 72%, transparent);
+.metricAfter strong {
+  color: var(--elara-teal);
 }
 
 .latencyArrow {
-  width: 1.25rem;
-  height: 1.25rem;
   color: var(--elara-yellow);
-  stroke-width: 1.7;
+  font-size: 1.25rem;
 }
 
 .deterministicBaseline {
-  margin: 1.25rem 0 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 64%, transparent);
-  font-size: 0.72rem;
-  line-height: 1.6;
-}
-
-.deterministicBaseline strong {
-  color: var(--elara-paper-bright);
-  font-variant-numeric: tabular-nums;
+  margin: 1.3rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.78rem;
 }
 
 .judgmentLimits {
-  margin: 2.25rem 0 0;
-  border-top: 1px solid color-mix(in srgb, var(--elara-paper-bright) 24%, transparent);
+  margin: 2rem 0 0;
 }
 
 .judgmentLimits > div {
-  display: grid;
-  grid-template-columns: minmax(8.5rem, 0.75fr) minmax(0, 1.25fr);
-  gap: 1rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--elara-paper-bright) 18%, transparent);
+  border-top: 1px solid var(--elara-line);
   padding: 1rem 0;
 }
 
+.judgmentLimits > div:last-child {
+  border-bottom: 1px solid var(--elara-line);
+}
+
 .judgmentLimits dt {
-  color: var(--elara-yellow);
-  font-size: 0.66rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1.45;
-  text-transform: uppercase;
+  font-weight: 800;
 }
 
 .judgmentLimits dd {
-  margin: 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 78%, transparent);
+  margin: 0.35rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
   font-size: 0.8rem;
-  line-height: 1.6;
+  line-height: 1.45;
 }
 
 .controlList {
-  counter-reset: deepseek-control;
   margin: 1.5rem 0 0;
   padding: 0;
   list-style: none;
 }
 
 .controlList li {
-  counter-increment: deepseek-control;
   display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr);
+  grid-template-columns: 1.8rem 1fr;
   gap: 0.8rem;
-  align-items: start;
-  padding: 0.75rem 0;
+  padding: 0.55rem 0;
 }
 
-.controlList li > span::before {
-  content: counter(deepseek-control, decimal-leading-zero);
-  color: var(--elara-yellow);
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 0.7rem;
+.controlList span {
+  color: var(--elara-teal);
+  font-family: Georgia, "Times New Roman", serif;
   font-weight: 700;
 }
 
 .controlList p {
   margin: 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 78%, transparent);
-  font-size: 0.82rem;
-  line-height: 1.6;
+  font-size: 0.8rem;
+  line-height: 1.5;
 }
 
-.outcomeHighlights {
+.searchPolicyPanel {
+  margin-top: clamp(4rem, 7vw, 7rem);
+  border-top: 1px solid var(--elara-line);
+  border-bottom: 1px solid var(--elara-line);
+}
+
+.searchPolicyHeader {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: clamp(2rem, 4vw, 3.5rem);
+  grid-template-columns: minmax(9rem, 0.3fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem);
 }
 
-.outcomeHighlights article {
-  grid-column: span 7;
-  min-height: 14rem;
-  border: 1px solid var(--elara-border);
-  border-radius: 1rem;
-  background: var(--elara-paper-bright);
-  padding: clamp(1.25rem, 2.5vw, 2rem);
-}
-
-.outcomeHighlights article:nth-child(2) {
-  grid-column: span 5;
-  background: #f2d9cf;
-}
-
-.outcomeHighlights span {
+.searchPolicyHeader h3 {
+  margin: 0;
   color: var(--elara-teal);
-  font-size: 0.65rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.outcomeHighlights strong {
-  display: block;
-  margin-top: 2rem;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
-  letter-spacing: -0.035em;
-  line-height: 1;
+.searchPolicyHeader p {
+  max-width: 72ch;
+  margin: 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  line-height: 1.55;
 }
 
-.outcomeHighlights p {
-  margin: 1.25rem 0 0;
-  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
-  font-size: 0.84rem;
-  line-height: 1.7;
+.searchPolicyPanel .reductionGroup {
+  border-bottom: 0;
 }
 
 .fixesSection {
-  margin-top: clamp(4rem, 8vw, 7.5rem);
+  margin-top: clamp(5rem, 9vw, 9rem);
 }
 
 .fixesHeading {
-  max-width: 64rem;
-}
-
-.fixesHeading h3 {
-  color: var(--elara-ink);
-  scroll-margin-top: 6rem;
-}
-
-.fixesHeading p {
-  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
-  font-size: clamp(1rem, 1.35vw, 1.12rem);
+  max-width: 55rem;
 }
 
 .fixesLedger {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: clamp(2.5rem, 5vw, 4.5rem);
-  border-top: 1px solid var(--elara-ink);
+  margin-top: 2.5rem;
 }
 
 .engineeringFix {
-  min-width: 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--elara-ink) 34%, transparent);
-  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  border-top: 1px solid var(--elara-line);
+  padding: 1.6rem 0;
 }
 
-.engineeringFix:nth-child(odd) {
-  border-right: 1px solid color-mix(in srgb, var(--elara-ink) 34%, transparent);
-  padding-right: clamp(1.25rem, 3vw, 3rem);
-}
-
-.engineeringFix:nth-child(even) {
-  padding-left: clamp(1.25rem, 3vw, 3rem);
+.engineeringFix:last-child {
+  border-bottom: 1px solid var(--elara-line);
 }
 
 .engineeringFix h4 {
-  max-width: 24ch;
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.45rem, 2.2vw, 2.15rem);
-  letter-spacing: -0.025em;
-  line-height: 1.08;
+  font-size: 1.2rem;
 }
 
 .engineeringFix dl {
   display: grid;
-  gap: 0.9rem;
-  margin: 1.75rem 0 0;
-}
-
-.engineeringFix dl > div {
-  display: grid;
-  grid-template-columns: 4.75rem minmax(0, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0;
 }
 
 .engineeringFix dt {
   color: var(--elara-teal);
-  font-size: 0.62rem;
+  font-size: 0.64rem;
   font-weight: 900;
   letter-spacing: 0.08em;
-  line-height: 1.6;
   text-transform: uppercase;
 }
 
 .engineeringFix dd {
-  margin: 0;
-  color: color-mix(in srgb, var(--elara-ink) 74%, transparent);
+  margin: 0.45rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
   font-size: 0.8rem;
-  line-height: 1.65;
+  line-height: 1.5;
 }
 
 .outcomeDataGrid {
+  margin-top: clamp(5rem, 9vw, 9rem);
+}
+
+.reductionGroup,
+.testGroup {
   display: grid;
-  overflow-x: auto;
-  grid-template-columns: repeat(8, minmax(8.5rem, 1fr));
-  gap: 1rem;
-  align-items: stretch;
-  margin-top: clamp(2rem, 4vw, 3.5rem);
-  padding-bottom: 1rem;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: inline proximity;
-  scrollbar-color: var(--elara-teal) color-mix(in srgb, var(--elara-ink) 10%, transparent);
-  scrollbar-width: thin;
+  border-top: 1px solid var(--elara-line);
+  border-bottom: 1px solid var(--elara-line);
 }
 
-.callReductionCard,
-.testCountCard {
-  display: grid;
-  min-width: 0;
-  min-height: 15rem;
-  border: 1px solid var(--elara-border);
-  border-radius: 1rem;
-  background: var(--elara-paper-bright);
-  padding: clamp(1rem, 1.25vw, 1.35rem);
-  box-shadow: 0.35rem 0.5rem 1rem color-mix(in srgb, var(--elara-ink) 8%, transparent);
-  scroll-snap-align: start;
+.reductionGroup {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.callReductionCard {
-  background: var(--elara-mint);
+.reductionGroup article,
+.testGroup article {
+  padding: 1.5rem clamp(1rem, 2vw, 2rem);
 }
 
-.callReductionCard.featuredReduction {
-  background: color-mix(in srgb, var(--elara-yellow) 32%, var(--elara-paper-bright));
+.reductionGroup article + article,
+.testGroup article + article {
+  border-left: 1px solid var(--elara-line);
 }
 
-.callReductionCard h3 {
+.reductionGroup h3 {
   margin: 0;
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+  color: var(--elara-teal);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .reductionMeasure {
   display: flex;
-  gap: clamp(0.2rem, 0.5vw, 0.45rem);
-  align-items: baseline;
-  margin: 2.25rem 0 0;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 1rem 0 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.6rem, 2vw, 2.35rem);
-  font-variant-numeric: tabular-nums;
+  font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1;
+}
+
+.reductionMeasure span:nth-child(2) {
+  color: var(--elara-yellow);
+}
+
+.featuredReduction .reductionMeasure {
+  color: var(--elara-teal);
+}
+
+.reductionPercent,
+.reductionScope {
+  margin: 0.7rem 0 0;
+  font-size: 0.72rem;
 }
 
 .reductionPercent {
-  margin: 1.5rem 0 0;
-  color: var(--elara-teal);
-  font-size: 0.82rem;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .reductionScope {
-  align-self: end;
-  margin: 1.5rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 62%, transparent);
-  font-size: 0.72rem;
-  line-height: 1.5;
 }
 
-.testCountCard {
-  align-content: center;
+.testGroup {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-.testCountCard strong {
-  color: var(--elara-teal);
+.testGroup article {
+  display: flex;
+  min-height: 7rem;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.testGroup strong {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.25rem, 3.5vw, 3.6rem);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.035em;
-  line-height: 1;
+  font-size: 2.25rem;
 }
 
-.testCountCard .highlightedTestCount {
-  color: var(--elara-yellow);
-}
-
-.testCountCard span {
-  margin-top: 0.65rem;
-  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
-  font-size: 0.74rem;
+.testGroup span {
+  color: color-mix(in srgb, var(--elara-ink) 64%, transparent);
+  font-size: 0.72rem;
   line-height: 1.4;
 }
 
+.highlightedTestCount {
+  color: var(--elara-teal);
+}
+
 .securitySection {
-  position: relative;
-  display: grid;
-  overflow: clip;
-  grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
-  gap: clamp(4rem, 8vw, 10rem);
-  align-items: start;
-  background:
-    radial-gradient(circle at 8% 16%, color-mix(in srgb, var(--elara-yellow) 8%, transparent), transparent 24rem),
-    var(--elara-forest);
-  color: var(--elara-paper-bright);
-}
-
-.securitySection .sectionHeading .eyebrow {
-  color: var(--elara-yellow);
-}
-
-.securitySection .sectionHeading {
-  position: sticky;
-  top: 7rem;
-  display: block;
-  max-width: 34rem;
-}
-
-.securitySection .sectionHeading h2,
-.securitySection .sectionIntro {
-  grid-column: auto;
-}
-
-.securitySection .sectionHeading h2 {
-  margin-top: 1rem;
-}
-
-.securitySection .sectionIntro {
-  max-width: 56ch;
-  margin-top: 1.75rem;
-  color: color-mix(in srgb, var(--elara-paper-bright) 70%, transparent);
+  background: var(--elara-mint);
 }
 
 .securityLedger {
-  position: relative;
-  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 6vw, 7rem);
+  margin: clamp(3.5rem, 7vw, 7rem) 0 0;
   padding: 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--elara-paper-bright) 24%, transparent);
   list-style: none;
 }
 
 .securityLedger li {
   display: grid;
-  min-height: 9.75rem;
-  grid-template-columns: 4.75rem minmax(11rem, 0.72fr) minmax(0, 1.28fr);
-  gap: clamp(1.25rem, 2.5vw, 2.75rem);
-  align-items: center;
-  border-top: 1px solid color-mix(in srgb, var(--elara-paper-bright) 24%, transparent);
-  padding: clamp(1.4rem, 2.4vw, 2.25rem) 0;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.4rem 1rem;
+  border-top: 1px solid var(--elara-line);
+  padding: 1.5rem 0;
 }
 
-.securityMarker {
-  display: grid;
-  align-self: stretch;
-  grid-template-rows: auto 1fr;
-  align-items: end;
-  border-right: 1px solid color-mix(in srgb, var(--elara-paper-bright) 18%, transparent);
-  padding-right: 1.25rem;
+.securityLedger li:nth-last-child(-n + 2) {
+  border-bottom: 1px solid var(--elara-line);
 }
 
-.securityMarker svg {
-  width: 1.55rem;
-  height: 1.55rem;
-  color: var(--elara-yellow);
-  stroke-width: 1.5;
-}
-
-.securityMarker span {
-  justify-self: end;
-  color: color-mix(in srgb, var(--elara-paper-bright) 48%, transparent);
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 0.72rem;
-  font-variant-numeric: tabular-nums;
+.securityLedger li > span {
+  grid-row: 1 / 3;
+  color: var(--elara-teal);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .securityLedger h3 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.45rem, 2vw, 2.15rem);
-  letter-spacing: -0.025em;
-  line-height: 1.08;
+  font-size: 1.3rem;
 }
 
 .securityLedger p {
-  max-width: 52ch;
-  margin: 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 68%, transparent);
-  font-size: 0.86rem;
-  line-height: 1.7;
+  margin: 0.35rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  line-height: 1.5;
 }
 
 .buildSection {
   display: grid;
-  grid-template-columns: minmax(20rem, 0.7fr) minmax(0, 1.3fr);
-  gap: clamp(3rem, 7vw, 8rem);
+  grid-template-columns: minmax(20rem, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(4rem, 8vw, 9rem);
 }
 
 .buildIntro {
-  align-self: start;
   position: sticky;
   top: 7rem;
+  align-self: start;
 }
 
-.buildIntro .eyebrow {
-  color: var(--elara-teal);
-}
-
-.buildIntro h2 {
-  font-size: clamp(3rem, 5vw, 5.5rem);
-}
-
-.buildIntro > p:last-child {
-  margin: 2rem 0 0;
+.buildIntro > p:last-child,
+.limitationsSection > div > p:last-child,
+.finalCta > div > p:last-child {
+  max-width: 55ch;
+  margin: 1.75rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
-  font-size: 1rem;
-  line-height: 1.8;
-}
-
-.technologyGrid {
-  border-top: 1px solid var(--elara-ink);
+  line-height: 1.65;
 }
 
 .technologyGrid article {
   display: grid;
-  grid-template-columns: 3rem minmax(9rem, 0.42fr) minmax(0, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: 2.5rem minmax(8rem, 0.45fr) minmax(0, 1.55fr);
+  gap: 1rem;
   align-items: start;
-  border-bottom: 1px solid var(--elara-ink);
-  padding: 1.5rem 0;
+  border-top: 1px solid var(--elara-line);
+  padding: 1.35rem 0;
 }
 
-.technologyGrid span {
+.technologyGrid article:last-child {
+  border-bottom: 1px solid var(--elara-line);
+}
+
+.technologyGrid article > span {
   color: var(--elara-teal);
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 0.72rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
 }
 
 .technologyGrid h3 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .technologyGrid p {
   margin: 0;
-  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
-  font-size: 0.82rem;
-  line-height: 1.7;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  line-height: 1.5;
 }
 
 .limitationsSection {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(24rem, 1.2fr);
-  gap: clamp(3rem, 8vw, 9rem);
-  background: #f0d7cc;
-  color: var(--elara-ink);
-}
-
-.limitationsSection .darkEyebrow {
-  color: var(--elara-coral);
-}
-
-.limitationsSection h2 {
-  font-size: clamp(2.8rem, 5vw, 5.3rem);
-}
-
-.limitationsSection > div > p:last-child {
-  margin: 2rem 0 0;
-  color: color-mix(in srgb, var(--elara-ink) 72%, transparent);
-  line-height: 1.8;
+  grid-template-columns: minmax(20rem, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(4rem, 8vw, 9rem);
+  border-top: 1px solid var(--elara-line);
 }
 
 .limitationsSection ul {
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--elara-ink);
   list-style: none;
 }
 
 .limitationsSection li {
-  display: grid;
-  grid-template-columns: 1.25rem minmax(0, 1fr);
-  gap: 1rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--elara-ink) 45%, transparent);
-  padding: 1.25rem 0;
-  font-size: 0.86rem;
-  line-height: 1.65;
+  border-top: 1px solid var(--elara-line);
+  padding: 1.2rem 0;
+  line-height: 1.55;
 }
 
-.limitationsSection li svg {
-  width: 1rem;
-  height: 1rem;
-  margin-top: 0.2rem;
-  color: var(--elara-coral);
+.limitationsSection li:last-child {
+  border-bottom: 1px solid var(--elara-line);
 }
 
 .finalCta {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(19rem, 0.8fr);
-  gap: clamp(3rem, 8vw, 9rem);
+  grid-template-columns: minmax(0, 1.2fr) auto;
+  gap: 3rem;
   align-items: end;
-  background:
-    radial-gradient(circle at 85% 30%, rgba(45, 127, 122, 0.5), transparent 27%),
-    var(--elara-forest);
-  color: var(--elara-paper-bright);
+  border-top: 5px solid var(--elara-forest);
 }
 
 .finalCta h2 {
-  max-width: 14ch;
-}
-
-.finalCta > div > p:last-child {
-  max-width: 48rem;
-  margin: 1.5rem 0 0;
-  color: color-mix(in srgb, var(--elara-paper-bright) 68%, transparent);
-  line-height: 1.75;
+  font-size: clamp(4rem, 8vw, 8rem);
 }
 
 .finalActions {
   justify-content: flex-end;
-  margin-top: 0;
-}
-
-.finalActions a {
-  min-width: 14rem;
-  border-color: color-mix(in srgb, var(--elara-paper-bright) 55%, transparent);
-  color: var(--elara-paper-bright);
+  margin: 0;
 }
 
 .finalActions a:first-child {
-  border-color: var(--elara-yellow);
-  background: var(--elara-yellow);
-  color: var(--elara-forest);
+  background: var(--elara-forest);
+  color: var(--elara-paper-bright);
 }
 
-.finalActions a:hover {
-  background: var(--elara-paper-bright);
-  color: var(--elara-forest);
-}
-
-@keyframes elara-rise {
-  from {
-    opacity: 0;
-    translate: 0 1.4rem;
+@media (hover: hover) and (pointer: fine) {
+  .backLink:hover {
+    color: var(--elara-teal);
   }
-  to {
-    opacity: 1;
-    translate: 0;
+
+  .topCta:hover,
+  .primaryButton:hover,
+  .finalActions a:first-child:hover {
+    border-color: var(--elara-teal);
+    background: var(--elara-teal);
+  }
+
+  .secondaryButton:hover,
+  .finalActions a:last-child:hover {
+    border-color: var(--elara-teal);
+    color: var(--elara-teal);
   }
 }
 
-@media (max-width: 1100px) {
+.backLink:active,
+.topCta:active,
+.primaryButton:active,
+.secondaryButton:active,
+.finalActions a:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 1120px) {
+  .heroGrid,
+  .walkthroughLayout,
+  .scoringLayout {
+    grid-template-columns: 1fr;
+  }
+
   .heroGrid {
-    grid-template-columns: minmax(0, 0.82fr) minmax(26rem, 1.18fr);
-    gap: 2.5rem;
+    min-height: 0;
   }
 
-  .proofStrip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .proofStrip > div:nth-child(3) {
-    border-left: 0;
-    border-top: 1px solid var(--elara-ink);
-  }
-
-  .proofStrip > div:nth-child(4) {
-    border-top: 1px solid var(--elara-ink);
+  .heroCopy {
+    max-width: 48rem;
   }
 
   .workflowList {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .workflowList li:nth-child(4) {
-    border-top: 1px solid var(--elara-ink);
+  .workflowList li:nth-child(odd) {
     border-left: 0;
   }
 
-  .workflowList li:nth-child(5) {
-    border-top: 1px solid var(--elara-ink);
+  .workflowList li:nth-child(n + 3) {
+    border-top: 1px solid var(--elara-line);
   }
 
-  .securitySection {
+  .architectureLayout {
     grid-template-columns: 1fr;
-    gap: clamp(3rem, 6vw, 5rem);
   }
 
-  .securitySection .sectionHeading {
-    position: static;
-    max-width: 62rem;
+  .designDecisions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 2rem;
+    border-top: 1px solid var(--elara-line);
+    border-left: 0;
+    padding: 2rem 0 0;
   }
 
-  .outcomeStory {
+  .designDecisions > h4 {
+    grid-column: 1 / -1;
+  }
+
+  .outcomeStory,
+  .buildSection,
+  .limitationsSection {
     grid-template-columns: 1fr;
   }
 
   .deepSeekMethod {
-    border-top: 1px solid color-mix(in srgb, var(--elara-paper-bright) 24%, transparent);
+    border-top: 1px solid var(--elara-line);
     border-left: 0;
-  }
-}
-
-@media (max-width: 920px) {
-  .fixesLedger {
-    grid-template-columns: 1fr;
+    padding: 2.5rem 0 0;
   }
 
-  .engineeringFix:nth-child(odd),
-  .engineeringFix:nth-child(even) {
-    border-right: 0;
-    padding-right: 0;
-    padding-left: 0;
+  .buildIntro {
+    position: static;
   }
 }
 
@@ -1395,66 +1313,75 @@
     display: none;
   }
 
-  .hero {
-    background:
-      radial-gradient(circle at 91% 14%, rgba(45, 127, 122, 0.13), transparent 28%),
-      var(--elara-paper);
-  }
-
-  .heroGrid,
   .manifesto,
-  .buildSection,
-  .limitationsSection,
   .finalCta {
     grid-template-columns: 1fr;
   }
 
-  .heroGrid {
-    min-height: 0;
+  .boundaryGrid {
+    max-width: 40rem;
   }
 
-  .heroVisual {
-    order: 2;
+  .architectureFlow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .sectionHeading {
+  .architectureFlow article:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .architectureFlow article:nth-child(n + 3) {
+    border-top: 1px solid var(--elara-line);
+  }
+
+  .evidenceGallery,
+  .securityLedger {
     grid-template-columns: 1fr;
   }
 
-  .sectionHeading h2,
-  .sectionIntro {
-    grid-column: 1;
+  .evidenceGallery {
+    gap: 3.5rem;
   }
 
-  .sectionHeading h2 {
-    margin-top: 1rem;
+  .auditTrail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .imageGrid,
-  .outcomeHighlights {
+  .auditTrail li:nth-child(4) {
+    border-left: 0;
+  }
+
+  .auditTrail li:nth-child(n + 4) {
+    border-top: 1px solid var(--elara-line);
+  }
+
+  .searchPolicyHeader {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .securityLedger li:nth-last-child(2) {
+    border-bottom: 0;
+  }
+
+  .engineeringFix {
     grid-template-columns: 1fr;
   }
 
-  .latencyRow {
-    grid-template-columns: minmax(0, 1fr) 1.25rem minmax(0, 1fr);
+  .engineeringFix dl {
+    grid-template-columns: 1fr;
   }
 
-  .latencyLabel {
-    grid-column: 1 / -1;
+  .testGroup {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .outcomeHighlights article {
-    display: block;
-    min-height: 0;
-    grid-column: 1;
+  .testGroup article:nth-child(odd) {
+    border-left: 0;
   }
 
-  .outcomeHighlights article {
-    min-height: 0;
-  }
-
-  .buildIntro {
-    position: static;
+  .testGroup article:nth-child(n + 3) {
+    border-top: 1px solid var(--elara-line);
   }
 
   .finalActions {
@@ -1471,11 +1398,18 @@
   .backLink,
   .topCta {
     font-size: 0.62rem;
-    letter-spacing: 0.05em;
   }
 
-  .topCta {
-    padding-inline: 0.8rem;
+  .hero,
+  .workflowSection,
+  .evidenceSection,
+  .outcomesSection,
+  .securitySection,
+  .buildSection,
+  .limitationsSection,
+  .finalCta,
+  .manifesto {
+    padding-inline: 1rem;
   }
 
   .heroMeta {
@@ -1483,16 +1417,8 @@
     gap: 0.45rem;
   }
 
-  .heroGrid {
-    padding-top: 3rem;
-  }
-
   .heroCopy h1 {
-    font-size: clamp(4rem, 22vw, 6.5rem);
-  }
-
-  .heroStatement {
-    margin-top: 2rem;
+    font-size: clamp(4rem, 22vw, 6.3rem);
   }
 
   .heroActions,
@@ -1506,121 +1432,78 @@
     width: 100%;
   }
 
-  .auditBadge {
-    right: 0.75rem;
-    bottom: -1.4rem;
+  .screenHeader {
+    font-size: 0.55rem;
   }
 
-  .proofStrip {
+  .proofStrip,
+  .workflowList,
+  .architectureFlow,
+  .designDecisions,
+  .reductionGroup,
+  .testGroup {
     grid-template-columns: 1fr;
+  }
+
+  .proofStrip > div {
+    min-height: 6rem;
   }
 
   .proofStrip > div + div,
-  .proofStrip > div:nth-child(3),
-  .proofStrip > div:nth-child(4) {
-    border-top: 1px solid var(--elara-ink);
+  .workflowList li,
+  .workflowList li + li,
+  .architectureFlow article,
+  .architectureFlow article + article,
+  .reductionGroup article + article,
+  .testGroup article + article,
+  .testGroup article:nth-child(odd) {
     border-left: 0;
   }
 
-  .boundaryGrid > div,
-  .technologyGrid article {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-
-  .workflowList {
-    grid-template-columns: 1fr;
+  .proofStrip > div + div,
+  .workflowList li + li,
+  .architectureFlow article + article,
+  .reductionGroup article + article,
+  .testGroup article + article {
+    border-top: 1px solid var(--elara-line);
   }
 
   .workflowList li {
-    min-height: 12rem;
-    border-left: 0 !important;
-    border-top: 1px solid var(--elara-ink);
-  }
-
-  .workflowList li:first-child {
-    border-top: 0;
-  }
-
-  .securityLedger li {
     min-height: 0;
-    grid-template-columns: 3.75rem minmax(0, 1fr);
-    gap: 0.65rem 1.1rem;
-    align-items: start;
-    padding: 1.5rem 0;
   }
 
-  .securityMarker {
-    grid-row: 1 / 3;
-    align-items: start;
-    padding-right: 1rem;
+  .workflowList li > p {
+    margin-bottom: 2rem;
   }
 
-  .securityMarker span {
-    justify-self: start;
-  }
-
-  .securityLedger h3,
-  .securityLedger p {
-    grid-column: 2;
-  }
-
-  .projectImageCanvas {
-    border-radius: 0.7rem;
-  }
-
-  .projectImage figcaption {
-    font-size: 0.62rem;
-  }
-
-  .outcomeStory {
-    border-radius: 0.75rem;
-  }
-
-  .latencyPanel,
-  .deepSeekMethod {
-    padding: 1.25rem;
+  .architectureFlow article::after {
+    display: none;
   }
 
   .latencyRow {
     grid-template-columns: 1fr;
-    gap: 0.8rem;
-  }
-
-  .latencyLabel,
-  .metricState,
-  .metricAfter {
-    grid-column: 1;
   }
 
   .latencyArrow {
-    display: none;
+    rotate: 90deg;
   }
 
-  .judgmentLimits > div,
-  .engineeringFix dl > div {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
+  .technologyGrid article {
+    grid-template-columns: 2rem 1fr;
   }
 
-
-  .metricAfter {
-    margin-top: 0.15rem;
+  .technologyGrid p {
+    grid-column: 2;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .heroCopy,
-  .heroVisual {
-    animation: none;
-  }
-
   .skipLink,
   .backLink,
   .topCta,
   .primaryButton,
   .secondaryButton,
   .finalActions a {
-    transition: none;
+    transition-duration: 0.01ms;
   }
 }
