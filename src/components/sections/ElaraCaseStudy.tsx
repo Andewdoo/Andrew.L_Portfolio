@@ -14,14 +14,6 @@ const proofPoints = [
   { value: "Jun-Aug", label: "2026 build timeline" },
 ];
 
-const workflow = [
-  { index: "01", title: "Decompose", copy: "Turn one submission into atomic claims, research questions, and explicit evidence needs." },
-  { index: "02", title: "Discover", copy: "Search required primary, contradiction, and attribution paths before adaptive expansion." },
-  { index: "03", title: "Preserve", copy: "Store exact passages, source snapshots, timestamps, versions, and provenance." },
-  { index: "04", title: "Assess", copy: "Classify evidence with model assistance while deterministic calculations retain authority." },
-  { index: "05", title: "Audit", copy: "Require typed output and complete citation coverage before a report can be published." },
-];
-
 const architectureNodes = [
   {
     title: "Browser experience",
@@ -159,7 +151,6 @@ function SystemArchitecture() {
     <section className={styles.architecture} aria-labelledby="architecture-title">
       <div className={styles.architectureHeading}>
         <h3 id="architecture-title">Architecture + Agent Pipeline</h3>
-        <p>Elara&apos;s system architecture defines where trust and authority live; its 13-stage agent pipeline defines how a submission becomes a citation-audited report.</p>
       </div>
 
       <section className={styles.architectureSystem} aria-labelledby="system-architecture-title">
@@ -203,7 +194,6 @@ function SystemArchitecture() {
       <section className={styles.pipelineSection} aria-labelledby="agent-pipeline-title">
         <header className={styles.architectureSubheading}>
           <h4 id="agent-pipeline-title">13-stage agent pipeline</h4>
-          <p>The five reader-facing workflow steps expand into a controlled execution path that separates model-assisted interpretation from deterministic decisions and durable system state.</p>
         </header>
         <div className={styles.pipelineContent}>
           <figure className={`${styles.diagramFigure} ${styles.pipelineFigure}`}>
@@ -272,7 +262,6 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
 
         <section className={styles.workflowSection} id="workflow">
           <SectionHeading eyebrow="02 / Workflow" title={<><span className={styles.workflowHeadingLine}>1. AI interprets the evidence.</span><span className={styles.workflowHeadingLine}>2. Rules decide what gets reported.</span></>} copy="The model helps interpret evidence, artifacts, typed state, and exact coverage while citation audit rules decides what can be published." />
-          <ol className={styles.workflowList}>{workflow.map((stage) => <li key={stage.index}><p>{stage.index}</p><div><h3>{stage.title}</h3><p>{stage.copy}</p></div></li>)}</ol>
           <SystemArchitecture />
         </section>
 
@@ -295,14 +284,14 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
 
           <section className={styles.scoringSection} aria-labelledby="scoring-title">
             <header className={styles.scoringHeading}>
-              <h3 id="scoring-title">From evidence to an auditable assessment</h3>
-              <p>Language models classify meaning, but transparent Python formulas calculate the score. Quality-adjusted evidence is balanced, confidence and guardrails preserve uncertainty, and citation coverage determines whether the report can complete.</p>
+              <h3 id="scoring-title">Calculations</h3>
+              <p>Language models classify meaning, but deterministic Python formulas calculate the score. Quality-adjusted evidence is balanced, confidence and guardrails preserve uncertainty, and citation coverage determines whether the report can complete.</p>
             </header>
             <figure className={styles.diagramFigure}>
               <div className={`${styles.diagramScroll} ${styles.scoringDiagramScroll}`} role="region" aria-label="Scrollable deterministic scoring diagram" tabIndex={0}>
                 <Image src="/images/elara/deterministic-scoring.png" alt="Deterministic scoring diagram showing evidence quality weighting, support and contradiction balance, confidence guardrails, citation audit, and a worked 66 percent result" width={3200} height={1800} sizes="(max-width: 820px) 64rem, (max-width: 1600px) 92vw, 1600px" className={styles.diagramImage} />
               </div>
-              <figcaption>In the historical test run, supporting weight P = 66 and contradicting weight N = 34 produced 66% evidence support. The label remained “Supported with limitations” because final approval was still pending at the evidence cutoff. <a href="/images/elara/deterministic-scoring.png" target="_blank" rel="noreferrer">Open the full-size scoring diagram<ExternalLink aria-hidden="true" /></a></figcaption>
+              <figcaption><a href="/images/elara/deterministic-scoring.png" target="_blank" rel="noreferrer">Open the full-size scoring diagram<ExternalLink aria-hidden="true" /></a></figcaption>
             </figure>
             <div className={styles.diagramSummary} aria-label="Scoring explanation">
               {scoringStages.map(([title, copy]) => (
@@ -316,7 +305,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         </section>
 
         <section className={styles.outcomesSection} id="outcomes">
-          <SectionHeading eyebrow="04 / Engineering outcomes" title="Challenges and Fixes." copy="Instrumentation exposed where time and failure really lived. Model-backed classification and citation auditing dominated latency; while scoring only took 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run." />
+          <SectionHeading eyebrow="04 / Engineering outcomes" title="Challenges and Fixes." copy="Testing revealed that model-backed classification and citation auditing dominated latency, often exceeding a few minutes; while scoring only took on average 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run." />
           <div className={styles.outcomeStory}>
             <div className={styles.latencyPanel}>
               <header><h3>DeepSeek latency, before and after</h3><p>The fixed path keeps the same measured work visible while making the result easier to compare.</p></header>
@@ -342,7 +331,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
           </section>
 
           <section className={styles.fixesSection} aria-labelledby="engineering-fixes-title">
-            <header className={styles.fixesHeading}><h3 id="engineering-fixes-title">Six fixes that strengthened the release path.</h3><p>Each change is tied to the failure it corrected and the proof that now guards the boundary.</p></header>
+            <header className={styles.fixesHeading}><h3 id="engineering-fixes-title">Six fixes that strengthened the project.</h3><p>Each change is tied to the failure it corrected.</p></header>
             <div className={styles.fixesLedger}>{engineeringFixes.map((item) => <article className={styles.engineeringFix} key={item.title}><h4>{item.title}</h4><dl><div><dt>Problem</dt><dd>{item.problem}</dd></div><div><dt>Fix</dt><dd>{item.fix}</dd></div><div><dt>Proof</dt><dd>{item.proof}</dd></div></dl></article>)}</div>
           </section>
 
