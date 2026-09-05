@@ -8,6 +8,8 @@
   --elara-yellow: #d2c300;
   --elara-coral: #9f452f;
   --elara-line: color-mix(in srgb, var(--elara-ink) 22%, transparent);
+  --elara-section-title: clamp(3rem, 6vw, 6rem);
+  --elara-description-copy: clamp(1.15rem, 1.65vw, 1.45rem);
   min-height: 100dvh;
   overflow: clip;
   background: var(--elara-paper);
@@ -334,10 +336,13 @@
 }
 
 .manifesto {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.55fr);
-  gap: clamp(4rem, 8vw, 9rem);
   background: var(--elara-mint);
+  text-align: center;
+}
+
+.manifestoLead {
+  display: grid;
+  justify-items: center;
 }
 
 .darkLabel {
@@ -349,38 +354,15 @@
 .limitationsSection h2,
 .finalCta h2 {
   margin: 1rem 0 0;
-  font-size: clamp(3rem, 6vw, 6rem);
+  font-size: var(--elara-section-title);
   line-height: 0.95;
 }
 
 .manifestoLead > p:last-child {
   max-width: 64ch;
-  margin: 2.25rem 0 0;
-  font-size: clamp(1.15rem, 1.65vw, 1.45rem);
+  margin: 2.25rem auto 0;
+  font-size: var(--elara-description-copy);
   line-height: 1.65;
-}
-
-.boundaryGrid {
-  align-self: end;
-}
-
-.boundaryGrid > div {
-  border-top: 1px solid var(--elara-line);
-  padding: 1.25rem 0;
-}
-
-.boundaryGrid > div:last-child {
-  border-bottom: 1px solid var(--elara-line);
-}
-
-.boundaryGrid span {
-  font-weight: 800;
-}
-
-.boundaryGrid p {
-  margin: 0.45rem 0 0;
-  color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
-  line-height: 1.55;
 }
 
 .workflowSection,
@@ -395,7 +377,7 @@
 
 .sectionHeading h2 {
   margin: 1rem 0 0;
-  font-size: clamp(3.2rem, 7vw, 7rem);
+  font-size: var(--elara-section-title);
   line-height: 0.92;
 }
 
@@ -407,7 +389,7 @@
   max-width: 70ch;
   margin: 1.75rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
-  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  font-size: var(--elara-description-copy);
   line-height: 1.65;
 }
 
@@ -453,11 +435,13 @@
 
 .workflowList h3 {
   font-size: 1.45rem;
+  font-weight: 800;
 }
 
 .workflowList li div p {
   margin: 0.7rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.95rem;
   line-height: 1.55;
 }
 
@@ -468,12 +452,216 @@
 }
 
 .architectureHeading h3 {
+  scroll-margin-top: 6rem;
   font-size: clamp(2rem, 4vw, 3.8rem);
 }
 
 .architectureHeading p {
+  max-width: 72ch;
   margin: 0.65rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
+  font-size: var(--elara-description-copy);
+  line-height: 1.6;
+}
+
+.architectureSystem {
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+}
+
+.architectureSubheading {
+  max-width: 72ch;
+}
+
+.architectureSubheading h4 {
+  scroll-margin-top: 6rem;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.65rem, 2.8vw, 2.65rem);
+  letter-spacing: -0.025em;
+}
+
+.architectureSubheading p {
+  margin: 0.75rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: var(--elara-description-copy);
+  line-height: 1.6;
+}
+
+.architectureLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 3.2fr) minmax(16rem, 0.8fr);
+  gap: clamp(3rem, 5vw, 5rem);
+  margin-top: 3rem;
+}
+
+.architectureFlow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--elara-line);
+  border-bottom: 1px solid var(--elara-line);
+}
+
+.architectureFlow article {
+  position: relative;
+  min-height: 16rem;
+  padding: 1.35rem 1.25rem;
+}
+
+.architectureFlow article + article {
+  border-left: 1px solid var(--elara-line);
+}
+
+.architectureFlow article:not(:last-child)::after {
+  position: absolute;
+  z-index: 1;
+  top: 2rem;
+  right: -0.68rem;
+  display: grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  background: var(--elara-paper);
+  color: var(--elara-teal);
+  content: "→";
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.architectureFlow h5,
+.dataPlane h5,
+.designDecisions h5,
+.designDecisions h6 {
+  margin: 0;
+}
+
+.architectureFlow h5,
+.dataPlane h5,
+.designDecisions h6 {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.architectureFlow ul {
+  margin: 0.85rem 0 0;
+  padding: 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  list-style: none;
+}
+
+.architectureFlow article > p,
+.architectureFlow article > span {
+  display: block;
+  margin: 1rem 0 0;
+  color: var(--elara-teal);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.architectureFlow article > span {
+  color: color-mix(in srgb, var(--elara-ink) 58%, transparent);
+}
+
+.dataPlane {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--elara-teal);
+  border-bottom: 1px solid var(--elara-line);
+  padding: 1.4rem 0;
+}
+
+.dataPlane p {
+  margin: 0.7rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.publicationRule {
+  margin: 1.5rem 0 0;
+  color: var(--elara-teal);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.designDecisions {
+  border-left: 1px solid var(--elara-line);
+  padding-left: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.designDecisions > h5 {
+  color: var(--elara-teal);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.designDecisions > div {
+  margin-top: 1.8rem;
+}
+
+.designDecisions p {
+  margin: 0.5rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.architectureCaption {
+  max-width: 78ch;
+  margin: 2rem 0 0;
+  color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.pipelineSection {
+  margin-top: clamp(4.5rem, 8vw, 8rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  border-top: 1px solid var(--elara-line);
+}
+
+.pipelineFigure {
+  width: min(100%, 50vw);
+}
+
+.pipelineContent {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.pipelineContent .pipelineFigure,
+.pipelineContent .pipelineSummary {
+  width: 100%;
+  margin-top: 0;
+}
+
+.pipelineSummary.diagramSummary {
+  grid-template-columns: 1fr;
+}
+
+.pipelineSummary.diagramSummary article {
+  padding: 1.1rem 0 1.25rem;
+}
+
+.pipelineSummary.diagramSummary article + article {
+  border-top: 1px solid var(--elara-line);
+  border-left: 0;
+}
+
+.pipelineFigure.diagramFigure figcaption {
+  display: block;
+}
+
+.pipelineFigure.diagramFigure figcaption a {
+  width: fit-content;
+  margin-top: 0.65rem;
 }
 
 .diagramFigure {
@@ -508,7 +696,7 @@
   gap: 1.5rem;
   margin-top: 1rem;
   color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   line-height: 1.6;
 }
 
@@ -543,7 +731,8 @@
   border-left: 1px solid var(--elara-line);
 }
 
-.diagramSummary h4 {
+.diagramSummary h4,
+.diagramSummary h5 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1rem;
@@ -553,7 +742,7 @@
 .diagramSummary p {
   margin: 0.65rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 68%, transparent);
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   line-height: 1.55;
 }
 
@@ -608,7 +797,7 @@
 .walkthroughCopy li p {
   margin: 0.2rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 66%, transparent);
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   line-height: 1.45;
 }
 
@@ -663,7 +852,7 @@
 .scoringHeading p {
   margin: 1.25rem 0 0;
   color: color-mix(in srgb, var(--elara-ink) 70%, transparent);
-  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  font-size: var(--elara-description-copy);
   line-height: 1.65;
 }
 
@@ -1104,10 +1293,6 @@
   border-top: 5px solid var(--elara-forest);
 }
 
-.finalCta h2 {
-  font-size: clamp(4rem, 8vw, 8rem);
-}
-
 .finalActions {
   justify-content: flex-end;
   margin: 0;
@@ -1171,6 +1356,23 @@
     border-top: 1px solid var(--elara-line);
   }
 
+  .architectureLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .designDecisions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 2rem;
+    border-top: 1px solid var(--elara-line);
+    border-left: 0;
+    padding: 2rem 0 0;
+  }
+
+  .designDecisions > h5 {
+    grid-column: 1 / -1;
+  }
+
   .outcomeStory,
   .buildSection,
   .limitationsSection {
@@ -1197,13 +1399,41 @@
     display: none;
   }
 
-  .manifesto,
   .finalCta {
     grid-template-columns: 1fr;
   }
 
-  .boundaryGrid {
-    max-width: 40rem;
+  .pipelineFigure {
+    width: 100%;
+  }
+
+  .pipelineContent {
+    grid-template-columns: 1fr;
+  }
+
+  .pipelineSummary.diagramSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .pipelineSummary.diagramSummary article:nth-child(odd),
+  .pipelineSummary.diagramSummary article + article {
+    border-left: 0;
+  }
+
+  .pipelineSummary.diagramSummary article:nth-child(n + 3) {
+    border-top: 1px solid var(--elara-line);
+  }
+
+  .architectureFlow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .architectureFlow article:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .architectureFlow article:nth-child(n + 3) {
+    border-top: 1px solid var(--elara-line);
   }
 
   .architectureDiagramScroll .diagramImage,
@@ -1337,6 +1567,8 @@
 
   .proofStrip,
   .workflowList,
+  .architectureFlow,
+  .designDecisions,
   .reductionGroup,
   .testGroup {
     grid-template-columns: 1fr;
@@ -1364,6 +1596,23 @@
 
   .workflowList li {
     min-height: 0;
+  }
+
+  .architectureFlow article {
+    min-height: 0;
+  }
+
+  .architectureFlow article + article,
+  .architectureFlow article:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .architectureFlow article + article {
+    border-top: 1px solid var(--elara-line);
+  }
+
+  .architectureFlow article:not(:last-child)::after {
+    display: none;
   }
 
   .workflowList li > p {

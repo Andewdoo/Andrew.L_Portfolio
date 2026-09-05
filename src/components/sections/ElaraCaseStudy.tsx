@@ -22,7 +22,38 @@ const workflow = [
   { index: "05", title: "Audit", copy: "Require typed output and complete citation coverage before a report can be published." },
 ];
 
+const architectureNodes = [
+  {
+    title: "Browser experience",
+    items: ["Next.js App Router", "React + TypeScript", "Firebase Web Auth", "TanStack Query", "React Flow + Recharts"],
+    note: "No privileged credentials",
+    connection: "HTTPS",
+  },
+  {
+    title: "FastAPI boundary",
+    items: ["Firebase Admin verification", "Authorization + validation", "Durable run creation", "Celery enqueueing", "Server-Sent Events", "Versioned report APIs"],
+    connection: "Queue",
+  },
+  {
+    title: "Verification worker",
+    items: ["Celery + LangGraph", "Typed Pydantic state", "Secure retrieval", "Evidence classification", "Deterministic scoring", "Numerical + citation audits"],
+    connection: "Server only",
+  },
+  {
+    title: "External inputs",
+    items: ["DeepSeek", "Brave Search", "Public web pages", "PDF documents"],
+    note: "Untrusted evidence",
+  },
+];
+
 const architectureDecisions = [
+  ["FastAPI is privileged", "Auth, authorization, durable run creation, exports, and SSE."],
+  ["PostgreSQL is truth", "Runs, passages, evidence, calculations, reports, and citations persist durably."],
+  ["Redis is transient", "Queues, locks, rate limits, caches, and progress streams can expire."],
+  ["The browser presents", "Final scores and report eligibility are never recomputed client-side."],
+];
+
+const pipelinePrinciples = [
   ["Controlled execution", "Five reader-facing workflow steps expand into 13 persisted stages, from intake and decomposition through retrieval, scoring, synthesis, and citation audit."],
   ["Model assistance", "DeepSeek helps plan queries, interpret passages, classify evidence, and draft grounded synthesis; it does not decide final arithmetic or report eligibility."],
   ["Deterministic authority", "Python owns canonicalization, deduplication, decimal calculations, thresholds, dependency multipliers, final-label gates, and citation presence."],
@@ -126,21 +157,71 @@ function SectionHeading({ eyebrow, title, copy }: Readonly<{ eyebrow: string; ti
 function SystemArchitecture() {
   return (
     <section className={styles.architecture} aria-labelledby="architecture-title">
-      <div className={styles.architectureHeading}><h3 id="architecture-title">The 13-stage verification agent cycle</h3><p>The five workflow steps above expand into a controlled execution path that separates model-assisted interpretation from deterministic decisions and durable system state.</p></div>
-      <figure className={styles.diagramFigure}>
-        <div className={`${styles.diagramScroll} ${styles.architectureDiagramScroll}`} role="region" aria-label="Scrollable Elara architecture diagram" tabIndex={0}>
-          <Image src="/images/elara/architecture-cycle.png" alt="Architecture diagram of Elara's 13-stage verification cycle from authenticated intake through research, deterministic scoring, citation audit, persistence, and report delivery" width={1536} height={1024} sizes="(max-width: 820px) 64rem, (max-width: 1536px) 92vw, 1536px" className={styles.diagramImage} />
-        </div>
-        <figcaption>The cycle moves clockwise from authenticated intake to source discovery, secure retrieval, evidence evaluation, deterministic scoring, synthesis, and citation audit. A report completes only after the durable audit gates pass. <a href="/images/elara/architecture-cycle.png" target="_blank" rel="noreferrer">Open the full-size architecture diagram<ExternalLink aria-hidden="true" /></a></figcaption>
-      </figure>
-      <div className={styles.diagramSummary} aria-label="Architecture explanation">
-        {architectureDecisions.map(([title, copy]) => (
-          <article key={title}>
-            <h4>{title}</h4>
-            <p>{copy}</p>
-          </article>
-        ))}
+      <div className={styles.architectureHeading}>
+        <h3 id="architecture-title">Architecture + Agent Pipeline</h3>
+        <p>Elara&apos;s system architecture defines where trust and authority live; its 13-stage agent pipeline defines how a submission becomes a citation-audited report.</p>
       </div>
+
+      <section className={styles.architectureSystem} aria-labelledby="system-architecture-title">
+        <header className={styles.architectureSubheading}>
+          <h4 id="system-architecture-title">System architecture</h4>
+          <p>The browser remains an unprivileged presentation layer. FastAPI owns authenticated entry, workers execute the verification graph, and durable state stays separate from transient coordination.</p>
+        </header>
+        <div className={styles.architectureLayout}>
+          <div>
+            <div className={styles.architectureFlow}>
+              {architectureNodes.map((node) => (
+                <article key={node.title}>
+                  <h5>{node.title}</h5>
+                  <ul>{node.items.map((item) => <li key={item}>{item}</li>)}</ul>
+                  {node.note ? <p>{node.note}</p> : null}
+                  {node.connection ? <span>{node.connection}</span> : null}
+                </article>
+              ))}
+            </div>
+            <div className={styles.dataPlane}>
+              <h5>Durable and transient data plane</h5>
+              <p>PostgreSQL + pgvector: authoritative runs, claims, queries, snapshots, passages, evidence, calculations, citations, reports, and versions.</p>
+              <p>Redis: transient queues, locks, caches, rate limits, and progress streams.</p>
+              <p>Private S3: uploads, immutable evidence artifacts, permitted snapshots, and exports.</p>
+            </div>
+            <p className={styles.publicationRule}>Publication rule: no report reaches COMPLETED until durable citation audit and typed completion gates succeed.</p>
+          </div>
+          <aside className={styles.designDecisions}>
+            <h5>Design decisions</h5>
+            {architectureDecisions.map(([title, copy]) => (
+              <div key={title}>
+                <h6>{title}</h6>
+                <p>{copy}</p>
+              </div>
+            ))}
+          </aside>
+        </div>
+        <p className={styles.architectureCaption}>System design: FastAPI is privileged, PostgreSQL is authoritative state, Redis is transient, and the browser only presents the final result.</p>
+      </section>
+
+      <section className={styles.pipelineSection} aria-labelledby="agent-pipeline-title">
+        <header className={styles.architectureSubheading}>
+          <h4 id="agent-pipeline-title">13-stage agent pipeline</h4>
+          <p>The five reader-facing workflow steps expand into a controlled execution path that separates model-assisted interpretation from deterministic decisions and durable system state.</p>
+        </header>
+        <div className={styles.pipelineContent}>
+          <figure className={`${styles.diagramFigure} ${styles.pipelineFigure}`}>
+            <div className={`${styles.diagramScroll} ${styles.architectureDiagramScroll}`} role="region" aria-label="Scrollable Elara architecture diagram" tabIndex={0}>
+              <Image src="/images/elara/architecture-cycle.png" alt="Architecture diagram of Elara's 13-stage verification cycle from authenticated intake through research, deterministic scoring, citation audit, persistence, and report delivery" width={1536} height={1024} sizes="(max-width: 820px) 64rem, (max-width: 1536px) 92vw, 1536px" className={styles.diagramImage} />
+            </div>
+            <figcaption>The cycle moves clockwise from authenticated intake to source discovery, secure retrieval, evidence evaluation, deterministic scoring, synthesis, and citation audit. A report completes only after the durable audit gates pass. <a href="/images/elara/architecture-cycle.png" target="_blank" rel="noreferrer">Open the full-size architecture diagram<ExternalLink aria-hidden="true" /></a></figcaption>
+          </figure>
+          <div className={`${styles.diagramSummary} ${styles.pipelineSummary}`} aria-label="Agent pipeline explanation">
+            {pipelinePrinciples.map(([title, copy]) => (
+              <article key={title}>
+                <h5>{title}</h5>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </section>
   );
 }
@@ -186,11 +267,6 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
             <p className={styles.darkLabel}>01 / Product boundary</p>
             <h2>Purpose: </h2>
             <p>Elara was made to combat an internet overwhelmed by contradictions, misinformation, and confusion. Give it a claim and Elara will gathers evidence, weighs what supports or challenges it, and preserves the sources and reasoning, saving you the research hassle. At its core, Elara helps you cut through the noise and make important judgments based on current evidence instead of reputation or popularity. It isn’t a lie detector or a judge of credibility but a way to give you a transparent, defensible view of what the evidence supports right now.</p>
-          </div>
-          <div className={styles.boundaryGrid}>
-            <div><span>Not a lie detector</span><p>It evaluates a claim or document, not an author's honesty.</p></div>
-            <div><span>No credibility score</span><p>Source identity never becomes a permanent reputation score for a publisher.</p></div>
-            <div><span>Missing ≠ false</span><p>Unavailable or insufficient evidence stays distinct from evidence that contradicts a claim.</p></div>
           </div>
         </section>
 
@@ -240,7 +316,7 @@ export function ElaraCaseStudy({ project }: Readonly<{ project: Project }>) {
         </section>
 
         <section className={styles.outcomesSection} id="outcomes">
-          <SectionHeading eyebrow="04 / Engineering outcomes" title="The Results." copy="Instrumentation exposed where time and failure really lived. Model-backed classification and citation auditing dominated latency; while scoring only took 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run." />
+          <SectionHeading eyebrow="04 / Engineering outcomes" title="Challenges and Fixes." copy="Instrumentation exposed where time and failure really lived. Model-backed classification and citation auditing dominated latency; while scoring only took 0.09 seconds and numerical audit 0.06 seconds in the measured Standard run." />
           <div className={styles.outcomeStory}>
             <div className={styles.latencyPanel}>
               <header><h3>DeepSeek latency, before and after</h3><p>The fixed path keeps the same measured work visible while making the result easier to compare.</p></header>
