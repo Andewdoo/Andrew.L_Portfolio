@@ -8,31 +8,14 @@ import { useEffect, useState } from "react";
 import styles from "./EditorialPortfolio.module.css";
 
 const capabilities = [
-  "AI/ML",
+  "Agentic Engineering",
   "Full Stack",
-  "Cloud & DevOps",
+  "Agent Orchestration",
 ];
 
 const capabilityLoop = Array.from({ length: 3 }, () => capabilities).flat();
 
 const coordinates = Array.from({ length: 14 }, (_, index) => String(index + 1).padStart(2, "0"));
-
-const lifePattern = ["Notice", "Question", "Try", "Adjust", "Repeat"];
-
-const educationFoundations = [
-  {
-    description: "Computational efficiency, memory, and structure.",
-    title: "DATA STRUCTURES & ALGORITHMS",
-  },
-  {
-    description: "Digital logic, processor design, and the architecture behind modern computers.",
-    title: "LOGIC DESIGN & COMPUTER ARCHITECTURE",
-  },
-  {
-    description: "Low-level programming, hardware control, and real-time embedded systems.",
-    title: "MICROPROCESSORS & EMBEDDED SYSTEMS",
-  },
-];
 
 const coreCapabilities = [
   {
@@ -40,16 +23,8 @@ const coreCapabilities = [
     title: "AI AS A COLLABORATOR",
   },
   {
-    description: "I keep repetition out of the way by automating scripts, shortcuts, templates, and reusable components.",
-    title: "AUTOMATE THE REPEATABLE",
-  },
-  {
     description: "I learn fastest by poking at something, seeing what breaks, and making the next version better.",
     title: "BUILD TO LEARN",
-  },
-  {
-    description: "I build, test, inspect, and refine continuously.",
-    title: "FEEDBACK LOOPS",
   },
 ];
 
@@ -73,25 +48,6 @@ const technologyTaxonomy = [
   {
     technologies: "Git / Github / Sentry / Pytest / Ruff",
     title: "QUALITY",
-  },
-];
-
-const offlineInterests = [
-  {
-    description: "BADMINTON, VOLLEYBALL, SNOWBOARDING, BENCH PRs, AND THE OCCASIONAL MARATHON.",
-    title: "SPORTS & FITNESS",
-  },
-  {
-    description: "LOCAL SPECIALTY FOODS, DISTINCTIVE ARCHITECTURE, DIFFERENT LANDSCAPES, AND THE LIFESTYLES THAT MAKE EACH PLACE UNIQUE.",
-    title: "TRAVEL & CULTURE",
-  },
-  {
-    description: "CHRISTIANITY, THE BIBLE, FAMILY DINNER, FAMILY VACATIONS, AND MOST IMPORTANTLY, HOME-LIFE",
-    title: "FAMILY & RELIGION",
-  },
-  {
-    description: "PLAYLISTS, FILMS, GAMES, PODCASTS, AND THE STORIES THAT KEEP CURIOSITY MOVING.",
-    title: "MUSIC & MEDIA",
   },
 ];
 
@@ -278,106 +234,15 @@ function Arrow({ direction = "right" }: Readonly<{ direction?: "down" | "right" 
   );
 }
 
-function SectionCoordinates() {
-  return (
-    <div className={styles.sectionCoordinates} aria-hidden="true">
-      {coordinates.map((coordinate) => (
-        <span key={coordinate}>{coordinate}</span>
-      ))}
-    </div>
-  );
-}
-
-function SectionNumber({ value }: Readonly<{ value: string }>) {
-  return (
-    <div className={styles.sectionNumber} aria-hidden="true">
-      <div className={styles.sectionNumberInner}>
-        <span className={styles.sectionNumberLabel}>SECTION</span>
-        <strong>{value}</strong>
-        <span className={styles.sectionNumberRule} />
-      </div>
-    </div>
-  );
-}
-
-function SectionTransition({
-  from,
-  fromLabel,
-  reverse = false,
-  to,
-  toLabel,
-  tone,
-}: Readonly<{
-  from: string;
-  fromLabel: string;
-  reverse?: boolean;
-  to: string;
-  toLabel: string;
-  tone: "dark-to-light" | "light-to-dark";
-}>) {
-  return (
-    <div
-      className={`${styles.sectionTransition} ${
-        tone === "light-to-dark" ? styles.transitionToDark : styles.transitionToLight
-      } ${reverse ? styles.transitionReverse : ""}`}
-      aria-hidden="true"
-    >
-      <div className={styles.transitionGrid} />
-
-      <svg className={styles.transitionRoute} viewBox="0 0 1200 140" preserveAspectRatio="none">
-        <path
-          className={styles.transitionRouteShadow}
-          d="M-24 36 C138 13 204 104 370 88 S610 20 774 65 S1006 126 1224 66"
-        />
-        <path
-          className={styles.transitionRouteLine}
-          d="M-24 36 C138 13 204 104 370 88 S610 20 774 65 S1006 126 1224 66"
-        />
-        <circle className={styles.transitionNode} cx="142" cy="50.442" r="6" />
-        <circle className={styles.transitionNode} cx="370" cy="88" r="6" />
-        <circle className={styles.transitionNode} cx="774" cy="65" r="6" />
-        <circle className={styles.transitionNode} cx="1070" cy="99.661" r="6" />
-      </svg>
-
-      <div className={styles.transitionDeparture}>
-        <span>EXIT / {fromLabel}</span>
-        <strong>{from}</strong>
-      </div>
-
-      <div className={styles.transitionGate}>
-        <div>
-          <small>ROUTE</small>
-          <b>↘</b>
-        </div>
-      </div>
-
-      <div className={styles.transitionArrival}>
-        <span>NEXT / {toLabel}</span>
-        <strong>{to}</strong>
-      </div>
-
-      <p className={styles.transitionStatus}>SIGNAL HANDOFF · {from}-{to} · PATH LOCKED</p>
-    </div>
-  );
-}
-
 function TrailGallery({
   items,
-  title,
   tone,
 }: Readonly<{
   items: readonly TrailItem[];
-  title: string;
   tone: "dark" | "light";
 }>) {
   return (
     <div className={`${styles.trailGallery} ${tone === "dark" ? styles.trailDark : styles.trailLight}`}>
-      <div className={styles.trailHeading}>
-        <span aria-hidden="true">X</span>
-        <p>{title}</p>
-        <small>4 STOPS / FOLLOW THE DOTS</small>
-      </div>
-
       <div className={styles.trailTrack}>
         <svg className={styles.trailPathDesktop} viewBox="0 0 1200 360" preserveAspectRatio="none" aria-hidden="true">
           <path d="M36 112 C145 42 235 64 312 145 S495 262 603 144 S786 25 882 135 S1036 260 1162 164" />
@@ -493,16 +358,13 @@ function EducationSkillsSequence() {
   return (
     <>
       <section id="education" className={styles.educationSection}>
-        <SectionCoordinates />
-        <SectionNumber value="01" />
         <div className={styles.educationContent}>
           <div className={styles.sectionLabelRow}>
             <p className={styles.desktopSectionLabel}>/ EDUCATION + WORKFLOW <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 01 / EDUCATION + WORKFLOW</p>
+            <p className={styles.mobileSectionLabel}><b>&gt;_</b> EDUCATION + WORKFLOW</p>
           </div>
 
           <div className={styles.educationIntro}>
-            <h2>LEARNING</h2>
             <div className={styles.degreeBlock}>
               <div>
                 <h3>MCMASTER UNIVERSITY</h3>
@@ -511,21 +373,6 @@ function EducationSkillsSequence() {
               </div>
               <p>Learning the whole system.</p>
             </div>
-          </div>
-
-          <div className={styles.foundationRows}>
-            {educationFoundations.map((foundation, index) => (
-              <div className={styles.foundationRow} key={foundation.title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{foundation.title}</h3>
-                <p>{foundation.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div id="skills" className={styles.educationWorkflow}>
-            <p className={styles.workflowStatement}>I don&apos;t just write code. I build better ways to write it.</p>
-
             <div className={styles.capabilityGrid}>
               {coreCapabilities.map((capability) => (
                 <article key={capability.title}>
@@ -535,6 +382,10 @@ function EducationSkillsSequence() {
                 </article>
               ))}
             </div>
+          </div>
+
+          <div id="skills" className={styles.educationWorkflow}>
+            <p className={styles.workflowStatement}>I don&apos;t just write code. I build better ways to write it.</p>
 
             <div className={styles.workflowRows}>
               <div>
@@ -551,74 +402,34 @@ function EducationSkillsSequence() {
           </div>
         </div>
       </section>
+
+      <section id="tech-stack" className={styles.techStackSection} aria-label="Tech stack">
+        <h2>/ TECH STACK <b>&gt;_</b></h2>
+        <div className={styles.taxonomyRows}>
+          {technologyTaxonomy.map((category, index) => (
+            <div className={styles.taxonomyRow} key={category.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{category.title}</h3>
+              <p>{category.technologies}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
 
-function TechHobbiesSequence() {
+function HobbiesSection() {
   return (
     <>
-      <SectionTransition
-        from="01"
-        fromLabel="EDUCATION + WORKFLOW"
-        to="02"
-        toLabel="TECH STACK"
-        tone="light-to-dark"
-      />
-
-      <section id="tech-stack" className={styles.techStackSection}>
-        <SectionCoordinates />
-        <SectionNumber value="02" />
-        <div className={styles.techStackContent}>
-          <div className={styles.sectionLabelRow}>
-            <p className={styles.desktopSectionLabel}>/ TECH STACK <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 02 / TECH STACK</p>
-          </div>
-
-          <h2>MY TOOLBOX.</h2>
-
-          <div className={styles.taxonomyRows}>
-            {technologyTaxonomy.map((category, index) => (
-              <div className={styles.taxonomyRow} key={category.title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{category.title}</h3>
-                <p>{category.technologies}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <SectionTransition
-        from="02"
-        fromLabel="TECH STACK"
-        to="03"
-        toLabel="OFFLINE"
-        tone="dark-to-light"
-      />
-
       <section id="hobbies" className={styles.hobbiesSection} aria-label="Hobbies and interests">
-        <SectionCoordinates />
-        <SectionNumber value="03" />
         <div className={styles.hobbiesContent}>
           <div className={styles.sectionLabelRow}>
             <p className={styles.desktopSectionLabel}>/ OFFLINE <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> 03 / OFFLINE</p>
+            <p className={styles.mobileSectionLabel}><b>&gt;_</b> OFFLINE</p>
           </div>
 
-          <h2>BEHIND THE SCENES.</h2>
-
-          <div className={styles.interestRows}>
-            {offlineInterests.map((interest, index) => (
-              <article className={styles.interestRow} key={interest.title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{interest.title}</h3>
-                <p>{interest.description}</p>
-              </article>
-            ))}
-          </div>
-
-          <TrailGallery items={offlineTrail} title="FIELD NOTES / OFF THE CLOCK" tone="light" />
+          <TrailGallery items={offlineTrail} tone="light" />
         </div>
       </section>
     </>
@@ -753,11 +564,6 @@ export function EditorialPortfolio() {
             <p className={styles.heroDescription}>
               <strong>Starting with curiosity and far too many tabs.</strong>
             </p>
-            <a className={styles.workButton} href="#projects">
-              <span className={styles.desktopCta}>VIEW SELECTED WORK</span>
-              <span className={styles.mobileCta}>VIEW WORK</span>
-              <Arrow direction="down" />
-            </a>
           </div>
 
           <div className={styles.asciiPanel}>
@@ -770,16 +576,7 @@ export function EditorialPortfolio() {
               className={styles.portraitImage}
             />
             <div className={styles.portraitWash} aria-hidden="true" />
-            <div className={styles.portraitScan} aria-hidden="true" />
-            <span className={styles.portraitStatus} aria-hidden="true">
-              <i /> IDENTITY:LOCKED
-            </span>
             <span className={styles.portraitIndex} aria-hidden="true">SUBJECT / A.L-01</span>
-            <div className={styles.asciiScale} aria-hidden="true">
-              {Array.from({ length: 25 }, (_, index) => (
-                <span key={index}>{String(index + 1).padStart(2, "0")}</span>
-              ))}
-            </div>
             <span className={styles.asciiLabel}>[ PORTRAIT.EDITION ]</span>
           </div>
         </section>
@@ -811,17 +608,6 @@ export function EditorialPortfolio() {
               Each idea evolves as I work, and that
               makes the final result more interesting.
             </p>
-          </div>
-          <div className={styles.lifePattern}>
-            <p>&gt; LIFE.PATTERN</p>
-            <div>
-              {lifePattern.map((item, index) => (
-                <span key={item}>
-                  <small>{String(index + 1).padStart(2, "0")}</small>
-                  <b>{item}</b>
-                </span>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -870,7 +656,7 @@ export function EditorialPortfolio() {
         </section>
 
         <EducationSkillsSequence />
-        <TechHobbiesSequence />
+        <HobbiesSection />
       </main>
 
       <footer className={styles.footer}>
