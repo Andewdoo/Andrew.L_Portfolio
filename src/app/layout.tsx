@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { CustomCursor } from "@/components/animations/CustomCursor";
-
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +13,6 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <html lang="en">
       <body>
         {children}
-        <CustomCursor />
       </body>
     </html>
   );

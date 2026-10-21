@@ -2,54 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, FileText, Github, Linkedin, Mail } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowDown, ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { useState } from "react";
 
+import { projects } from "@/lib/projects";
 import styles from "./EditorialPortfolio.module.css";
-
-const capabilities = [
-  "Agentic Engineering",
-  "Full Stack",
-  "Agent Orchestration",
-];
-
-const capabilityLoop = Array.from({ length: 3 }, () => capabilities).flat();
-
-const coordinates = Array.from({ length: 14 }, (_, index) => String(index + 1).padStart(2, "0"));
-
-const coreCapabilities = [
-  {
-    description: "I use the best tools available to work faster, explore more options, and stay focused on the decisions that matter.",
-    title: "AI AS A COLLABORATOR",
-  },
-  {
-    description: "I learn fastest by poking at something, seeing what breaks, and making the next version better.",
-    title: "BUILD TO LEARN",
-  },
-];
-
-const technologyTaxonomy = [
-  {
-    technologies: "TypeScript / JavaScript / Python / C++ / SQL / HTML5 / Tailwind CSS / MATLAB",
-    title: "LANGUAGES",
-  },
-  {
-    technologies: "React / Next.js / TanStack Query / Node.js / FastAPI / SQLAlchemy / Celery / Alembic",
-    title: "FRONTEND & BACKEND",
-  },
-  {
-    technologies: " LangGraph / Langchain / DeepSeek / Codex / Claude Code",
-    title: "AI WORKFLOWS",
-  },
-  {
-    technologies: "PostgreSQL / MongoDB / pgvector / Redis / Docker / AWS",
-    title: "DATA & INFRA",
-  },
-  {
-    technologies: "Git / Github / Sentry / Pytest / Ruff",
-    title: "QUALITY",
-  },
-];
 
 type TrailMedia = {
   alt: string;
@@ -179,391 +136,107 @@ const offlineTrail: readonly TrailItem[] = [
   },
 ];
 
-const easternTimeFormatter = new Intl.DateTimeFormat("en-CA", {
-  hour: "2-digit",
-  hourCycle: "h23",
-  minute: "2-digit",
-  second: "2-digit",
-  timeZone: "America/Toronto",
-});
 
-function LiveClock() {
-  const [times, setTimes] = useState({ eastern: "--:--:--", utc: "--:--:--" });
+const selectedWork = [
+  {
+    slug: "elara-ai",
+    image: "/images/elara-report-ui-cropped.png",
+    alt: "Elara.ai report workspace with evidence, citations, and a claim assessment",
+    category: "Evidence verification",
+    summary: "Making AI research easier to verify.",
+    description: "A claim-to-report workflow that brings source retrieval, evidence analysis, and citation audits into one transparent workspace.",
+    details: ["Traceable sources and explicit uncertainty", "Queued background jobs and durable reports"],
+    stack: ["Next.js", "FastAPI", "PostgreSQL", "pgvector", "Celery"],
+  },
+  {
+    slug: "devlify",
+    image: "/images/devlify-workspace-preview.png",
+    alt: "Devlify learning workspace with subject navigation and a chat composer",
+    category: "AI learning workspace",
+    summary: "A clearer place to learn.",
+    description: "Subject-specific tutoring, file analysis, and saved conversations in one full-stack learning platform.",
+    details: ["File-aware tutoring with persistent chat context", "Authenticated APIs and per-user data isolation"],
+    stack: ["React", "Next.js", "TypeScript", "FastAPI", "PostgreSQL"],
+  },
+];
 
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      setTimes({
-        eastern: easternTimeFormatter.format(now),
-        utc: now.toISOString().slice(11, 19),
-      });
-    };
+const technologyTaxonomy = [
+  {
+    title: "Languages & styling",
+    items: ["TypeScript", "JavaScript", "Python", "C++", "SQL", "HTML5", "Tailwind CSS", "MATLAB"],
+  },
+  {
+    title: "Frontend & backend",
+    items: ["React", "Next.js", "TanStack Query", "Node.js", "FastAPI", "SQLAlchemy", "Celery", "Alembic"],
+  },
+  {
+    title: "AI workflows",
+    items: ["LangGraph", "LangChain", "DeepSeek", "Codex", "Claude Code"],
+  },
+  {
+    title: "Data & infrastructure",
+    items: ["PostgreSQL", "MongoDB", "pgvector", "Redis", "Docker", "AWS"],
+  },
+  {
+    title: "Quality & tooling",
+    items: ["Git", "GitHub", "Sentry", "Pytest", "Ruff"],
+  },
+];
 
-    updateClock();
-    const interval = window.setInterval(updateClock, 1000);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
-  return (
-    <div
-      className={`${styles.desktopMeta} ${styles.liveClock}`}
-      aria-label={`Current UTC time ${times.utc}; Eastern time ${times.eastern}`}
-    >
-      <span>UTC: {times.utc}</span>
-      <span>ET: {times.eastern}</span>
-    </div>
-  );
-}
-
-function Arrow({ direction = "right" }: Readonly<{ direction?: "down" | "right" }>) {
-  return (
-    <svg aria-hidden="true" className={styles.arrowIcon} viewBox="0 0 24 24">
-      {direction === "down" ? (
-        <>
-          <path d="M12 4v16" />
-          <path d="m6 14 6 6 6-6" />
-        </>
-      ) : (
-        <>
-          <path d="M4 12h16" />
-          <path d="m14 6 6 6-6 6" />
-        </>
-      )}
-    </svg>
-  );
-}
-
-function TrailGallery({
-  items,
-  tone,
-}: Readonly<{
-  items: readonly TrailItem[];
-  tone: "dark" | "light";
-}>) {
-  return (
-    <div className={`${styles.trailGallery} ${tone === "dark" ? styles.trailDark : styles.trailLight}`}>
-      <div className={styles.trailTrack}>
-        <svg className={styles.trailPathDesktop} viewBox="0 0 1200 360" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M36 112 C145 42 235 64 312 145 S495 262 603 144 S786 25 882 135 S1036 260 1162 164" />
-          <circle cx="36" cy="112" r="8" />
-          <circle cx="312" cy="145" r="8" />
-          <circle cx="603" cy="144" r="8" />
-          <circle cx="882" cy="135" r="8" />
-        </svg>
-        <svg className={styles.trailPathMobile} viewBox="0 0 400 960" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M72 34 C330 92 344 207 205 265 S45 370 194 454 S360 580 205 650 S42 785 320 916" />
-          <circle cx="72" cy="34" r="7" />
-          <circle cx="205" cy="265" r="7" />
-          <circle cx="194" cy="454" r="7" />
-          <circle cx="205" cy="650" r="7" />
-        </svg>
-
-        {items.map((item, index) => (
-          <TrailCard
-            index={index}
-            item={item}
-            key={item.src}
-            tone={tone}
-            total={items.length}
-          />
-        ))}
-
-      </div>
-    </div>
-  );
-}
-
-function TrailCard({
-  index,
-  item,
-  tone,
-  total,
-}: Readonly<{
-  index: number;
-  item: TrailItem;
-  tone: "dark" | "light";
-  total: number;
-}>) {
+function PhotoCollection({ item, index }: Readonly<{ item: TrailItem; index: number }>) {
   const gallery = item.gallery ?? [item];
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeMedia = gallery[activeIndex] ?? gallery[0];
-  const hasGallery = gallery.length > 1;
-  const slotNumber = String(index + 1).padStart(2, "0");
-
-  const showPrevious = () => {
-    setActiveIndex((current) => (current - 1 + gallery.length) % gallery.length);
-  };
-
-  const showNext = () => {
-    setActiveIndex((current) => (current + 1) % gallery.length);
-  };
+  const photo = gallery[activeIndex];
+  const labels = ["Outdoors & sport", "Places & discoveries", "Family & friends", "On repeat"];
 
   return (
-    <figure className={styles.trailCard}>
-      <div className={styles.trailImageFrame}>
-        <span className={styles.trailTape} aria-hidden="true" />
-        <img
-          alt={activeMedia.alt}
-          className={hasGallery ? styles.trailCarouselImage : undefined}
-          decoding="async"
-          height="600"
-          key={activeMedia.src}
-          loading="lazy"
-          src={activeMedia.src}
-          width="800"
-        />
-        <b aria-hidden="true">{slotNumber}</b>
-        {index === total - 1 && (
-          <span className={styles.trailFinish} aria-hidden="true">X</span>
-        )}
+    <figure className={styles.photoCollection}>
+      <div className={styles.photoFrame}>
+        <img src={photo.src} alt={photo.alt} width="800" height="600" loading="lazy" decoding="async" />
       </div>
       <figcaption>
-        <div className={tone === "dark" ? styles.trailCaptionInline : undefined}>
-          <span>{item.label}</span>
-          <p>{activeMedia.caption}</p>
-        </div>
-        {hasGallery && (
-          <div className={styles.trailCarouselControls}>
-            <button
-              aria-label={`Previous photo in slot ${slotNumber}`}
-              onClick={showPrevious}
-              type="button"
-            >
-              <ChevronLeft aria-hidden="true" size={17} strokeWidth={2.5} />
-            </button>
-            <span aria-live="polite" className={styles.trailCarouselMeta}>
-              {activeMedia.group && (
-                <span className={styles.trailCarouselGroup}>{activeMedia.group}</span>
-              )}
-              <span className={styles.trailCarouselStatus}>
-                {String(activeIndex + 1).padStart(2, "0")} / {String(gallery.length).padStart(2, "0")}
-              </span>
-            </span>
-            <button
-              aria-label={`Next photo in slot ${slotNumber}`}
-              onClick={showNext}
-              type="button"
-            >
-              <ChevronRight aria-hidden="true" size={17} strokeWidth={2.5} />
-            </button>
+        <div className={styles.photoHeading}>
+          <h3>{labels[index]}</h3>
+          <div className={styles.photoControls}>
+            <button type="button" aria-label={"Previous photo in " + labels[index]} onClick={() => setActiveIndex((current) => (current - 1 + gallery.length) % gallery.length)}><ChevronLeft size={16} aria-hidden="true" /></button>
+            <button type="button" aria-label={"Next photo in " + labels[index]} onClick={() => setActiveIndex((current) => (current + 1) % gallery.length)}><ChevronRight size={16} aria-hidden="true" /></button>
           </div>
-        )}
+        </div>
+        <p aria-live="polite">{photo.caption} <span className={styles.photoCount}>{activeIndex + 1}/{gallery.length}</span></p>
       </figcaption>
     </figure>
-  );
-}
-
-function EducationSkillsSequence() {
-  return (
-    <>
-      <section id="education" className={styles.educationSection}>
-        <div className={styles.educationContent}>
-          <div className={styles.sectionLabelRow}>
-            <p className={styles.desktopSectionLabel}>/ EDUCATION + WORKFLOW <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> EDUCATION + WORKFLOW</p>
-          </div>
-
-          <div className={styles.educationIntro}>
-            <div className={styles.degreeBlock}>
-              <div>
-                <h3>MCMASTER UNIVERSITY</h3>
-                <p>COMPUTER ENGINEERING</p>
-                <mark aria-hidden="true" />
-              </div>
-              <p>Learning the whole system.</p>
-            </div>
-            <div className={styles.capabilityGrid}>
-              {coreCapabilities.map((capability) => (
-                <article key={capability.title}>
-                  <h3>{capability.title}</h3>
-                  <b aria-hidden="true">&gt;_</b>
-                  <p>{capability.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <div id="skills" className={styles.educationWorkflow}>
-            <p className={styles.workflowStatement}>I don&apos;t just write code. I build better ways to write it.</p>
-
-            <div className={styles.workflowRows}>
-              <div>
-                <span>01</span>
-                <h3>EXPLORE</h3>
-                <p><b>&gt;_</b> FRAME THE PROBLEM / GATHER CONTEXT / COMPARE APPROACHES</p>
-              </div>
-              <div>
-                <span>02</span>
-                <h3>EXECUTE</h3>
-                <p><b>&gt;_</b> PROTOTYPE / TEST / AUTOMATE / DOCUMENT / REFINE</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="tech-stack" className={styles.techStackSection} aria-label="Tech stack">
-        <h2>/ TECH STACK <b>&gt;_</b></h2>
-        <div className={styles.taxonomyRows}>
-          {technologyTaxonomy.map((category, index) => (
-            <div className={styles.taxonomyRow} key={category.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{category.title}</h3>
-              <p>{category.technologies}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
-  );
-}
-
-function HobbiesSection() {
-  return (
-    <>
-      <section id="hobbies" className={styles.hobbiesSection} aria-label="Hobbies and interests">
-        <div className={styles.hobbiesContent}>
-          <div className={styles.sectionLabelRow}>
-            <p className={styles.desktopSectionLabel}>/ OFFLINE <b>&gt;_</b></p>
-            <p className={styles.mobileSectionLabel}><b>&gt;_</b> OFFLINE</p>
-          </div>
-
-          <TrailGallery items={offlineTrail} tone="light" />
-        </div>
-      </section>
-    </>
-  );
-}
-
-function ProjectRow({
-  category,
-  description,
-  index,
-  previewImages,
-  slug,
-  stackLine,
-  title,
-  year,
-}: Readonly<{
-  category: string;
-  description: string;
-  index: string;
-  previewImages?: readonly {
-    alt: string;
-    crop?: "code" | "report";
-    src: string;
-  }[];
-  slug: string;
-  stackLine: string;
-  title: string;
-  year: string;
-}>) {
-  return (
-    <article className={styles.projectCard}>
-      <Link className={styles.projectLink} href={`/projects/${slug}`} aria-label={`Open ${title} case study`}>
-        <div className={styles.projectRow}>
-          <div className={styles.projectNumber}>{index}</div>
-          <div className={styles.projectCopy}>
-            <span className={styles.projectSlash}>/</span>
-            <div>
-              <h2>{title}</h2>
-              <p>{category}</p>
-            </div>
-          </div>
-          <div className={styles.projectIndex}>[ {year} ]</div>
-          <span className={styles.squareButton} aria-hidden="true">
-            <Arrow />
-          </span>
-        </div>
-        <div className={styles.projectDetails}>
-          <div className={styles.projectDetailsInner}>
-            {previewImages?.length ? (
-              <div className={`${styles.projectPreview}${previewImages.length > 1 ? ` ${styles.projectPreviewSplit}` : ""}`}>
-                {previewImages.map((image) => (
-                  <div className={styles.projectPreviewPane} key={image.src}>
-                    <Image
-                      alt={image.alt}
-                      className={[
-                        styles.projectPreviewImage,
-                        image.crop === "code" ? styles.projectPreviewImageCode : "",
-                        image.crop === "report" ? styles.projectPreviewImageReport : "",
-                      ].filter(Boolean).join(" ")}
-                      fill
-                      sizes={previewImages.length > 1 ? "50vw" : "100vw"}
-                      src={image.src}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className={styles.projectDetailsContent}>
-                <div>
-                  <span>// SYSTEM</span>
-                  <p>{description}</p>
-                </div>
-                <div>
-                  <span>// STACK</span>
-                  <p>{stackLine}</p>
-                </div>
-                <div className={styles.detailStatus}>
-                  <span>// STATUS</span>
-                  <p>CASE STUDY / OPEN ↗</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </Link>
-    </article>
   );
 }
 
 export function EditorialPortfolio() {
   return (
     <div id="top" className={styles.page}>
-      <header className={styles.utilityHeader}>
-        <div className={styles.systemStatus}>
-          <span className={styles.statusDot} />
-          SYS:ONLINE
-        </div>
-        <div>USER: ANDREW.L</div>
-        <div className={styles.desktopMeta}>ROLE: SOFTWARE ENGINEER</div>
-        <div className={styles.desktopMeta}>LOC: MARKHAM, CA</div>
-        <LiveClock />
-        <a className={styles.mobileMenu} href="#projects" aria-label="Jump to selected work">
-          <span aria-hidden="true">&gt;_</span>
-          <span>01 / 08</span>
-          <i aria-hidden="true" />
-        </a>
+      <a className={styles.skipLink} href="#main">Skip to content</a>
+      <header className={styles.header}>
+        <a className={styles.brand} href="#top" aria-label="Andrew L. home">ANDREW<span>.</span>L</a>
+        <p className={styles.headerNote}><span aria-hidden="true" />SOFTWARE ENGINEER</p>
+        <nav aria-label="Main navigation">
+          <a href="#projects">Work</a>
+          <a href="#about">About</a>
+          <a href="#tech-stack">Stack</a>
+          <a href="/Andrew-Liu-Resume.pdf" target="_blank" rel="noreferrer">Résumé <ArrowUpRight size={14} aria-hidden="true" /></a>
+        </nav>
       </header>
 
-      <div className={styles.columnIndex} aria-hidden="true">
-        {Array.from({ length: 12 }, (_, index) => (
-          <span key={index}>{String(index + 1).padStart(2, "0")}</span>
-        ))}
-      </div>
-
-      <main>
-        <section className={styles.hero}>
-          <div className={styles.rowCoordinates} aria-hidden="true">
-            {coordinates.map((coordinate) => (
-              <span key={coordinate}>{coordinate}</span>
-            ))}
-          </div>
-
+      <main id="main">
+        <section className={styles.hero} aria-labelledby="intro-heading">
           <div className={styles.heroCopy}>
-            <p className={styles.mobileRole}>&gt; SOFTWARE ENGINEER / MARKHAM</p>
-            <p className={styles.wordmark}>ANDREW.L<sup>®</sup></p>
-            <p className={styles.role}>SOFTWARE ENGINEER <b>/</b> MARKHAM</p>
-            <span className={styles.prompt}>&gt;_</span>
-            <h1>
-              <span className={styles.headlineLine}>MAKING THINGS THAT</span>
-              <span className={styles.headlineLine}>I WOULD <mark>USE</mark></span>
+            <p className={styles.eyebrow}>SOFTWARE ENGINEER <span>/</span> MARKHAM, ON</p>
+            <h1 id="intro-heading">
+              <span className={styles.headlineLine}>MAKING THINGS</span>
+              <span className={styles.headlineLine}>I WOULD <mark>USE.</mark></span>
             </h1>
-            <p className={styles.heroDescription}>
-              <strong>Starting with curiosity and far too many tabs.</strong>
-            </p>
+            <p className={styles.heroDescription}>I’m Andrew, a Computer Engineering student at McMaster. I build full-stack applications and AI workflows with a focus on clear, practical experiences.</p>
+            <div className={styles.heroActions}>
+              <a className={styles.primaryLink} href="#projects">Explore my work <ArrowDown size={17} aria-hidden="true" /></a>
+              <a className={styles.textLink} href="/Andrew-Liu-Resume.pdf" target="_blank" rel="noreferrer">View résumé <ArrowUpRight size={16} aria-hidden="true" /></a>
+            </div>
+            <p className={styles.heroNote}>Starting with curiosity and far too many tabs.</p>
           </div>
 
           <div className={styles.asciiPanel}>
@@ -572,7 +245,7 @@ export function EditorialPortfolio() {
               alt="Centered grain-textured editorial screen-print portrait of Andrew L."
               fill
               priority
-              sizes="(max-width: 980px) 100vw, 50vw"
+              sizes="(max-width: 760px) 100vw, 50vw"
               className={styles.portraitImage}
             />
             <div className={styles.portraitWash} aria-hidden="true" />
@@ -581,82 +254,96 @@ export function EditorialPortfolio() {
           </div>
         </section>
 
-        <div className={styles.capabilities} aria-label="Capabilities: AI/ML, Full Stack, and Cloud & DevOps">
-          <div className={styles.capabilitiesTrack} aria-hidden="true">
-            {[0, 1].map((copy) => (
-              <div className={styles.capabilitiesSet} key={copy}>
-                {capabilityLoop.map((capability, index) => (
-                  <span key={`${copy}-${index}-${capability}`}>
-                    <b>+</b>
-                    {capability}
-                  </span>
-                ))}
+        <div className={styles.focusStrip} aria-label="Engineering focus">
+          <span><b aria-hidden="true">+</b> FULL STACK</span>
+          <span><b aria-hidden="true">+</b> AGENTIC ENGINEERING</span>
+          <span><b aria-hidden="true">+</b> AGENT ORCHESTRATION</span>
+        </div>
+
+        <section id="projects" className={styles.workSection} aria-labelledby="work-heading">
+          <div className={styles.sectionHeading}>
+            <div><p className={styles.eyebrow}>01 / SELECTED WORK</p><h2 id="work-heading">Ideas, made real.</h2></div>
+            <p>From the first idea to the systems behind it.</p>
+          </div>
+
+          <div className={styles.projectGrid}>
+            {selectedWork.map((work, index) => {
+              const project = projects.find((project) => project.slug === work.slug)!;
+              return (
+                <article className={styles.project} key={work.slug}>
+                  <Link className={styles.projectVisual} href={"/projects/" + work.slug} aria-label={"Read the " + project.title + " case study"}>
+                    <div className={styles.previewBar}><span><i /><i /><i /></span><span>{project.url}</span><ArrowUpRight size={15} aria-hidden="true" /></div>
+                    <div className={styles.previewImage}><Image src={work.image} alt={work.alt} fill sizes="(max-width: 760px) 90vw, 48vw" /></div>
+                  </Link>
+                  <div className={styles.projectCopy}>
+                    <p className={styles.projectCategory}><span>0{index + 1}</span> {work.category}</p>
+                    <h3><Link href={"/projects/" + work.slug}>{project.title}</Link></h3>
+                    <p className={styles.projectSummary}>{work.summary}</p>
+                    <p className={styles.projectDescription}>{work.description}</p>
+                    <ul className={styles.projectDetails}>{work.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>
+                    <ul className={styles.stack} aria-label={project.title + " technologies"}>{work.stack.map((technology) => <li key={technology}>{technology}</li>)}</ul>
+                    <div className={styles.projectLinks}>
+                      <Link href={"/projects/" + work.slug}>Case study <ArrowRight size={16} aria-hidden="true" /></Link>
+                      <a href={project.links.live} target="_blank" rel="noreferrer">Live demo <ArrowUpRight size={15} aria-hidden="true" /></a>
+                      <a href={project.links.github} target="_blank" rel="noreferrer" aria-label={project.title + " source on GitHub"}><Github size={17} aria-hidden="true" /><span>Source</span></a>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="about" className={styles.aboutSection} aria-labelledby="about-heading">
+          <div className={styles.aboutIntro}>
+            <p className={styles.eyebrow}>02 / A LITTLE ABOUT ME</p>
+            <h2 id="about-heading">I learn by building.</h2>
+            <p>I like understanding how the whole system works, from what someone sees on screen to the services behind it. My projects are how I explore that curiosity: frame a problem, build a working version, and keep making it better.</p>
+            <p>I use AI as a collaborator, while staying hands-on with the architecture, testing, and decisions that shape the result.</p>
+          </div>
+          <div className={styles.aboutDetails}>
+            <div className={styles.education}>
+              <p className={styles.eyebrow}>EDUCATION</p>
+              <h3>McMaster University</h3>
+              <p>Computer Engineering</p>
+            </div>
+            <div className={styles.approach}>
+              <p className={styles.eyebrow}>HOW I WORK</p>
+              <h3>Explore. Build. Refine.</h3>
+              <p>Understand the problem, test the approach, and improve the details.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="tech-stack" className={styles.techStackSection} aria-labelledby="stack-heading">
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>03 / TOOLS &amp; TECHNOLOGIES</p>
+              <h2 id="stack-heading">The full tech stack.</h2>
+            </div>
+            <p>The tools I use to bring it all together.</p>
+          </div>
+          <div id="skills">
+            {technologyTaxonomy.map((category, index) => (
+              <div className={styles.taxonomyRow} key={category.title}>
+                <span className={styles.taxonomyIndex} aria-hidden="true">0{index + 1}</span>
+                <h3>{category.title}</h3>
+                <ul aria-label={category.title}>
+                  {category.items.map((technology) => <li key={technology}>{technology}</li>)}
+                </ul>
               </div>
             ))}
           </div>
-        </div>
-
-        <section className={styles.aboutStack}>
-          <div className={styles.aboutTitle}>
-            <p>&gt; ABOUT <b>/</b></p>
-            <h2>I LIKE LEARNING HOW THINGS WORK BY DOING</h2>
-            <span className={styles.aboutSubtitle}>Visual &amp; hands-on learner.</span>
-          </div>
-          <div className={styles.aboutCopy}>
-            <p className={styles.aboutCopyLabel}>&gt; BUILD.NOTES</p>
-            <p>
-              Each idea evolves as I work, and that
-              makes the final result more interesting.
-            </p>
-          </div>
         </section>
 
-        <section id="projects" className={styles.projects} aria-label="Selected work">
-          <ProjectRow
-            index="01"
-            title="ELARA.AI"
-            category="EVIDENCE VERIFICATION"
-            description="Evidence-first verification with timestamped sources, visible uncertainty, and citation-audited reports."
-            previewImages={[
-              {
-                alt: "Elara.ai decomposition normalization code open in Visual Studio Code",
-                crop: "code",
-                src: "/images/elara-code-preview.png",
-              },
-              {
-                alt: "Elara.ai citation-audited report overview",
-                crop: "report",
-                src: "/images/elara-report-ui-cropped.png",
-              },
-            ]}
-            stackLine="NEXT.JS / FASTAPI / PGVECTOR / CELERY"
-            slug="elara-ai"
-            year="2026"
-          />
-          <ProjectRow
-            index="02"
-            title="DEVLIFY"
-            category="AI LEARNING WORKSPACE"
-            description="Multi-modal tutoring, persistent chat history, and retrieval-aware answers in one focused workspace."
-            previewImages={[
-              {
-                alt: "Devlify math workshop code open in Visual Studio Code",
-                crop: "code",
-                src: "/images/devlify-code-preview.png",
-              },
-              {
-                alt: "Devlify general workspace welcoming Andrew with an empty chat composer",
-                src: "/images/devlify-workspace-preview.png",
-              },
-            ]}
-            stackLine="NEXT.JS / FASTAPI / POSTGRESQL"
-            slug="devlify"
-            year="2026"
-          />
+        <section id="hobbies" className={styles.personalSection} aria-labelledby="personal-heading">
+          <div className={styles.sectionHeading}>
+            <div><p className={styles.eyebrow}>04 / OFFLINE</p><h2 id="personal-heading">Beyond the screen.</h2></div>
+            <p>A few things that keep me curious.</p>
+          </div>
+          <div className={styles.photoGrid}>{offlineTrail.map((item, index) => <PhotoCollection item={item} index={index} key={item.src} />)}</div>
         </section>
-
-        <EducationSkillsSequence />
-        <HobbiesSection />
+        <div className={styles.endNote}><span>Andrew L. · Software Engineer</span><a href="#top">Back to top <ArrowUpRight size={14} aria-hidden="true" /></a></div>
       </main>
 
       <footer className={styles.footer}>
