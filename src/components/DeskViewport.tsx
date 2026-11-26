@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties } from "react";
+import { Menu } from "lucide-react";
 import type { Panel } from "@/data/content";
 import type { DeskRenderer } from "@/lib/deskScene";
 import MonitorDesktop from "./MonitorDesktop";
@@ -134,6 +135,7 @@ export default function DeskViewport({ onSelect }: Props) {
       <div className="desk-frame" ref={desk}>
         <img className="room-render" src={asset + "room.webp"} alt="" fetchPriority="high" draggable={false} />
         <div className="mobile-shelf" aria-hidden="true" />
+        <img className="keyboard-hand" src={asset + "keyboard-hand.webp"} alt="" draggable={false} />
         <div className="mouse-foreground" aria-hidden="true">
           <div className="mouse-shadow" />
           <img src={asset + "hand.webp"} alt="" draggable={false} />
@@ -147,7 +149,9 @@ export default function DeskViewport({ onSelect }: Props) {
         {propTargets.map(target => <button type="button" key={target.label}
           className={"desk-object prop-target prop-" + target.panel} aria-label={target.label}
           title={target.label} aria-haspopup="dialog" style={propStyle(target)}
-          onClick={e => onSelect(target.panel,e.currentTarget,"index" in target ? target.index : 0)} />)}
+          onClick={e => onSelect(target.panel,e.currentTarget,"index" in target ? target.index : 0)}>
+          {target.panel === "photos" && <Menu className="shelf-button-icon" aria-hidden="true" />}
+        </button>)}
       </div>
     </main>
   );

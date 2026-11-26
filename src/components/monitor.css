@@ -54,10 +54,16 @@
 }
 .monitor-shortcuts img { width: 49%; align-self: end; }
 .monitor-shortcuts img, .monitor-chrome button > span {
-  filter: drop-shadow(0 0 .42cqw #ffd3ae69);
+  filter: drop-shadow(0 0 .49cqw #ffdcaf8c);
 }
 .monitor-shortcuts span { align-self: start; padding-top: 4%; }
 .monitor-shortcuts button:hover, .monitor-shortcuts button:focus-visible { background: #d1b0db20; }
+.monitor-shortcuts button:is(:hover, :focus-visible) img,
+.monitor-chrome button:is(:hover, :focus-visible) > span {
+  filter: brightness(1.13) sepia(.25) drop-shadow(0 0 .65cqw #ffdb75cb);
+}
+.monitor-shortcuts button:is(:hover, :focus-visible),
+.monitor-chrome button:is(:hover, :focus-visible) { color: #ffe2a2; }
 .monitor-shortcuts button:first-child img { width: 46%; }
 .monitor-shortcuts button:last-child img { image-rendering: pixelated; width: 45%; }
 
@@ -91,12 +97,12 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  transform-origin: 52.25% 48%;
+  transform-origin: 50% 48%;
 }
-.monitor-desktop[data-expanded="true"] .monitor-launcher { transform: translateX(-4%) scale(1.13); }
+.monitor-desktop[data-expanded="true"] .monitor-launcher { transform: scale(1.13); }
 .monitor-kicker, .monitor-controller, .monitor-welcome, .monitor-prompt, .monitor-apps {
   position: absolute;
-  left: 52.25%;
+  left: 50%;
   transform: translateX(-50%);
   text-align: center;
 }
@@ -137,7 +143,7 @@
   color: #f6dfee;
   white-space: nowrap;
   --tile-edge: #c5bec0;
-  filter: drop-shadow(0 0 .48cqw #ffd3ad55);
+  filter: drop-shadow(0 0 .56cqw #ffdcaf73);
   --cut: .91cqw;
   --corners: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
 }
@@ -160,9 +166,11 @@
   text-shadow: 0 1px 1px #523b58;
 }
 .monitor-apps button:is(:hover,:focus-visible) {
-  --tile-edge: #ffcf9a;
-  filter: drop-shadow(0 0 .47cqw #efad826b);
+  --tile-edge: #ffe099;
+  color: #ffedc2;
+  filter: drop-shadow(0 0 .65cqw #ffd46cc2);
 }
+.monitor-apps button:is(:hover,:focus-visible) img { filter: brightness(1.12) sepia(.22); }
 .monitor-apps button:focus-visible { outline-offset: .36cqw; }
 .monitor-apps button:is(:hover,:focus-visible)::after {
   content: "";
@@ -188,15 +196,19 @@
   padding: .7cqw 1.2cqw;
   border: 1px solid #c8a4bc;
   background: #302b4deb;
-  box-shadow: 0 0 .48cqw #ffd3ad55;
+  box-shadow: 0 0 .56cqw #ffdcaf73;
   font-size: 1.65cqw;
 }
 .monitor-task img { width: 2.5cqw; height: 2.5cqw; }
+.monitor-desktop .monitor-task:is(:hover, :focus-visible) {
+  border-color: #ffe099;
+  box-shadow: 0 0 .65cqw #ffd46cc2;
+  color: #ffedc2;
+}
 
 @media (orientation: portrait) and (max-width: 600px) {
   .monitor-desktop { background-size: auto 121%; background-position: 69% bottom; }
   .monitor-shortcuts, .monitor-chrome { display: none; }
-  .monitor-kicker, .monitor-welcome, .monitor-controller, .monitor-prompt, .monitor-apps { left: 50%; }
   .monitor-kicker { top: 5.8%; font-size: clamp(.63rem,2.6cqw,.84rem); }
   .monitor-controller { top: 12%; width: 8%; height: 8%; }
   .monitor-welcome { top: 22%; width: 52%; height: 9%; }

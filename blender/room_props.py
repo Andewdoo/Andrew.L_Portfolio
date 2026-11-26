@@ -8,7 +8,9 @@ import math
 import random
 
 import bpy
-from mathutils import Vector
+from mathutils import Matrix, Vector
+
+from keyboard import material
 
 
 def build(b):
@@ -226,6 +228,7 @@ def build(b):
             for face in o.data.polygons: face.use_smooth=True
             shell=o.modifiers.new("Leaf thickness","SOLIDIFY")
             shell.thickness=.0009
+        return o
     # Measurements are local to two crops of the original camera study. Each
     # entry records an actual petiole attachment and tip, both half-widths,
     # and the midrib's signed lateral bow. Edge-on leaves can be very narrow.
@@ -488,16 +491,85 @@ def build(b):
     collect("05 • Tempered-glass workstation",prior)
 
     prior=inventory()
-    # Small understory plant partly hidden behind the right monitor edge.
-    lathe("Desk plant · glazed cachepot",1325,2.052,[(678,31,5,.052),(673,43,6,.07),
-        (653,44,7,.071),(595,50,8,.079),(590,50,8,.079),(590,47,7,.075),(600,44,7,.069)])
-    for x,y,tx,ty in [(1313,587,1306,544),(1321,588,1344,521),(1330,586,1374,538),
-                       (1321,591,1294,562),(1329,587,1358,560)]:
-        conduit("Desk plant · petiole",[(x,y,2.06),((x+tx)/2,(y+ty)/2,2.05),(tx,ty,2.045)],.003)
-        for s in [-1,1]:
-            leaf((tx,ty),(tx+s*22,ty+rng.uniform(8,23)),10.7,2.032,s*1.8)
-    booklet("Hardback · lower volume",1322,675,242,33,1.92,15,.15)
-    booklet("Hardback · upper volume",1338,638,210,41,1.921,19,.13)
+    room_finish = b.material
+    b.material = material("Desk plant · satin terracotta", "977166", .38, grain=.14)
+    center_x, center_y, _ = point(1312, 597, 2.085)
+    angles = [math.tau*i/80 for i in range(80)]
+    finish_rings("Desk plant · glazed cachepot", [
+        [Vector((center_x+r*math.cos(a),center_y+r*math.sin(a),z)) for a in angles]
+        for z,r in [(-.698,.065),(-.696,.071),(-.692,.075),(-.681,.077),(-.563,.089),
+                    (-.557,.089),(-.554,.087),(-.554,.084),(-.558,.081),(-.575,.080)]
+    ])
+    b.material = material("Desk plant · potting soil", "3e3224", .9, grain=.55)
+    b.mesh("Desk plant · soil", [Vector((center_x+.081*math.cos(a),
+                center_y+.081*math.sin(a),-.572)) for a in angles], [tuple(range(len(angles)))])
+    stems = material("Desk plant · green petioles", "687545", .53)
+    blades = [material("Desk plant · " + tone, swatch, .42, grain=.23, emission=.12)
+              for tone, swatch in [("young leaves", "788750"), ("mature leaves", "51663a"),
+                                   ("deep green leaves", "425936")]]
+    veins = material("Desk plant · leaf midribs", "809355", .57, emission=.09)
+    for x,y,tx,ty,w,d,bow,tone in [
+        (1304,541,1264,518,11,2.106,-4,1), (1315,535,1325,501,12,2.116,-5,0),
+        (1322,539,1366,514,14,2.121,-4,1), (1332,550,1381,547,13,2.096,-5,2),
+        (1304,554,1262,545,13,2.077,4,2), (1321,559,1355,529,12,2.058,-4,1),
+        (1311,566,1280,579,14,2.035,5,0), (1326,565,1360,580,15,2.025,-5,1),
+        (1301,574,1272,563,11,2.011,4,1), (1317,577,1332,602,12,1.995,3,2),
+    ]:
+        b.material = stems
+        root_x = 1310 + (x - 1310) * .39
+        conduit("Desk plant · petiole", [(root_x,597,2.10),((x+root_x)/2,y+19,2.10),
+                                       (x-3,y+5,d+.015),(x,y,d)], .0018)
+        b.material = blades[tone]
+        blade = leaf((x,y), (tx,ty), w, d, bow, w*.84)
+        b.material = veins
+        midrib = [blade.data.vertices[i].co + Vector((0,-.00065,0)) for i in (2,17,32,47,57)]
+        for start, end in zip(midrib, midrib[1:]):
+            b.tube("Desk plant · fine midrib", start, end, .00043)
+
+    bindings = [material("Hardback · dark brown book cloth", "382a28", .81, grain=.68, emission=.18),
+                material("Hardback · charcoal book cloth", "322c32", .8, grain=.68, emission=.18)]
+    lettering = material("Hardback · warm ivory title ink", "c6b49f", .78, emission=.29)
+    paper = material("Hardback · cut paper", "98756b", .82, grain=.23, emission=.21)
+    cut = material("Hardback · paper fibers", "826057", .85, emission=.21)
+
+    for i, (title, left, corner, right, base, height) in enumerate([
+        ("Full-Stack", (1323,689), (1417,725), 1559, -.695, .044),
+        ("coding 101", (1340,668), (1411,690), 1547, -.647, .046),
+    ]):
+        # Place the spine and the fore edge on adjoining vertical planes.
+        a,c = [point(x,y,-base*1300/(y-230)) for x,y in (left,corner)]
+        end = point(right, corner[1], c.y)
+        up = Vector((0,0,height))
+        along = (c-a).normalized()
+        normal = along.cross(up).normalized()
+        b.material = bindings[i]
+        spine = [a,c,c+up,a+up]
+        b.prism(title+" · rounded spine", spine, -normal*.009, .0036)
+        for z in (0, height-.0037):
+            edge = Vector((0,0,z))
+            board = [c+edge, end+edge, end+edge+Vector((0,0,.0037)), c+edge+Vector((0,0,.0037))]
+            b.prism(title+" · cover board", board, Vector((0,.006,0)), .0015)
+        b.material = paper
+        low = c + Vector((.004,.002,.0046))
+        high = end + Vector((-.002,.002,height-.0046))
+        b.prism(title+" · page block", [low,Vector((high.x,low.y,low.z)),high,
+                                       Vector((low.x,low.y,high.z))], Vector((0,.002,0)), .0008)
+        b.material = cut
+        for t in (.06,.12,.21,.30,.35,.42,.54,.62,.69,.80,.85,.93):
+            z = low.z + (high.z-low.z)*t
+            x = low.x + .002 + .006 * t
+            b.tube(title+" · page edge", Vector((x,low.y-.00006,z)),
+                   Vector((high.x-.002,low.y-.00006,z)), .00012)
+        text = bpy.data.curves.new(title, "FONT")
+        text.body, text.align_x, text.align_y = title, "CENTER", "CENTER"
+        text.size = .021
+        text.materials.append(lettering)
+        label = bpy.data.objects.new(title+" · printed title", text)
+        b.group.objects.link(label)
+        label.location = (a+c)/2 + up*.51 + normal*.001
+        label.rotation_euler = Matrix((along,up.normalized(),normal)).transposed().to_euler()
+
+    b.material = room_finish
     # The miniature astronaut has a nested smoked visor and a separate suit and boots.
     b.ellipsoid("Astronaut · life support pack",(1389,591,1413,630),1.998,.029)
     b.ellipsoid("Astronaut · pressure suit",(1394,591,1452,642),1.986,.06)

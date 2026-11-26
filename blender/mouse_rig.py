@@ -7,6 +7,8 @@ import bpy
 from mathutils import Vector
 from mathutils.geometry import delaunay_2d_cdt
 
+from desk_finishes import linear_swatch
+
 
 # Paths are authored at twice the resolution of the lower right image crop.
 MOUSE = [
@@ -110,7 +112,58 @@ def materials(image):
         link(emission.outputs[0], output.inputs["Surface"])
         return mat
 
-    return finish("Mouse and hands · original painted finish"), finish("Sweater · white wool", True)
+    mouse = finish("Mouse · painted finish")
+    skin = finish("Hands · warm beige skin")
+    nodes, link = skin.node_tree.nodes, skin.node_tree.links.new
+    paint = next(node for node in nodes if node.type == "TEX_IMAGE")
+    emission = next(node for node in nodes if node.type == "EMISSION")
+    output = next(node for node in nodes if node.type == "OUTPUT_MATERIAL")
+    uv = next(node for node in nodes if node.type == "UVMAP")
+
+    # Retain the reference's colored bounce light and gently lift its shadows.
+    tone = nodes.new("ShaderNodeMixRGB")
+    tone.blend_type = "MIX"
+    tone.inputs[0].default_value = .34
+    tone.inputs[2].default_value = (.54, .37, .26, 1)
+    link(paint.outputs["Color"], tone.inputs[1])
+
+    pores = nodes.new("ShaderNodeTexNoise")
+    pores.inputs["Scale"].default_value = 440
+    pores.inputs["Detail"].default_value = 2
+    link(uv.outputs["UV"], pores.inputs["Vector"])
+    variation = nodes.new("ShaderNodeMapRange")
+    variation.inputs["To Min"].default_value = .88
+    variation.inputs["To Max"].default_value = 1.07
+    link(pores.outputs["Fac"], variation.inputs["Value"])
+    folds = nodes.new("ShaderNodeVertexColor")
+    folds.layer_name = "Skin folds"
+    detail = nodes.new("ShaderNodeMath")
+    detail.operation = "MULTIPLY"
+    link(variation.outputs[0], detail.inputs[0])
+    link(folds.outputs["Color"], detail.inputs[1])
+    pigment = nodes.new("ShaderNodeMixRGB")
+    pigment.blend_type = "MULTIPLY"
+    pigment.inputs[0].default_value = 1
+    link(tone.outputs[0], pigment.inputs[1])
+    link(detail.outputs[0], pigment.inputs[2])
+    link(pigment.outputs[0], emission.inputs["Color"])
+
+    bump = nodes.new("ShaderNodeBump")
+    bump.inputs["Strength"].default_value = .22
+    bump.inputs["Distance"].default_value = .0011
+    link(pores.outputs["Fac"], bump.inputs["Height"])
+    surface = nodes.new("ShaderNodeBsdfPrincipled")
+    surface.inputs["Roughness"].default_value = .48
+    surface.inputs["Subsurface Weight"].default_value = .08
+    surface.inputs["Subsurface Scale"].default_value = .016
+    link(pigment.outputs[0], surface.inputs["Base Color"])
+    link(bump.outputs["Normal"], surface.inputs["Normal"])
+    mix = nodes.new("ShaderNodeMixShader")
+    mix.inputs[0].default_value = .30
+    link(emission.outputs[0], mix.inputs[1])
+    link(surface.outputs[0], mix.inputs[2])
+    link(mix.outputs[0], output.inputs["Surface"])
+    return mouse, skin, finish("Sweater · white wool", True)
 
 
 def outline(path):
@@ -139,6 +192,8 @@ def palm_shape(x, y):
         (218, 306, 68, 29, .016, .31),
         (170, 278, 28, 18, .007, -.64),
         (346, 269, 105, 60, .024, .84),
+        (311, 214, 88, 13, .006, .99),
+        (355, 210, 77, 12, .005, 1.05),
     ]
     depth = 0
     for cx, cy, width, height, lift, angle in features:
@@ -147,6 +202,28 @@ def palm_shape(x, y):
         b = (-dx * math.sin(angle) + dy * math.cos(angle)) / height
         depth += lift * math.exp(-(a*a + b*b))
     return depth
+
+
+def skin_folds(x, y):
+    # Taper parallel folds across the bent finger joints and thumb.
+    joints = [
+        (185, 122, 16, .91, .15),
+        (230, 109, 15, 1.15, .11),
+        (306, 117, 15, 1.91, .12),
+        (361, 146, 13, 2.03, .10),
+        (398, 174, 11, 2.04, .10),
+        (175, 287, 14, 1.03, .16),
+    ]
+    shade = 1
+    for cx, cy, span, angle, strength in joints:
+        dx, dy = x - cx, y - cy
+        along = (dx * math.cos(angle) + dy * math.sin(angle)) / span
+        across = -dx * math.sin(angle) + dy * math.cos(angle) - 2.6 * along**2
+        weight = math.exp(-along**2)
+        shade -= strength * weight * (
+            math.exp(-(across / 2.7)**2) + .62 * math.exp(-((across - 6) / 2.1)**2)
+        )
+    return shade
 
 
 def shell(b, name, path, spacing, depth_offset, height, thickness, shape=None, *, keyboard=False):
@@ -189,8 +266,8 @@ def shell(b, name, path, spacing, depth_offset, height, thickness, shape=None, *
         if keyboard:
             # Mirror across the desk and rotate toward the letter keys. Give
             # the fingertips a shallow pitch so the wrist sits below the keys.
-            u = 537 - .355 * (x - 435) - .014 * (y - 336)
-            v = 839 + .080 * (x - 435) + .395 * (y - 336)
+            u = 537 - .484 * (x - 435) - .019 * (y - 336)
+            v = 839 + .090 * (x - 435) + .486 * (y - 336)
             z = -.677 + .00031 * (840 - v) + .36 * depth_offset
             depth_per_height = 1300 / (v - 230)
             top.append(b.point(u, v, -(z + .36 * relief) * depth_per_height))
@@ -215,17 +292,51 @@ def shell(b, name, path, spacing, depth_offset, height, thickness, shape=None, *
         poly.use_smooth = True
     for loop in obj.data.loops:
         paint.data[loop.index].uv = uv[loop.vertex_index % count]
+    if shape is palm_shape:
+        folds = obj.data.color_attributes.new(name="Skin folds", type="FLOAT_COLOR", domain="POINT")
+        for index, point in enumerate(used):
+            shade = skin_folds(*xy[point])
+            folds.data[index].color = folds.data[index + count].color = (shade, shade, shade, 1)
+
+
+def mouse_accents(b):
+    material = bpy.data.materials.new("Mouse accents · warm ink")
+    material.use_nodes = True
+    nodes = material.node_tree.nodes
+    emission = nodes.new("ShaderNodeEmission")
+    emission.inputs["Color"].default_value = linear_swatch("f6d5bb")
+    material.node_tree.links.new(emission.outputs[0], nodes["Material Output"].inputs["Surface"])
+    b.material = material
+    for index, (start, end) in enumerate([
+        ((1210.6, 694), (1217.1, 710.3)),
+        ((1191.8, 705.5), (1206.5, 718.5)),
+        ((1184.6, 727.4), (1200.1, 730.6)),
+    ], 1):
+        start, end = Vector(start), Vector(end)
+        direction = end - start
+        heading = math.atan2(direction.y, direction.x)
+        outline = []
+        for center, angle in ((end, heading), (start, heading + math.pi)):
+            for step in range(7):
+                a = angle - math.pi / 2 + step * math.pi / 6
+                outline.append(center + 1.8 * Vector((math.cos(a), math.sin(a))))
+        # Place the ink at mouse depth so it travels with the grip.
+        b.prism(f"Mouse accent {index}", [b.point(x, y, 1.68) for x, y in outline],
+                Vector((0, .001, 0)))
 
 
 def build(b, finish, *, keyboard=False):
-    b.material, wool = finish
+    mouse, skin, wool = finish
     side = "Left" if keyboard else "Right"
     if not keyboard:
+        b.material = mouse
         shell(b, "Mouse / optical chassis", MOUSE, 15, 0, .024, .019)
         scroll = [(180,166), (184,163,195,161,201,164), (208,167,201,171,193,172),
                   (188,173,180,172,179,170), (178,168,179,167,180,166)]
         shell(b, "Mouse / recessed scroll wheel", scroll, 4, .034, .004, .002)
-    shell(b, side + " hand / knuckles, palm and thumb", PALM, 9, .049, .021, .025,
+        mouse_accents(b)
+    b.material = skin
+    shell(b, side + " hand / knuckles, palm and thumb", PALM, 5, .049, .021, .025,
           palm_shape, keyboard=keyboard)
     b.material = wool
     shell(b, side + " sweater / rib-knit cuff", CUFF, 9, .115, .032, .036,

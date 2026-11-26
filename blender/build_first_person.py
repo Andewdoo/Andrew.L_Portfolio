@@ -58,7 +58,7 @@ authoring.objects.link(projector)
 projector.empty_display_size = .09
 
 
-def projected_material(name, file):
+def projected_material(name, file, *, scale_x=1, offset_x=0):
     """A fixed projector preserves the painted light on large receding surfaces."""
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
@@ -73,7 +73,7 @@ def projected_material(name, file):
     split = node("ShaderNodeSeparateXYZ", 190, 0)
     link(coord.outputs["Object"], split.inputs[0])
     uv = node("ShaderNodeCombineXYZ", 780, 0)
-    for axis, socket, scale, bias, row in [("X", "X", FOCAL/W, .5, 30),
+    for axis, socket, scale, bias, row in [("X", "X", scale_x*FOCAL/W, .5 + offset_x/W, 30),
                                            ("Z", "Y", FOCAL/H, 1-HORIZON/H, -180)]:
         divide = node("ShaderNodeMath", 390, row)
         divide.operation = "DIVIDE"
@@ -98,7 +98,6 @@ def projected_material(name, file):
 
 
 room_mat = projected_material("Room · baked evening light", "room-projection.png")
-detail_mat = projected_material("Foreground · reference finish", "desk-study.png")
 
 
 class Builder:
@@ -176,14 +175,20 @@ b.surface("Solid walnut top", [(-220,678),(1890,678),(1900,912),(-220,912)], -.7
 b.surface("Stitched desk pad", [(295,735),(1458,735),(1653,877),(1657,890),
           (1647,899),(190,899),(177,891)], -.695, .007, .004)
 b.group = collection("Display and stand")
+monitor_scale = .92
+monitor_center = 845
+bezel_mat = projected_material("Display · graphite frame", "desk-study.png",
+    scale_x=1/monitor_scale, offset_x=(monitor_center-W/2)*(1-1/monitor_scale))
 def display_panel(name, corners, depth, thickness, bevel):
-    return b.prism(name, [b.point(x,y,depth) for x,y in corners],
+    return b.prism(name, [b.point(monitor_center + (x-monitor_center)*monitor_scale,y,depth) for x,y in corners],
                    Vector((0,thickness,0)), bevel)
 
+b.material = bezel_mat
 display_panel("Display · soft-edged graphite case",
               [(411,220),(1277,220),(1289,655),(402,655)], 2.69,.11,.011)
 display_panel("Display · inset LCD",
               [(431.5,237),(1257.4,237),(1268,632),(422,632)], 2.681,.012,.001)
+b.material = room_mat
 b.box("Display · articulated neck", (759,649,895,696), 2.66, .096, .012)
 b.surface("Display · foot", [(714,678),(955,678),(984,711),(687,711)], -.69, .012, .005)
 for i,(u,v) in enumerate([(612,680),(1049,681)]):
@@ -205,7 +210,9 @@ hand_finish = mouse_rig.materials(bpy.data.images["desk-study.png"])
 mouse_rig.build(b, hand_finish, keyboard=True)
 
 b.group = note = collection("Skills note · interactive")
-b.material = detail_mat
+note_shift = 35
+note_mat = projected_material("Skills note · reference finish", "desk-study.png", offset_x=note_shift)
+b.material = note_mat
 for name,outline,d in [
     ("Golden paper",[(1122,290),(1259,311),(1241,429),(1102,406)],2.653),
     ("Masking tape",[(1169,283),(1231,294),(1223,324),(1162,313)],2.646),
@@ -213,7 +220,7 @@ for name,outline,d in [
     ("Ink glint 2",[(1082,318),(1084,315),(1098,326),(1096,329)],2.653),
     ("Ink glint 3",[(1075,336),(1093,335),(1093,339),(1075,340)],2.653),
 ]:
-    b.prism(name,[b.point(x,y,d) for x,y in outline],Vector((0,.001,0)))
+    b.prism(name,[b.point(x-note_shift,y,d) for x,y in outline],Vector((0,.001,0)))
 
 b.group = hand = collection("Mouse and hand · interactive")
 mouse_rig.build(b, hand_finish)
@@ -228,7 +235,7 @@ for obj in list(hand.objects):
     obj.parent = rig
     obj.matrix_parent_inverse = rig.matrix_world.inverted()
 
-desk_finishes.finish_scene(scene, authoring, (room_mat, detail_mat))
+desk_finishes.finish_scene(scene, authoring, (room_mat, bezel_mat, note_mat))
 for screen in bpy.data.screens:
     for area in screen.areas:
         if area.type == "VIEW_3D":
@@ -254,7 +261,9 @@ render_dir.mkdir(parents=True, exist_ok=True)
 for name, visible in [("room",None), ("mouse",hand), ("note",note)]:
     for group in scene.collection.children:
         group.hide_render = (group in [hand,note] if visible is None else group != visible) and group != authoring
-    if name != "room":
+    if name == "mouse":
+        scene.cycles.samples = 16 if draft else 64
+    elif name == "note":
         scene.cycles.samples = 8 if draft else 24
         scene.cycles.use_denoising = False
     scene.render.filepath = str(render_dir / (name + ("-preview" if draft else "") + ".png"))

@@ -48,7 +48,8 @@ button:focus-visible, a:focus-visible { outline: 2px solid #ffdfac; outline-offs
   --look-x: 0;
   --look-y: 0;
   position: relative;
-  width: calc(var(--desk-height) * 1672 / 941);
+  /* Keep the whole camera gate visible, including the shelf and wrists. */
+  width: 100%;
   height: var(--desk-height);
   flex: none;
   grid-area: 1 / 1;
@@ -71,42 +72,52 @@ button:focus-visible, a:focus-visible { outline: 2px solid #ffdfac; outline-offs
 }
 .mouse-rig { visibility: hidden; }
 .desk-frame[data-live=true] .mouse-rig { visibility: visible; }
-.desk-frame[data-live=true] .mouse-foreground img { visibility: hidden; }
+.desk-frame[data-live=true] :is(.mouse-foreground img, .keyboard-hand) { visibility: hidden; }
+.keyboard-hand {
+  position: absolute;
+  left: calc(455 / 1672 * 100%);
+  top: calc(690 / 941 * 100%);
+  width: calc(240 / 1672 * 100%);
+  height: calc(190 / 941 * 100%);
+  pointer-events: none;
+  user-select: none;
+}
 .monitor-glass {
   position: absolute;
-  left: calc(422 / 1672 * 100%);
+  left: calc(455.84 / 1672 * 100%);
   top: calc(237 / 941 * 100%);
-  width: calc(846 / 1672 * 100%);
+  width: calc(778.32 / 1672 * 100%);
   height: calc(395 / 941 * 100%);
   overflow: hidden;
   clip-path: polygon(1.13% 0,98.74% 0,100% 100%,0 100%);
 }
 .desk-object {
-  --prop-glow: .53;
+  --prop-glow: .65;
+  --prop-glow-color: 255 246 231;
+  --prop-warmth: 0;
   appearance: none;
   position: absolute;
   padding: 0;
   border: 0;
   background: transparent;
   touch-action: manipulation;
-  filter: drop-shadow(0 0 2px rgb(255 255 255 / calc(.84 * var(--prop-glow))))
-    drop-shadow(0 0 7px rgb(255 255 255 / calc(.82 * var(--prop-glow))));
+  filter: drop-shadow(0 0 2px rgb(var(--prop-glow-color) / calc(.86 * var(--prop-glow))))
+    drop-shadow(0 0 8px rgb(var(--prop-glow-color) / calc(.84 * var(--prop-glow))));
   transition: filter .18s ease;
 }
-.desk-object:focus-visible {
+.desk-object:is(:hover, :focus-visible) {
   --prop-glow: 1;
-}
-@media (any-hover: hover) {
-  .desk-object:hover { --prop-glow: 1; }
+  --prop-glow-color: 255 215 113;
+  --prop-warmth: .22;
 }
 .skills-note {
-  left: 64.1746%;
-  top: 29.7556%;
-  width: 11.3038%;
-  height: 16.153%;
+  left: calc(1038 / 1672 * 100%);
+  top: calc(280 / 941 * 100%);
+  width: calc(189 / 1672 * 100%);
+  height: calc(152 / 941 * 100%);
 }
 .skills-note img, .prop-target::after {
-  filter: brightness(calc(1 + .13 * var(--prop-glow)));
+  filter: brightness(calc(1 + .16 * var(--prop-glow))) sepia(var(--prop-warmth));
   transition: filter .18s ease;
 }
 .prop-target {
@@ -126,6 +137,20 @@ button:focus-visible, a:focus-visible { outline: 2px solid #ffdfac; outline-offs
   background-size: calc(1672 / var(--w) * 100%) calc(941 / var(--h) * 100%);
   background-position: calc(var(--u) / (1672 - var(--w)) * 100%) calc(var(--v) / (941 - var(--h)) * 100%);
 }
+.shelf-button-icon {
+  position: absolute;
+  z-index: 1;
+  bottom: 4px;
+  left: 3px;
+  width: clamp(14px, 2.6vw, 22px);
+  height: auto;
+  padding: 2px;
+  border-radius: 4px;
+  background: #211923dc;
+  color: var(--ink);
+  pointer-events: none;
+}
+.prop-photos:is(:hover, :focus-visible) .shelf-button-icon { color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   .desk-object, .skills-note img, .prop-target::after { transition: none; }
 }
@@ -176,6 +201,13 @@ button:focus-visible, a:focus-visible { outline: 2px solid #ffdfac; outline-offs
     translate: -50% 0;
     height: calc(var(--table-scale) * 941);
     width: calc(var(--table-scale) * 1672);
+  }
+  .keyboard-hand {
+    left: calc(50% + (455 - 836) * var(--table-scale));
+    top: auto;
+    bottom: calc((941 - 880) * var(--table-scale));
+    width: calc(240 * var(--table-scale));
+    height: calc(190 * var(--table-scale));
   }
   .mobile-shelf {
     display: block;

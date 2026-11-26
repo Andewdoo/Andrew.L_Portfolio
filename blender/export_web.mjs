@@ -15,6 +15,6 @@ await Promise.all([
   render("room").removeAlpha().webp({ quality: 94, smartSubsample: true, effort: 6 }).toFile(asset("room.webp")),
   render("mouse").extract(crop(1130, 655, 542, 286))
     .webp({ quality: 95, alphaQuality: 100 }).toFile(asset("hand.webp")),
-  render("note").extract(crop(1073, 280, 189, 152))
+  render("note").extract(crop(1038, 280, 189, 152))
     .webp({ lossless: true }).toFile(asset("skills-note.webp")),
 ]);
