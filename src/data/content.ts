@@ -15,6 +15,7 @@ export const panelTitles = {
   resume: "Resume",
   contact: "Contact",
   photos: "Off the desk",
+  camera: "Camera roll",
 };
 
 export type Panel = keyof typeof panelTitles;
@@ -57,20 +58,17 @@ export const photos = [
     caption: "A view of the city skyline from a canoe.",
     alt: "Toronto skyline across the water from a canoe",
     image: "/images/offline-toronto-canoe.webp",
-    thumbnail: "/scene/shelf-toronto.webp",
   },
   {
     title: "Sunset on the slopes",
     caption: "The last light of the day on a ski slope.",
     alt: "Skiers and snowboarders on a snowy slope at sunset",
     image: "/images/offline-01-02.webp",
-    thumbnail: "/scene/shelf-ski.webp",
   },
   {
     title: "A night in Chongqing",
     caption: "The city’s skyline lit up after dark.",
     alt: "Chongqing skyline glowing at night",
     image: "/images/offline-02-13.webp",
-    thumbnail: "/scene/shelf-chongqing.webp",
   },
 ];

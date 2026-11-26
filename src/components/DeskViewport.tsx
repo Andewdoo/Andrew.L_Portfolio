@@ -1,27 +1,31 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, type CSSProperties } from "react";
-import { Menu } from "lucide-react";
-import type { Panel } from "@/data/content";
+import { Camera } from "lucide-react";
+import { photos, type Panel } from "@/data/content";
 import type { DeskRenderer } from "@/lib/deskScene";
 import MonitorDesktop from "./MonitorDesktop";
 
-type Props = { onSelect: (panel: Panel, trigger: HTMLElement, photoIndex?: number) => void };
+type Props = {
+  onSelect: (panel: Panel, trigger: HTMLElement) => void;
+};
 const asset = "/scene/first-person/";
 const propTargets = [
   { label: "Open my résumé", rect: [43,717,377,183], panel: "resume",
     shape: "polygon(37% 0, 100% 10%, 83% 100%, 0 90%)" },
-  { label: "View my Toronto photo", rect: [704,21,162,142], panel: "photos", index: 0,
-    shape: "polygon(0 7%, 93% 0, 100% 92%, 7% 100%)" },
-  { label: "View my ski photo", rect: [918,30,116,131], panel: "photos", index: 1,
-    shape: "polygon(6% 0, 100% 2%, 93% 100%, 0 98%)" },
-  { label: "View my Chongqing photo", rect: [1053,63,146,98], panel: "photos", index: 2,
-    shape: "polygon(2% 2%, 98% 0, 100% 100%, 0 100%)" },
-  { label: "Open my photo album", rect: [585,71,106,92], panel: "photos",
+  { label: "Open the shelf camera", rect: [585,71,106,92], panel: "camera",
     shape: "polygon(1% 61%, 5% 26%, 11% 12%, 24% 4%, 60% 0, 80% 4%, 88% 14%, 95% 38%, 100% 74%, 98% 90%, 90% 100%, 10% 100%, 3% 90%)" },
 ] as const;
+const shelfPrints = [
+  { photo: photos[0], rect: [717,35,138,100], shape: "polygon(0 9%, 96% 0, 100% 91%, 4% 100%)" },
+  { photo: photos[1], rect: [929.6,41.1,92.8,92.4], shape: "polygon(5% 0, 100% 2%, 95% 100%, 0 98%)" },
+  { photo: photos[2], rect: [1065.4,76.7,119,73], shape: "polygon(2% 3%, 100% 0, 100% 98%, 0 100%)" },
+] as const;
 
-function propStyle({ rect: [x, y, width, height], shape }: (typeof propTargets)[number]): CSSProperties {
+function propStyle({ rect: [x, y, width, height], shape }: {
+  rect: readonly [number, number, number, number]; shape: string;
+}): CSSProperties {
   return { "--u": x, "--v": y, "--w": width, "--h": height, "--prop-shape": shape } as CSSProperties;
 }
 
@@ -135,6 +139,12 @@ export default function DeskViewport({ onSelect }: Props) {
       <div className="desk-frame" ref={desk}>
         <img className="room-render" src={asset + "room.webp"} alt="" fetchPriority="high" draggable={false} />
         <div className="mobile-shelf" aria-hidden="true" />
+        {shelfPrints.map(print => (
+          <div className="shelf-print" key={print.photo.image} style={propStyle(print)}>
+            <Image src={print.photo.image} alt={print.photo.alt} fill quality={90} loading="eager" draggable={false}
+              sizes="(min-width: 4200px) 9vw, 384px" />
+          </div>
+        ))}
         <img className="keyboard-hand" src={asset + "keyboard-hand.webp"} alt="" draggable={false} />
         <div className="mouse-foreground" aria-hidden="true">
           <div className="mouse-shadow" />
@@ -149,8 +159,8 @@ export default function DeskViewport({ onSelect }: Props) {
         {propTargets.map(target => <button type="button" key={target.label}
           className={"desk-object prop-target prop-" + target.panel} aria-label={target.label}
           title={target.label} aria-haspopup="dialog" style={propStyle(target)}
-          onClick={e => onSelect(target.panel,e.currentTarget,"index" in target ? target.index : 0)}>
-          {target.panel === "photos" && <Menu className="shelf-button-icon" aria-hidden="true" />}
+          onClick={e => onSelect(target.panel,e.currentTarget)}>
+          {target.panel === "camera" && <Camera className="shelf-button-icon" aria-hidden="true" />}
         </button>)}
       </div>
     </main>

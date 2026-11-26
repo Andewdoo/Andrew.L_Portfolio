@@ -1,6 +1,6 @@
 # Andrew Liu’s desk
 
-This portfolio opens at a seated, first-person view of Andrew’s desk. Select an app on the monitor, the taped skills note, a framed photo, the instant camera, or the paper résumé. On a phone, the monitor has a six-app launcher. Each section supports keyboard navigation and Escape returns to the desk.
+This portfolio opens at a seated, first-person view of Andrew’s desk. Select an app on the monitor, the taped skills note, the instant camera, or the paper résumé. On a phone, the monitor has a six-app launcher. Each section supports keyboard navigation and Escape returns to the desk.
 
 ## Run
 

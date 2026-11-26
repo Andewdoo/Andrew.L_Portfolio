@@ -9,14 +9,14 @@ export default function RoomExperience() {
   const trigger = useRef<HTMLElement>(null);
   const [panel, setPanel] = useState<Panel | null>(null);
   const [photoIndex, setPhotoIndex] = useState(0);
-  const openPanel = useCallback((name: Panel, element: HTMLElement, index = 0) => {
+  const openPanel = useCallback((name: Panel, element: HTMLElement) => {
     trigger.current = element;
-    setPhotoIndex(index);
+    setPhotoIndex(0);
     setPanel(name);
   }, []);
   return <>
     <DeskViewport onSelect={openPanel} />
-    <PortfolioDialog panel={panel} photoIndex={photoIndex} setPhotoIndex={setPhotoIndex}
+    <PortfolioDialog panel={panel} trigger={trigger} photoIndex={photoIndex} setPhotoIndex={setPhotoIndex}
       onClose={() => { setPanel(null); trigger.current?.focus({ preventScroll: true }); }} />
   </>;
 }

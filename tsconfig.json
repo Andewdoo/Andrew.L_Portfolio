@@ -33,7 +33,8 @@
     "**/*.tsx",
     ".next-development/types/**/*.ts",
     ".next-production/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "tmp/blender-desk/width-verify/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
