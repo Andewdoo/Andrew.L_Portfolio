@@ -1,5 +1,5 @@
-import { EditorialPortfolio } from "@/components/portfolio/EditorialPortfolio";
+import RoomExperience from "@/components/RoomExperience";
 
 export default function Home() {
-  return <EditorialPortfolio />;
+  return <RoomExperience />;
 }

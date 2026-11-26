@@ -1,0 +1,214 @@
+.monitor-desktop {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  container-type: inline-size;
+  isolation: isolate;
+  color: #f9dfed;
+  font: 500 1rem/1.15 "Courier New", monospace;
+  background: #303b46 url("/scene/desktop/dusk.webp") center / cover no-repeat;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.monitor-desktop p, .monitor-desktop h2 { margin: 0; }
+.monitor-desktop button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.monitor-desktop button:focus-visible { outline: 2px solid #ffdfaa; outline-offset: 1px; }
+.monitor-sprite, .monitor-welcome img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.monitor-shortcuts {
+  position: absolute;
+  left: 2%;
+  top: 3.6%;
+  width: 9.4%;
+  height: 59.7%;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  row-gap: 8%;
+}
+.monitor-shortcuts button {
+  grid-template-rows: 52% 1fr;
+  gap: 4%;
+  font-family: system-ui, sans-serif;
+  font-size: 1.45cqw;
+  line-height: 1;
+  text-shadow: 0 1px 2px #191630;
+}
+.monitor-shortcuts img { width: 49%; align-self: end; }
+.monitor-shortcuts img, .monitor-chrome button > span {
+  filter: drop-shadow(0 0 .42cqw #ffd3ae69);
+}
+.monitor-shortcuts span { align-self: start; padding-top: 4%; }
+.monitor-shortcuts button:hover, .monitor-shortcuts button:focus-visible { background: #d1b0db20; }
+.monitor-shortcuts button:first-child img { width: 46%; }
+.monitor-shortcuts button:last-child img { image-rendering: pixelated; width: 45%; }
+
+.monitor-chrome {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 2%;
+  height: 8%;
+  display: flex;
+}
+.monitor-chrome button { width: 3.9cqw; }
+.monitor-chrome button:hover, .monitor-chrome button:focus-visible { background: #caa9d133; }
+.monitor-chrome button:last-child:hover { background: #ba768050; }
+.monitor-chrome button > span { position: relative; display: block; width: 1.48cqw; }
+.monitor-minimize { height: max(1px, .18cqw); background: currentColor; }
+.monitor-maximize { height: 1.38cqw; border: max(1px, .16cqw) solid currentColor; }
+.monitor-close { height: 1.5cqw; }
+.monitor-close::before, .monitor-close::after {
+  position: absolute;
+  top: 45%;
+  left: -5%;
+  width: 111%;
+  height: max(1px, .17cqw);
+  background: currentColor;
+  content: "";
+  transform: rotate(45deg);
+}
+.monitor-close::after { transform: rotate(-45deg); }
+.monitor-launcher {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-origin: 52.25% 48%;
+}
+.monitor-desktop[data-expanded="true"] .monitor-launcher { transform: translateX(-4%) scale(1.13); }
+.monitor-kicker, .monitor-controller, .monitor-welcome, .monitor-prompt, .monitor-apps {
+  position: absolute;
+  left: 52.25%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.monitor-kicker {
+  top: 14.9%;
+  color: #e1cde3;
+  font-size: 1.36cqw;
+  line-height: 1;
+  letter-spacing: .37em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.monitor-kicker, .monitor-prompt { text-shadow: 0 1px 3px #49304a; }
+.monitor-controller { top: 23.6%; width: 6.05%; height: 8%; }
+.monitor-welcome { top: 34.8%; width: 33.15%; height: 8.8%; }
+.monitor-prompt {
+  top: 47.5%;
+  color: #dbc4df;
+  font-size: 1.54cqw;
+  line-height: 1;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+.monitor-apps {
+  top: 59.4%;
+  width: 60.4%;
+  height: 22.2%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6.6%;
+  pointer-events: auto;
+}
+.monitor-apps button {
+  position: relative;
+  isolation: isolate;
+  grid-template-rows: 56% 1fr;
+  gap: 2%;
+  color: #f6dfee;
+  white-space: nowrap;
+  --tile-edge: #c5bec0;
+  filter: drop-shadow(0 0 .48cqw #ffd3ad55);
+  --cut: .91cqw;
+  --corners: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
+}
+.monitor-tile, .monitor-tile::before, .monitor-tile::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.monitor-tile { z-index: -1; }
+.monitor-tile::before, .monitor-tile::after { content: ""; clip-path: var(--corners); }
+.monitor-tile::before { background: var(--tile-edge); }
+.monitor-tile::after { inset: max(1px, .24cqw); background: linear-gradient(145deg,#373e46,#494745); }
+.monitor-apps button img { align-self: end; width: 39%; height: 66%; }
+.monitor-app-name {
+  align-self: start;
+  padding-top: .6cqw;
+  font-size: 1.66cqw;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  text-shadow: 0 1px 1px #523b58;
+}
+.monitor-apps button:is(:hover,:focus-visible) {
+  --tile-edge: #ffcf9a;
+  filter: drop-shadow(0 0 .47cqw #efad826b);
+}
+.monitor-apps button:focus-visible { outline-offset: .36cqw; }
+.monitor-apps button:is(:hover,:focus-visible)::after {
+  content: "";
+  position: absolute;
+  width: 28%;
+  height: 34%;
+  right: -19%;
+  top: -28%;
+  pointer-events: none;
+  background:
+    linear-gradient(101deg,transparent 35%,#f7cba9 42% 56%,transparent 65%) left top / 24% 54% no-repeat,
+    linear-gradient(132deg,transparent 39%,#f7cba9 43% 52%,transparent 57%) 52% 37% / 49% 49% no-repeat,
+    linear-gradient(162deg,transparent 31%,#f7cba9 40% 57%,transparent 65%) right bottom / 45% 22% no-repeat;
+}
+.monitor-apps .monitor-extra-app { display: none; }
+.monitor-desktop .monitor-task {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  display: flex;
+  gap: .75cqw;
+  align-items: center;
+  padding: .7cqw 1.2cqw;
+  border: 1px solid #c8a4bc;
+  background: #302b4deb;
+  box-shadow: 0 0 .48cqw #ffd3ad55;
+  font-size: 1.65cqw;
+}
+.monitor-task img { width: 2.5cqw; height: 2.5cqw; }
+
+@media (orientation: portrait) and (max-width: 600px) {
+  .monitor-desktop { background-size: auto 121%; background-position: 69% bottom; }
+  .monitor-shortcuts, .monitor-chrome { display: none; }
+  .monitor-kicker, .monitor-welcome, .monitor-controller, .monitor-prompt, .monitor-apps { left: 50%; }
+  .monitor-kicker { top: 5.8%; font-size: clamp(.63rem,2.6cqw,.84rem); }
+  .monitor-controller { top: 12%; width: 8%; height: 8%; }
+  .monitor-welcome { top: 22%; width: 52%; height: 9%; }
+  .monitor-prompt { top: 33.7%; font-size: clamp(.67rem,2.8cqw,.9rem); letter-spacing: .035em; }
+  .monitor-apps { top: 43%; width: 91%; height: 50%; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,minmax(0,1fr)); gap: 6% 3%; }
+  .monitor-apps button { --cut: 1.5cqw; min-height: 44px; }
+  .monitor-apps .monitor-extra-app { display: grid; }
+  .monitor-apps button::after { display: none; }
+  .monitor-apps button img { width: 38%; height: 76%; max-height: 34px; }
+  .monitor-extra-app img { image-rendering: pixelated; }
+  .monitor-app-name { font-size: clamp(.76rem,3.4cqw,1rem); padding-top: .65cqw; }
+  .monitor-desktop:has(.monitor-shortcuts):not(:has(.monitor-launcher)) .monitor-shortcuts { display: grid; width: 25%; height: 65%; }
+  .monitor-shortcuts button { font-size: .85rem; }
+  .monitor-desktop[data-expanded="true"] .monitor-launcher { transform: none; }
+}

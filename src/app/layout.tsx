@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Andrew L. | Software Engineer",
-  description: "Andrew L.'s software engineering portfolio, featuring Devlify and Elara.ai.",
+  title: "Andrew Liu | The Desk",
+  description: "Explore Andrew Liu’s interactive 3D workspace, featuring software engineering projects, skills, and a resume.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

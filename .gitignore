@@ -8,12 +8,17 @@
 
 # next.js
 /.next/
+/.next-development/
 /.next-production/
 /out/
 *.tsbuildinfo
 
 # production
 /build
+
+# Blender render intermediates
+/tmp/blender-desk/
+/blender/__pycache__/
 
 # debug
 npm-debug.log*

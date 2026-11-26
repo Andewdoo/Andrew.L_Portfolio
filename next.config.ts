@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
-const nextConfig: NextConfig = {
-  distDir: process.env.NEXT_DIST_DIR ?? ".next",
-  images: {
-    qualities: [75, 95],
-  },
-};
-
-export default nextConfig;
+export default function nextConfig(phase: string): NextConfig {
+  return {
+    devIndicators: false,
+    distDir: process.env.NEXT_DIST_DIR
+      ?? (phase === PHASE_DEVELOPMENT_SERVER ? ".next-development" : ".next-production"),
+  };
+}
